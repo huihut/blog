@@ -1,0 +1,14 @@
+.DS_Store
+.deploy*/
+Thumbs.db
+db.json
+*.log
+_config.yml
+package.json
+package-lock.json
+Commit.bat
+node_modules/
+public/
+scaffolds/
+themes/
+backup/

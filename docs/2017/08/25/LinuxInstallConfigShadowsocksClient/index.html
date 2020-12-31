@@ -1,0 +1,1114 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next muse" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Shadowsocks," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HuiHut" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言 Shadowsocks无GUI客户端教程：Linux安装配置Shadowsocks客户端及开机自动启动 Shadowsocks-Qt5客户端教程：Shadowsocks-Qt5 For Centos 7 Shadowsocks服务端教程：搬瓦工Shadowsocks安装及配置多用户(服务端)  安装Debian/Ubuntu:apt-get install python-pip pip in">
+<meta name="keywords" content="Shadowsocks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安装配置Shadowsocks客户端及开机自动启动">
+<meta property="og:url" content="https://blog.huihut.com/2017/08/25/LinuxInstallConfigShadowsocksClient/index.html">
+<meta property="og:site_name" content="HuiHut">
+<meta property="og:description" content="前言 Shadowsocks无GUI客户端教程：Linux安装配置Shadowsocks客户端及开机自动启动 Shadowsocks-Qt5客户端教程：Shadowsocks-Qt5 For Centos 7 Shadowsocks服务端教程：搬瓦工Shadowsocks安装及配置多用户(服务端)  安装Debian/Ubuntu:apt-get install python-pip pip in">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/SystemNetworkProxy.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/SwitchyOmegaProxy.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/SwitchyOmegaAutoSwitch.png">
+<meta property="og:updated_time" content="2018-12-23T14:46:44.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux安装配置Shadowsocks客户端及开机自动启动">
+<meta name="twitter:description" content="前言 Shadowsocks无GUI客户端教程：Linux安装配置Shadowsocks客户端及开机自动启动 Shadowsocks-Qt5客户端教程：Shadowsocks-Qt5 For Centos 7 Shadowsocks服务端教程：搬瓦工Shadowsocks安装及配置多用户(服务端)  安装Debian/Ubuntu:apt-get install python-pip pip in">
+<meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/SystemNetworkProxy.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 'huihut',
+      author: 'huihut'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索博文 ⚆_⚆","hits_empty":"没找到 ${query} Σ（ﾟдﾟlll）","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.huihut.com/2017/08/25/LinuxInstallConfigShadowsocksClient/"/>
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6107965651704299",
+    enable_page_level_ads: true
+  });
+</script>
+  <title> Linux安装配置Shadowsocks客户端及开机自动启动 | HuiHut </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96169060-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c6aed63af966e244a9d556ee0bb87fa2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HuiHut</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专业修电脑，副业补衣服</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'QJAVBiuVtsH97ThqN76E','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/08/25/LinuxInstallConfigShadowsocksClient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="辉哈">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuiHut">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux安装配置Shadowsocks客户端及开机自动启动
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T09:17:40+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>Shadowsocks无GUI客户端教程：<a href="https://blog.huihut.com/2017/08/25/LinuxInstallConfigShadowsocksClient/">Linux安装配置Shadowsocks客户端及开机自动启动</a></li>
+<li>Shadowsocks-Qt5客户端教程：<a href="https://blog.huihut.com/2017/03/25/Shadowsocks-Qt5ForCentos7/">Shadowsocks-Qt5 For Centos 7</a></li>
+<li>Shadowsocks服务端教程：<a href="https://blog.huihut.com/2016/12/03/BandwagonShadowsocksServer/">搬瓦工Shadowsocks安装及配置多用户(服务端)</a></li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Debian-Ubuntu"><a href="#Debian-Ubuntu" class="headerlink" title="Debian/Ubuntu:"></a>Debian/Ubuntu:</h3><pre><code>apt-get install python-pip
+pip install shadowsocks
+</code></pre><h3 id="CentOS"><a href="#CentOS" class="headerlink" title="CentOS:"></a>CentOS:</h3><pre><code>sudo yum install python-setuptools &amp;&amp; easy_install pip
+sudo pip install shadowsocks
+</code></pre><a id="more"></a>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>找个地方放shadowsocks的配置文件，一般放到 <code>/etc</code>下面：</p>
+<pre><code>sudo vi /etc/shadowsocks.json
+</code></pre><p>我放在我的用户目录下，因为有时需要修改，放在这里方便些：</p>
+<pre><code>vi /home/xx/Software/ShadowsocksConfig/shadowsocks.json
+</code></pre><p>你可以根据自身情况考虑。</p>
+<p>然后在<code>shadowsocks.json</code>里面添加配置信息，如：</p>
+<pre><code>{
+  &quot;server&quot;:&quot;my_server_ip&quot;,
+  &quot;local_address&quot;: &quot;127.0.0.1&quot;,
+  &quot;local_port&quot;:1080,
+  &quot;server_port&quot;:my_server_port,
+  &quot;password&quot;:&quot;my_password&quot;,
+  &quot;timeout&quot;:300,
+  &quot;method&quot;:&quot;aes-256-cfb&quot;
+}
+</code></pre><p>把</p>
+<ul>
+<li><code>my_server_ip</code>改为自己的服务器IP</li>
+<li><code>my_server_port</code>改为自己的服务器端口</li>
+<li><code>my_server_password</code>改为自己的密码</li>
+<li><code>method</code>的值改为自己的加密方式，一般是<code>aes-256-cfb</code>或者<code>rc4-md5</code></li>
+</ul>
+<p>详细配置说明：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server</td>
+<td>服务器地址，填ip或域名</td>
+</tr>
+<tr>
+<td>local_address</td>
+<td>本地地址</td>
+</tr>
+<tr>
+<td>local_port</td>
+<td>本地端口，一般1080，可任意</td>
+</tr>
+<tr>
+<td>server_port</td>
+<td>服务器对外开的端口</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码，可以每个服务器端口设置不同密码</td>
+</tr>
+<tr>
+<td>port_password</td>
+<td>server_port + password ，服务器端口加密码的组合</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>超时重连</td>
+</tr>
+<tr>
+<td>method</td>
+<td>默认: “aes-256-cfb”，见 <a href="https://github.com/shadowsocks/shadowsocks/wiki/Encryption" target="_blank" rel="noopener">Encryption</a></td>
+</tr>
+<tr>
+<td>fast_open</td>
+<td>开启或关闭 <a href="https://github.com/shadowsocks/shadowsocks/wiki/TCP-Fast-Open" target="_blank" rel="noopener">TCP_FASTOPEN</a>, 填true / false，需要服务端支持</td>
+</tr>
+</tbody>
+</table>
+<p>保存退出就配置好啦！</p>
+<h2 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h2><h3 id="系统代理"><a href="#系统代理" class="headerlink" title="系统代理"></a>系统代理</h3><p>可以选择系统代理，就如下图配置就好啦：</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/SystemNetworkProxy.png" alt=""></p>
+<p>但是系统代理是全局走代理的，访问国内网站一般会有限制（速度较慢、浪费流量、版权受限等）。</p>
+<p>所以推荐下面的用浏览器按照规则选择性代理。</p>
+<h3 id="浏览器代理"><a href="#浏览器代理" class="headerlink" title="浏览器代理"></a>浏览器代理</h3><h4 id="安装-SwitchyOmega-插件"><a href="#安装-SwitchyOmega-插件" class="headerlink" title="安装 SwitchyOmega 插件"></a>安装 SwitchyOmega 插件</h4><p>以 Chrome 为例，安装 SwitchyOmega 插件代理。</p>
+<p>Github 下载 SwitchyOmega：<a href="https://github.com/FelisCatus/SwitchyOmega/releases/" target="_blank" rel="noopener">https://github.com/FelisCatus/SwitchyOmega/releases/</a></p>
+<p>Chrome 打开<a href="chrome://extensions/" target="_blank" rel="noopener">chrome://extensions/</a>，把插件托进去安装。</p>
+<h4 id="配置-Proxy"><a href="#配置-Proxy" class="headerlink" title="配置 Proxy"></a>配置 Proxy</h4><ul>
+<li><code>Server</code>填写<code>shadowsocks.json</code>配置中的<code>local_address</code></li>
+<li><code>Port</code>填写<code>shadowsocks.json</code>配置中的<code>local_port</code></li>
+<li>左边<code>Apply changes</code>保存。</li>
+</ul>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/SwitchyOmegaProxy.png" alt=""></p>
+<h4 id="配置-Auto-Switch"><a href="#配置-Auto-Switch" class="headerlink" title="配置 Auto Switch"></a>配置 Auto Switch</h4><ul>
+<li><code>Rule list rules</code>的<code>Profile</code>填<code>proxy</code></li>
+<li><code>Default</code>的<code>Profile</code>填<code>[Direct]</code></li>
+<li><code>Rule List Format</code>选择<code>AutoProxy</code></li>
+<li><p><code>Rule List URL</code>填写<code>gfwlist</code>的规则: </p>
+<pre><code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
+</code></pre></li>
+<li><p>下载规则文件<code>Download Profile Now</code></p>
+</li>
+<li>左边<code>Apply changes</code>保存</li>
+</ul>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/SwitchyOmegaAutoSwitch.png" alt=""></p>
+<h4 id="启用-SwitchyOmega"><a href="#启用-SwitchyOmega" class="headerlink" title="启用 SwitchyOmega"></a>启用 SwitchyOmega</h4><p>启用 SwitchyOmega 插件，选择 Auto Switch 模式就可以了。</p>
+<h2 id="测试启动"><a href="#测试启动" class="headerlink" title="测试启动"></a>测试启动</h2><p>配置文件的路径改成自己的，如：<code>/etc/shadowsocks.json</code></p>
+<ul>
+<li>前端启动：<code>sslocal -c /home/xx/Software/ShadowsocksConfig/shadowsocks.json</code>；</li>
+<li>后端启动：<code>sslocal -c /home/xx/Software/ShadowsocksConfig/shadowsocks.json -d start</code>；</li>
+<li>后端停止：<code>sslocal -c /home/xx/Software/ShadowsocksConfig/shadowsocks.json -d stop</code>；</li>
+<li>重启(修改配置要重启才生效)：<code>sslocal -c /home/xx/Software/ShadowsocksConfig/shadowsocks.json -d restart</code></li>
+</ul>
+<h2 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h2><p>以下使用Systemd来实现shadowsocks开机自启。</p>
+<pre><code>sudo vim /etc/systemd/system/shadowsocks.service
+</code></pre><p>在里面填写如下内容：</p>
+<pre><code>[Unit]
+Description=Shadowsocks Client Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/sslocal -c /home/xx/Software/ShadowsocksConfig/shadowsocks.json
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>把<code>/home/xx/Software/ShadowsocksConfig/shadowsocks.json</code>修改为你的<code>shadowsocks.json</code>路径，如：<code>/etc/shadowsocks.json</code></p>
+<p>配置生效：</p>
+<pre><code>systemctl enable /etc/systemd/system/shadowsocks.service
+</code></pre><p>输入管理员密码就可以了。</p>
+<p>现在你可以马上重启试试，或先在后台启动，等下次重启再看看！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      辉哈
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.huihut.com/2017/08/25/LinuxInstallConfigShadowsocksClient/" title="Linux安装配置Shadowsocks客户端及开机自动启动">https://blog.huihut.com/2017/08/25/LinuxInstallConfigShadowsocksClient/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Shadowsocks/" rel="tag"># Shadowsocks</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/23/AddLibraryToSolveLibraryNotFound/" rel="next" title="通过直接添加或者手动编译添加库，解决 library not found for -lxxx 等的问题">
+                <i class="fa fa-chevron-left"></i> 通过直接添加或者手动编译添加库，解决 library not found for -lxxx 等的问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/27/Oneplus3TBrushAndPlay/" rel="prev" title="一加3T的刷机流程及玩机一些事">
+                一加3T的刷机流程及玩机一些事 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTYxNS82MTgz"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="辉哈" />
+          <p class="site-author-name" itemprop="name">辉哈</p>
+           
+              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huihut" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/huihut" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-wordpress"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/huihut" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/MenghuiXie" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:huihut@outlook.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Debian-Ubuntu"><span class="nav-number">2.1.</span> <span class="nav-text">Debian/Ubuntu:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS"><span class="nav-number">2.2.</span> <span class="nav-text">CentOS:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置代理"><span class="nav-number">4.</span> <span class="nav-text">设置代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统代理"><span class="nav-number">4.1.</span> <span class="nav-text">系统代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器代理"><span class="nav-number">4.2.</span> <span class="nav-text">浏览器代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装-SwitchyOmega-插件"><span class="nav-number">4.2.1.</span> <span class="nav-text">安装 SwitchyOmega 插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-Proxy"><span class="nav-number">4.2.2.</span> <span class="nav-text">配置 Proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-Auto-Switch"><span class="nav-number">4.2.3.</span> <span class="nav-text">配置 Auto Switch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启用-SwitchyOmega"><span class="nav-number">4.2.4.</span> <span class="nav-text">启用 SwitchyOmega</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试启动"><span class="nav-number">5.</span> <span class="nav-text">测试启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机自启"><span class="nav-number">6.</span> <span class="nav-text">开机自启</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">辉哈</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
