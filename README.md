@@ -2,7 +2,6 @@
 
 * [Log4cplus 日志库](source/_posts/Log4cplusLogLibrary.md)
 * [Windows编译构建CEF发行版](source/_posts/WindowsBuildCEF.md)
-* [毕业四个月小结](source/_posts/GraduationFourMonthsSummary.md)
 * [一个基于 C# 的简单的线程安全日志模块](source/_posts/LogConsumer.md)
 * [获取 Windows 操作系统的系统、网络、硬件、软件等信息](source/_posts/GetWindowsInfo.md)
 * [Unity3D 编辑器调试无响应问题](source/_posts/Unity3DEditorDebuggingNoResponse.md)
