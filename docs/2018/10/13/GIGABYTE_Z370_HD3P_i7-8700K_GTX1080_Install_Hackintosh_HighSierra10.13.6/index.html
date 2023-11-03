@@ -1,0 +1,1127 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next muse" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Mac," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HuiHut" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。 原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。 装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(">
+<meta name="keywords" content="Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6">
+<meta property="og:url" content="https://blog.huihut.com/2018/10/13/GIGABYTE_Z370_HD3P_i7-8700K_GTX1080_Install_Hackintosh_HighSierra10.13.6/index.html">
+<meta property="og:site_name" content="HuiHut">
+<meta property="og:description" content="前言本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。 原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。 装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-High-Sierra-10.13.6.jpeg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/etcher-create-hackintosh.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/IMG_20181007_204929.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/IMG_20181007_211514.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-221705.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-gpu.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-232553.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-233544.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-system-information.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-225717.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-225733.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-230207.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-231402.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-audio.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-223654.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hackintosh-usb3.jpg">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-bluetooth.jpg">
+<meta property="og:image" content="https://camo.githubusercontent.com/df4adb0f442a1baf2ec59cf17f3442253619af6f/687474703a2f2f692e696d67626f782e636f6d2f346773734c6453492e706e67">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181013-001702.jpg">
+<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6">
+<meta name="twitter:description" content="前言本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。 原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。 装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(">
+<meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-High-Sierra-10.13.6.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索博文 ⚆_⚆","hits_empty":"没找到 ${query} Σ（ﾟдﾟlll）","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.huihut.com/2018/10/13/GIGABYTE_Z370_HD3P_i7-8700K_GTX1080_Install_Hackintosh_HighSierra10.13.6/"/>
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6107965651704299",
+    enable_page_level_ads: true
+  });
+</script>
+  <title> 技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6 | HuiHut </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96169060-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HuiHut</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专业修电脑，副业补衣服</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/10/13/GIGABYTE_Z370_HD3P_i7-8700K_GTX1080_Install_Hackintosh_HighSierra10.13.6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huihut">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuiHut">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T13:00:00+08:00">
+                2018-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。</p>
+<p>原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。</p>
+<p>装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(17F77) 镜像装好后在 AppStore 更新 10.13.6</p>
+<a id="more"></a>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-High-Sierra-10.13.6.jpeg" alt="Hackintosh-High-Sierra-10.13.6"></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
+<li>主板：技嘉 Z370 HD3P</li>
+<li>CPU：Intel Core i7-8700K</li>
+<li>核显：Intel UHD Graphics 630</li>
+<li>独显：七彩虹 iGame GTX1080 Vulcan X 8G</li>
+<li>内存：海盗船复仇者 DDR4 3200 8G*2</li>
+<li>固态硬盘：三星 SSD 970 EVO 250GB（Windows）</li>
+<li>机械硬盘：西数 WD10EZEX 7200PPM 64M 1T（EFI + MacOS + Storage）</li>
+<li>板载音频：Realtek ALC1220</li>
+<li>板载网卡：Intel I219V2 PCI Express Gigabit Ethernet</li>
+<li>USB蓝牙：绿联 CSR8891 USB蓝牙 4.0</li>
+</ul>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>本博文使用的一些软件工具驱动，下文则不赘述。</p>
+<ul>
+<li><a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/" target="_blank" rel="noopener">带 Clover 镜像</a><ul>
+<li>10.13.6(17G2112) 镜像：<a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/macOS%20High%20Sierra%2010.13.6%2817G2112%29%20Installer%20with%20Clover%204606.dmg" target="_blank" rel="noopener">macOS High Sierra 10.13.6(17G2112) Installer with Clover 4606.dmg</a></li>
+<li>10.13.5(17F77)镜像：<a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/macOS%20High%20Sierra%2010.13.5%2817F77%29%20Installer%20with%20Clover%204512.dmg" target="_blank" rel="noopener">macOS High Sierra 10.13.5(17F77) Installer with Clover 4512.dmg</a></li>
+</ul>
+</li>
+<li>EFI 分区<ul>
+<li><a href="https://github.com/huihut/Hackintosh-Z370/tree/master/EFI" target="_blank" rel="noopener">huihut . Hackintosh-Z370/EFI</a></li>
+</ul>
+</li>
+<li>工具<ul>
+<li>U盘刻录工具 Etcher：<a href="https://etcher.io/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1EAarG7mLxhI0xwQEXerUEg" target="_blank" rel="noopener">百度网盘</a></li>
+<li>Clover 配置工具 Clover Configurator：<a href="https://www.tonymacx86.com/resources/clover-configurator.335/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1adKnfyIT0MVwHGl_Lke_Fg" target="_blank" rel="noopener">百度网盘</a></li>
+<li>内核注入工具 Kext Wizard：<a href="https://mac.softpedia.com/get/Utilities/Kext-Wizard.shtml" target="_blank" rel="noopener">网络</a> | <a href="https://pan.baidu.com/s/1bnsRR4s3FYmc6jCRiVYRew" target="_blank" rel="noopener">百度网盘</a></li>
+<li>文本编辑器 BBEdit 12：<a href="https://www.barebones.com/products/bbedit/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1pWO_hFMcHIjzoFGSOdUgDQ" target="_blank" rel="noopener">百度网盘</a></li>
+</ul>
+</li>
+<li>驱动<ul>
+<li>驱动安装工具 MultiBeast 10.4.0 - High Sierra：<a href="https://www.tonymacx86.com/resources/multibeast-10-4-0-high-sierra.401/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1QBX514ELiqltAJ_EcHan0g" target="_blank" rel="noopener">百度网盘</a></li>
+<li>Nvidia Web 驱动 387.10.10.10.40.105（适用于 10.13.6）：<a href="https://www.nvidia.com/download/driverResults.aspx/136062/en-us" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1pgf06gmxiwpK1256_7QmcQ" target="_blank" rel="noopener">百度网盘</a></li>
+<li>Nvidia Web 驱动 387.10.10.10.35.106（适用于 10.13.5）：<a href="https://www.nvidia.com/download/driverResults.aspx/134834/en-us" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/13ObVcKgRqr1XIvDv2d96Eg" target="_blank" rel="noopener">百度网盘</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="刻录镜像"><a href="#刻录镜像" class="headerlink" title="刻录镜像"></a>刻录镜像</h2><p>准备一个8G以上的U盘，使用 Etcher 刻录上面下载的镜像（带有 Clover EFI 分区）：<code>macOS High Sierra 10.13.6(17G2112) Installer with Clover 4606.dmg</code></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/etcher-create-hackintosh.png" alt="etcher-create-hackintosh"></p>
+<h2 id="设置-BIOS"><a href="#设置-BIOS" class="headerlink" title="设置 BIOS"></a>设置 BIOS</h2><blockquote>
+<p>BIOS 版本已更新为 F7</p>
+</blockquote>
+<ul>
+<li>Save &amp; Exit -&gt; Load Optimized Defaults : Yes</li>
+<li>M.I.T. -&gt; Advanced Memory Settings -&gt; Extreme Memory Profile(X.M.P.) : Profile 1</li>
+<li>BIOS -&gt; Fast Boot : Disabled</li>
+<li>BIOS -&gt; CSM Support : Disabled</li>
+<li>Peripherals -&gt; Super IO Configuration -&gt; Serial Port : Disabled</li>
+<li>Peripherals -&gt; USB Configuration -&gt; XHCI Hand-off : Enabled</li>
+<li>Chipset -&gt; Vt-d : Disabled</li>
+</ul>
+<p>保存 BIOS 配置</p>
+<h2 id="引导出错"><a href="#引导出错" class="headerlink" title="引导出错"></a>引导出错</h2><p>重启进入刻录好的U盘，选择 <code>Boot macOS Install from Install macOS High Sierra</code></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/IMG_20181007_204929.jpg" alt="Clover"></p>
+<p>唠叨模式滚代码的时候出错：please go to <a href="https://panic.apple.com" target="_blank" rel="noopener">https://panic.apple.com</a> to report this panic</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/IMG_20181007_211514.jpg" alt="please go to https://panic.apple.com to report this panic"></p>
+<h2 id="重新刻录"><a href="#重新刻录" class="headerlink" title="重新刻录"></a>重新刻录</h2><p>上面的问题 Google 了一圈并未发现解决办法，因此重新刻录 <code>macOS High Sierra 10.13.5(17F77) Installer with Clover 4512.dmg</code>，先装 10.13.5(17F77) 。</p>
+<h2 id="引导安装"><a href="#引导安装" class="headerlink" title="引导安装"></a>引导安装</h2><p>这次的 10.13.5(17F77)  成功进入安装界面了。</p>
+<p>打开磁盘工具，格好一个系统盘，格式为 APFS 或者 Mac OS 扩展（日志式），大小因人而异，我留了 128G。</p>
+<p>格好后安装系统到这个盘。</p>
+<p>安装过程中第一次自动重启依然进入 U 盘 Clover，引导进入格出来的盘继续安装。</p>
+<p>第二次自动重启也是进入 U 盘 Clover，引导进入格出来的盘，然后安装完毕进入系统。</p>
+<h2 id="安装-Clover"><a href="#安装-Clover" class="headerlink" title="安装 Clover"></a>安装 Clover</h2><h3 id="Clover-选择"><a href="#Clover-选择" class="headerlink" title="Clover 选择"></a>Clover 选择</h3><p>进入系统后发现 1080 独显不能驱动、八代 CPU 不能识别，这个先不管，先装 Clover 到磁盘的 EFI 分区。</p>
+<p>安装 Clover 有两种：</p>
+<ul>
+<li>使用原版 CLover：<a href="https://sourceforge.net/projects/cloverefiboot/" target="_blank" rel="noopener">Clover EFI bootloader 官方下载</a></li>
+<li>使用 U 盘 EFI 分区的 Clover</li>
+</ul>
+<p>由于 U 盘的 Clover 是已经试验过能引导的，所以我就用了 U 盘的。</p>
+<h3 id="挂载-EFI-分区"><a href="#挂载-EFI-分区" class="headerlink" title="挂载 EFI 分区"></a>挂载 EFI 分区</h3><p>在终端上执行 <code>diskutil list</code>，找到两个 EFI 分区（磁盘的 EFI 和 U 盘的 EFI），如下的 <code>disk0 s1</code> 和 <code>disk3 s1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">HuiMac:~ huihut$ diskutil list</span><br><span class="line">/dev/disk0 (internal, physical):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                        *1.0 TB     disk0</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk0s1</span><br><span class="line">   2:                 Apple_APFS Container disk2         128.8 GB   disk0s2</span><br><span class="line">   3:       Microsoft Basic Data Document                85.9 GB    disk0s3</span><br><span class="line">   4:       Microsoft Basic Data Software                161.1 GB   disk0s4</span><br><span class="line">   5:       Microsoft Basic Data Data                    624.2 GB   disk0s5</span><br><span class="line"></span><br><span class="line">/dev/disk1 (internal):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                         250.1 GB   disk1</span><br><span class="line">   1:         Microsoft Reserved                         16.8 MB    disk1s1</span><br><span class="line">   2:       Microsoft Basic Data                         249.2 GB   disk1s2</span><br><span class="line">   3:           Windows Recovery                         847.2 MB   disk1s3</span><br><span class="line"></span><br><span class="line">/dev/disk2 (synthesized):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      APFS Container Scheme -                      +128.8 GB   disk2</span><br><span class="line">                                 Physical Store disk0s2</span><br><span class="line">   1:                APFS Volume MacOS                   84.8 GB    disk2s1</span><br><span class="line">   2:                APFS Volume Preboot                 67.7 MB    disk2s2</span><br><span class="line">   3:                APFS Volume Recovery                1.0 GB     disk2s3</span><br><span class="line">   4:                APFS Volume VM                      20.5 KB    disk2s4</span><br><span class="line"></span><br><span class="line">/dev/disk3 (external, physical):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                        *31.0 GB    disk3</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk3s1</span><br><span class="line">   2:                  Apple_HFS Install macOS High S... 5.7 GB     disk3s2</span><br><span class="line"></span><br><span class="line">HuiMac:~ huihut$</span><br></pre></td></tr></table></figure>
+<p>分别挂载到不同名字的卷</p>
+<p>挂载磁盘 EFI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /Volumes/efidisk</span><br><span class="line">sudo mount -t msdos /dev/disk0s1 /Volumes/efidisk</span><br></pre></td></tr></table></figure></p>
+<p>挂载 U 盘 EFI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /Volumes/efiusb</span><br><span class="line">sudo mount -t msdos /dev/disk3s1 /Volumes/efiusb</span><br></pre></td></tr></table></figure></p>
+<h3 id="复制-Clover"><a href="#复制-Clover" class="headerlink" title="复制 Clover"></a>复制 Clover</h3><p>然后把 U 盘的 <code>EFI/CLOVER</code> 这个文件夹复制到 磁盘的 <code>EFI</code> 下 </p>
+<h2 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h2><p>使用 MultiBeast 安装驱动，使用 Nvidia WebDriver 安装显卡驱动（MultiBeast 的 WebDriver 不能驱动我的 1080）。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-221705.jpg" alt="MultiBeast-config"></p>
+<p>装好 Nvidia WebDriver 后 1080 能驱动，不过 i7-8700K 的八代 CPU 还是不能识别，先不管，在 AppStore 更新 10.13.6。</p>
+<h2 id="更新后安装驱动"><a href="#更新后安装驱动" class="headerlink" title="更新后安装驱动"></a>更新后安装驱动</h2><p>更新完 10.13.6 发现许多驱动有问题：</p>
+<ul>
+<li>独显无法驱动</li>
+<li>CPU无法识别</li>
+<li>声卡无法驱动</li>
+<li>USB3.0无法驱动</li>
+</ul>
+<h3 id="驱动独显"><a href="#驱动独显" class="headerlink" title="驱动独显"></a>驱动独显</h3><p>使用适用于 10.13.6 的 WebDriver-387.10.10.10.40.105.pkg，装好重启后就 OK 了</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-gpu.jpg" alt=""></p>
+<h3 id="修复-CPU-识别"><a href="#修复-CPU-识别" class="headerlink" title="修复 CPU 识别"></a>修复 CPU 识别</h3><blockquote>
+<p>参见 <a href="https://osx.cx/8-dai-cpu-installed-black-apple.html" target="_blank" rel="noopener">八代处理器安装黑苹果 关于本机显示“未知”解决办法</a></p>
+</blockquote>
+<p>挂载磁盘 EFI 分区（操作如上），使用 Clover Configurator 打开 <code>/EFI/CLOVER/config.plist</code></p>
+<p>在 CPU 页面的 Type 中填入 Unknown，保存。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-232553.jpg" alt=""></p>
+<p>使用文本编辑器（如 BBEdit）打开 <code>/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/zh_CN.lproj/AppleSystemInfo.strings</code> 文件</p>
+<p>修改 <code>UnknownCPUKind</code> 的值为 <code>3.7 GHz Intel Core i7-8700K</code></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-233544.jpg" alt="3.7 GHz Intel Core i7-8700K"></p>
+<p>保存重启即可。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-system-information.jpg" alt=""></p>
+<h3 id="修复声卡驱动"><a href="#修复声卡驱动" class="headerlink" title="修复声卡驱动"></a>修复声卡驱动</h3><blockquote>
+<p>参见 <a href="https://imac.hk/applealc-kext-use.html" target="_blank" rel="noopener">黑苹果AppleALC声卡驱动安装使用教程</a></p>
+</blockquote>
+<p>我使用 MultiBeast 安装的 ALC1220 驱动在 10.13.6 下不能驱动我的声卡，试过 MultiBeast 的其他驱动也不行，因此使用另一种方法修复。</p>
+<p>在 <a href="https://github.com/acidanthera/AppleALC/releases" target="_blank" rel="noopener">acidanthera/AppleALC/releases</a> 下载最新的 AppleALC 的 RELEASE 版 <code>AppleALC.kext</code>，使用 Kext Wizard 注入这个内核，如下图</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-225717.jpg" alt="Kext Wizard AppleALC.kext"><br><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-225733.jpg" alt="Kext Wizard AppleALC.kext"></p>
+<p>然后挂载磁盘 EFI 分区（操作如上），把 <code>AppleALC.kext</code> 放入磁盘 EFI 分区的 <code>EFI/CLOVER/kexts/Other/</code>目录中。</p>
+<p>然后在 <a href="https://github.com/acidanthera/AppleALC/tree/master/Resources" target="_blank" rel="noopener">acidanthera/AppleALC/Resources</a> 找到你的声卡型号的文件夹，进入（如我的是 <code>ALC1220</code>）。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-230207.jpg" alt="ALC1220"></p>
+<p>我的声卡型号看到有 <code>layout1.xml</code>、<code>layout2.xml</code>、<code>layout5.xml</code>、<code>layout7.xml</code>、<code>layout11.xml</code>、<code>layout13.xml</code></p>
+<p>然后在 1、2、5、7、11、13 中随便取一个数。</p>
+<p>使用文本编辑器打开磁盘 EFI 分区的 <code>EFI/CLOVER/config.plist</code> 文件，搜索 <code>&lt;key&gt;Audio&lt;/key&gt;</code>，把它的 <code>integer</code> 改为刚刚取的那个数（如 <code>1</code>）。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-231402.jpg" alt="Audio"></p>
+<p>保存重启即可。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-audio.jpg" alt=""></p>
+<h3 id="修复-USB3-0"><a href="#修复-USB3-0" class="headerlink" title="修复 USB3.0"></a>修复 USB3.0</h3><blockquote>
+<p>参见 <a href="https://hackintosher.com/guides/hackintosh-high-sierra-10-13-6-update-guide/" target="_blank" rel="noopener">HACKINTOSH HIGH SIERRA 10.13.6 UPDATE GUIDE</a></p>
+</blockquote>
+<p>使用上文描述的操作挂载磁盘的 EFI 分区</p>
+<p>使用 Clover Configurator 打开 <code>/EFI/CLOVER/config.plist</code></p>
+<p>如下图，插入（若已存在则修改为）配置信息</p>
+<ul>
+<li>Name*: com.apple.driver.usb.AppleUSBXHCI</li>
+<li>Find* [HEX]: 837D880F 0F83A704 0000</li>
+<li>Replace* [HEX]: 837D880F 90909090 9090</li>
+<li>Comment: USB 10.13.6+ by PMHeart</li>
+<li>MatchOS: 10.13.x</li>
+</ul>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-223654.jpg" alt="Clover Configurator USB3.0"></p>
+<p>保存重启即可。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hackintosh-usb3.jpg" alt=""></p>
+<h3 id="蓝牙免驱"><a href="#蓝牙免驱" class="headerlink" title="蓝牙免驱"></a>蓝牙免驱</h3><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-bluetooth.jpg" alt=""></p>
+<h3 id="iMessage、序列号问题"><a href="#iMessage、序列号问题" class="headerlink" title="iMessage、序列号问题"></a>iMessage、序列号问题</h3><blockquote>
+<p>参见 <a href="http://www.ituring.com.cn/article/274156" target="_blank" rel="noopener">[Hackintosh]解决黑苹果无法使用Siri、iMessage等服务</a></p>
+</blockquote>
+<h2 id="更换Clover主题"><a href="#更换Clover主题" class="headerlink" title="更换Clover主题"></a>更换Clover主题</h2><p>Clover主题可以到官方仓库下载：</p>
+<ul>
+<li><a href="https://clover-wiki.zetam.org/theme-database" target="_blank" rel="noopener">Clover Theme Repository</a></li>
+</ul>
+<p>也可以使用其他的，比如我使用这个简洁风格的：</p>
+<ul>
+<li><a href="https://github.com/al3xtjames/clover-theme-minimal" target="_blank" rel="noopener">Clover Minimal - A clean theme for the Clover UEFI bootloader</a></li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/df4adb0f442a1baf2ec59cf17f3442253619af6f/687474703a2f2f692e696d67626f782e636f6d2f346773734c6453492e706e67" alt="clover-theme-minimal"></p>
+<p>只需下载下来，放到 <code>/EFI/CLOVER/themes</code> 文件夹下，然后使用 Clover Configurator 打开 <code>/EFI/CLOVER/config.plist</code> 更换到这个主题就好啦。</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181013-001702.jpg" alt="更换Clover主题"></p>
+<p>另外这个显示启动盘的标签的 <code>Label</code> 建议勾上，这样才知道选择的是哪个盘，保存重启即可。</p>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><ul>
+<li><a href="https://www.tonymacx86.com/" target="_blank" rel="noopener">tonymacx86</a></li>
+<li><a href="https://blog.daliansky.net/" target="_blank" rel="noopener">黑果小兵的部落阁</a></li>
+<li><a href="https://imac.hk/" target="_blank" rel="noopener">黑苹果乐园</a></li>
+<li><a href="https://www.tonymacx86.com/threads/success-gigabyte-z370-hd3p-i7-8700k-gigabyte-rx580-4gb-mojave-10-14-0.256221/" target="_blank" rel="noopener">[Success] Gigabyte Z370 HD3P - i7 8700K - Gigabyte RX580 4GB - Mojave 10.14.0</a></li>
+<li><a href="https://9to5mac.com/2017/04/28/building-a-gtx-1080-ti-powered-hackintosh-installing-macos-sierra-step-by-step-video/" target="_blank" rel="noopener">Building a GTX 1080 Ti-powered Hackintosh: Installing macOS Sierra step-by-step [Video]</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      huihut
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.huihut.com/2018/10/13/GIGABYTE_Z370_HD3P_i7-8700K_GTX1080_Install_Hackintosh_HighSierra10.13.6/" title="技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6">https://blog.huihut.com/2018/10/13/GIGABYTE_Z370_HD3P_i7-8700K_GTX1080_Install_Hackintosh_HighSierra10.13.6/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mac/" rel="tag"># Mac</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/13/PyparsingFailsToUninstallCausingErrorInInstallingMatplotlib/" rel="next" title="pyparsing 无法卸载导致安装 matplotlib 出错">
+                <i class="fa fa-chevron-left"></i> pyparsing 无法卸载导致安装 matplotlib 出错
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/07/CSharpUnzipAnd7zLibraryMissingError/" rel="prev" title="C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error!">
+                C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error! <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="huihut" />
+          <p class="site-author-name" itemprop="name">huihut</p>
+           
+              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huihut" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/huihut" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-wordpress"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/huihut" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:huihut@outlook.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">3.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#刻录镜像"><span class="nav-number">4.</span> <span class="nav-text">刻录镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-BIOS"><span class="nav-number">5.</span> <span class="nav-text">设置 BIOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引导出错"><span class="nav-number">6.</span> <span class="nav-text">引导出错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新刻录"><span class="nav-number">7.</span> <span class="nav-text">重新刻录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引导安装"><span class="nav-number">8.</span> <span class="nav-text">引导安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Clover"><span class="nav-number">9.</span> <span class="nav-text">安装 Clover</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Clover-选择"><span class="nav-number">9.1.</span> <span class="nav-text">Clover 选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载-EFI-分区"><span class="nav-number">9.2.</span> <span class="nav-text">挂载 EFI 分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制-Clover"><span class="nav-number">9.3.</span> <span class="nav-text">复制 Clover</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装驱动"><span class="nav-number">10.</span> <span class="nav-text">安装驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新后安装驱动"><span class="nav-number">11.</span> <span class="nav-text">更新后安装驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#驱动独显"><span class="nav-number">11.1.</span> <span class="nav-text">驱动独显</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复-CPU-识别"><span class="nav-number">11.2.</span> <span class="nav-text">修复 CPU 识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复声卡驱动"><span class="nav-number">11.3.</span> <span class="nav-text">修复声卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复-USB3-0"><span class="nav-number">11.4.</span> <span class="nav-text">修复 USB3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#蓝牙免驱"><span class="nav-number">11.5.</span> <span class="nav-text">蓝牙免驱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iMessage、序列号问题"><span class="nav-number">11.6.</span> <span class="nav-text">iMessage、序列号问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换Clover主题"><span class="nav-number">12.</span> <span class="nav-text">更换Clover主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感谢"><span class="nav-number">13.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huihut</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

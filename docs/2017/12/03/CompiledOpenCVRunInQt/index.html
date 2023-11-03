@@ -1,0 +1,1088 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next muse" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="链接装载库,QT," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HuiHut" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本篇博文是使用 32 位的 MinGW 在 Windows 下编译 OpenCV 生成 32 位的 dll。 关于使用 64 位的 MinGW 编译 OpenCV 生成 64 位的 dll，见：OpenCV使用CMake和MinGW-w64的编译安装 编译好的 OpenCV（MinGW 版）：Github . huihut/OpenCV-MinGW-Build">
+<meta name="keywords" content="链接装载库,QT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV使用CMake和MinGW的编译安装及其在Qt配置运行">
+<meta property="og:url" content="https://blog.huihut.com/2017/12/03/CompiledOpenCVRunInQt/index.html">
+<meta property="og:site_name" content="HuiHut">
+<meta property="og:description" content="前言本篇博文是使用 32 位的 MinGW 在 Windows 下编译 OpenCV 生成 32 位的 dll。 关于使用 64 位的 MinGW 编译 OpenCV 生成 64 位的 dll，见：OpenCV使用CMake和MinGW-w64的编译安装 编译好的 OpenCV（MinGW 版）：Github . huihut/OpenCV-MinGW-Build">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OpenCVCMakeGenerate.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_cap_dshow.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCVRCError.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_cap_dshow.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_nullptr_Error.png">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_chmod_Error.png">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_test_common_Error.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OpenCVMinGWBin.png">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OpenCVQtDemo.png">
+<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenCV使用CMake和MinGW的编译安装及其在Qt配置运行">
+<meta name="twitter:description" content="前言本篇博文是使用 32 位的 MinGW 在 Windows 下编译 OpenCV 生成 32 位的 dll。 关于使用 64 位的 MinGW 编译 OpenCV 生成 64 位的 dll，见：OpenCV使用CMake和MinGW-w64的编译安装 编译好的 OpenCV（MinGW 版）：Github . huihut/OpenCV-MinGW-Build">
+<meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OpenCVCMakeGenerate.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索博文 ⚆_⚆","hits_empty":"没找到 ${query} Σ（ﾟдﾟlll）","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.huihut.com/2017/12/03/CompiledOpenCVRunInQt/"/>
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6107965651704299",
+    enable_page_level_ads: true
+  });
+</script>
+  <title> OpenCV使用CMake和MinGW的编译安装及其在Qt配置运行 | HuiHut </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96169060-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HuiHut</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专业修电脑，副业补衣服</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/12/03/CompiledOpenCVRunInQt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huihut">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuiHut">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                OpenCV使用CMake和MinGW的编译安装及其在Qt配置运行
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T15:27:22+08:00">
+                2017-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博文是使用 32 位的 MinGW 在 Windows 下编译 OpenCV 生成 32 位的 dll。</p>
+<p>关于使用 64 位的 MinGW 编译 OpenCV 生成 64 位的 dll，见：<a href="https://blog.huihut.com/2018/07/31/CompiledOpenCVWithMinGW64/">OpenCV使用CMake和MinGW-w64的编译安装</a></p>
+<h2 id="编译好的-OpenCV（MinGW-版）："><a href="#编译好的-OpenCV（MinGW-版）：" class="headerlink" title="编译好的 OpenCV（MinGW 版）："></a>编译好的 OpenCV（MinGW 版）：</h2><p><a href="https://github.com/huihut/OpenCV-MinGW-Build" target="_blank" rel="noopener">Github . huihut/OpenCV-MinGW-Build</a></p>
+<a id="more"></a>
+<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><ul>
+<li>Windows-10-64bit</li>
+<li><a href="https://download.qt.io/archive/qt/" target="_blank" rel="noopener">Qt-5.9.3</a></li>
+<li><a href="https://sourceforge.net/projects/mingw/" target="_blank" rel="noopener">MinGW-5.3.0-32bit</a></li>
+<li><a href="https://cmake.org/download/" target="_blank" rel="noopener">CMake-3.9.2</a></li>
+<li><a href="https://opencv.org/releases.html" target="_blank" rel="noopener">OpenCV-3.3.1 / 3.4.1 / 3.4.5 / 3.4.6 / 3.4.7 (适用)</a></li>
+</ul>
+<h2 id="OpenCV-的-MSVC-版及-MinGW-版"><a href="#OpenCV-的-MSVC-版及-MinGW-版" class="headerlink" title="OpenCV 的 MSVC 版及 MinGW 版"></a>OpenCV 的 MSVC 版及 MinGW 版</h2><h3 id="MSVC-版"><a href="#MSVC-版" class="headerlink" title="MSVC 版"></a>MSVC 版</h3><p>下载的 OpenCV 文件夹会有：</p>
+<ul>
+<li>build （已编译好的库）</li>
+<li>sources （源码）</li>
+</ul>
+<p>使用 MSVC 的话，直接在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">build/x64/vc14</span><br></pre></td></tr></table></figure>
+<p>里面就有了，配置好路径就可以使用。</p>
+<h3 id="MinGW-版"><a href="#MinGW-版" class="headerlink" title="MinGW 版"></a>MinGW 版</h3><p>OpenCV 没有为我们编译好 MinGW 版，所以我们只能自己编译，下面就是介绍 MinGW 版的编译流程。</p>
+<p>也可以直接下载使用我编译好了的 OpenCV （在上文）。</p>
+<h2 id="安装及配置-Qt、MinGW、CMake"><a href="#安装及配置-Qt、MinGW、CMake" class="headerlink" title="安装及配置 Qt、MinGW、CMake"></a>安装及配置 Qt、MinGW、CMake</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>CMake 自行安装，Qt 和 MinGW 可以直接使用<code>qt-opensource-windows-x86-5.9.3.exe</code> 安装包安装，注意选择安装的<code>组件(components)</code>的时候勾选 <code>MinGW</code> :</p>
+<ul>
+<li>Qt-Qt5.9-MingGW 5.3.0 32 bit</li>
+<li>Qt-Tools-MinGW 5.3.0</li>
+</ul>
+<h3 id="配置-Qt、MinGW"><a href="#配置-Qt、MinGW" class="headerlink" title="配置 Qt、MinGW"></a>配置 Qt、MinGW</h3><p>安装好后打开 QtCreator，在<code>工具</code>-<code>选项</code>-<code>构建和运行</code>-<code>构建套件</code>，选中<code>Desktop Qt 5.9.3 MinGW 32bit</code>，设为默认，OK。</p>
+<h2 id="添加-MinGW-到环境变量"><a href="#添加-MinGW-到环境变量" class="headerlink" title="添加 MinGW 到环境变量"></a>添加 MinGW 到环境变量</h2><p>为用户变量 <code>Path</code> 添加 <code>E:\Qt\Qt5.9.3\Tools\mingw530_32\bin</code></p>
+<h2 id="使环境变量生效"><a href="#使环境变量生效" class="headerlink" title="使环境变量生效"></a>使环境变量生效</h2><p>打开命令提示符 CMD，运行 <code>set PATH=C:</code>，更改当前窗口任务的环境变量，关闭这个 CMD。</p>
+<p>再次打开另一个 CMD，运行 <code>echo %PATH%</code>，显示最新的环境变量，会发现刚刚添加的 MinGW 环境变量已经生效。</p>
+<h2 id="使用-CMake-生成-OpenCV-的-Makefile"><a href="#使用-CMake-生成-OpenCV-的-Makefile" class="headerlink" title="使用 CMake 生成 OpenCV 的 Makefile"></a>使用 CMake 生成 OpenCV 的 Makefile</h2><p>打开 cmake-gui，设置源码和生成路径：</p>
+<ul>
+<li>Where is the source code: <code>E:/OpenCV_3.3.1/opencv/sources</code></li>
+<li>Where to build the binaries: <code>E:/OpenCV_3.3.1/opencv-build</code></li>
+</ul>
+<p>点击 Configure，设置编译器</p>
+<ul>
+<li>Specify the generator for this project: <code>MinGW Makefiles</code></li>
+<li>Specify native compilers</li>
+<li>Next</li>
+<li>Compilers C: <code>E:\Qt\Qt5.9.3\Tools\mingw530_32\bin\gcc.exe</code></li>
+<li>Compilers C++: <code>E:\Qt\Qt5.9.3\Tools\mingw530_32\bin\g++.exe</code></li>
+<li>Finish</li>
+</ul>
+<p>编译配置：</p>
+<ul>
+<li>勾选 <code>WITH_QT</code></li>
+<li>勾选 <code>WITH_OPENGL</code></li>
+</ul>
+<p>点击 Configure，再次配置：</p>
+<ul>
+<li>不勾选 <code>WITH_IPP</code></li>
+<li>设置 <code>QT_MAKE_EXECUTABLE</code> 为 <code>E:\Qt\Qt5.9.3\5.9.3\mingw53_32\bin\qmake.exe</code></li>
+<li>设置 <code>Qt5Concurrent_DIR</code> 为 <code>E:\Qt\Qt5.9.3\5.9.3\mingw53_32\lib\cmake\Qt5Concurrent</code></li>
+<li>设置 <code>Qt5Core_DIR</code> 为 <code>E:\Qt\Qt5.9.3\5.9.3\mingw53_32\lib\cmake\Qt5Core</code></li>
+<li>设置 <code>Qt5Gui_DIR</code> 为 <code>E:\Qt\Qt5.9.3\5.9.3\mingw53_32\lib\cmake\Qt5Gui</code></li>
+<li>设置 <code>Qt5Test_DIR</code> 为 <code>E:\Qt\Qt5.9.3\5.9.3\mingw53_32\lib\cmake\Qt5Test</code></li>
+<li>设置 <code>Qt5Widgets_DIR</code> 为 <code>E:\Qt\Qt5.9.3\5.9.3\mingw53_32\lib\cmake\Qt5Widgets</code></li>
+<li>设置 <code>Qt5OpenGL_DIR</code> 为 <code>E:\Qt\Qt5.9.3\5.9.3\mingw53_32\lib\cmake\Qt5OpenGL</code></li>
+<li>设置 <code>CMAKE_BUILD_TYPE</code> 为 <code>Release</code> 或者 <code>RelWithDebInfo</code></li>
+</ul>
+<p>点击 Generate 生成 Makefile</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OpenCVCMakeGenerate.png" alt="OpenCVCMakeGenerate"></p>
+<h2 id="编译-OpenCV"><a href="#编译-OpenCV" class="headerlink" title="编译 OpenCV"></a>编译 OpenCV</h2><p>打开终端进行编译：（<code>-j</code> 是使用 <code>8</code> 个线程进行编译，请根据你的计算机配置合理设置线程数）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">E:</span><br><span class="line">cd E:\OpenCV_3.3.1\opencv-build</span><br><span class="line">mingw32-make -j 8</span><br><span class="line">mingw32-make install</span><br></pre></td></tr></table></figure>
+<p>如果 <code>mingw32-make -j 8</code> 遇到错误，请看下面的  <strong>编译 OpenCV 常见错误</strong>，否则执行 <code>mingw32-make install</code>，完成安装。</p>
+<h2 id="编译-OpenCV-常见错误"><a href="#编译-OpenCV-常见错误" class="headerlink" title="编译 OpenCV 常见错误"></a>编译 OpenCV 常见错误</h2><h3 id="0-多线程编译错误信息不明确"><a href="#0-多线程编译错误信息不明确" class="headerlink" title="0. 多线程编译错误信息不明确"></a>0. 多线程编译错误信息不明确</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>如果使用了多线程编译，导致错误，但是错误信息不明确，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Makefile:161: recipe for target &apos;all&apos; failed</span><br><span class="line">mingw32-make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_cap_dshow.png" alt="MakeOpenCV_cap_dshow"></p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>使用单线程编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mingw32-make</span><br></pre></td></tr></table></figure>
+<p>以查看详细的错误提示，再根据具体情况解决。</p>
+<h3 id="1-RC-错误"><a href="#1-RC-错误" class="headerlink" title="1. RC 错误"></a>1. RC 错误</h3><h4 id="表现-1"><a href="#表现-1" class="headerlink" title="表现"></a>表现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">... windres.exe: unknown option -- W ...</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FORMAT is one of rc, res, or coff, and is deduced from the file name</span><br><span class="line">extension if not specified.  A single file name is an input file.</span><br><span class="line">No input-file is stdin, default rc.  No output-file is stdout, default rc.</span><br></pre></td></tr></table></figure>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCVRCError.png" alt="MakeOpenCVRCError"></p>
+<h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><p>在 cmake-gui 编译配置中：</p>
+<ul>
+<li>不勾选 <code>ENABLE_PRECOMPILED_HEADERS</code></li>
+</ul>
+<p>然后重新 <code>Configure</code>-<code>Generate</code>-<code>mingw32-make</code></p>
+<h3 id="2-sprintf-instead-use-StringCbPrintfA-or-StringCchPrintfA-错误"><a href="#2-sprintf-instead-use-StringCbPrintfA-or-StringCchPrintfA-错误" class="headerlink" title="2. sprintf_instead_use_StringCbPrintfA_or_StringCchPrintfA 错误"></a>2. sprintf_instead_use_StringCbPrintfA_or_StringCchPrintfA 错误</h3><h4 id="表现-2"><a href="#表现-2" class="headerlink" title="表现"></a>表现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...opencv/sources/modules/videoio/src/cap_dshow.cpp...</span><br><span class="line">... &apos;sprintf_instead_use_StringCbPrintfA_or_StringCchPrintfA&apos; was not declared in this scope ...</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Makefile:161: recipe for target &apos;all&apos; failed</span><br><span class="line">mingw32-make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_cap_dshow.png" alt="MakeOpenCV_cap_dshow"></p>
+<h4 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h4><p>修改<code>E:\OpenCV_3.3.1\opencv\sources\modules\videoio\src\cap_dshow.cpp</code>文件，在<code>#include &quot;DShow.h&quot;</code>这行的上面加一行<code>#define NO_DSHOW_STRSAFE</code>，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define NO_DSHOW_STRSAFE</span><br><span class="line">#include &quot;DShow.h&quot;</span><br></pre></td></tr></table></figure>
+<p>然后重新 <code>Configure</code>-<code>Generate</code>-<code>mingw32-make</code></p>
+<h3 id="3-identifier-‘nullptr’-is-a-keyword-in-C-11-错误【2018年3月2日编译OpenCV-3-4-1时遇到并解决】"><a href="#3-identifier-‘nullptr’-is-a-keyword-in-C-11-错误【2018年3月2日编译OpenCV-3-4-1时遇到并解决】" class="headerlink" title="3. identifier ‘nullptr’ is a keyword in C++11 错误【2018年3月2日编译OpenCV 3.4.1时遇到并解决】"></a>3. identifier ‘nullptr’ is a keyword in C++11 错误【2018年3月2日编译OpenCV 3.4.1时遇到并解决】</h3><h4 id="表现-3"><a href="#表现-3" class="headerlink" title="表现"></a>表现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">D:\opencv-3.4.1\opencv-3.4.1\3rdparty\protobuf\src\google\protobuf\stubs\io_win32.cc:94:3: warning: identifier &apos;nullptr&apos; is a keyword in C++11 [-Wc++0x-compat]</span><br><span class="line">   return s == nullptr || *s == 0;</span><br><span class="line">   ^</span><br><span class="line">D:\opencv-3.4.1\opencv-3.4.1\3rdparty\protobuf\src\google\protobuf\stubs\io_win32.cc: In function &apos;bool google::protobuf::internal::win32::&#123;anonymous&#125;::null_or_empty(const char_type*)&apos;:</span><br><span class="line">D:\opencv-3.4.1\opencv-3.4.1\3rdparty\protobuf\src\google\protobuf\stubs\io_win32.cc:94:15: error: &apos;nullptr&apos; was not declared in this scope</span><br><span class="line">   return s == nullptr || *s == 0;</span><br><span class="line">               ^</span><br><span class="line">3rdparty\protobuf\CMakeFiles\libprotobuf.dir\build.make:412: recipe for target &apos;3rdparty/protobuf/CMakeFiles/libprotobuf.dir/src/google/protobuf/stubs/io_win32.cc.obj&apos; failed</span><br><span class="line">mingw32-make[2]: *** [3rdparty/protobuf/CMakeFiles/libprotobuf.dir/src/google/protobuf/stubs/io_win32.cc.obj] Error 1</span><br><span class="line">CMakeFiles\Makefile2:710: recipe for target &apos;3rdparty/protobuf/CMakeFiles/libprotobuf.dir/all&apos; failed</span><br><span class="line">mingw32-make[1]: *** [3rdparty/protobuf/CMakeFiles/libprotobuf.dir/all] Error 2</span><br><span class="line">Makefile:161: recipe for target &apos;all&apos; failed</span><br><span class="line">mingw32-make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_nullptr_Error.png" alt="MakeOpenCV_nullptr_Error"></p>
+<h4 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h4><p>在 cmake-gui 编译配置中：</p>
+<ul>
+<li>勾选 <code>ENABLE_CXX11</code></li>
+</ul>
+<p>然后重新 <code>Configure</code>-<code>Generate</code>-<code>mingw32-make</code></p>
+<h3 id="4-‘chmod’-不是内部或外部命令，也不是可运行的程序-或批处理文件-‘chmod’-is-not-recognized-as-an-internal-or-external-command【2019年9月2日编译OpenCV-3-4-7时遇到并解决】"><a href="#4-‘chmod’-不是内部或外部命令，也不是可运行的程序-或批处理文件-‘chmod’-is-not-recognized-as-an-internal-or-external-command【2019年9月2日编译OpenCV-3-4-7时遇到并解决】" class="headerlink" title="4. ‘chmod’ 不是内部或外部命令，也不是可运行的程序 或批处理文件 | ‘chmod’ is not recognized as an internal or external command【2019年9月2日编译OpenCV 3.4.7时遇到并解决】"></a>4. ‘chmod’ 不是内部或外部命令，也不是可运行的程序 或批处理文件 | ‘chmod’ is not recognized as an internal or external command【2019年9月2日编译OpenCV 3.4.7时遇到并解决】</h3><h4 id="表现-4"><a href="#表现-4" class="headerlink" title="表现"></a>表现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;chmod&apos; 不是内部或外部命令，也不是可运行的程序 或批处理文件</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_chmod_Error.png" alt="MakeOpenCV_chmod_Error"></p>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>在 <code>E:\opencv-3.4.7\opencv-3.4.7\cmake\OpenCVPCHSupport.cmake</code> 中使用了 <code>chmod</code> 命令，然而 Windows 下不支持 <code>chmod</code> 命令，因此报错。</p>
+<h4 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a>解决</h4><p>判断系统是否 Windows，若是 Windows，则不使用 <code>COMMAND chmod +x &quot;${_pch_generate_file_cmd}&quot;</code>，如我提的 PR 中的修改：<a href="https://github.com/opencv/opencv/pull/15433/files" target="_blank" rel="noopener">fix ‘chmod’ is not recognized as an internal or external command in Windows #15433</a></p>
+<p>修改后再重新 <code>Configure</code>-<code>Generate</code>-<code>mingw32-make</code></p>
+<h3 id="5-test-common-hpp-No-such-file-or-directory【2019年9月2日编译OpenCV-3-4-7时遇到并解决】"><a href="#5-test-common-hpp-No-such-file-or-directory【2019年9月2日编译OpenCV-3-4-7时遇到并解决】" class="headerlink" title="5. test_common.hpp: No such file or directory【2019年9月2日编译OpenCV 3.4.7时遇到并解决】"></a>5. test_common.hpp: No such file or directory【2019年9月2日编译OpenCV 3.4.7时遇到并解决】</h3><h4 id="表现-5"><a href="#表现-5" class="headerlink" title="表现"></a>表现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In file included from &lt;command-line&gt;:0:0:</span><br><span class="line">E:/opencv-3.4.7/opencv-3.4.7-build/modules/dnn/test_precomp.hpp:50:10: fatal error: test_common.hpp: No such file or directory</span><br><span class="line"> #include &quot;test_common.hpp&quot;</span><br><span class="line">          ^~~~~~~~~~~~~~~~~</span><br><span class="line">compilation terminated.</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeOpenCV_test_common_Error.png" alt="MakeOpenCV_test_common_Error"></p>
+<h4 id="解决-5"><a href="#解决-5" class="headerlink" title="解决"></a>解决</h4><p>方法一：（<a href="https://github.com/opencv/opencv/issues/15381" target="_blank" rel="noopener">issues/15381</a>）</p>
+<p>在 cmake-gui 编译配置中：</p>
+<ul>
+<li>不勾选 <code>ENABLE_PRECOMPILED_HEADERS</code>（禁用预编译头）</li>
+</ul>
+<p>然后重新 <code>Configure</code>-<code>Generate</code>-<code>mingw32-make</code></p>
+<p>方法二：</p>
+<p>把 <code>E:\opencv-3.4.7\opencv-3.4.7\modules\dnn\test\test_common.hpp</code> 复制到 <code>E:\opencv-3.4.7\opencv-3.4.7-build\modules\dnn\</code> 目录下</p>
+<p>然后继续 <code>mingw32-make</code></p>
+<h2 id="添加-OpenCV-编译的库到环境变量"><a href="#添加-OpenCV-编译的库到环境变量" class="headerlink" title="添加 OpenCV 编译的库到环境变量"></a>添加 OpenCV 编译的库到环境变量</h2><ul>
+<li>为系统变量 <code>Path</code> 添加 <code>E:\OpenCV_3.3.1\opencv-build\install\x86\mingw\bin</code></li>
+</ul>
+<h2 id="新建-OpenCV-的-Qt-项目"><a href="#新建-OpenCV-的-Qt-项目" class="headerlink" title="新建 OpenCV 的 Qt 项目"></a>新建 OpenCV 的 Qt 项目</h2><p>在 <code>.pro</code> 文件里面添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">win32 &#123;</span><br><span class="line">INCLUDEPATH += E:\OpenCV_3.3.1\opencv-build\install\include</span><br><span class="line">LIBS += E:\OpenCV_3.3.1\opencv-build\install\x86\mingw\bin\libopencv_*.dll</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者：（区分 debug 和 release 是因为 OpenCV 对其两者有不同的库，你需要把路径改为你自己的，我编译 MinGW 的 OpenCV 只有 release 库）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">win32 &#123;</span><br><span class="line">INCLUDEPATH += E:\OpenCV_3.3.1\opencv-build\install\include</span><br><span class="line">CONFIG(debug, debug|release): &#123;</span><br><span class="line">LIBS += E:\OpenCV_3.3.1\opencv-build\install\x86\mingw\bin\libopencv_*d.dll</span><br><span class="line">&#125; else:CONFIG(release, debug|release): &#123;</span><br><span class="line">LIBS += -LE:\OpenCV_3.3.1\opencv-build\install\x86\mingw\bin \</span><br><span class="line">    -llibopencv_core331 \</span><br><span class="line">    -llibopencv_highgui331 \</span><br><span class="line">    -llibopencv_imgcodecs331 \</span><br><span class="line">    -llibopencv_imgproc331 \</span><br><span class="line">    -llibopencv_features2d331 \</span><br><span class="line">    -llibopencv_calib3d331</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OpenCVMinGWBin.png" alt="OpenCVMinGWBin"></p>
+<p>然后在 MainWindow 中如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;mainwindow.h&quot;</span><br><span class="line">#include &quot;ui_mainwindow.h&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;opencv2/core/core.hpp&gt;</span><br><span class="line">#include &lt;opencv2/highgui/highgui.hpp&gt;</span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent),</span><br><span class="line">    ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line"></span><br><span class="line">    // read an image</span><br><span class="line">    cv::Mat image = cv::imread(&quot;E:/Pictures/H_white.png&quot;, 1);</span><br><span class="line">    // create image window named &quot;My Image&quot;</span><br><span class="line">    cv::namedWindow(&quot;My Image&quot;);</span><br><span class="line">    // show the image on window</span><br><span class="line">    cv::imshow(&quot;My Image&quot;, image);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~MainWindow()</span><br><span class="line">&#123;</span><br><span class="line">    delete ui;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后运行起来了，效果如图：</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OpenCVQtDemo.png" alt="OpenCVQtDemo"></p>
+<h2 id="官方教程"><a href="#官方教程" class="headerlink" title="官方教程"></a>官方教程</h2><ul>
+<li><a href="https://wiki.qt.io/How_to_setup_Qt_and_openCV_on_Windows" target="_blank" rel="noopener">How to setup Qt and openCV on Windows</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      huihut
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.huihut.com/2017/12/03/CompiledOpenCVRunInQt/" title="OpenCV使用CMake和MinGW的编译安装及其在Qt配置运行">https://blog.huihut.com/2017/12/03/CompiledOpenCVRunInQt/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/链接装载库/" rel="tag"># 链接装载库</a>
+          
+            <a href="/tags/QT/" rel="tag"># QT</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/13/GraphicsExercise3D/" rel="next" title="使用MFC的CDC类绘制三维坐标系及球面函数">
+                <i class="fa fa-chevron-left"></i> 使用MFC的CDC类绘制三维坐标系及球面函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/05/QVaiantQ_DECLARE_METATYPE/" rel="prev" title="Qt的QVaiant中使用非QMetaType类型缺少Q_DECLARE_METATYPE宏定义错误">
+                Qt的QVaiant中使用非QMetaType类型缺少Q_DECLARE_METATYPE宏定义错误 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="huihut" />
+          <p class="site-author-name" itemprop="name">huihut</p>
+           
+              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huihut" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/huihut" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-wordpress"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/huihut" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:huihut@outlook.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译好的-OpenCV（MinGW-版）："><span class="nav-number">2.</span> <span class="nav-text">编译好的 OpenCV（MinGW 版）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件环境"><span class="nav-number">3.</span> <span class="nav-text">软件环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenCV-的-MSVC-版及-MinGW-版"><span class="nav-number">4.</span> <span class="nav-text">OpenCV 的 MSVC 版及 MinGW 版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MSVC-版"><span class="nav-number">4.1.</span> <span class="nav-text">MSVC 版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MinGW-版"><span class="nav-number">4.2.</span> <span class="nav-text">MinGW 版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装及配置-Qt、MinGW、CMake"><span class="nav-number">5.</span> <span class="nav-text">安装及配置 Qt、MinGW、CMake</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">5.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Qt、MinGW"><span class="nav-number">5.2.</span> <span class="nav-text">配置 Qt、MinGW</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-MinGW-到环境变量"><span class="nav-number">6.</span> <span class="nav-text">添加 MinGW 到环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使环境变量生效"><span class="nav-number">7.</span> <span class="nav-text">使环境变量生效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-CMake-生成-OpenCV-的-Makefile"><span class="nav-number">8.</span> <span class="nav-text">使用 CMake 生成 OpenCV 的 Makefile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译-OpenCV"><span class="nav-number">9.</span> <span class="nav-text">编译 OpenCV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译-OpenCV-常见错误"><span class="nav-number">10.</span> <span class="nav-text">编译 OpenCV 常见错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-多线程编译错误信息不明确"><span class="nav-number">10.1.</span> <span class="nav-text">0. 多线程编译错误信息不明确</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表现"><span class="nav-number">10.1.1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">10.1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-RC-错误"><span class="nav-number">10.2.</span> <span class="nav-text">1. RC 错误</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表现-1"><span class="nav-number">10.2.1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决-1"><span class="nav-number">10.2.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-sprintf-instead-use-StringCbPrintfA-or-StringCchPrintfA-错误"><span class="nav-number">10.3.</span> <span class="nav-text">2. sprintf_instead_use_StringCbPrintfA_or_StringCchPrintfA 错误</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表现-2"><span class="nav-number">10.3.1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决-2"><span class="nav-number">10.3.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-identifier-‘nullptr’-is-a-keyword-in-C-11-错误【2018年3月2日编译OpenCV-3-4-1时遇到并解决】"><span class="nav-number">10.4.</span> <span class="nav-text">3. identifier ‘nullptr’ is a keyword in C++11 错误【2018年3月2日编译OpenCV 3.4.1时遇到并解决】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表现-3"><span class="nav-number">10.4.1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决-3"><span class="nav-number">10.4.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-‘chmod’-不是内部或外部命令，也不是可运行的程序-或批处理文件-‘chmod’-is-not-recognized-as-an-internal-or-external-command【2019年9月2日编译OpenCV-3-4-7时遇到并解决】"><span class="nav-number">10.5.</span> <span class="nav-text">4. ‘chmod’ 不是内部或外部命令，也不是可运行的程序 或批处理文件 | ‘chmod’ is not recognized as an internal or external command【2019年9月2日编译OpenCV 3.4.7时遇到并解决】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表现-4"><span class="nav-number">10.5.1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原因"><span class="nav-number">10.5.2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决-4"><span class="nav-number">10.5.3.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-test-common-hpp-No-such-file-or-directory【2019年9月2日编译OpenCV-3-4-7时遇到并解决】"><span class="nav-number">10.6.</span> <span class="nav-text">5. test_common.hpp: No such file or directory【2019年9月2日编译OpenCV 3.4.7时遇到并解决】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表现-5"><span class="nav-number">10.6.1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决-5"><span class="nav-number">10.6.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-OpenCV-编译的库到环境变量"><span class="nav-number">11.</span> <span class="nav-text">添加 OpenCV 编译的库到环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建-OpenCV-的-Qt-项目"><span class="nav-number">12.</span> <span class="nav-text">新建 OpenCV 的 Qt 项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方教程"><span class="nav-number">13.</span> <span class="nav-text">官方教程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huihut</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

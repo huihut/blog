@@ -1,0 +1,998 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next muse" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C/C++,OSS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HuiHut" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&amp;#123;&quot;error&quot;:&quot;no such domain&quot;&amp;#125;">
+<meta name="keywords" content="C&#x2F;C++,OSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS">
+<meta property="og:url" content="https://blog.huihut.com/2018/11/08/SolveInvalidQiniuLinksAndDownloadImagesInBatchesAndMigrateAliOSS/index.html">
+<meta property="og:site_name" content="HuiHut">
+<meta property="og:description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&amp;#123;&quot;error&quot;:&quot;no such domain&quot;&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuStorageSpaceTbody.png">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuQrsctlDownload.png">
+<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS">
+<meta name="twitter:description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&amp;#123;&quot;error&quot;:&quot;no such domain&quot;&amp;#125;">
+<meta name="twitter:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuStorageSpaceTbody.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索博文 ⚆_⚆","hits_empty":"没找到 ${query} Σ（ﾟдﾟlll）","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.huihut.com/2018/11/08/SolveInvalidQiniuLinksAndDownloadImagesInBatchesAndMigrateAliOSS/"/>
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6107965651704299",
+    enable_page_level_ads: true
+  });
+</script>
+  <title> 解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS | HuiHut </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96169060-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HuiHut</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专业修电脑，副业补衣服</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/11/08/SolveInvalidQiniuLinksAndDownloadImagesInBatchesAndMigrateAliOSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huihut">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuiHut">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T14:28:00+08:00">
+                2018-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"error"</span>:<span class="string">"no such domain"</span>&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="找回图片对象"><a href="#找回图片对象" class="headerlink" title="找回图片对象"></a>找回图片对象</h2><p>经过提交工单与七牛云工程师协商，知道了失效的图片并没有丢失，可通过某些方法找回，解决办法如下：</p>
+<ol>
+<li>绑定自定义域名：<a href="https://developer.qiniu.com/kodo/kb/5158/how-to-transition-from-test-domain-name-to-a-custom-domain-name" target="_blank" rel="noopener">如何从测试域名过渡到自定义域名</a>（绑定后则可用自定义域名访问失效的图片）</li>
+<li><p>下载单个图片：<a href="https://developer.qiniu.com/kodo/tools/1300/qrsctl" target="_blank" rel="noopener">命令行辅助工具(qrsctl)</a>（使用 qrsctl 工具的 get 下载），如下：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.\qrsctl.exe login huihut@outlook.com 123   # 假设密码为 123</span><br><span class="line">.\qrsctl.exe get temp H.png ./H.png         # 下载 temp 存储空间的 H.png 文件，保存到当前目录下</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载多个对象</p>
+<ol>
+<li>先新建一个同区域存储空间，会分配一个新的测试域名到新空间</li>
+<li>通过 qshell batchcopy 到有域名的同区域空间然后再进行 qdownload 下载操作：<a href="https://developer.qiniu.com/kodo/tools/1302/qshell" target="_blank" rel="noopener">命令行工具(qshell)</a><ol>
+<li><code>qshell listbucket &lt;原bucket名&gt; list.txt</code> （list 出全部文件）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/listbucket.md" target="_blank" rel="noopener">https://github.com/qiniu/qshell/blob/master/docs/listbucket.md</a></li>
+<li><code>cat list.txt | awk &#39;{print $1}&#39; &gt;list_final.txt</code> （ 用awk获取list结果的第一列）</li>
+<li><code>qshell batchcopy &lt;原bucket名&gt; &lt;新bucket名&gt; list_final.txt</code> （复制到新bucket的文件和原bucket文件名一致）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/batchcopy.md" target="_blank" rel="noopener">https://github.com/qiniu/qshell/blob/master/docs/batchcopy.md</a></li>
+<li><code>qshell qdownload newfilelist.txt</code> （newfilelist.txt 为下载的配置文档）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/qdownload.md" target="_blank" rel="noopener">https://github.com/qiniu/qshell/blob/master/docs/qdownload.md</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p><a href="https://developer.qiniu.com/kodo/kb/3858/video-of-how-to-use-qrs-tools" target="_blank" rel="noopener">视频教程 – qshell qrsctl qfetch 命令行工具使用</a></p>
+</blockquote>
+<h2 id="准备迁移阿里云-OSS"><a href="#准备迁移阿里云-OSS" class="headerlink" title="准备迁移阿里云 OSS"></a>准备迁移阿里云 OSS</h2><p>上面的解决方法中，要想继续使用七牛云存储作为图床，必须要有个实名认证的域名（解决方法一），然后绑定之</p>
+<p>而我并没有，因此我打算把我的图片对象迁移到 <a href="https://cn.aliyun.com/product/oss" target="_blank" rel="noopener">阿里云 OSS 存储</a></p>
+<p>上们的解决方法二、三都可以，但是二非常麻烦，三需要两个存储空间，也就需要对七牛账号进行实名认证</p>
+<p>而我又不想另外实名认证（<del>瞎折腾</del>），因此我用了第二种方法：下载单个图片！[捂脸]</p>
+<h2 id="C-程序下载七牛存储的对象"><a href="#C-程序下载七牛存储的对象" class="headerlink" title="C++ 程序下载七牛存储的对象"></a>C++ 程序下载七牛存储的对象</h2><p>使用 qrsctl 工具只能单个文件下载，为了避免重复的工作，我写了个 C++ 程序解决。</p>
+<h3 id="获取包含所有对象名的-html-文件"><a href="#获取包含所有对象名的-html-文件" class="headerlink" title="获取包含所有对象名的 html 文件"></a>获取包含所有对象名的 html 文件</h3><p>首先进入七牛云要下载的 bucket（存储空间）的 web 界面，把内容管理列表中全部对象显示出来（点底部加载更多直到全部显示），在 Chrome 浏览器 <code>右键</code> - <code>检查</code>，如下图，选中 <code>tbody</code> - <code>右键</code> - <code>Copy</code> - <code>Copy element</code></p>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuStorageSpaceTbody.png" alt="QiniuStorageSpaceTbody"></p>
+<p>然后把复制到的内容保存成 <code>html.html</code> 文件，放到一个目录下，如我的 <code>D:\code\test\</code>（以下均以此目录为工程目录）</p>
+<h3 id="下载并登录-qrsctl"><a href="#下载并登录-qrsctl" class="headerlink" title="下载并登录 qrsctl"></a>下载并登录 qrsctl</h3><p>下载 <a href="https://developer.qiniu.com/kodo/tools/1300/qrsctl" target="_blank" rel="noopener">命令行辅助工具(qrsctl)</a>，保存到 <code>D:\code\test\</code> 目录，并重命名为 <code>qrsctl.exe</code></p>
+<p>在 <code>D:\code\test\</code> 目录的 CMD 或 PowerShell 中输入如下命令登录你的七牛账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\qrsctl.exe login huihut@outlook.com 123   # 假设密码为 123</span><br></pre></td></tr></table></figure>
+<h3 id="编写批量下载程序"><a href="#编写批量下载程序" class="headerlink" title="编写批量下载程序"></a>编写批量下载程序</h3><p>在 <code>D:\code\test\</code> 下创建个 <code>QrsctlGet.cpp</code>，把下面 C++ 代码保存到刚创建的文件，修改存储空间名为你的存储空间名的名字（本文为 <code>temp</code>），用 <code>VS Code</code> 或其他工具编译运行，七牛存储的文件即会下载到同目录下。</p>
+<p>Github 仓库：<a href="https://github.com/huihut/QrsctlGet" target="_blank" rel="noopener">huihut/QrsctlGet</a>（有 <code>QrsctlGet.Cpp</code>、<code>qrsctl.exe</code>、<code>.vscode环境</code>）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//==============================================================</span></span><br><span class="line"><span class="comment">//  作者：huihut</span></span><br><span class="line"><span class="comment">//  邮箱：huihut@outlook.com</span></span><br><span class="line"><span class="comment">//  时间：2018-11-08 14:28:00</span></span><br><span class="line"><span class="comment">//  说明：匹配 HTML 的七牛云存储的文件名，并使用 qrsctl 下载文件</span></span><br><span class="line"><span class="comment">//==============================================================</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;regex&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 存储空间名【需要修改为你的存储空间名】</span></span><br><span class="line">	<span class="built_in">string</span> bucket = <span class="string">"temp"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打开 html 文件</span></span><br><span class="line">	ifstream fhtml;</span><br><span class="line">	fhtml.open(<span class="string">"html.html"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 统计下载的文件对象数</span></span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (fhtml)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// tbody 里面符合 reg 的奇数为文件对象，偶数是文件类型，因此只取奇数匹配项</span></span><br><span class="line">		<span class="keyword">bool</span> isObj = <span class="literal">true</span>;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">stringstream</span> buffer;</span><br><span class="line">		buffer &lt;&lt; fhtml.rdbuf();</span><br><span class="line">		<span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">contents</span><span class="params">(buffer.str())</span></span>;</span><br><span class="line">		<span class="built_in">std</span>::smatch match;</span><br><span class="line">		<span class="built_in">std</span>::<span class="function">regex <span class="title">reg</span><span class="params">(<span class="string">"\\b(edit-word ng-binding\"&gt;)([^&lt;]*)"</span>)</span></span>;</span><br><span class="line">		<span class="keyword">while</span> (<span class="built_in">std</span>::regex_search(contents, match, reg)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (isObj)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 匹配到的文件对象</span></span><br><span class="line">				<span class="built_in">string</span> objfile = match.format(<span class="string">"$2"</span>);</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"Matched "</span> + objfile &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 合成下载命令</span></span><br><span class="line">				<span class="built_in">string</span> command = <span class="string">"qrsctl.exe get "</span> + bucket + <span class="string">" "</span> + objfile + <span class="string">" ./"</span> + objfile;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 下载文件</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"Download "</span> + objfile + <span class="string">"..."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				system(command.c_str());</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 文件个数加一</span></span><br><span class="line">				num++;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 下一个非文件对象</span></span><br><span class="line">				isObj = <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 下一个是文件对象</span></span><br><span class="line">				isObj = <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			contents = match.suffix().str();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Failed to read html file!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		system(<span class="string">"pause"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Downloaded "</span> + to_string(num) + <span class="string">" files."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuQrsctlDownload.png" alt="QiniuQrsctlDownload"></p>
+<h2 id="迁移阿里云-OSS"><a href="#迁移阿里云-OSS" class="headerlink" title="迁移阿里云 OSS"></a>迁移阿里云 OSS</h2><p>在 <a href="https://cn.aliyun.com/product/oss" target="_blank" rel="noopener">阿里云 OSS 存储</a> 创建阿里云账号，并在 OSS 中新建 Bucket，其中读写权限选中公共读（public-read），以便能在博文中读取</p>
+<p>把上面下载的图片上传到阿里云 OSS，可以使用客户端上传下载：<a href="https://github.com/aliyun/oss-browser" target="_blank" rel="noopener">aliyun/oss-browser</a></p>
+<p>然后获取外链，批量修改我的博文，把所有七牛云链接改为阿里云就好了</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      huihut
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.huihut.com/2018/11/08/SolveInvalidQiniuLinksAndDownloadImagesInBatchesAndMigrateAliOSS/" title="解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS">https://blog.huihut.com/2018/11/08/SolveInvalidQiniuLinksAndDownloadImagesInBatchesAndMigrateAliOSS/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/OSS/" rel="tag"># OSS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/07/CSharpUnzipAnd7zLibraryMissingError/" rel="next" title="C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error!">
+                <i class="fa fa-chevron-left"></i> C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error!
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/EffectiveCppSummary/" rel="prev" title="Effective C++ 概要">
+                Effective C++ 概要 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="huihut" />
+          <p class="site-author-name" itemprop="name">huihut</p>
+           
+              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huihut" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/huihut" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-wordpress"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/huihut" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:huihut@outlook.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找回图片对象"><span class="nav-number">2.</span> <span class="nav-text">找回图片对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备迁移阿里云-OSS"><span class="nav-number">3.</span> <span class="nav-text">准备迁移阿里云 OSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-程序下载七牛存储的对象"><span class="nav-number">4.</span> <span class="nav-text">C++ 程序下载七牛存储的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取包含所有对象名的-html-文件"><span class="nav-number">4.1.</span> <span class="nav-text">获取包含所有对象名的 html 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并登录-qrsctl"><span class="nav-number">4.2.</span> <span class="nav-text">下载并登录 qrsctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写批量下载程序"><span class="nav-number">4.3.</span> <span class="nav-text">编写批量下载程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移阿里云-OSS"><span class="nav-number">5.</span> <span class="nav-text">迁移阿里云 OSS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huihut</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

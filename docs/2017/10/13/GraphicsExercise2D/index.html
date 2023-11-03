@@ -1,0 +1,1067 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next muse" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="图形学,MFC," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HuiHut" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 / 源码  使用MFC的CDC类绘制三维坐标系及球面函数 / 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
+<meta name="keywords" content="图形学,MFC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用MFC的CDC类绘制二维坐标系及正余弦函数">
+<meta property="og:url" content="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/index.html">
+<meta property="og:site_name" content="HuiHut">
+<meta property="og:description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 / 源码  使用MFC的CDC类绘制三维坐标系及球面函数 / 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GraphicsExercise2DCapture.png">
+<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用MFC的CDC类绘制二维坐标系及正余弦函数">
+<meta name="twitter:description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 / 源码  使用MFC的CDC类绘制三维坐标系及球面函数 / 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
+<meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GraphicsExercise2DCapture.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索博文 ⚆_⚆","hits_empty":"没找到 ${query} Σ（ﾟдﾟlll）","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/"/>
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6107965651704299",
+    enable_page_level_ads: true
+  });
+</script>
+  <title> 使用MFC的CDC类绘制二维坐标系及正余弦函数 | HuiHut </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96169060-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HuiHut</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专业修电脑，副业补衣服</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huihut">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuiHut">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用MFC的CDC类绘制二维坐标系及正余弦函数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T00:55:09+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="系列链接"><a href="#系列链接" class="headerlink" title="系列链接"></a>系列链接</h2><ul>
+<li><p><a href="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/">使用MFC的CDC类绘制二维坐标系及正余弦函数</a> / <a href="https://github.com/huihut/GraphicsExercise2D" target="_blank" rel="noopener">源码</a></p>
+</li>
+<li><p><a href="https://blog.huihut.com/2017/10/13/GraphicsExercise3D/">使用MFC的CDC类绘制三维坐标系及球面函数</a> / <a href="https://github.com/huihut/GraphicsExercise3D" target="_blank" rel="noopener">源码</a></p>
+</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。</p>
+<a id="more"></a>
+<h2 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h2><p><code>Visual Studio</code>- <code>新建项目</code> - <code>MFC应用程序</code> - 命名为<code>CGraphicsExercise2D</code> - <code>确定</code> - <code>下一步</code> - 应用程序类型选择<code>单个文档</code> - <code>完成</code></p>
+<h2 id="绘制函数"><a href="#绘制函数" class="headerlink" title="绘制函数"></a>绘制函数</h2><p>Visual Studio为我们创建了很多无用的代码，而我们的绘制函数在在<code>CGraphicsExercise2DView.cpp</code>的</p>
+<pre><code>void CGraphicsExercise2DView::OnDraw(CDC* /*pDC*/)
+{
+  CGraphicsExercise2DDoc* pDoc = GetDocument();
+  ASSERT_VALID(pDoc);
+  if (!pDoc)
+  return;
+
+  // TODO: 在此处为本机数据添加绘制代码
+}
+</code></pre><p>取消<code>pDC</code>的注释，变成</p>
+<pre><code>void CGraphicsExercise2DView::OnDraw(CDC* pDC)
+</code></pre><p>在</p>
+<pre><code>// TODO: 在此处为本机数据添加绘制代码
+</code></pre><p>下面编写你自己的程序，如画一条线：</p>
+<pre><code>pDC-&gt;MoveTo(20, 30);    // 画笔移到从左上角往右20像素、往下30像素
+pDC-&gt;LineTo(100, 100);    // 画一条线到右100、下100的位置
+</code></pre><p>运行下看下效果吧！</p>
+<p>现在删掉上面两行那条线，开始正式编写二维坐标系了。</p>
+<h2 id="规模变换函数"><a href="#规模变换函数" class="headerlink" title="规模变换函数"></a>规模变换函数</h2><p>上面的<code>MoveTo(20, 30)</code>中的20、30是在显示器上的像素点，如果绘制的坐标系是以像素为大小的话，那1、2这样小的单位在显示器上就难以看到，因此需要规模变换。通常是把小单位乘上放大规模（倍数）就可以了。</p>
+<p>在<code>CGraphicsExercise2DView.h</code></p>
+<pre><code>public:
+  void SetScale(int scale);
+  float TransformScale(float num);
+
+private:
+    int scale;
+</code></pre><p>在<code>CGraphicsExercise2DView.cpp</code></p>
+<pre><code>// 设置规模
+void CGraphicsExercise2DView::SetScale(int scale)
+{
+  this-&gt;scale = scale;
+}
+
+// 变换规模
+float CGraphicsExercise2DView::TransformScale(float num)
+{
+  return num * scale;
+}
+</code></pre><p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
+<pre><code>// 设置规模比例
+SetScale(70);
+</code></pre><h2 id="变换坐标和规模"><a href="#变换坐标和规模" class="headerlink" title="变换坐标和规模"></a>变换坐标和规模</h2><p>在<code>CGraphicsExercise2DView.h</code></p>
+<pre><code>public:
+  float TransformCoordinateScaleX(float x);
+  float TransformCoordinateScaleY(float y);
+</code></pre><p>在<code>CGraphicsExercise2DView.cpp</code></p>
+<pre><code>// 变换x的坐标和规模
+float CGraphicsExercise2DView::TransformCoordinateScaleX(float x)
+{
+     return TransformScale(x + 2);
+}
+
+// 变换y的坐标和规模
+float CGraphicsExercise2DView::TransformCoordinateScaleY(float y)
+{
+     return TransformScale(y + 4);
+}
+</code></pre><h2 id="设置绘制的函数类型"><a href="#设置绘制的函数类型" class="headerlink" title="设置绘制的函数类型"></a>设置绘制的函数类型</h2><p>在<code>CGraphicsExercise2DView.h</code></p>
+<p>类外面定义</p>
+<pre><code>// 支持绘制的函数类型
+enum Function { Sin, Cos };
+</code></pre><p>类里面定义</p>
+<pre><code>public:
+  void SetDrawFunction(Function fun);
+
+private:
+  Function fun;
+</code></pre><p>在<code>GraphicsExerciseView.cpp</code></p>
+<pre><code>#include &lt;math.h&gt;
+
+// 设置绘制的函数
+void CGraphicsExercise2DView::SetDrawFunction(Function fun)
+{
+    this-&gt;fun = fun;
+}
+</code></pre><p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
+<pre><code>// 设置绘制的函数
+SetDrawFunction(Sin);
+</code></pre><h2 id="函数范围和步长"><a href="#函数范围和步长" class="headerlink" title="函数范围和步长"></a>函数范围和步长</h2><p>设置正余弦函数的x取值范围如<code>[0, 2*π]</code>，设置x的取样步长如<code>0.01</code>。</p>
+<p>在<code>CGraphicsExercise2DView.h</code></p>
+<pre><code>public:
+  void SetPlotSin(float startX, float endX, float step);
+
+private:
+  float startX, endX, step;
+</code></pre><p>在<code>CGraphicsExercise2DView.cpp</code></p>
+<pre><code>// 设置范围和步长
+void CGraphicsExercise2DView::SetPlotSin(float startX, float endX, float step)
+{
+     this-&gt;startX = startX;
+     this-&gt;endX = endX;
+     this-&gt;step = step;
+}
+</code></pre><p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
+<pre><code>// 设置自变量x范围[startX, endX]、取样步长step
+SetPlotSin((float)0.0, (float)6.3, (float)0.01);
+</code></pre><h2 id="绘制坐标系"><a href="#绘制坐标系" class="headerlink" title="绘制坐标系"></a>绘制坐标系</h2><p>坐标系是距离左上角右下各2 * 规模个像素开始绘制的（即y轴的顶点是（2 * 放大规模, 2 * 放大规模））</p>
+<p>在<code>OnDraw()</code>函数的<code>// TODO: 在此处为本机数据添加绘制代码</code>下面添加如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">// -------------------- 绘制坐标系 -------------------------</span><br><span class="line"></span><br><span class="line">float endPointX = 2 + endX + 2;</span><br><span class="line"></span><br><span class="line">// 坐标y轴</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(2), (int)TransformScale(6));</span><br><span class="line"></span><br><span class="line">// 坐标x轴</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(4));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX), (int)TransformScale(4));</span><br><span class="line"></span><br><span class="line">// 坐标y轴的箭头</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale((float)1.8), (int)TransformScale((float)2.2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(2), (int)TransformScale(2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale((float)2.2), (int)TransformScale((float)2.2));</span><br><span class="line"></span><br><span class="line">// 坐标x轴的箭头</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(endPointX - (float)0.2), (int)TransformScale((float)3.8));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX), (int)TransformScale(4));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX - (float)0.2), (int)TransformScale((float)4.2));</span><br><span class="line"></span><br><span class="line">// -------------------- 绘制刻度线 -------------------------</span><br><span class="line"></span><br><span class="line">// 绘制y轴刻度线</span><br><span class="line">for (float scaleY = 3; scaleY &lt;= 5; scaleY += 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(scaleY));</span><br><span class="line">  pDC-&gt;LineTo((int)TransformScale((float)2.1), (int)TransformScale(scaleY));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制x轴刻度线</span><br><span class="line">for (float scaleX = 2.2; scaleX &lt; endPointX - 1; scaleX += 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  pDC-&gt;MoveTo((int)TransformScale(scaleX), (int)TransformScale(4));</span><br><span class="line">  pDC-&gt;LineTo((int)TransformScale(scaleX), (int)TransformScale(3.9));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// -------------------- 绘制文字 -------------------------</span><br><span class="line"></span><br><span class="line">// 绘制y轴的y</span><br><span class="line">pDC-&gt;TextOutW((int)TransformScale(1.8), (int)TransformScale(2.3), CString(&quot;y&quot;));</span><br><span class="line">// 绘制x轴的x</span><br><span class="line">pDC-&gt;TextOutW((int)TransformScale(endPointX - (float)0.5), (int)TransformScale(4.1), CString(&quot;x&quot;));</span><br><span class="line"></span><br><span class="line">CString s;</span><br><span class="line">// 绘制y轴刻度文字</span><br><span class="line">for (float ScaleTextY = 2.9, text = 1.0; ScaleTextY &lt;= 4.9; ScaleTextY += 0.2, text -= 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  s.Format(_T(&quot;%.1f&quot;), text);</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(1.6), (int)TransformScale(ScaleTextY), s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制x轴刻度文字</span><br><span class="line">for (float ScaleTextX = 2.3; ScaleTextX &lt; endPointX - 1; ScaleTextX += 0.4)</span><br><span class="line">&#123;</span><br><span class="line">  s.Format(_T(&quot;%.1f&quot;), ScaleTextX - 1.9);</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(ScaleTextX), (int)TransformScale(4.1), s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制函数图的Title</span><br><span class="line">// 判断调用的函数</span><br><span class="line">switch (fun)</span><br><span class="line">&#123;</span><br><span class="line">case Sin:</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(4), (int)TransformScale(6), CString(&quot;y = sin( x )&quot;));</span><br><span class="line">  break;</span><br><span class="line">case Cos:</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(4), (int)TransformScale(6), CString(&quot;y = cos( x )&quot;));</span><br><span class="line">  break;</span><br><span class="line">default:</span><br><span class="line">  break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="绘制函数-1"><a href="#绘制函数-1" class="headerlink" title="绘制函数"></a>绘制函数</h2><p>x从startX绘制到endX，每间隔step绘制一次。</p>
+<p>也是在<code>OnDraw()</code>函数下面添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// -------------------- 绘制函数 -------------------------</span><br><span class="line"></span><br><span class="line">// 不改变坐标和规模的xy</span><br><span class="line">float x, y;</span><br><span class="line"></span><br><span class="line">for (x = startX; x &lt;= endX; x += step)</span><br><span class="line">&#123;</span><br><span class="line">  // 判断调用的函数</span><br><span class="line">  switch (fun)</span><br><span class="line">  &#123;</span><br><span class="line">  case Sin:</span><br><span class="line">    y = (float)sin(x);</span><br><span class="line">    break;</span><br><span class="line">  case Cos:</span><br><span class="line">    y = (float)cos(x);</span><br><span class="line">    break;</span><br><span class="line">  default:</span><br><span class="line">    break;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 对xy改变坐标和规模再显示点</span><br><span class="line">  pDC-&gt;SetPixel((int)TransformCoordinateScaleX(x), (int)TransformCoordinateScaleY(y), 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GraphicsExercise2DCapture.png" alt="GraphicsExercise2DCapture"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      huihut
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/" title="使用MFC的CDC类绘制二维坐标系及正余弦函数">https://blog.huihut.com/2017/10/13/GraphicsExercise2D/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/图形学/" rel="tag"># 图形学</a>
+          
+            <a href="/tags/MFC/" rel="tag"># MFC</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/06/CompileIceMissingLibrary/" rel="next" title="解决源码编译 ZeroC Ice 缺失 mcpp、bzip2、expat 库的问题">
+                <i class="fa fa-chevron-left"></i> 解决源码编译 ZeroC Ice 缺失 mcpp、bzip2、expat 库的问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/13/GraphicsExercise3D/" rel="prev" title="使用MFC的CDC类绘制三维坐标系及球面函数">
+                使用MFC的CDC类绘制三维坐标系及球面函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="huihut" />
+          <p class="site-author-name" itemprop="name">huihut</p>
+           
+              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huihut" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/huihut" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-wordpress"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/huihut" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:huihut@outlook.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列链接"><span class="nav-number">1.</span> <span class="nav-text">系列链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建项目"><span class="nav-number">3.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制函数"><span class="nav-number">4.</span> <span class="nav-text">绘制函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规模变换函数"><span class="nav-number">5.</span> <span class="nav-text">规模变换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变换坐标和规模"><span class="nav-number">6.</span> <span class="nav-text">变换坐标和规模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置绘制的函数类型"><span class="nav-number">7.</span> <span class="nav-text">设置绘制的函数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数范围和步长"><span class="nav-number">8.</span> <span class="nav-text">函数范围和步长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制坐标系"><span class="nav-number">9.</span> <span class="nav-text">绘制坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制函数-1"><span class="nav-number">10.</span> <span class="nav-text">绘制函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">11.</span> <span class="nav-text">效果图</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huihut</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

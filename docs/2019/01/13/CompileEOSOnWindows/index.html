@@ -1,0 +1,1070 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next muse" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="链接装载库," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HuiHut" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="eos 是一个用现代 C++11/14 编写的轻量级三维形变人脸模型拟合库，下面介绍下编译它的步骤和遇到的一些坑坑坑坑！  博文的前半部分是用手动安装的 opencv 和 boost 构建和编译的，一路是坑，最终没有编译成功； 博文的后半部分是用 vcpkg 构建系统安装的 opencv 和 boost 然后构建和编译的，最终编译成功，但是运行失败。  至今为止，关于运行失败的 issue 作者也">
+<meta name="keywords" content="链接装载库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 下源码编译 eos 人脸模型拟合库过程遇到的坑坑坑">
+<meta property="og:url" content="https://blog.huihut.com/2019/01/13/CompileEOSOnWindows/index.html">
+<meta property="og:site_name" content="HuiHut">
+<meta property="og:description" content="eos 是一个用现代 C++11/14 编写的轻量级三维形变人脸模型拟合库，下面介绍下编译它的步骤和遇到的一些坑坑坑坑！  博文的前半部分是用手动安装的 opencv 和 boost 构建和编译的，一路是坑，最终没有编译成功； 博文的后半部分是用 vcpkg 构建系统安装的 opencv 和 boost 然后构建和编译的，最终编译成功，但是运行失败。  至今为止，关于运行失败的 issue 作者也">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/20181229012607.png">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2018-12-29_015957.png">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2018-12-29_020403.png">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/1546520602.jpg">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2019-01-03_213217.png">
+<meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2019-01-03_212959.png">
+<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows 下源码编译 eos 人脸模型拟合库过程遇到的坑坑坑">
+<meta name="twitter:description" content="eos 是一个用现代 C++11/14 编写的轻量级三维形变人脸模型拟合库，下面介绍下编译它的步骤和遇到的一些坑坑坑坑！  博文的前半部分是用手动安装的 opencv 和 boost 构建和编译的，一路是坑，最终没有编译成功； 博文的后半部分是用 vcpkg 构建系统安装的 opencv 和 boost 然后构建和编译的，最终编译成功，但是运行失败。  至今为止，关于运行失败的 issue 作者也">
+<meta name="twitter:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/20181229012607.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索博文 ⚆_⚆","hits_empty":"没找到 ${query} Σ（ﾟдﾟlll）","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.huihut.com/2019/01/13/CompileEOSOnWindows/"/>
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6107965651704299",
+    enable_page_level_ads: true
+  });
+</script>
+  <title> Windows 下源码编译 eos 人脸模型拟合库过程遇到的坑坑坑 | HuiHut </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96169060-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HuiHut</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专业修电脑，副业补衣服</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2019/01/13/CompileEOSOnWindows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huihut">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuiHut">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Windows 下源码编译 eos 人脸模型拟合库过程遇到的坑坑坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-13T02:09:21+08:00">
+                2019-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://github.com/patrikhuber/eos" target="_blank" rel="noopener">eos</a> 是一个用现代 C++11/14 编写的轻量级三维形变人脸模型拟合库，下面介绍下编译它的步骤和遇到的一些坑坑坑坑！</p>
+<ul>
+<li>博文的前半部分是用手动安装的 opencv 和 boost 构建和编译的，一路是坑，最终没有编译成功；</li>
+<li>博文的后半部分是用 <a href="https://github.com/Microsoft/vcpkg/" target="_blank" rel="noopener">vcpkg</a> 构建系统安装的 opencv 和 boost 然后构建和编译的，最终编译成功，但是运行失败。</li>
+</ul>
+<p>至今为止，关于运行失败的 <a href="https://github.com/patrikhuber/eos/issues/245" target="_blank" rel="noopener">issue</a> 作者也没有回复，希望有朝一日能填坑吧~</p>
+<a id="more"></a>
+<h2 id="初期编译环境"><a href="#初期编译环境" class="headerlink" title="初期编译环境"></a>初期编译环境</h2><ul>
+<li>Windows 10</li>
+<li>Visual Studio 2017</li>
+<li>CMake 3.12.4</li>
+<li>OpenCV 4.0.1</li>
+<li>Boost 1.66.0</li>
+</ul>
+<h2 id="克隆配置"><a href="#克隆配置" class="headerlink" title="克隆配置"></a>克隆配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone --recursive git@github.com:patrikhuber/eos.git</span><br><span class="line">mkdir eos_build</span><br></pre></td></tr></table></figure>
+<p>打开 CMake-gui，设置</p>
+<ul>
+<li>Where is the source code: <code>D:/code/VS/BabyCreator/eos</code></li>
+<li>Where to build the binaries: <code>D:/code/VS/BabyCreator/eos_build</code></li>
+</ul>
+<p>点击 Configure，设置编译器</p>
+<ul>
+<li>Specify the generator for this project: Visual Studio 15 2017</li>
+<li>Finish</li>
+</ul>
+<p>配置过程遇到如下错误。</p>
+<h2 id="Found-OpenCV-Windows-Pack-but-it-has-no-binaries-compatible-with-your-configuration-错误"><a href="#Found-OpenCV-Windows-Pack-but-it-has-no-binaries-compatible-with-your-configuration-错误" class="headerlink" title="Found OpenCV Windows Pack but it has no binaries compatible with your configuration. 错误"></a>Found OpenCV Windows Pack but it has no binaries compatible with your configuration. 错误</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Found OpenCV Windows Pack but it has no binaries compatible with your</span><br><span class="line">configuration.</span><br><span class="line"></span><br><span class="line">You should manually point CMake variable OpenCV_DIR to your build of OpenCV</span><br><span class="line">library.</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/20181229012607.png" alt="20181229012607"></p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>能找到 OpenCV 路径，但找不到兼容的二进制文件。</p>
+<p>出错的这个 OpenCV 是在 <a href="https://opencv.org/releases.html" target="_blank" rel="noopener">opencv.org/releases</a> 下载的 Win pack。</p>
+<p>尝试过网友的解决方案【尝试二、三、四】都不能解决，最终通过【尝试五】重新下载源码编译解决，因此可能是构建环境或者编译器的问题。</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>【尝试一】重新设置环境变量：<code>E:\opencv-4.0.1\opencv-4.0.1-winpack\opencv\build\x64\vc15\bin</code></p>
+<p>【尝试二】在 <code>eos/CMakeCache.txt</code> 设置 OpenCV_DIR，不行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set(OpenCV_DIR &quot;D:\\code\\VS\\BabyCreator\\eos\\3rdparty\\opencv\\build&quot;)</span><br><span class="line">find_package(OpenCV REQUIRED)</span><br></pre></td></tr></table></figure>
+<p>【尝试三】在终端设置 OpenCV_DIR，不行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS D:\code\VS\BabyCreator\eos&gt; cmake . -DOpenCV_DIR=D:\\code\\VS\\BabyCreator\\eos\\3rdparty\\opencv\\build\\OpenCVConfig.cmake</span><br></pre></td></tr></table></figure>
+<p>【尝试四】在 find_package 前设置 OpenCV_FOUND 为 1，不行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set(OpenCV_FOUND 1)</span><br><span class="line">find_package(OpenCV REQUIRED)</span><br></pre></td></tr></table></figure>
+<p>【尝试五】下载源码编译 VS 2017 工程的 opencv，解决。</p>
+<ol>
+<li>在 CMake Configure、Generate</li>
+<li>在 VS ALL_BUILD、INSTALL</li>
+<li>执行 <code>install/setup_vars_opencv4.cmd</code></li>
+<li>设置环境变量：<code>E:/opencv-4.0.1/opencv-4.0.1-vs-build/install/x86/vc15/bin</code></li>
+</ol>
+<h2 id="Imported-targets-and-dependency-information-not-available-for-Boost-version-错误"><a href="#Imported-targets-and-dependency-information-not-available-for-Boost-version-错误" class="headerlink" title="Imported targets and dependency information not available for Boost version 错误"></a>Imported targets and dependency information not available for Boost version 错误</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CMake Warning at E:/CMake/share/cmake-3.12/Modules/FindBoost.cmake:577 (message):</span><br><span class="line">  Imported targets and dependency information not available for Boost version</span><br><span class="line">  (all versions older than 1.33)</span><br><span class="line">Call Stack (most recent call first):</span><br><span class="line">  E:/CMake/share/cmake-3.12/Modules/FindBoost.cmake:963 (_Boost_COMPONENT_DEPENDENCIES)</span><br><span class="line">  E:/CMake/share/cmake-3.12/Modules/FindBoost.cmake:1622 (_Boost_MISSING_DEPENDENCIES)</span><br><span class="line">  examples/CMakeLists.txt:22 (find_package)</span><br><span class="line">......</span><br><span class="line">Boost found at Boost_INCLUDE_DIR-NOTFOUND</span><br><span class="line">CMake Error: The following variables are used in this project, but they are set to NOTFOUND.</span><br><span class="line">Please set them or make sure they are set and tested correctly in the CMake files:</span><br><span class="line">D:/code/VS/BabyCreator/eos/examples/Boost_INCLUDE_DIR</span><br><span class="line">   used as include directory in directory D:/code/VS/BabyCreator/eos/examples</span><br><span class="line">   used as include directory in directory D:/code/VS/BabyCreator/eos/examples</span><br><span class="line">   used as include directory in directory D:/code/VS/BabyCreator/eos/examples</span><br><span class="line">   used as include directory in directory D:/code/VS/BabyCreator/eos/examples</span><br><span class="line"></span><br><span class="line">Configuring incomplete, errors occurred!</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2018-12-29_015957.png" alt="2018-12-29_015957"></p>
+<h3 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h3><p>没找到 Boost 库，原因是没配置好。</p>
+<h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><p>尝试了如下方式后，这个问题变成了 <code>Unable to find the requested Boost libraries.</code></p>
+<ol>
+<li>下载 <a href="https://www.boost.org/users/download/" target="_blank" rel="noopener">boost</a> </li>
+<li>运行 <code>boost_1_66_0/b2.exe</code> 生成静态库</li>
+<li>在 <code>eos/CMakeCache.txt</code> 配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set(BOOST_ROOT &quot;E:\\boost_1_66_0&quot;)</span><br><span class="line">set(BOOST_LIBRARYDIR $&#123;BOOST_ROOT&#125;/stage/lib)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Unable-to-find-the-requested-Boost-libraries-错误"><a href="#Unable-to-find-the-requested-Boost-libraries-错误" class="headerlink" title="Unable to find the requested Boost libraries. 错误"></a>Unable to find the requested Boost libraries. 错误</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CMake Error at E:/CMake/share/cmake-3.12/Modules/FindBoost.cmake:2048 (message):</span><br><span class="line">  Unable to find the requested Boost libraries.</span><br><span class="line"></span><br><span class="line">  Boost version: 1.66.0</span><br><span class="line"></span><br><span class="line">  Boost include path: E:/boost_1_66_0</span><br><span class="line"></span><br><span class="line">  Could not find the following Boost libraries:</span><br><span class="line"></span><br><span class="line">          boost_system</span><br><span class="line">          boost_filesystem</span><br><span class="line">          boost_program_options</span><br><span class="line"></span><br><span class="line">  No Boost libraries were found.  You may need to set BOOST_LIBRARYDIR to the</span><br><span class="line">  directory containing Boost libraries or BOOST_ROOT to the location of</span><br><span class="line">  Boost.</span><br><span class="line">Call Stack (most recent call first):</span><br><span class="line">  examples/CMakeLists.txt:22 (find_package)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Boost found at E:/boost_1_66_0</span><br><span class="line">Configuring incomplete, errors occurred!</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2018-12-29_020403.png" alt="2018-12-29_020403"></p>
+<h3 id="原因-2"><a href="#原因-2" class="headerlink" title="原因"></a>原因</h3><p>找到了 Boost 库，但是找不到 <code>boost_system</code>、<code>boost_filesystem</code>、<code>boost_program_options</code> 这三个库。</p>
+<h3 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h3><p>这个问题太坑了，最终是把 <code>E:\boost_1_66_0\stage\lib</code> 里面的那三个库（每个有四个相关库）的名字分别删掉 <code>lib</code>，如下对 <code>boost_system</code> 的修改：</p>
+<ul>
+<li><code>libboost_system-vc141-mt-x32-1_66.lib</code> 改为 <code>boost_system-vc141-mt-x32-1_66.lib</code></li>
+<li><code>libboost_system-vc141-mt-gd-x32-1_66.lib</code> 改为 <code>boost_system-vc141-mt-gd-x32-1_66.lib</code></li>
+<li><code>libboost_system-vc141-mt-x64-1_66.lib</code> 改为 <code>boost_system-vc141-mt-x64-1_66.lib</code></li>
+<li><code>libboost_system-vc141-mt-gd-x64-1_66.lib</code> 改为 <code>boost_system-vc141-mt-gd-x64-1_66.lib</code></li>
+</ul>
+<p>现在终于可以生成工程文件了！</p>
+<p>然而 VS 打开工程后编译，又有问题。</p>
+<h2 id="error-C2065-“CV-BGR2BGRA”-未声明的标识符"><a href="#error-C2065-“CV-BGR2BGRA”-未声明的标识符" class="headerlink" title="error C2065: “CV_BGR2BGRA”: 未声明的标识符"></a>error C2065: “CV_BGR2BGRA”: 未声明的标识符</h2><p>generate-obj.vcxproj<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eos\include\eos\render\texture.hpp(101): error C2065: “CV_BGR2BGRA”: 未声明的标识符 (undeclared identifier)</span><br></pre></td></tr></table></figure></p>
+<h3 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h3><p>这个问题可以根据这个 <a href="https://github.com/patrikhuber/4dface/issues/40" target="_blank" rel="noopener">issue</a>，把 <code>CV_BGR2BGRA</code> 改为 <code>cv::COLOR_BGR2BGRA</code>，或者改为 <code>0</code> 解决。</p>
+<h2 id="error-LNK2005-xxx-已经在-xxx-中定义；error-LNK2019-无法解析的外部符号"><a href="#error-LNK2005-xxx-已经在-xxx-中定义；error-LNK2019-无法解析的外部符号" class="headerlink" title="error LNK2005: xxx 已经在 xxx 中定义；error LNK2019: 无法解析的外部符号"></a>error LNK2005: xxx 已经在 xxx 中定义；error LNK2019: 无法解析的外部符号</h2><p>fit-model-simple.vcxproj<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1&gt;boost_program_options-vc140-mt-gd.lib(boost_program_options-vc141-mt-gd-x32-1_68.dll) : error LNK2005: &quot;public: __thiscall boost::program_options::value_semantic_codecvt_helper&lt;char&gt;::value_semantic_codecvt_helper&lt;char&gt;(void)&quot; (??0?$value_semantic_codecvt_helper@D@program_options@boost@@QAE@XZ) 已经在 boost_program_options-vc141-mt-gd-x32-1_66.lib(value_semantic.obj) 中定义</span><br><span class="line">1&gt;boost_program_options-vc140-mt-gd.lib(boost_program_options-vc141-mt-gd-x32-1_68.dll) : error LNK2005: &quot;public: virtual __thiscall boost::program_options::value_semantic_codecvt_helper&lt;char&gt;::~value_semantic_codecvt_helper&lt;char&gt;(void)&quot; (??1?$value_semantic_codecvt_helper@D@program_options@boost@@UAE@XZ) 已经在 boost_program_options-vc141-mt-gd-x32-1_66.lib(value_semantic.obj) 中定义</span><br><span class="line">1&gt;boost_program_options-vc140-mt-gd.lib(boost_program_options-vc141-mt-gd-x32-1_68.dll) : error LNK2005: &quot;void __cdecl boost::program_options::validate(class boost::any &amp;,class std::vector&lt;class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt;,class std::allocator&lt;class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; &gt; &gt; const &amp;,class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; *,int)&quot; (?validate@program_options@boost@@YAXAAVany@2@ABV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@5@H@Z) 已经在 boost_program_options-vc141-mt-gd-x32-1_66.lib(value_semantic.obj) 中定义</span><br><span class="line">1&gt;boost_program_options-vc140-mt-gd.lib(boost_program_options-vc141-mt-gd-x32-1_68.dll) : error LNK2005: &quot;class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; __cdecl boost::program_options::to_internal(class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; const &amp;)&quot; (?to_internal@program_options@boost@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV34@@Z) 已经在 boost_program_options-vc141-mt-gd-x32-1_66.lib(convert.obj) 中定义</span><br><span class="line">1&gt;  正在创建库 D:/code/VS/BabyCreator/eos_build/examples/Debug/fit-model-simple.lib 和对象 D:/code/VS/BabyCreator/eos_build/examples/Debug/fit-model-simple.exp</span><br><span class="line">1&gt;fit-model-simple.obj : error LNK2019: 无法解析的外部符号 &quot;class cv::Mat __cdecl cv::imread(class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; const &amp;,int)&quot; (?imread@cv@@YA?AVMat@1@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z)，该符号在函数 __catch$_main$0 中被引用</span><br><span class="line">1&gt;fit-model-simple.obj : error LNK2019: 无法解析的外部符号 &quot;bool __cdecl cv::imwrite(class std::basic_string&lt;char,struct std::char_traits&lt;char&gt;,class std::allocator&lt;char&gt; &gt; const &amp;,class cv::debug_build_guard::_InputArray const &amp;,class std::vector&lt;int,class std::allocator&lt;int&gt; &gt; const &amp;)&quot; (?imwrite@cv@@YA_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV_InputArray@debug_build_guard@1@ABV?$vector@HV?$allocator@H@std@@@3@@Z)，该符号在函数 __catch$_main$6 中被引用</span><br><span class="line">1&gt;D:\code\VS\BabyCreator\eos_build\examples\Debug\fit-model-simple.exe : fatal error LNK1120: 2 个无法解析的外部命令</span><br></pre></td></tr></table></figure></p>
+<h3 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h3><p>这个问题可能是安装的这个版本的 boost 库与什么东西不兼容吧，又是环境问题，我已经无力吐槽 Windows 了（心累）。</p>
+<h3 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a>解决</h3><p>这个问题我在官方仓库提了个 <a href="https://github.com/patrikhuber/eos/issues/245" target="_blank" rel="noopener">issue</a>。</p>
+<p>作者的意思是：我没试过你的 boost 和 opencv 的版本，可能是本地配置问题，建议用构建系统（如 <a href="https://github.com/Microsoft/vcpkg/" target="_blank" rel="noopener">vcpkg</a>） 或者在 StackOverflow 上提问。</p>
+<p>我：emmm……</p>
+<p>所以，这个问题未解决，最后是用 vcpkg 安装库解决的。</p>
+<h2 id="再次编译环境"><a href="#再次编译环境" class="headerlink" title="再次编译环境"></a>再次编译环境</h2><ul>
+<li>Windows 10</li>
+<li>Visual Studio 2017</li>
+<li>CMake 3.12.4</li>
+<li>OpenCV 3.4.3</li>
+<li>Boost 1.68.0</li>
+<li>vcpkg 2018.11.23-nohash</li>
+</ul>
+<h2 id="vcpkg-配置安装"><a href="#vcpkg-配置安装" class="headerlink" title="vcpkg 配置安装"></a>vcpkg 配置安装</h2><p>安装 vcpkg、opencv、boost<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/Microsoft/vcpkg.git</span><br><span class="line">cd vcpkg</span><br><span class="line">.\bootstrap-vcpkg.bat</span><br><span class="line">.\vcpkg install opencv boost</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，在 <code>eos</code> 同级目录下创建 build 文件夹 <code>eos_vcpkg_build</code>，如下目录结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- eos</span><br><span class="line">  - CMakeLists.txt</span><br><span class="line">  - ...</span><br><span class="line">- eos_vcpkg_build</span><br><span class="line">  - install</span><br><span class="line">  - eos.sln</span><br><span class="line">  - ...</span><br></pre></td></tr></table></figure>
+<p>然后执行下面的命令构建工程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir eos_vcpkg_build</span><br><span class="line">cd eos_vcpkg_build</span><br><span class="line">cmake ../eos -DOpenCV_DIR=D:\\code\\git\\vcpkg\\buildtrees\\opencv\\x86-windows-rel -DBOOST_ROOT=D:\\code\\git\\vcpkg\\installed\\x86-windows\\bin -DBOOST_LIBRARYDIR=D:\\code\\git\\vcpkg\\installed\\x86-windows\\bin -DBOOST_INCLUDEDIR=D:\\code\\git\\vcpkg\\installed\\x86-windows\\include -DCMAKE_INSTALL_PREFIX=install/</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>OpenCV_DIR</code> 设为 vcpkg 安装的 <code>opencv 路径</code></li>
+<li><code>BOOST_ROOT</code> 设为 vcpkg 安装的 <code>boost 路径</code></li>
+<li><code>BOOST_LIBRARYDIR</code> 设为 vcpkg 安装的 <code>boost 库文件路径</code></li>
+<li><code>BOOST_INCLUDEDIR</code> 设为 vcpkg 安装的 <code>boost 头文件路径</code></li>
+<li><code>CMAKE_INSTALL_PREFIX</code> 即为 <code>make install 的路径</code></li>
+</ul>
+<p>构建好后，用 VS 打开，右键 <code>解决方案 eos</code> - <code>生成解决方案</code></p>
+<p>然后选择 <code>INSTALL</code> 工程 - 右键 <code>设为启动项目</code> - 右键 <code>生成</code></p>
+<p>居然成功编译并安装好了（喜极而泣）！</p>
+<h2 id="eos-运行示例"><a href="#eos-运行示例" class="headerlink" title="eos 运行示例"></a>eos 运行示例</h2><p>运行下 <code>eos_vcpkg_build\install\bin\fit-model.exe</code> 示例程序吧 ~</p>
+<p>根据墨菲定律，必定没这么顺利，果然……</p>
+<p>一连跳几个框，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于找不到 opencv_core343.dll、opencv_imgcodecs343.dll、boost_filesystem-vc141-mt-x32-1_68.dll、jpeg62.dll、zlib1.dll 等，无法继续执行代码。重新安装重新可能会解决此问题。</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/1546520602.jpg" alt=""></p>
+<p>既然缺少动态库，那就去 vcpkg 安装路径下找，如果没有则用 vcpkg 安装，然后把这些 dll 放到 <code>fit-model.exe</code> 同级目录下。</p>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2019-01-03_213217.png" alt=""></p>
+<p>然后就……</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用程序无法正常启动(0xc000007b)。请点击“确定”关闭应用程序。</span><br></pre></td></tr></table></figure>
+<p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/2019-01-03_212959.png" alt=""></p>
+<p>我：emmm……mmp</p>
+<p>应该是动态库的链接错误，关于这个问题我再次开了 <a href="https://github.com/patrikhuber/eos/issues/245#issuecomment-451143760" target="_blank" rel="noopener">issue</a>，但是作者不再回应了。</p>
+<p>所以，在 Windows 上，只是编译成功库，但是示例都无法运行。</p>
+<p>最终，在 Ubuntu 上，编译运行起来了。</p>
+<p>心累。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      huihut
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.huihut.com/2019/01/13/CompileEOSOnWindows/" title="Windows 下源码编译 eos 人脸模型拟合库过程遇到的坑坑坑">https://blog.huihut.com/2019/01/13/CompileEOSOnWindows/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/链接装载库/" rel="tag"># 链接装载库</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/Unity3DPluginXXXIsUsedFromSeveralLocations/" rel="next" title="Unity3D Plugin xxx is used from several locations 错误">
+                <i class="fa fa-chevron-left"></i> Unity3D Plugin xxx is used from several locations 错误
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/21/PythonDeprecationWarningTheImpModuleIsDeprecatedInFavourOfImportlib/" rel="prev" title="Python DeprecationWarning the imp module is deprecated in favour of importlib">
+                Python DeprecationWarning the imp module is deprecated in favour of importlib <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="huihut" />
+          <p class="site-author-name" itemprop="name">huihut</p>
+           
+              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huihut" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/huihut" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-wordpress"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/huihut" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:huihut@outlook.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初期编译环境"><span class="nav-number">1.</span> <span class="nav-text">初期编译环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆配置"><span class="nav-number">2.</span> <span class="nav-text">克隆配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Found-OpenCV-Windows-Pack-but-it-has-no-binaries-compatible-with-your-configuration-错误"><span class="nav-number">3.</span> <span class="nav-text">Found OpenCV Windows Pack but it has no binaries compatible with your configuration. 错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因"><span class="nav-number">3.2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">3.3.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Imported-targets-and-dependency-information-not-available-for-Boost-version-错误"><span class="nav-number">4.</span> <span class="nav-text">Imported targets and dependency information not available for Boost version 错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因-1"><span class="nav-number">4.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-1"><span class="nav-number">4.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unable-to-find-the-requested-Boost-libraries-错误"><span class="nav-number">5.</span> <span class="nav-text">Unable to find the requested Boost libraries. 错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因-2"><span class="nav-number">5.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-2"><span class="nav-number">5.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#error-C2065-“CV-BGR2BGRA”-未声明的标识符"><span class="nav-number">6.</span> <span class="nav-text">error C2065: “CV_BGR2BGRA”: 未声明的标识符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-3"><span class="nav-number">6.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#error-LNK2005-xxx-已经在-xxx-中定义；error-LNK2019-无法解析的外部符号"><span class="nav-number">7.</span> <span class="nav-text">error LNK2005: xxx 已经在 xxx 中定义；error LNK2019: 无法解析的外部符号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因-3"><span class="nav-number">7.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-4"><span class="nav-number">7.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再次编译环境"><span class="nav-number">8.</span> <span class="nav-text">再次编译环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vcpkg-配置安装"><span class="nav-number">9.</span> <span class="nav-text">vcpkg 配置安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eos-运行示例"><span class="nav-number">10.</span> <span class="nav-text">eos 运行示例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huihut</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
