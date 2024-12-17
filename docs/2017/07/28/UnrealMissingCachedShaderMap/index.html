@@ -80,27 +80,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="Unreal 源码编译运行 Missing cached shader map… 的问题问题描述Unreal 源码是 Github-release 分支，版本是4.16。 编译运行Unreal引擎源码的时候，出现虚幻编辑器的窗口，但是卡在45%不动。">
-<meta name="keywords" content="Unreal">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unreal 源码编译运行 Missing cached shader map... 的问题">
 <meta property="og:url" content="https://blog.huihut.com/2017/07/28/UnrealMissingCachedShaderMap/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="Unreal 源码编译运行 Missing cached shader map… 的问题问题描述Unreal 源码是 Github-release 分支，版本是4.16。 编译运行Unreal引擎源码的时候，出现虚幻编辑器的窗口，但是卡在45%不动。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UnrealLunch45Missing.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MissingCachedShaderMap.png">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:published_time" content="2017-07-28T06:10:28.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Unreal">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unreal 源码编译运行 Missing cached shader map... 的问题">
-<meta name="twitter:description" content="Unreal 源码编译运行 Missing cached shader map… 的问题问题描述Unreal 源码是 Github-release 分支，版本是4.16。 编译运行Unreal引擎源码的时候，出现虚幻编辑器的窗口，但是卡在45%不动。">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UnrealLunch45Missing.png">
 
 
@@ -108,9 +106,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -143,7 +141,7 @@
   });
 </script>
   <title> Unreal 源码编译运行 Missing cached shader map... 的问题 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -151,15 +149,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -317,7 +306,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/07/28/UnrealMissingCachedShaderMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -410,13 +399,15 @@
       
         <h2 id="Unreal-源码编译运行-Missing-cached-shader-map…-的问题"><a href="#Unreal-源码编译运行-Missing-cached-shader-map…-的问题" class="headerlink" title="Unreal 源码编译运行 Missing cached shader map… 的问题"></a>Unreal 源码编译运行 Missing cached shader map… 的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Unreal 源码是 Github-release 分支，版本是4.16。</p>
 <p>编译运行Unreal引擎源码的时候，出现虚幻编辑器的窗口，但是卡在45%不动。</p>
-<a id="more"></a>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UnrealLunch45Missing.png" alt=""></p>
+<span id="more"></span>
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UnrealLunch45Missing.png"></p>
 <p>并在调试窗口输出：</p>
 <pre><code>Missing cached shader map for material WorldGridMaterial, compiling. Is special engine material.
-</code></pre><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MissingCachedShaderMap.png" alt=""></p>
+</code></pre>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MissingCachedShaderMap.png"></p>
 <h3 id="同类问题"><a href="#同类问题" class="headerlink" title="同类问题"></a>同类问题</h3><p>同样这个问题，在unrealengine社区有人遇到，但没有说明具体原因及解决方案。</p>
-<p><a href="https://answers.unrealengine.com/questions/184696/ue47-source-build-missing-cached-shader.html" target="_blank" rel="noopener">answers.unrealengine.com - UE4.7 source build, missing cached shader</a></p>
+<p><a href="https://answers.unrealengine.com/questions/184696/ue47-source-build-missing-cached-shader.html">answers.unrealengine.com - UE4.7 source build, missing cached shader</a></p>
 <h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p>结果我没有进行任何操作，<strong>再等会儿</strong> 居然成功运行了起来！</p>
 <p>我猜测可能是WorldGridMaterial这个材质需要联网下载，然后由于网络问题在45%处卡住了一会儿。</p>
 
@@ -549,10 +540,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -571,7 +562,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -581,10 +572,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -662,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unreal-源码编译运行-Missing-cached-shader-map…-的问题"><span class="nav-number">1.</span> <span class="nav-text">Unreal 源码编译运行 Missing cached shader map… 的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同类问题"><span class="nav-number">1.2.</span> <span class="nav-text">同类问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果"><span class="nav-number">1.3.</span> <span class="nav-text">结果</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unreal-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C-Missing-cached-shader-map%E2%80%A6-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">Unreal 源码编译运行 Missing cached shader map… 的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">同类问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">1.3.</span> <span class="nav-text">结果</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -685,7 +676,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -960,5 +951,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

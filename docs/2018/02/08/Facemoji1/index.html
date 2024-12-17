@@ -80,28 +80,26 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="概述本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌 这是个 Unity 项目，其暂时有两个模块 ：  【模块一】是实时人脸卡通化（FaceTracking），使用 OpenCV 和 Dlib 检测面部表情，并实时转化为 Live2D 模型，然后可 录制 成 gif 图； 【模块二】是人工智能（AI）使用 图灵机器人、讯飞IAT语音听写、讯飞TTS语音合成 进行语音聊天。">
-<meta name="keywords" content="Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌（OpenCV+Dlib+Live2D+图灵机器人+讯飞IAT语音听写+讯飞TTS语音合成）">
 <meta property="og:url" content="https://blog.huihut.com/2018/02/08/Facemoji1/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="概述本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌 这是个 Unity 项目，其暂时有两个模块 ：  【模块一】是实时人脸卡通化（FaceTracking），使用 OpenCV 和 Dlib 检测面部表情，并实时转化为 Live2D 模型，然后可 录制 成 gif 图； 【模块二】是人工智能（AI）使用 图灵机器人、讯飞IAT语音听写、讯飞TTS语音合成 进行语音聊天。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Facemoji%E6%95%88%E6%9E%9C%E5%9B%BE_cn.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/FacemojiDirectoryStructure1.5.0.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GifCapture-201802072218435427.gif">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.165Z">
+<meta property="article:published_time" content="2018-02-07T16:11:00.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.165Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌（OpenCV+Dlib+Live2D+图灵机器人+讯飞IAT语音听写+讯飞TTS语音合成）">
-<meta name="twitter:description" content="概述本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌 这是个 Unity 项目，其暂时有两个模块 ：  【模块一】是实时人脸卡通化（FaceTracking），使用 OpenCV 和 Dlib 检测面部表情，并实时转化为 Live2D 模型，然后可 录制 成 gif 图； 【模块二】是人工智能（AI）使用 图灵机器人、讯飞IAT语音听写、讯飞TTS语音合成 进行语音聊天。">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Facemoji%E6%95%88%E6%9E%9C%E5%9B%BE_cn.png">
 
 
@@ -109,9 +107,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -144,7 +142,7 @@
   });
 </script>
   <title> 一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌（OpenCV+Dlib+Live2D+图灵机器人+讯飞IAT语音听写+讯飞TTS语音合成） | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -152,15 +150,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -318,7 +307,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/02/08/Facemoji1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -412,23 +401,24 @@
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌</p>
 <p>这是个 Unity 项目，其暂时有两个模块 ：</p>
 <ul>
-<li>【模块一】是实时人脸卡通化（FaceTracking），使用 <a href="https://enoxsoftware.com/opencvforunity/" target="_blank" rel="noopener">OpenCV</a> 和 <a href="https://enoxsoftware.com/dlibfacelandmarkdetector/" target="_blank" rel="noopener">Dlib</a> 检测面部表情，并实时转化为 <a href="http://sites.cybernoids.jp/cubism-sdk2_e/unity_2-1" target="_blank" rel="noopener">Live2D</a> 模型，然后可 <a href="https://github.com/Chman/Moments" target="_blank" rel="noopener">录制</a> 成 gif 图；</li>
-<li>【模块二】是人工智能（AI）使用 <a href="http://www.tuling123.com/" target="_blank" rel="noopener">图灵机器人</a>、<a href="http://www.xfyun.cn/services/voicedictation" target="_blank" rel="noopener">讯飞IAT语音听写</a>、<a href="http://www.xfyun.cn/services/online_tts" target="_blank" rel="noopener">讯飞TTS语音合成</a> 进行语音聊天。</li>
+<li>【模块一】是实时人脸卡通化（FaceTracking），使用 <a href="https://enoxsoftware.com/opencvforunity/">OpenCV</a> 和 <a href="https://enoxsoftware.com/dlibfacelandmarkdetector/">Dlib</a> 检测面部表情，并实时转化为 <a href="http://sites.cybernoids.jp/cubism-sdk2_e/unity_2-1">Live2D</a> 模型，然后可 <a href="https://github.com/Chman/Moments">录制</a> 成 gif 图；</li>
+<li>【模块二】是人工智能（AI）使用 <a href="http://www.tuling123.com/">图灵机器人</a>、<a href="http://www.xfyun.cn/services/voicedictation">讯飞IAT语音听写</a>、<a href="http://www.xfyun.cn/services/online_tts">讯飞TTS语音合成</a> 进行语音聊天。</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
+
 <h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Facemoji%E6%95%88%E6%9E%9C%E5%9B%BE_cn.png" alt="Facemoji效果图_cn"></p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>源码：<a href="https://github.com/huihut/Facemoji" target="_blank" rel="noopener">Github . huihut/Facemoji</a></p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>源码：<a href="https://github.com/huihut/Facemoji">Github . huihut&#x2F;Facemoji</a></p>
 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
-<li><a href="https://www.coolapk.com/apk/192260" target="_blank" rel="noopener">酷安 . Facemoji 废萌</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.huihut.facemoji" target="_blank" rel="noopener">Google Play (需要梯子)</a></li>
-<li><a href="https://github.com/huihut/Facemoji/releases" target="_blank" rel="noopener">Github . Facemoji/releases</a></li>
-<li><a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-" target="_blank" rel="noopener">Google云盘 . Facemoji/Platform</a></li>
-<li><a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA" target="_blank" rel="noopener">Baidu网盘 . Facemoji/Platform</a></li>
+<li><a href="https://www.coolapk.com/apk/192260">酷安 . Facemoji 废萌</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.huihut.facemoji">Google Play (需要梯子)</a></li>
+<li><a href="https://github.com/huihut/Facemoji/releases">Github . Facemoji&#x2F;releases</a></li>
+<li><a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘 . Facemoji&#x2F;Platform</a></li>
+<li><a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘 . Facemoji&#x2F;Platform</a></li>
 </ul>
 <h2 id="为什么叫废萌（Facemoji）"><a href="#为什么叫废萌（Facemoji）" class="headerlink" title="为什么叫废萌（Facemoji）"></a>为什么叫废萌（Facemoji）</h2><p>首先，为什么叫废萌（Facemoji）？…emmm…这个项目其实是由 Animoji 启发的，由于当时 Animoji 没有开放 api，所以想开发个跨平台（Unity）的类似的项目，就叫 Facemoji。</p>
 <p>至于中文名废萌嘛？…emmm…总觉得她除了卖萌没什么作用，所以就叫废（Face）萌（Moji）了。</p>
 <h2 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h2><ol>
-<li><p>从 <a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-" target="_blank" rel="noopener">Google云盘</a> 或者 <a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA" target="_blank" rel="noopener">Baidu网盘</a>下载<code>shape_predictor_68_face_landmarks.dat</code>（已训练好的人脸检测模型）和 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>（精简的 OpenCV, Dlib, Live2D 和 Iflytek 库）</p>
+<li><p>从 <a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘</a> 或者 <a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘</a>下载<code>shape_predictor_68_face_landmarks.dat</code>（已训练好的人脸检测模型）和 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>（精简的 OpenCV, Dlib, Live2D 和 Iflytek 库）</p>
 </li>
 <li><p>克隆下源码：<code>git clone git@github.com:huihut/Facemoji.git</code></p>
 </li>
@@ -466,16 +456,17 @@
 <p>但是由于她是个中国 AI（<del>机器人</del>），图灵机器人只支持中文，所以她只能进行中文聊天，和她讲英文她只会翻译。</p>
 <p>不过她以后会学习英文的（<del>换个会讲英文的</del>）。</p>
 <h2 id="Gif演示"><a href="#Gif演示" class="headerlink" title="Gif演示"></a>Gif演示</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GifCapture-201802072218435427.gif" alt="GifCapture-201802072218435427.gif">    </p>
-<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><h3 id="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1"><a href="#人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1" class="headerlink" title="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji/issues/1"></a>人不动时模型抖动问题（特别是眼睛眉毛）<a href="https://github.com/huihut/Facemoji/issues/1" target="_blank" rel="noopener">Facemoji/issues/1</a></h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>手/眼/眉等的轻微抖动</li>
+<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><h3 id="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1"><a href="#人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1" class="headerlink" title="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji&#x2F;issues&#x2F;1"></a>人不动时模型抖动问题（特别是眼睛眉毛）<a href="https://github.com/huihut/Facemoji/issues/1">Facemoji&#x2F;issues&#x2F;1</a></h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>手&#x2F;眼&#x2F;眉等的轻微抖动</li>
 <li>Dlib 检测到的每一帧人脸特征点的位置会有轻微差距</li>
 </ul>
 <h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ul>
 <li><p>调整模型参数</p>
-<p>  如果人眼睛小的话，可以修改 <code>FaceTracking.cs</code> 中 <a href="https://github.com/huihut/Facemoji/blob/v1.4.1/Assets/Scripts/FaceTracking.cs#L294" target="_blank" rel="noopener">live2DModelUpdate</a> 方法，把睁开眼的区间改大一点，如下：</p>
+<p>  如果人眼睛小的话，可以修改 <code>FaceTracking.cs</code> 中 <a href="https://github.com/huihut/Facemoji/blob/v1.4.1/Assets/Scripts/FaceTracking.cs#L294">live2DModelUpdate</a> 方法，把睁开眼的区间改大一点，如下：</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// eye_open_L                               // 左眼</span><br><span class="line">float eyeOpen_L = getRaitoOfEyeOpen_L (points);</span><br><span class="line">if (eyeOpen_L &gt; 0.4f &amp;&amp; eyeOpen_L &lt; 1.0f)</span><br><span class="line">    eyeOpen_L = 1;                          // 睁开眼</span><br><span class="line">else if (eyeOpen_L &gt;= 1.0f)</span><br><span class="line">    eyeOpen_L = 2;                          // 睁大眼</span><br><span class="line">else if (eyeOpen_L &lt;= 0.4f)</span><br><span class="line">    eyeOpen_L = 0;                          // 闭上眼</span><br><span class="line">live2DModel.PARAM_EYE_L_OPEN = eyeOpen_L;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// eye_open_L                               // 左眼</span><br><span class="line">float eyeOpen_L = getRaitoOfEyeOpen_L (points);</span><br><span class="line">if (eyeOpen_L &gt; 0.4f &amp;&amp; eyeOpen_L &lt; 1.0f)</span><br><span class="line">    eyeOpen_L = 1;                          // 睁开眼</span><br><span class="line">else if (eyeOpen_L &gt;= 1.0f)</span><br><span class="line">    eyeOpen_L = 2;                          // 睁大眼</span><br><span class="line">else if (eyeOpen_L &lt;= 0.4f)</span><br><span class="line">    eyeOpen_L = 0;                          // 闭上眼</span><br><span class="line">live2DModel.PARAM_EYE_L_OPEN = eyeOpen_L;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>考虑使用卡尔曼滤波器或者其他滤波器过滤（未尝试）</li>
 </ul>
@@ -612,10 +603,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -634,7 +625,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -644,10 +635,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -725,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预览"><span class="nav-number">2.</span> <span class="nav-text">预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">3.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">4.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么叫废萌（Facemoji）"><span class="nav-number">5.</span> <span class="nav-text">为什么叫废萌（Facemoji）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作"><span class="nav-number">6.</span> <span class="nav-text">制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">7.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实时人脸卡通化（FaceTracking）"><span class="nav-number">7.1.</span> <span class="nav-text">实时人脸卡通化（FaceTracking）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#录制-gif-图"><span class="nav-number">7.2.</span> <span class="nav-text">录制 gif 图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）"><span class="nav-number">7.3.</span> <span class="nav-text">语音和文字聊天（聊天机器人？ 她说她是 AI，不是机器人！ hhhh…）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gif演示"><span class="nav-number">8.</span> <span class="nav-text">Gif演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常问题"><span class="nav-number">9.</span> <span class="nav-text">异常问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1"><span class="nav-number">9.1.</span> <span class="nav-text">人不动时模型抖动问题（特别是眼睛眉毛）Facemoji/issues/1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原因"><span class="nav-number">9.1.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">9.1.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改说明"><span class="nav-number">10.</span> <span class="nav-text">修改说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E8%A7%88"><span class="nav-number">2.</span> <span class="nav-text">预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E5%BA%9F%E8%90%8C%EF%BC%88Facemoji%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">为什么叫废萌（Facemoji）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B6%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E5%8D%A1%E9%80%9A%E5%8C%96%EF%BC%88FaceTracking%EF%BC%89"><span class="nav-number">7.1.</span> <span class="nav-text">实时人脸卡通化（FaceTracking）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%95%E5%88%B6-gif-%E5%9B%BE"><span class="nav-number">7.2.</span> <span class="nav-text">录制 gif 图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E9%9F%B3%E5%92%8C%E6%96%87%E5%AD%97%E8%81%8A%E5%A4%A9%EF%BC%88%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%EF%BC%9F-%E5%A5%B9%E8%AF%B4%E5%A5%B9%E6%98%AF-AI%EF%BC%8C%E4%B8%8D%E6%98%AF%E6%9C%BA%E5%99%A8%E4%BA%BA%EF%BC%81-hhhh%E2%80%A6%EF%BC%89"><span class="nav-number">7.3.</span> <span class="nav-text">语音和文字聊天（聊天机器人？ 她说她是 AI，不是机器人！ hhhh…）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gif%E6%BC%94%E7%A4%BA"><span class="nav-number">8.</span> <span class="nav-text">Gif演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98"><span class="nav-number">9.</span> <span class="nav-text">异常问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E4%B8%8D%E5%8A%A8%E6%97%B6%E6%A8%A1%E5%9E%8B%E6%8A%96%E5%8A%A8%E9%97%AE%E9%A2%98%EF%BC%88%E7%89%B9%E5%88%AB%E6%98%AF%E7%9C%BC%E7%9D%9B%E7%9C%89%E6%AF%9B%EF%BC%89Facemoji-issues-1"><span class="nav-number">9.1.</span> <span class="nav-text">人不动时模型抖动问题（特别是眼睛眉毛）Facemoji&#x2F;issues&#x2F;1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">9.1.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">9.1.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%B4%E6%98%8E"><span class="nav-number">10.</span> <span class="nav-text">修改说明</span></a></li></ol></div>
             
 
           </div>
@@ -748,7 +739,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1023,5 +1014,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

@@ -80,27 +80,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="NTFS-3G安装使用 NTFS-3G 实现，可以挂载 NTFS，还可以挂载 HFS+ 等，以下是在 Centos 7 下安装 NTFS-3G 及挂载 NTFS 分区 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo  sudo yum update  sudo yum install ntf">
-<meta name="keywords" content="Linux">
+<meta name="description" content="NTFS-3G安装使用 NTFS-3G 实现，可以挂载 NTFS，还可以挂载 HFS+ 等，以下是在 Centos 7 下安装 NTFS-3G 及挂载 NTFS 分区 wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;epel.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;epel-7.repo  sudo yum update  sudo yum install ntf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos 7 挂载 NTFS 分区">
 <meta property="og:url" content="https://blog.huihut.com/2017/03/29/Centos7NTFS/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="NTFS-3G安装使用 NTFS-3G 实现，可以挂载 NTFS，还可以挂载 HFS+ 等，以下是在 Centos 7 下安装 NTFS-3G 及挂载 NTFS 分区 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo  sudo yum update  sudo yum install ntf">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="NTFS-3G安装使用 NTFS-3G 实现，可以挂载 NTFS，还可以挂载 HFS+ 等，以下是在 Centos 7 下安装 NTFS-3G 及挂载 NTFS 分区 wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;epel.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;epel-7.repo  sudo yum update  sudo yum install ntf">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/centosNTFSError.jpeg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing1.gif">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.590Z">
+<meta property="article:published_time" content="2017-03-29T12:02:35.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.590Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 挂载 NTFS 分区">
-<meta name="twitter:description" content="NTFS-3G安装使用 NTFS-3G 实现，可以挂载 NTFS，还可以挂载 HFS+ 等，以下是在 Centos 7 下安装 NTFS-3G 及挂载 NTFS 分区 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo  sudo yum update  sudo yum install ntf">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/centosNTFSError.jpeg">
 
 
@@ -108,9 +106,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -143,7 +141,7 @@
   });
 </script>
   <title> Centos 7 挂载 NTFS 分区 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -151,15 +149,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -317,7 +306,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/03/29/Centos7NTFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -414,8 +403,11 @@
 sudo yum update
 
 sudo yum install ntfs-3g
-</code></pre><h2 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h2><pre><code>fdisk -l
-</code></pre><a id="more"></a>
+</code></pre>
+<h2 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h2><pre><code>fdisk -l
+</code></pre>
+<span id="more"></span>
+
 <h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><pre><code># d、e、f改成你想要挂的盘符名字
 mkdir /mnt/windows/d
 mkdir /mnt/windows/e
@@ -425,8 +417,10 @@ mkdir /mnt/windows/f
 mount -t ntfs-3g /dev/sdb3 /mnt/windows/d
 mount -t ntfs-3g /dev/sdb4 /mnt/windows/e
 mount -t ntfs-3g /dev/sdb5 /mnt/windows/f
-</code></pre><h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><pre><code>umount /mnt
-</code></pre><h2 id="设置开机自动挂载"><a href="#设置开机自动挂载" class="headerlink" title="设置开机自动挂载"></a>设置开机自动挂载</h2><pre><code>sudo vim /etc/fstab
+</code></pre>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><pre><code>umount /mnt
+</code></pre>
+<h2 id="设置开机自动挂载"><a href="#设置开机自动挂载" class="headerlink" title="设置开机自动挂载"></a>设置开机自动挂载</h2><pre><code>sudo vim /etc/fstab
 
 #只读式挂载：
 /dev/sda1 /mnt/windows/c ntfs-3g ro,umask=0222,defaults 0 0
@@ -435,21 +429,24 @@ mount -t ntfs-3g /dev/sdb5 /mnt/windows/f
 /dev/sda1 /mnt/windows/c ntfs-3g rw,umask=0000,defaults 0 0
 #或者： 
 /dev/sda1 /mnt/windows/c ntfs-3g defaults 0 0
-</code></pre><h2 id="设置后开机无法启动（无法挂载）"><a href="#设置后开机无法启动（无法挂载）" class="headerlink" title="设置后开机无法启动（无法挂载）"></a>设置后开机无法启动（无法挂载）</h2><p>网上很多教程都是如上几步就好了~</p>
+</code></pre>
+<h2 id="设置后开机无法启动（无法挂载）"><a href="#设置后开机无法启动（无法挂载）" class="headerlink" title="设置后开机无法启动（无法挂载）"></a>设置后开机无法启动（无法挂载）</h2><p>网上很多教程都是如上几步就好了~</p>
 <p>然而我的无法开机。</p>
 <p>如下图：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/centosNTFSError.jpeg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/centosNTFSError.jpeg"></p>
 <p>这样应该需要输入root密码，用root账户登录修复模式，</p>
 <p>然后 <code>vim /etc/fstab</code> 删除刚刚添加的东西，</p>
 <p><code>reboot</code> 就能进入系统了</p>
 <p>所以之前之前忙活的都没用了？</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing1.gif" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing1.gif"></p>
 <p>后来试了下原来</p>
 <pre><code>mount -t ntfs-3g /dev/sdb3 /mnt/windows/d
-</code></pre><p>这句本身就无法挂载！</p>
+</code></pre>
+<p>这句本身就无法挂载！</p>
 <p>然后可以通过</p>
 <pre><code>sudo mount -o ro /dev/sdb3 /mnt/windows/d
-</code></pre><p>挂载，但是只能通过终端访问，就是下面这个👇</p>
+</code></pre>
+<p>挂载，但是只能通过终端访问，就是下面这个👇</p>
 <h2 id="其他问题无法挂载的解决办法"><a href="#其他问题无法挂载的解决办法" class="headerlink" title="其他问题无法挂载的解决办法"></a>其他问题无法挂载的解决办法</h2><p>实现了只能在终端访问</p>
 <pre><code>#创建挂载点
 mkdir /mnt/windows/d
@@ -466,10 +463,11 @@ sudo vim /etc/rc.d/rc.local
 
 #更改权限
 chmod +x /etc/rc.d/rc.local
-</code></pre><h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://www.cnblogs.com/gbyukg/archive/2011/11/02/2232343.html" target="_blank" rel="noopener">http://www.cnblogs.com/gbyukg/archive/2011/11/02/2232343.html</a></p>
-<p><a href="http://www.jianshu.com/p/f578b575fcaa" target="_blank" rel="noopener">http://www.jianshu.com/p/f578b575fcaa</a></p>
-<p><a href="http://askubuntu.com/questions/462381/cant-mount-ntfs-drive-the-disk-contains-an-unclean-file-system" target="_blank" rel="noopener">http://askubuntu.com/questions/462381/cant-mount-ntfs-drive-the-disk-contains-an-unclean-file-system</a></p>
-<p><a href="https://www.techbrown.com/mount-ntfs-file-system-centos-7-rhel-7.shtml" target="_blank" rel="noopener">https://www.techbrown.com/mount-ntfs-file-system-centos-7-rhel-7.shtml</a>  </p>
+</code></pre>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://www.cnblogs.com/gbyukg/archive/2011/11/02/2232343.html">http://www.cnblogs.com/gbyukg/archive/2011/11/02/2232343.html</a></p>
+<p><a href="http://www.jianshu.com/p/f578b575fcaa">http://www.jianshu.com/p/f578b575fcaa</a></p>
+<p><a href="http://askubuntu.com/questions/462381/cant-mount-ntfs-drive-the-disk-contains-an-unclean-file-system">http://askubuntu.com/questions/462381/cant-mount-ntfs-drive-the-disk-contains-an-unclean-file-system</a></p>
+<p><a href="https://www.techbrown.com/mount-ntfs-file-system-centos-7-rhel-7.shtml">https://www.techbrown.com/mount-ntfs-file-system-centos-7-rhel-7.shtml</a>  </p>
 
       
     </div>
@@ -600,10 +598,10 @@ chmod +x /etc/rc.d/rc.local
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -622,7 +620,7 @@ chmod +x /etc/rc.d/rc.local
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -632,10 +630,10 @@ chmod +x /etc/rc.d/rc.local
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -713,7 +711,7 @@ chmod +x /etc/rc.d/rc.local
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NTFS-3G"><span class="nav-number">1.</span> <span class="nav-text">NTFS-3G</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看分区"><span class="nav-number">1.2.</span> <span class="nav-text">查看分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载"><span class="nav-number">1.3.</span> <span class="nav-text">挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载"><span class="nav-number">1.4.</span> <span class="nav-text">卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置开机自动挂载"><span class="nav-number">1.5.</span> <span class="nav-text">设置开机自动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置后开机无法启动（无法挂载）"><span class="nav-number">1.6.</span> <span class="nav-text">设置后开机无法启动（无法挂载）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题无法挂载的解决办法"><span class="nav-number">1.7.</span> <span class="nav-text">其他问题无法挂载的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks"><span class="nav-number">1.8.</span> <span class="nav-text">Thanks</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NTFS-3G"><span class="nav-number">1.</span> <span class="nav-text">NTFS-3G</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E5%8C%BA"><span class="nav-number">1.2.</span> <span class="nav-text">查看分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD"><span class="nav-number">1.3.</span> <span class="nav-text">挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD"><span class="nav-number">1.4.</span> <span class="nav-text">卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="nav-number">1.5.</span> <span class="nav-text">设置开机自动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%90%8E%E5%BC%80%E6%9C%BA%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%EF%BC%88%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">设置后开机无法启动（无法挂载）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">其他问题无法挂载的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks"><span class="nav-number">1.8.</span> <span class="nav-text">Thanks</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -736,7 +734,7 @@ chmod +x /etc/rc.d/rc.local
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1011,5 +1009,5 @@ chmod +x /etc/rc.d/rc.local
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

@@ -80,26 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="环境 Windows 10 x64 Visual Studio 2017 Qt 5.11  异常Qt Debug 时提示异常： 1qt not in executable format. file format not recognized">
-<meta name="keywords" content="QT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qt GDB 无法调试 MSVC 编译的程序而报错：file format not recognized">
 <meta property="og:url" content="https://blog.huihut.com/2018/06/02/QtNotInExecutableFormat/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="环境 Windows 10 x64 Visual Studio 2017 Qt 5.11  异常Qt Debug 时提示异常： 1qt not in executable format. file format not recognized">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qt-not-in-executable-format-file-format-not-recognized.PNG">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2018-06-02T05:11:56.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="QT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qt GDB 无法调试 MSVC 编译的程序而报错：file format not recognized">
-<meta name="twitter:description" content="环境 Windows 10 x64 Visual Studio 2017 Qt 5.11  异常Qt Debug 时提示异常： 1qt not in executable format. file format not recognized">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qt-not-in-executable-format-file-format-not-recognized.PNG">
 
 
@@ -107,9 +105,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -142,7 +140,7 @@
   });
 </script>
   <title> Qt GDB 无法调试 MSVC 编译的程序而报错：file format not recognized | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -150,15 +148,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -316,7 +305,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/06/02/QtNotInExecutableFormat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -413,14 +402,16 @@
 <li>Qt 5.11</li>
 </ul>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>Qt Debug 时提示异常：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qt not in executable format. file format not recognized</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qt not in executable format. file format not recognized</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qt-not-in-executable-format-file-format-not-recognized.PNG" alt="qt-not-in-executable-format-file-format-not-recognized"></p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>编译器（Compiler）使用了 64 位版本的 MSVC，调试器（Debugger）却使用了 32 位的 MinGW 的 GDB，从而 GDB 不能调试 64 位程序而报错。</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ul>
 <li>在 Qt 的 <code>工具</code> - <code>选项</code> - <code>构建和运行</code> - <code>Debuggers</code> 选择 CDB（Debugging Tools for Windows），</li>
 <li>不能自动检测到则手动添加，如：<code>C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\cdb.exe</code>，</li>
-<li>没有 cdb 则下载：<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk" target="_blank" rel="noopener">Windows Driver Kit (WDK)</a>（下载装好后重启 Qt 一般就可以自动检测到）</li>
+<li>没有 cdb 则下载：<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk">Windows Driver Kit (WDK)</a>（下载装好后重启 Qt 一般就可以自动检测到）</li>
 </ul>
 
       
@@ -552,10 +543,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -574,7 +565,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -584,10 +575,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -665,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">4.</span> <span class="nav-text">解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">4.</span> <span class="nav-text">解决</span></a></li></ol></div>
             
 
           </div>
@@ -688,7 +679,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -963,5 +954,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

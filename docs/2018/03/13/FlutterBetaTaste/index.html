@@ -80,21 +80,18 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="Flutter 是一个 Google 发布的跨平台移动 UI 框架，使用 Dart 语言开发，可以构建高质量原生 iOS 、Android 以及 Fuchsia OS 应用，并且在排版、图标、滚动、点击等方面实现零差异。 Flutter 官网 鉴于最近出了 beta 版，就来尝鲜一下吧。 本文有 Windows + Android Studio 与 MacOS + VS Code 的体验。">
-<meta name="keywords" content="Flutter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flutter beta 版尝鲜（在 Windows + Android Studio 与 MacOS + VS Code 的安装配置）">
 <meta property="og:url" content="https://blog.huihut.com/2018/03/13/FlutterBetaTaste/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="Flutter 是一个 Google 发布的跨平台移动 UI 框架，使用 Dart 语言开发，可以构建高质量原生 iOS 、Android 以及 Fuchsia OS 应用，并且在排版、图标、滚动、点击等方面实现零差异。 Flutter 官网 鉴于最近出了 beta 版，就来尝鲜一下吧。 本文有 Windows + Android Studio 与 MacOS + VS Code 的体验。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GitCloneFlutter.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/flutterdoctor.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/AndroidStudioInstallFlutter.png">
@@ -104,10 +101,11 @@
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/FlutterOfficialSiteXcode.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MacFlutterDoctorRequiresXcode9.0.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MacFlutterRun.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2018-03-13T11:06:43.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Flutter">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flutter beta 版尝鲜（在 Windows + Android Studio 与 MacOS + VS Code 的安装配置）">
-<meta name="twitter:description" content="Flutter 是一个 Google 发布的跨平台移动 UI 框架，使用 Dart 语言开发，可以构建高质量原生 iOS 、Android 以及 Fuchsia OS 应用，并且在排版、图标、滚动、点击等方面实现零差异。 Flutter 官网 鉴于最近出了 beta 版，就来尝鲜一下吧。 本文有 Windows + Android Studio 与 MacOS + VS Code 的体验。">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GitCloneFlutter.png">
 
 
@@ -115,9 +113,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -150,7 +148,7 @@
   });
 </script>
   <title> Flutter beta 版尝鲜（在 Windows + Android Studio 与 MacOS + VS Code 的安装配置） | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -158,15 +156,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -324,7 +313,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/03/13/FlutterBetaTaste/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -416,18 +405,22 @@
 
       
         <p>Flutter 是一个 Google 发布的跨平台移动 UI 框架，使用 Dart 语言开发，可以构建高质量原生 iOS 、Android 以及 Fuchsia OS 应用，并且在排版、图标、滚动、点击等方面实现零差异。</p>
-<p><a href="https://flutter.io/" target="_blank" rel="noopener">Flutter 官网</a></p>
+<p><a href="https://flutter.io/">Flutter 官网</a></p>
 <p>鉴于最近出了 beta 版，就来尝鲜一下吧。</p>
 <p>本文有 Windows + Android Studio 与 MacOS + VS Code 的体验。</p>
-<a id="more"></a>
-<h2 id="Windows-Android-Studio"><a href="#Windows-Android-Studio" class="headerlink" title="Windows + Android Studio"></a>Windows + Android Studio</h2><h3 id="获取-Flutter-SDK"><a href="#获取-Flutter-SDK" class="headerlink" title="获取 Flutter SDK"></a>获取 Flutter SDK</h3><p>使用 <a href="https://git-scm.com/" target="_blank" rel="noopener">git</a> 克隆下来 Flutter SDK</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b beta https://github.com/flutter/flutter.git</span><br></pre></td></tr></table></figure>
-<p>也可以使用中国的镜像，使用方法：<a href="https://github.com/flutter/flutter/wiki/Using-Flutter-in-China" target="_blank" rel="noopener">Using Flutter in China</a></p>
+<span id="more"></span>
+
+<h2 id="Windows-Android-Studio"><a href="#Windows-Android-Studio" class="headerlink" title="Windows + Android Studio"></a>Windows + Android Studio</h2><h3 id="获取-Flutter-SDK"><a href="#获取-Flutter-SDK" class="headerlink" title="获取 Flutter SDK"></a>获取 Flutter SDK</h3><p>使用 <a href="https://git-scm.com/">git</a> 克隆下来 Flutter SDK</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b beta https://github.com/flutter/flutter.git</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用中国的镜像，使用方法：<a href="https://github.com/flutter/flutter/wiki/Using-Flutter-in-China">Using Flutter in China</a></p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GitCloneFlutter.png" alt="GitCloneFlutter"></p>
 <h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>添加 <code>flutter\bin</code> 的完整路径到<code>用户变量</code> <code>Path</code>，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\code\git\flutter\bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\code\git\flutter\bin</span><br></pre></td></tr></table></figure>
+
 <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>打开<code>cmd</code>或者<code>PowerShell</code>，安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+
 <p>安装过程可能持续比较久</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/flutterdoctor.png" alt="flutterdoctor"></p>
 <h3 id="为-Android-Studio-安装-Flutter-插件"><a href="#为-Android-Studio-安装-Flutter-插件" class="headerlink" title="为 Android Studio 安装 Flutter 插件"></a>为 Android Studio 安装 Flutter 插件</h3><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/AndroidStudioInstallFlutter.png" alt="AndroidStudioInstallFlutter"></p>
@@ -453,24 +446,31 @@
 <p>就能看到模拟器中间那行字符串很快更新了。</p>
 <p>嗯，体验还是蛮爽的！</p>
 <h2 id="MacOS-VS-Code"><a href="#MacOS-VS-Code" class="headerlink" title="MacOS + VS Code"></a>MacOS + VS Code</h2><p>接下来看下在 MacOS 下的安装</p>
-<h3 id="获取-Flutter-SDK-1"><a href="#获取-Flutter-SDK-1" class="headerlink" title="获取 Flutter SDK"></a>获取 Flutter SDK</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone -b beta https://github.com/flutter/flutter.git</span><br><span class="line">export PATH=`pwd`/flutter/bin:$PATH</span><br></pre></td></tr></table></figure>
+<h3 id="获取-Flutter-SDK-1"><a href="#获取-Flutter-SDK-1" class="headerlink" title="获取 Flutter SDK"></a>获取 Flutter SDK</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone -b beta https://github.com/flutter/flutter.git</span><br><span class="line">export PATH=`pwd`/flutter/bin:$PATH</span><br></pre></td></tr></table></figure>
+
 <h3 id="配置环境变量-1"><a href="#配置环境变量-1" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>打开环境变量配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi $HOME/.bash_profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi $HOME/.bash_profile</span><br></pre></td></tr></table></figure>
+
 <p>添加一行你的<code>flutter/bin</code>的绝对路径，如我的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/Users/xx/code/git/flutter/bin:$PATH</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/Users/xx/code/git/flutter/bin:$PATH</span><br></pre></td></tr></table></figure>
+
 <p>刷新</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source $HOME/.bash_profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source $HOME/.bash_profile</span><br></pre></td></tr></table></figure>
+
 <p>验证一下是否配置好</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH</span><br></pre></td></tr></table></figure>
-<h3 id="安装依赖-1"><a href="#安装依赖-1" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装依赖-1"><a href="#安装依赖-1" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+
 <h3 id="为-VS-Code-安装-Flutter-插件"><a href="#为-VS-Code-安装-Flutter-插件" class="headerlink" title="为 VS Code 安装 Flutter 插件"></a>为 VS Code 安装 Flutter 插件</h3><p>在扩展商店中搜索 <code>Dart Code</code> 下载安装</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/VSCodeInstallDartCode.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/VSCodeInstallDartCode.jpg"></p>
 <p>安装好后重新打开</p>
 <p>点击 <code>查看</code> - <code>命令面板</code>，搜索 <code>Flutter: Run Flutter Doctor</code> </p>
 <p>如果 VS Code 找不到 Flutter SDK 路径，就点击进行配置</p>
 <p>配置好后重新 <code>Flutter: Run Flutter Doctor</code>，检查配置是否成功</p>
 <h3 id="编译-iOS-需要-Xcode-9-0-0"><a href="#编译-iOS-需要-Xcode-9-0-0" class="headerlink" title="编译 iOS 需要 Xcode 9.0.0+"></a>编译 iOS 需要 Xcode 9.0.0+</h3><p>接下来再检查还需要安装什么</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+
 <p>然后突然发现。。。</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MacFlutterDoctorRequiresXcode.jpg" alt="MacFlutterDoctorRequiresXcode"></p>
 <p>要编译 iOS 应用需要 Xcode 9.0.0+ ！</p>
@@ -481,9 +481,10 @@
 <p>什么？你说为什么不更新到 Xcode 最新版？</p>
 <p>这个……由于博主的是黑苹果，无法升级 MacOS，现在还是 OSX 10.10.5，最高支持的 Xcode 是 7.2.1</p>
 <p>所以只好再编译 Android 应用了，下面也只讲构建 Android 的</p>
-<p>这里附上有编译 iOS 的教程：<a href="http://blog.csdn.net/hekaiyou/article/details/52874796?locationNum=4&amp;fps=1" target="_blank" rel="noopener">Flutter基础—开发环境与入门</a></p>
+<p>这里附上有编译 iOS 的教程：<a href="http://blog.csdn.net/hekaiyou/article/details/52874796?locationNum=4&fps=1">Flutter基础—开发环境与入门</a></p>
 <h3 id="创建并执行-Flutter-APP"><a href="#创建并执行-Flutter-APP" class="headerlink" title="创建并执行 Flutter APP"></a>创建并执行 Flutter APP</h3><p>在 VS Code 的终端（或其他终端）上跳转到要创建项目的路径，然后创建名为<code>flutter_app</code>的项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/code/Android</span><br><span class="line">flutter create flutter_app</span><br><span class="line">cd flutter_app</span><br><span class="line">flutter run</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/code/Android</span><br><span class="line">flutter create flutter_app</span><br><span class="line">cd flutter_app</span><br><span class="line">flutter run</span><br></pre></td></tr></table></figure>
+
 <p>在 Windows 的时候使用的是模拟器，现在用真机体验一下</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MacFlutterRun.jpg" alt="MacFlutterRun"></p>
 <p>运行后，试着修改字符串</p>
@@ -495,7 +496,7 @@
 <li><code>r</code>：热重载</li>
 <li><code>R</code>：重启整个APP</li>
 <li><code>h</code>：帮助</li>
-<li><code>q</code>：退出APP  </li>
+<li><code>q</code>：退出APP</li>
 </ul>
 <p>嗯，Cool。</p>
 
@@ -628,10 +629,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -650,7 +651,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -660,10 +661,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -741,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Android-Studio"><span class="nav-number">1.</span> <span class="nav-text">Windows + Android Studio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-Flutter-SDK"><span class="nav-number">1.1.</span> <span class="nav-text">获取 Flutter SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境变量"><span class="nav-number">1.2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖"><span class="nav-number">1.3.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为-Android-Studio-安装-Flutter-插件"><span class="nav-number">1.4.</span> <span class="nav-text">为 Android Studio 安装 Flutter 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Flutter-APP"><span class="nav-number">1.5.</span> <span class="nav-text">创建 Flutter APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-Flutter-APP"><span class="nav-number">1.6.</span> <span class="nav-text">启动 Flutter APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试热重载"><span class="nav-number">1.7.</span> <span class="nav-text">尝试热重载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MacOS-VS-Code"><span class="nav-number">2.</span> <span class="nav-text">MacOS + VS Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-Flutter-SDK-1"><span class="nav-number">2.1.</span> <span class="nav-text">获取 Flutter SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境变量-1"><span class="nav-number">2.2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖-1"><span class="nav-number">2.3.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为-VS-Code-安装-Flutter-插件"><span class="nav-number">2.4.</span> <span class="nav-text">为 VS Code 安装 Flutter 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译-iOS-需要-Xcode-9-0-0"><span class="nav-number">2.5.</span> <span class="nav-text">编译 iOS 需要 Xcode 9.0.0+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建并执行-Flutter-APP"><span class="nav-number">2.6.</span> <span class="nav-text">创建并执行 Flutter APP</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Android-Studio"><span class="nav-number">1.</span> <span class="nav-text">Windows + Android Studio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-Flutter-SDK"><span class="nav-number">1.1.</span> <span class="nav-text">获取 Flutter SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">1.3.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA-Android-Studio-%E5%AE%89%E8%A3%85-Flutter-%E6%8F%92%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">为 Android Studio 安装 Flutter 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Flutter-APP"><span class="nav-number">1.5.</span> <span class="nav-text">创建 Flutter APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-Flutter-APP"><span class="nav-number">1.6.</span> <span class="nav-text">启动 Flutter APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95%E7%83%AD%E9%87%8D%E8%BD%BD"><span class="nav-number">1.7.</span> <span class="nav-text">尝试热重载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MacOS-VS-Code"><span class="nav-number">2.</span> <span class="nav-text">MacOS + VS Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-Flutter-SDK-1"><span class="nav-number">2.1.</span> <span class="nav-text">获取 Flutter SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F-1"><span class="nav-number">2.2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96-1"><span class="nav-number">2.3.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA-VS-Code-%E5%AE%89%E8%A3%85-Flutter-%E6%8F%92%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">为 VS Code 安装 Flutter 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-iOS-%E9%9C%80%E8%A6%81-Xcode-9-0-0"><span class="nav-number">2.5.</span> <span class="nav-text">编译 iOS 需要 Xcode 9.0.0+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E6%89%A7%E8%A1%8C-Flutter-APP"><span class="nav-number">2.6.</span> <span class="nav-text">创建并执行 Flutter APP</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -764,7 +765,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1039,5 +1040,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

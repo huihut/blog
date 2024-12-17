@@ -80,34 +80,32 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="Gist 仓库地址：https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include &amp;lt;string&amp;gt;#include &amp;lt;Windows">
-<meta name="keywords" content="C&#x2F;C++">
+<meta name="description" content="Gist 仓库地址：https:&#x2F;&#x2F;gist.github.com&#x2F;huihut&#x2F;8f75e2332e05673ff7e1248ad5e85339 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include &lt;string&gt;#include &lt;Windows">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WinRT(C++&#x2F;CX) UTF8类型转换为std::string和Platform::String^的Unicode字符串">
 <meta property="og:url" content="https://blog.huihut.com/2018/08/23/UTF8ToStdStrAndUTF8ToManagedStr/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="Gist 仓库地址：https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include &amp;lt;string&amp;gt;#include &amp;lt;Windows">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta property="og:description" content="Gist 仓库地址：https:&#x2F;&#x2F;gist.github.com&#x2F;huihut&#x2F;8f75e2332e05673ff7e1248ad5e85339 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include &lt;string&gt;#include &lt;Windows">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-08-23T15:44:50.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WinRT(C++&#x2F;CX) UTF8类型转换为std::string和Platform::String^的Unicode字符串">
-<meta name="twitter:description" content="Gist 仓库地址：https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include &amp;lt;string&amp;gt;#include &amp;lt;Windows">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -140,7 +138,7 @@
   });
 </script>
   <title> WinRT(C++/CX) UTF8类型转换为std::string和Platform::String^的Unicode字符串 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -148,15 +146,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -314,7 +303,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/08/23/UTF8ToStdStrAndUTF8ToManagedStr/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -405,8 +394,8 @@
       
 
       
-        <p>Gist 仓库地址：<a href="https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339" target="_blank" rel="noopener">https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">UTF8_To_Std_Str</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nwLen = MultiByteToWideChar(CP_UTF8, <span class="number">0</span>, str.c_str(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="keyword">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	MultiByteToWideChar(CP_UTF8, <span class="number">0</span>, str.c_str(), str.length(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> nLen = WideCharToMultiByte(CP_ACP, <span class="number">0</span>, pwBuf, <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span>* pBuf = <span class="keyword">new</span> <span class="keyword">char</span>[nLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pBuf, <span class="number">0</span>, nLen + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	WideCharToMultiByte(CP_ACP, <span class="number">0</span>, pwBuf, nwLen, pBuf, nLen, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> retStr = pBuf;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pBuf;</span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line"></span><br><span class="line">	pBuf = <span class="literal">NULL</span>;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> retStr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ UTF8_To_Managed_Str(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp; str)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> nwLen = MultiByteToWideChar(CP_UTF8, <span class="number">0</span>, str.c_str(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="keyword">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	MultiByteToWideChar(CP_UTF8, <span class="number">0</span>, str.c_str(), str.length(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	Platform::String^ pStr = ref <span class="keyword">new</span> Platform::String(pwBuf);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>Gist 仓库地址：<a href="https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339">https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">UTF8_To_Std_Str</span><span class="params">(<span class="type">const</span> std::string &amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nwLen = <span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="type">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), str.<span class="built_in">length</span>(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> nLen = <span class="built_in">WideCharToMultiByte</span>(CP_ACP, <span class="number">0</span>, pwBuf, <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span>* pBuf = <span class="keyword">new</span> <span class="type">char</span>[nLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pBuf, <span class="number">0</span>, nLen + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WideCharToMultiByte</span>(CP_ACP, <span class="number">0</span>, pwBuf, nwLen, pBuf, nLen, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	std::string retStr = pBuf;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pBuf;</span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line"></span><br><span class="line">	pBuf = <span class="literal">NULL</span>;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> retStr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ <span class="built_in">UTF8_To_Managed_Str</span>(<span class="type">const</span> std::string &amp; str)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> nwLen = <span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="type">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), str.<span class="built_in">length</span>(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	Platform::String^ pStr = ref <span class="keyword">new</span> Platform::<span class="built_in">String</span>(pwBuf);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -527,10 +516,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -549,7 +538,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -559,10 +548,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -647,7 +636,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -922,5 +911,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

@@ -80,34 +80,33 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#!/usr/bin/python# -*- coding: UTF-8 -*-# P">
-<meta name="keywords" content="Python,ML">
+<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#!&#x2F;usr&#x2F;bin&#x2F;python# -*- coding: UTF-8 -*-# P">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 生成带标签数据集的 CSV 文件">
 <meta property="og:url" content="https://blog.huihut.com/2018/06/17/UsingPythonToCreateCSV/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#!/usr/bin/python# -*- coding: UTF-8 -*-# P">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#!&#x2F;usr&#x2F;bin&#x2F;python# -*- coding: UTF-8 -*-# P">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-06-17T15:48:32.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python 生成带标签数据集的 CSV 文件">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#!/usr/bin/python# -*- coding: UTF-8 -*-# P">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -140,7 +139,7 @@
   });
 </script>
   <title> Python 生成带标签数据集的 CSV 文件 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -148,15 +147,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -314,7 +304,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/06/17/UsingPythonToCreateCSV/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -405,7 +395,7 @@
       
 
       
-        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件</span></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签从0开始自动升序：0,1,2,3...</span></span><br><span class="line"><span class="comment"># 作者：huihut</span></span><br><span class="line"><span class="comment"># 仓库：https://gist.github.com/huihut/9881c98a1d9279d4fa9dfd8475e3fe4b</span></span><br><span class="line"><span class="comment"># 参考：https://github.com/opencv/opencv_attic/blob/master/opencv/modules/contrib/doc/facerec/src/create_csv.py</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用脚本：</span></span><br><span class="line"><span class="string">* python create_csv.py &lt;base_path&gt; [save_path]</span></span><br><span class="line"><span class="string">例如：</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── README</span></span><br><span class="line"><span class="string">├── dataset_csv.txt</span></span><br><span class="line"><span class="string">├── s01</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">├── s02</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">└── s10</span></span><br><span class="line"><span class="string">    ├── 01.pgm</span></span><br><span class="line"><span class="string">    ├── ...</span></span><br><span class="line"><span class="string">    └── 10.pgm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/01.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/02.pgm;0</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/10.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/01.pgm;1</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/02.pgm;1</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/01.pgm;9</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/02.pgm;9</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/10.pgm;9</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    </span><br><span class="line">    SAVE_PATH = <span class="string">"./dataset_csv.txt"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (len(sys.argv) != <span class="number">2</span> <span class="keyword">and</span> len(sys.argv) != <span class="number">3</span>):</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"usage:"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"* python create_csv.py &lt;base_path&gt; [save_path]"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"example:"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"* python create_csv.py /Users/xx/code/dataset"</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt"</span></span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (len(sys.argv) == <span class="number">3</span>):</span><br><span class="line">        SAVE_PATH = sys.argv[<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    BASE_PATH = sys.argv[<span class="number">1</span>]</span><br><span class="line">    SEPARATOR = <span class="string">";"</span></span><br><span class="line">    fh = open(SAVE_PATH,<span class="string">'w'</span>)</span><br><span class="line"></span><br><span class="line">    label = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> dirname, dirnames, filenames <span class="keyword">in</span> os.walk(BASE_PATH):</span><br><span class="line">        <span class="keyword">for</span> subdirname <span class="keyword">in</span> dirnames:</span><br><span class="line">            subject_path = os.path.join(dirname, subdirname)</span><br><span class="line">            <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(subject_path):</span><br><span class="line">                abs_path = <span class="string">"%s/%s"</span> % (subject_path, filename)</span><br><span class="line">                <span class="keyword">print</span> <span class="string">"%s%s%d"</span> % (abs_path, SEPARATOR, label)</span><br><span class="line">                fh.write(abs_path + SEPARATOR + str(label) + <span class="string">"\n"</span>)</span><br><span class="line">            label = label + <span class="number">1</span></span><br><span class="line">    fh.close()</span><br></pre></td></tr></table></figure>
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件</span></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签从0开始自动升序：0,1,2,3...</span></span><br><span class="line"><span class="comment"># 作者：huihut</span></span><br><span class="line"><span class="comment"># 仓库：https://gist.github.com/huihut/9881c98a1d9279d4fa9dfd8475e3fe4b</span></span><br><span class="line"><span class="comment"># 参考：https://github.com/opencv/opencv_attic/blob/master/opencv/modules/contrib/doc/facerec/src/create_csv.py</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用脚本：</span></span><br><span class="line"><span class="string">* python create_csv.py &lt;base_path&gt; [save_path]</span></span><br><span class="line"><span class="string">例如：</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── README</span></span><br><span class="line"><span class="string">├── dataset_csv.txt</span></span><br><span class="line"><span class="string">├── s01</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">├── s02</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">└── s10</span></span><br><span class="line"><span class="string">    ├── 01.pgm</span></span><br><span class="line"><span class="string">    ├── ...</span></span><br><span class="line"><span class="string">    └── 10.pgm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/01.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/02.pgm;0</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/10.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/01.pgm;1</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/02.pgm;1</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/01.pgm;9</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/02.pgm;9</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/10.pgm;9</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    </span><br><span class="line">    SAVE_PATH = <span class="string">&quot;./dataset_csv.txt&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">len</span>(sys.argv) != <span class="number">2</span> <span class="keyword">and</span> <span class="built_in">len</span>(sys.argv) != <span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;usage:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py &lt;base_path&gt; [save_path]&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;example:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt&quot;</span></span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">len</span>(sys.argv) == <span class="number">3</span>):</span><br><span class="line">        SAVE_PATH = sys.argv[<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    BASE_PATH = sys.argv[<span class="number">1</span>]</span><br><span class="line">    SEPARATOR = <span class="string">&quot;;&quot;</span></span><br><span class="line">    fh = <span class="built_in">open</span>(SAVE_PATH,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    label = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> dirname, dirnames, filenames <span class="keyword">in</span> os.walk(BASE_PATH):</span><br><span class="line">        <span class="keyword">for</span> subdirname <span class="keyword">in</span> dirnames:</span><br><span class="line">            subject_path = os.path.join(dirname, subdirname)</span><br><span class="line">            <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(subject_path):</span><br><span class="line">                abs_path = <span class="string">&quot;%s/%s&quot;</span> % (subject_path, filename)</span><br><span class="line">                <span class="built_in">print</span> <span class="string">&quot;%s%s%d&quot;</span> % (abs_path, SEPARATOR, label)</span><br><span class="line">                fh.write(abs_path + SEPARATOR + <span class="built_in">str</span>(label) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            label = label + <span class="number">1</span></span><br><span class="line">    fh.close()</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -528,10 +518,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -550,7 +540,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -560,10 +550,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -648,7 +638,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -923,5 +913,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

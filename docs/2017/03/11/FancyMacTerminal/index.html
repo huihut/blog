@@ -80,21 +80,18 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="唠叨一下自从装了黑苹果后一直用着 Mac 自带的终端（Terminal），相比 Windows 的终端根本无法同台竞技！毕竟 Mac 是基于 Unix 嘛~ 对开发友好太多了。 就是下面这个家伙了👇  本来没觉得什么，直到我看到它👇">
-<meta name="keywords" content="Mac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iTerm2 + OhMyZsh + agnoster + Powerline + solarized = 漂亮的Mac终端">
+<meta property="og:title" content="iTerm2 + OhMyZsh + agnoster + Powerline + solarized &#x3D; 漂亮的Mac终端">
 <meta property="og:url" content="https://blog.huihut.com/2017/03/11/FancyMacTerminal/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="唠叨一下自从装了黑苹果后一直用着 Mac 自带的终端（Terminal），相比 Windows 的终端根本无法同台竞技！毕竟 Mac 是基于 Unix 嘛~ 对开发友好太多了。 就是下面这个家伙了👇  本来没觉得什么，直到我看到它👇">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/mac_terminal_white.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm2_black.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iTerm2_noPowerline.jpg">
@@ -103,10 +100,11 @@
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm2_end.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing2.gif">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm_vim_black.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2017-03-11T06:59:45.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Mac">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iTerm2 + OhMyZsh + agnoster + Powerline + solarized = 漂亮的Mac终端">
-<meta name="twitter:description" content="唠叨一下自从装了黑苹果后一直用着 Mac 自带的终端（Terminal），相比 Windows 的终端根本无法同台竞技！毕竟 Mac 是基于 Unix 嘛~ 对开发友好太多了。 就是下面这个家伙了👇  本来没觉得什么，直到我看到它👇">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/mac_terminal_white.jpg">
 
 
@@ -114,9 +112,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -149,7 +147,7 @@
   });
 </script>
   <title> iTerm2 + OhMyZsh + agnoster + Powerline + solarized = 漂亮的Mac终端 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -157,15 +155,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -323,7 +312,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/03/11/FancyMacTerminal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -416,59 +405,69 @@
       
         <h2 id="唠叨一下"><a href="#唠叨一下" class="headerlink" title="唠叨一下"></a>唠叨一下</h2><p>自从装了黑苹果后一直用着 Mac 自带的终端（Terminal），相比 Windows 的终端根本无法同台竞技！毕竟 Mac 是基于 Unix 嘛~ 对开发友好太多了。</p>
 <p>就是下面这个家伙了👇</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/mac_terminal_white.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/mac_terminal_white.jpg"></p>
 <p>本来没觉得什么，直到我看到它👇</p>
-<a id="more"></a>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm2_black.png" alt=""></p>
+<span id="more"></span>
+
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm2_black.png"></p>
 <p>颜值碾压，有木有！</p>
 <p>所以就着手折腾了……</p>
-<h2 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h2><p>iTerm是一个非常好的终端模拟器，官网地址：<a href="http://iterm2.com/" target="_blank" rel="noopener">http://iterm2.com/</a>，需要下载它。</p>
+<h2 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h2><p>iTerm是一个非常好的终端模拟器，官网地址：<a href="http://iterm2.com/">http://iterm2.com/</a>，需要下载它。</p>
 <h2 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h2><p>zsh 是一款强大的虚拟终端，是 Oh My Zsh 的爸爸，所以需要先装它。</p>
 <p>在命令行输入：</p>
 <pre><code>zsh --version
-</code></pre><p>如果输入zsh的当前版本号就说明装好了，一般Mac自带有的</p>
+</code></pre>
+<p>如果输入zsh的当前版本号就说明装好了，一般Mac自带有的</p>
 <p>如果没装则需要输入：</p>
 <pre><code>brew install zsh zsh-completions
-</code></pre><p>这是用Homebrew装，需要Mac上有Homebrew，它的网站：<a href="https://brew.sh/" target="_blank" rel="noopener">https://brew.sh/</a></p>
+</code></pre>
+<p>这是用Homebrew装，需要Mac上有Homebrew，它的网站：<a href="https://brew.sh/">https://brew.sh/</a></p>
 <h2 id="Oh-My-Zsh"><a href="#Oh-My-Zsh" class="headerlink" title="Oh My Zsh"></a>Oh My Zsh</h2><p>Oh My Zsh 是基于 zsh 的一个扩展工具集，它提供了丰富的扩展功能</p>
 <p>它可以通过<code>curl</code>或者<code>wget</code>来安装</p>
 <ul>
-<li>via curl</li>
+<li><p>via curl</p>
+<pre><code>  sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+</code></pre>
+</li>
+<li><p>via wget</p>
+<pre><code>  sh -c &quot;$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;
+</code></pre>
+</li>
 </ul>
-<pre><code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
-</code></pre><ul>
-<li>via wget</li>
-</ul>
-<pre><code>sh -c &quot;$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;
-</code></pre><p>装好之后就可以换到 agnoster 主题，就是之前看到的那张颜值主题，Oh My Zsh 一般自带有这个主题。</p>
+<p>装好之后就可以换到 agnoster 主题，就是之前看到的那张颜值主题，Oh My Zsh 一般自带有这个主题。</p>
 <p>可以看看它的默认主题：</p>
 <pre><code>ls ~/.oh-my-zsh/themes
-</code></pre><p>需要修改主题只需：</p>
+</code></pre>
+<p>需要修改主题只需：</p>
 <pre><code>vim ~/.zshrc
-</code></pre><p>然后把里面 <code>ZSH_THEME</code> 的值改为 <code>ZSH_THEME=&quot;agnoster&quot;</code>，保存退出</p>
-<p>（<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes#agnoster" target="_blank" rel="noopener">点击这里</a>还有各种主题，任君翻牌~）</p>
+</code></pre>
+<p>然后把里面 <code>ZSH_THEME</code> 的值改为 <code>ZSH_THEME=&quot;agnoster&quot;</code>，保存退出</p>
+<p>（<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes#agnoster">点击这里</a>还有各种主题，任君翻牌~）</p>
 <p>应用配置：</p>
 <pre><code>chsh -s /bin/zsh
-</code></pre><p>重启 iTerm2</p>
+</code></pre>
+<p>重启 iTerm2</p>
 <p>然后你会惊喜地发现……</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iTerm2_noPowerline.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iTerm2_noPowerline.jpg"></p>
 <p>和颜值主题并不一样！</p>
 <p>难道官方坑爹？</p>
 <p>震惊！oh-my-zsh 竟然做出这种事！</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing1.gif" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing1.gif"></p>
 <p>嘛~ 原来少了 Powerline 的字符集</p>
 <h2 id="Powerline"><a href="#Powerline" class="headerlink" title="Powerline"></a>Powerline</h2><p>Git 下来安装：</p>
 <pre><code>git clone git@github.com:powerline/fonts.git
 cd fonts
 ./install.sh
-</code></pre><p>然后到 iterm2 配置，设置字体为<code>Roboto Mono for Powerline</code>：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/powerline.jpg" alt=""></p>
+</code></pre>
+<p>然后到 iterm2 配置，设置字体为<code>Roboto Mono for Powerline</code>：</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/powerline.jpg"></p>
 <p>这样就可以有颜值图的效果了~</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm2_end.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm2_end.jpg"></p>
 <p>然而终端下的 vim 编辑器还是一种颜色~</p>
 <p>作为一个追求完美的 geek 怎能容许此等瑕疵呢！</p>
 <p>所以就继续捣鼓 solarized 配色。</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing2.gif" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/biaoqing2.gif"></p>
 <h2 id="solarized"><a href="#solarized" class="headerlink" title="solarized"></a>solarized</h2><p>Solarized 是个很牛逼的配色项目，主流OS、IDE、Editor都有它影子。</p>
 <pre><code># git下Solarized 的源码
 git clone git://github.com/altercation/solarized.git
@@ -487,14 +486,15 @@ sudo vim ~/.vimrc
 syntax enable
 set background=dark
 colorscheme solarized
-</code></pre><p>然后保存 .vimrc, 退出</p>
+</code></pre>
+<p>然后保存 .vimrc, 退出</p>
 <p>之后打开用 vim 打开文件就是这种效果了：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm_vim_black.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/iterm_vim_black.jpg"></p>
 <h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><blockquote>
-<p><a href="http://iterm2.com/" target="_blank" rel="noopener">iTerm2</a></p>
-<p><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">robbyrussell/oh-my-zsh</a></p>
-<p><a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">powerline/fonts</a></p>
-<p><a href="https://github.com/altercation/solarized" target="_blank" rel="noopener">altercation/solarized</a></p>
+<p><a href="http://iterm2.com/">iTerm2</a></p>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh">robbyrussell&#x2F;oh-my-zsh</a></p>
+<p><a href="https://github.com/powerline/fonts">powerline&#x2F;fonts</a></p>
+<p><a href="https://github.com/altercation/solarized">altercation&#x2F;solarized</a></p>
 </blockquote>
 
       
@@ -626,10 +626,10 @@ colorscheme solarized
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -648,7 +648,7 @@ colorscheme solarized
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -658,10 +658,10 @@ colorscheme solarized
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -739,7 +739,7 @@ colorscheme solarized
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#唠叨一下"><span class="nav-number">1.</span> <span class="nav-text">唠叨一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iTerm2"><span class="nav-number">2.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh"><span class="nav-number">3.</span> <span class="nav-text">zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oh-My-Zsh"><span class="nav-number">4.</span> <span class="nav-text">Oh My Zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Powerline"><span class="nav-number">5.</span> <span class="nav-text">Powerline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solarized"><span class="nav-number">6.</span> <span class="nav-text">solarized</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks"><span class="nav-number">7.</span> <span class="nav-text">Thanks</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%94%A0%E5%8F%A8%E4%B8%80%E4%B8%8B"><span class="nav-number">1.</span> <span class="nav-text">唠叨一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iTerm2"><span class="nav-number">2.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh"><span class="nav-number">3.</span> <span class="nav-text">zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oh-My-Zsh"><span class="nav-number">4.</span> <span class="nav-text">Oh My Zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Powerline"><span class="nav-number">5.</span> <span class="nav-text">Powerline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solarized"><span class="nav-number">6.</span> <span class="nav-text">solarized</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks"><span class="nav-number">7.</span> <span class="nav-text">Thanks</span></a></li></ol></div>
             
 
           </div>
@@ -762,7 +762,7 @@ colorscheme solarized
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1037,5 +1037,5 @@ colorscheme solarized
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

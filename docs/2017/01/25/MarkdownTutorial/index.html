@@ -80,21 +80,18 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="自己整理的 Markdown 简介、编辑器推荐、语法、特征等，是 Markdown 的简易入门教程">
-<meta name="keywords" content="Markdown">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown 简易入门教程">
 <meta property="og:url" content="https://blog.huihut.com/2017/01/25/MarkdownTutorial/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="自己整理的 Markdown 简介、编辑器推荐、语法、特征等，是 Markdown 的简易入门教程">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://www.williamlong.info/upload/4319_1.jpg">
 <meta property="og:image" content="http://www.williamlong.info/upload/4319_3.jpg">
 <meta property="og:image" content="http://www.williamlong.info/upload/4319_10.jpg">
@@ -132,10 +129,11 @@
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/sequencemapcode.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/html.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/autolink.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2017-01-24T17:45:50.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown 简易入门教程">
-<meta name="twitter:description" content="自己整理的 Markdown 简介、编辑器推荐、语法、特征等，是 Markdown 的简易入门教程">
 <meta name="twitter:image" content="http://www.williamlong.info/upload/4319_1.jpg">
 
 
@@ -143,9 +141,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -178,7 +176,7 @@
   });
 </script>
   <title> Markdown 简易入门教程 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -186,15 +184,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -352,7 +341,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/01/25/MarkdownTutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -444,37 +433,39 @@
 
       
         <p>自己整理的 Markdown 简介、编辑器推荐、语法、特征等，是 Markdown 的简易入门教程</p>
-<a id="more"></a>
+<span id="more"></span>
+
+
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
 <li><p><a href="#overview">概述</a></p>
 <ul>
-<li><a href="#summary">简介</a></li>
-<li><a href="#doc">官方文档</a></li>
-<li><a href="#editor">Markdown编辑器</a></li>
+<li>   <a href="#summary">简介</a></li>
+<li>   <a href="#doc">官方文档</a></li>
+<li>   <a href="#editor">Markdown编辑器</a></li>
 </ul>
 </li>
 <li><p><a href="#primary">初级语法</a></p>
 <ul>
 <li><a href="#MarkdownHeader">标题</a></li>
-<li><a href="#bolditalic">粗体和斜体</a></li>
+<li>   <a href="#bolditalic">粗体和斜体</a></li>
 <li><a href="#paragraph">段落和换行</a></li>
 <li><a href="#hr">分隔线</a></li>
 <li><a href="#blockquote">引言</a></li>
-<li><a href="#list">列表</a><ul>
+<li>   <a href="#list">列表</a><ul>
 <li><a href="#disorderlist">无序列表</a></li>
 <li><a href="#sorderlist">有序列表</a></li>
 </ul>
 </li>
 <li><a href="#code">代码</a><ul>
-<li><a href="#linecode">行内代码块</a></li>
-<li><a href="#paragraphcode">段落代码块</a></li>
+<li>   <a href="#linecode">行内代码块</a></li>
+<li>   <a href="#paragraphcode">段落代码块</a></li>
 </ul>
 </li>
 <li><a href="#link">链接</a><ul>
-<li><a href="#urllink">网址链接</a></li>
-<li><a href="#picturelink">图片链接</a><ul>
-<li><a href="#picturelinksize">指定图片宽高</a></li>
-<li><a href="#picturelinkchain">用图床获取外链</a></li>
+<li>   <a href="#urllink">网址链接</a></li>
+<li>   <a href="#picturelink">图片链接</a><ul>
+<li>   <a href="#picturelinksize">指定图片宽高</a></li>
+<li>   <a href="#picturelinkchain">用图床获取外链</a></li>
 </ul>
 </li>
 </ul>
@@ -483,13 +474,13 @@
 </li>
 <li><p><a href="#Advanced">进阶语法</a></p>
 <ul>
-<li><a href="#label">标签</a></li>
-<li><a href="#content">目录</a></li>
+<li>   <a href="#label">标签</a></li>
+<li>   <a href="#content">目录</a></li>
 <li><a href="#table">表格</a></li>
-<li><a href="#footnote">脚注</a></li>
-<li><a href="#formula">公式</a></li>
-<li><a href="#flowsheet">流程图</a></li>
-<li><a href="#sequencemap">序列图</a></li>
+<li>   <a href="#footnote">脚注</a></li>
+<li>   <a href="#formula">公式</a></li>
+<li>   <a href="#flowsheet">流程图</a></li>
+<li>   <a href="#sequencemap">序列图</a></li>
 </ul>
 </li>
 <li><p><a href="#others">其他</a></p>
@@ -513,58 +504,58 @@
 
 
 <blockquote>
-<p><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="noopener">Markdown: Syntax</a></p>
-<p><a href="http://wowubuntu.com/markdown/" target="_blank" rel="noopener">Markdown 语法说明 (简体中文版)</a></p>
+<p><a href="http://daringfireball.net/projects/markdown/syntax">Markdown: Syntax</a></p>
+<p><a href="http://wowubuntu.com/markdown/">Markdown 语法说明 (简体中文版)</a></p>
 </blockquote>
 <h3 id="editor">Markdown编辑器</h3>
 
 <ul>
 <li><p>在线编辑器</p>
 <ul>
-<li><p><a href="http://dillinger.io/" target="_blank" rel="noopener">dillinger</a>——漂亮强大，支持md, html, pdf 文件导出。  </p>
+<li><p><a href="http://dillinger.io/">dillinger</a>——漂亮强大，支持md, html, pdf 文件导出。  </p>
 <p>  <img src="http://www.williamlong.info/upload/4319_1.jpg" alt="dillinger"></p>
 </li>
-<li><p><a href="http://www.jianshu.com/" target="_blank" rel="noopener">简书</a>——非常漂亮的博客平台，可以自动备份，直接拖入图片。  </p>
+<li><p><a href="http://www.jianshu.com/">简书</a>——非常漂亮的博客平台，可以自动备份，直接拖入图片。  </p>
 <p>  <img src="http://www.williamlong.info/upload/4319_3.jpg" alt="简书"></p>
 </li>
 </ul>
 </li>
 <li><p>Windows</p>
 <ul>
-<li><p><a href="http://www.markdownpad.com/" target="_blank" rel="noopener">MarkdownPad</a>——一款全功能的编辑器，被很多人称赞为windows 平台最好用的markdown编辑器。  </p>
+<li><p><a href="http://www.markdownpad.com/">MarkdownPad</a>——一款全功能的编辑器，被很多人称赞为windows 平台最好用的markdown编辑器。  </p>
 <p>  <img src="http://www.williamlong.info/upload/4319_10.jpg" alt="MarkdownPad"></p>
 </li>
-<li><p><a href="http://code52.org/DownmarkerWPF/" target="_blank" rel="noopener">MarkPad</a>——开源软件，可以直接在你的博客或者 GitHub 中打开、保存文档，直接将图片粘贴到 Markdown 文档中。  </p>
+<li><p><a href="http://code52.org/DownmarkerWPF/">MarkPad</a>——开源软件，可以直接在你的博客或者 GitHub 中打开、保存文档，直接将图片粘贴到 Markdown 文档中。  </p>
 <p>  <img src="http://code52.org/DownmarkerWPF/screenshot.png" alt="MarkPad"></p>
 </li>
-<li><p><a href="https://www.zybuluo.com/cmd/" target="_blank" rel="noopener">Cmd Markdown</a>——作业部落出品，全平台并支持Web端      </p>
+<li><p><a href="https://www.zybuluo.com/cmd/">Cmd Markdown</a>——作业部落出品，全平台并支持Web端  	</p>
 <p>  <img src="http://www.williamlong.info/upload/4319_6.jpg" alt="Cmd Markdown"></p>
 </li>
 </ul>
 </li>
 <li><p>Mac</p>
 <ul>
-<li><p><a href="http://25.io/mou/" target="_blank" rel="noopener">Mou</a>——简洁优雅，免费又好用，中文兼容性好。  </p>
+<li><p><a href="http://25.io/mou/">Mou</a>——简洁优雅，免费又好用，中文兼容性好。  </p>
 <p>  <img src="http://www.williamlong.info/upload/4319_14.jpg" alt="Mou"></p>
 </li>
-<li><p><a href="https://typora.io/" target="_blank" rel="noopener">Typora</a>——极致简洁，自定义皮肤。</p>
+<li><p><a href="https://typora.io/">Typora</a>——极致简洁，自定义皮肤。</p>
 <p>  <img src="http://www.williamlong.info/upload/4319_15.jpg" alt="Typora"></p>
 </li>
-<li><p><a href="https://macdown.uranusjr.com/" target="_blank" rel="noopener">MacDown</a>——简洁优雅，开源免费。</p>
+<li><p><a href="https://macdown.uranusjr.com/">MacDown</a>——简洁优雅，开源免费。</p>
 <p>  <img src="http://www.williamlong.info/upload/4319_16.jpg" alt="MacDown"></p>
 </li>
-<li><p><a href="https://www.ulyssesapp.com/" target="_blank" rel="noopener">Ulysses</a>——文字写作推荐。  </p>
+<li><p><a href="https://www.ulyssesapp.com/">Ulysses</a>——文字写作推荐。  </p>
 <p>  <img src="http://www.williamlong.info/upload/4319_19.jpg" alt="Ulysses"></p>
 </li>
 </ul>
 </li>
 <li><p>多平台</p>
 <ul>
-<li><p><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a>——github出的编辑器，支持各种编程语言，可装Markdown插件。</p>
-<p>  <img src="http://www.williamlong.info/upload/4319_9.jpg" alt=""></p>
+<li><p><a href="https://atom.io/">Atom</a>——github出的编辑器，支持各种编程语言，可装Markdown插件。</p>
+<p>  <img src="http://www.williamlong.info/upload/4319_9.jpg"></p>
 </li>
-<li><p><a href="http://www.sublimetext.com/" target="_blank" rel="noopener">sublimetext</a>——专业编辑器，支持各种编程语言。</p>
-<p>  <img src="http://www.williamlong.info/upload/4319_8.jpg" alt=""></p>
+<li><p><a href="http://www.sublimetext.com/">sublimetext</a>——专业编辑器，支持各种编程语言。</p>
+<p>  <img src="http://www.williamlong.info/upload/4319_8.jpg"></p>
 </li>
 </ul>
 </li>
@@ -579,54 +570,59 @@
 <p>Markdown 支持两种标题的语法，类 Atx 和类 Setext 形式。</p>
 <ul>
 <li><p>Atx（注意<code>#</code>后面有个空格）</p>
-<pre><code># 一级标题
-## 二级标题
-### 三级标题
-</code></pre></li>
+<pre><code>  # 一级标题
+  ## 二级标题
+  ### 三级标题
+</code></pre>
+</li>
 <li><p>Setext（<code>-</code>与<code>=</code>数目任意，最好三个及以上，比较直观）</p>
-<pre><code>一级标题
-======
+<pre><code>  一级标题
+  ======
 
-二级标题
-------
-</code></pre></li>
+  二级标题
+  ------
+</code></pre>
+</li>
 </ul>
 <h3 id="bolditalic">粗体和斜体</h3>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/bolditalic.jpg" alt="bolditalic"></p>
 <ul>
 <li><p>粗体</p>
-<pre><code>**这是粗体**
+<pre><code>  **这是粗体**
 
-__这是粗体__
-</code></pre></li>
-</ul>
-<ul>
+  __这是粗体__
+</code></pre>
+</li>
 <li><p>斜体</p>
-<pre><code>*这是斜体*
+<pre><code>  *这是斜体*
 
-_这是斜体_
-</code></pre></li>
+  _这是斜体_
+</code></pre>
+</li>
 </ul>
 <h3 id="paragraph">段落和换行</h3>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/paragraph.jpg" alt="paragraph"></p>
 <ul>
 <li><p>第一种写法（上图的<code>这是第一段</code>），直接敲两个回车键即可</p>
-<pre><code>这是第一段
-
-这是第二段
-</code></pre></li>
+<pre><code>  这是第一段
+  
+  这是第二段
+</code></pre>
+</li>
 <li><p>第二种写法（上图的<code>这是第二段</code>），在写完一段后敲两个空格，然后回车写下一段</p>
-<pre><code>这是第二段  
-这是第三段
-</code></pre></li>
+<pre><code>  这是第二段  
+  这是第三段
+</code></pre>
+</li>
 <li><p>第三种写法（上图的<code>这是第三段</code>），在写完一段后用HTML的语法：<code>&lt;br /&gt;</code>作为换行，然后写下一段</p>
-<pre><code>这是第三段&lt;br /&gt;这是第四段
-
-这是第三段&lt;br /&gt;
-这是第四段
-</code></pre></li>
+<pre><code>  这是第三段&lt;br /&gt;这是第四段
+  
+  这是第三段&lt;br /&gt;
+  这是第四段
+</code></pre>
+</li>
 </ul>
 <h3 id="hr">分隔线</h3>
 
@@ -636,7 +632,8 @@ _这是斜体_
 ---
 ===
 ___
-</code></pre><h3 id="blockquote">引言</h3>
+</code></pre>
+<h3 id="blockquote">引言</h3>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/blockquote.jpg" alt="blockquote"></p>
 <pre><code>&gt; 我想只用一个 “&gt;” 号来写一个多行的引用，所以在扯鸡巴蛋地码字占空间，好像差不多了吧，嗯嗯~
@@ -649,7 +646,8 @@ ___
 ---
 
 &gt; &gt; 另外一种就是嵌套引用，就像我一样，用两个“&gt;”
-</code></pre><h3 id="list">列表</h3>
+</code></pre>
+<h3 id="list">列表</h3>
 
 <h4 id="disorderlist">无序列表</h4>
 
@@ -658,31 +656,35 @@ ___
 <pre><code>* 一朵百合花
 * 两朵百合花
 * 三朵百合花
-</code></pre><h4 id="sorderlist">有序列表</h4>
+</code></pre>
+<h4 id="sorderlist">有序列表</h4>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/orderlist.jpg" alt="orderlist"></p>
-<p>有序列表用数字接着一个英文句点来表示，数字可无序，但还是推荐使用<code>1.</code>、<code>2.</code>，避免混乱。</p>
+<p>有序列表用数字接着一个英文句点来表示，数字可无序，但还是推荐使用<code>1. </code>、<code>2. </code>，避免混乱。</p>
 <pre><code>1. 一朵百合花
 2. 两朵百合花
 3. 三朵百合花
-</code></pre><h3 id="code">代码</h3>
+</code></pre>
+<h3 id="code">代码</h3>
 
 <h4 id="linecode">行内代码块</h4>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/linecode.jpg" alt="linecode"></p>
 <pre><code>I am a `code`
 I am a `` ` ``
-</code></pre><h4 id="paragraphcode">段落代码块</h4>
+</code></pre>
+<h4 id="paragraphcode">段落代码块</h4>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/paragraphcode.jpg" alt="paragraphcode"></p>
 <pre><code>#### 第一种
 
     int main()
-    {
+    &#123;
         printf(&quot;我是个段落代码块&quot;);
         return 0;
-    }
-</code></pre><p>另外，可以用三个反引号和语言名，作为标记代码所使用的语言</p>
+    &#125;
+</code></pre>
+<p>另外，可以用三个反引号和语言名，作为标记代码所使用的语言</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/paragraphcode2.jpg" alt="paragraphcode2"></p>
 <p>我的 Mou 编辑器不能识别 (ノ▼Д▼)ノ</p>
 <h3 id="link">链接</h3>
@@ -694,37 +696,41 @@ I am a `` ` ``
 <p>不管是哪一种，链接文字都是用 [方括号] 来标记，双引号<code>&quot;&quot;</code>的<code>title</code>可写可不写。</p>
 <ul>
 <li><p>行内式</p>
-<pre><code>[huihut](https://huihut.github.io/)
-
-[huihut](https://huihut.github.io/ &quot;huihut&quot;)
-
-[huihut](https://huihut.github.io/ &apos;huihut&apos;)
-</code></pre></li>
+<pre><code>  [huihut](https://huihut.github.io/)
+  
+  [huihut](https://huihut.github.io/ &quot;huihut&quot;)
+  
+  [huihut](https://huihut.github.io/ &#39;huihut&#39;)
+</code></pre>
+</li>
 <li><p>参考式</p>
 <ul>
-<li>一般写法</li>
-</ul>
+<li><p>一般写法</p>
+<pre><code>  [huihut][1]
+  [1]: https://huihut.github.io/
+</code></pre>
 </li>
 </ul>
-<pre><code>[huihut][1]
-[1]: https://huihut.github.io/
-</code></pre><ul>
-<li>隐式链接标记——可省略id，只需要[text]与下面[方括号]内容相同即可</li>
-</ul>
-<pre><code>[Google][]
-[Google]: http://google.com/
-</code></pre><ul>
+</li>
+<li><p>隐式链接标记——可省略id，只需要[text]与下面[方括号]内容相同即可</p>
+<pre><code>      [Google][]
+      [Google]: http://google.com/
+</code></pre>
+</li>
 <li><p>拓展</p>
 <ul>
 <li><p>这里的链接辨别标签可以有字母、数字、空白和标点符号，但是并不区分大小写，因此下面两个链接是一样的：</p>
-<pre><code>[text][a]
-[text][A]
-</code></pre></li>
+<pre><code>      [text][a]
+      [text][A]
+  
+</code></pre>
+</li>
 <li><p>链接 title 可以用双引号、单引号、圆括号包起来，因此，下面这三种链接的定义都是相同：</p>
-<pre><code>[1]: https://huihut.github.io/  &quot;title&quot;
-[1]: https://huihut.github.io/  &apos;title&apos;
-[1]: https://huihut.github.io/  (title)
-</code></pre></li>
+<pre><code>      [1]: https://huihut.github.io/  &quot;title&quot;
+      [1]: https://huihut.github.io/  &#39;title&#39;
+      [1]: https://huihut.github.io/  (title)
+</code></pre>
+</li>
 </ul>
 </li>
 </ul>
@@ -735,37 +741,43 @@ I am a `` ` ``
 <p>图片链接与上面的网址链接类似，同样有两种形式：行内式和参考式，只不过图片链接在前面加上一个感叹号<code>!</code>，在此不做累述。</p>
 <ul>
 <li><p>行内式</p>
-<pre><code>![huihut](http://huihut-img.oss-cn-shenzhen.aliyuncs.com/H_ya.png)
-</code></pre></li>
+<pre><code>  ![huihut](http://huihut-img.oss-cn-shenzhen.aliyuncs.com/H_ya.png)
+</code></pre>
+</li>
 <li><p>参考式</p>
-<pre><code>![谷歌][1]
-[1]: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png &quot;Google&quot;
-</code></pre></li>
+<pre><code>  ![谷歌][1]
+  [1]: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png &quot;Google&quot;
+</code></pre>
+</li>
 </ul>
 <h5 id="picturelinksize">指定图片宽高</h5>
 
 <ul>
 <li><p>Markdown 一般不支持指定图片的宽高，若要指定宽高可以使用普通的 <code>&lt;img&gt;</code> 标签</p>
-<pre><code>&lt;img src=&quot;./xxx.png&quot; width = &quot;100&quot; height = &quot;100&quot; alt=&quot;title&quot; align=center /&gt;
-</code></pre><p>  如果需要居中可以在外围包围<code>div</code>标签</p>
-<pre><code>&lt;div  align=&quot;center&quot;&gt;    
-&lt;img src=&quot;xxx.png&quot; width = &quot;100&quot; height = &quot;100&quot; alt=&quot;title&quot; align=center /&gt;
-&lt;/div&gt;
-</code></pre></li>
+<pre><code>  &lt;img src=&quot;./xxx.png&quot; width = &quot;100&quot; height = &quot;100&quot; alt=&quot;title&quot; align=center /&gt;
+   
+</code></pre>
+<p>  如果需要居中可以在外围包围<code>div</code>标签</p>
+<pre><code>  &lt;div  align=&quot;center&quot;&gt;    
+  &lt;img src=&quot;xxx.png&quot; width = &quot;100&quot; height = &quot;100&quot; alt=&quot;title&quot; align=center /&gt;
+  &lt;/div&gt;
+      
+</code></pre>
+</li>
 <li><p>使用支持指定图片大小的 Markdown 编辑器，如 Mou</p>
-<pre><code>![](xxx.png =100x100)
-</code></pre></li>
+<pre><code>  ![](xxx.png =100x100)
+</code></pre>
+</li>
 </ul>
 <h5 id="picturelinkchain">用图床获取外链</h5>
 
 <p>网上有许多图床，这里推荐两个 <strong>七牛图床</strong> 和 <strong>极简图床</strong>。</p>
 <ul>
-<li><p><a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛图床</a> </p>
-<p>  <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qiniutuchuang.jpg" width="90%" height="90%"></p>
+<li><p><a href="https://www.qiniu.com/">七牛图床</a> </p>
+  <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qiniutuchuang.jpg" width = "90%" height = "90%"/>
 </li>
-<li><p><a href="https://yotuku.cn/" target="_blank" rel="noopener">极简图床</a></p>
-<p>  <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/jijiantuchuang.jpg" width="90%" height="90%"></p>
-</li>
+<li><p><a href="https://yotuku.cn/">极简图床</a></p>
+  <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/jijiantuchuang.jpg" width = "90%" height = "90%"/></li>
 </ul>
 <h2 id="Advanced">进阶语法</h2>
 
@@ -774,52 +786,56 @@ I am a `` ` ``
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/label.jpg" alt="label"></p>
 <ul>
 <li><p>方法一</p>
-<pre><code>title: Markdown 简易入门教程
-date: 2017-01-25 1:45:50
-tags: Markdown
-categories: 技术
-</code></pre></li>
+<pre><code>  title: Markdown 简易入门教程
+  date: 2017-01-25 1:45:50
+  tags: Markdown
+  categories: 技术
+</code></pre>
+</li>
 <li><p>方法三</p>
-<pre><code>tags:
-- Markdown
-- 语言
-categories:
-- 技术
-</code></pre></li>
+<pre><code>  tags:
+  - Markdown
+  - 语言
+  categories:
+  - 技术
+</code></pre>
+</li>
 <li><p>方法三</p>
-<pre><code>tags: [Markdown,语言]
-categories: [技术]
-</code></pre></li>
+<pre><code>  tags: [Markdown,语言]
+  categories: [技术]
+</code></pre>
+</li>
 </ul>
 <h3 id="content">目录</h3>
 
 <ul>
 <li><p>方法一</p>
-<p>  <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/content.jpg" alt=""></p>
+<p>  <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/content.jpg"></p>
 <p>  这种目录其实是用 <strong>HTML</strong> 加 <strong>Markdown的链接</strong> 实现，分为两个部分，<strong>目录部分</strong>和<strong>标题部分</strong>。</p>
 <ul>
 <li><p>目录部分——实质是链接，链接的<code>[地址]</code>填需要跳转到的标题的<code>id</code>属性（自定义）。</p>
-<pre><code>[跳到标题一](#title1)
-</code></pre></li>
+<pre><code>  [跳到标题一](#title1)
+</code></pre>
+</li>
 <li><p>标题部分——实质是HTML的标题标签，标签里面的<code>id</code>属性等于待跳转的目录的<code>[地址]</code>。</p>
-<pre><code>&lt;h1 id=&quot;title1&quot;&gt;标题一&lt;/h1&gt;
-</code></pre></li>
-</ul>
+<pre><code>  &lt;h1 id=&quot;title1&quot;&gt;标题一&lt;/h1&gt;
+</code></pre>
 </li>
 </ul>
-<ul>
+</li>
 <li><p>方法二</p>
 <p>  <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/content2.jpg" alt="content2"></p>
 <p>  这种方法非常简单，就是直接添加 <code>[TOC]</code>，标题1~6样式的内容会被提取出来作为目录，然而有些编辑器不能使用这功能，如 Mou 不能使用。我是在有道云笔记的 Markdown 中截图的。</p>
-<pre><code>[TOC]
-
-# 标题一
-……
-## 标题二
-……
-### 标题三
-</code></pre><p>  这里有个jQuery插件，貌似可以让Markdown生成目录：</p>
-<p>  <a href="https://github.com/i5ting/i5ting_ztree_toc" target="_blank" rel="noopener">https://github.com/i5ting/i5ting_ztree_toc</a></p>
+<pre><code>  [TOC]
+  
+  # 标题一
+  ……
+  ## 标题二
+  ……
+  ### 标题三
+</code></pre>
+<p>  这里有个jQuery插件，貌似可以让Markdown生成目录：</p>
+<p>  <a href="https://github.com/i5ting/i5ting_ztree_toc">https://github.com/i5ting/i5ting_ztree_toc</a></p>
 </li>
 </ul>
 <h3 id="table">表格</h3>
@@ -827,19 +843,21 @@ categories: [技术]
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/table.jpg" alt="table"></p>
 <ul>
 <li><p>表格一般这样子写，这应该是最简单的写法了</p>
-<pre><code>id    |   name   |   score
----   |   ---    |   ---
-001   |   Mark   |   90
-002   |   Ford   |   80
-003   |   Alan   |   95
-</code></pre></li>
+<pre><code>  id    |   name   |   score
+  ---   |   ---    |   ---
+  001   |   Mark   |   90
+  002   |   Ford   |   80
+  003   |   Alan   |   95
+</code></pre>
+</li>
 <li><p>还有就是对齐了，用<code>:</code>对齐，<code>:</code>写在在<code>---</code>的左边就是左对齐，右边就是右对齐，两边都写就是居中。</p>
-<pre><code>|long_long_id|long_long_name|long_long_score|
-|    ---     |    :---:     |     ---:      |
-|    001     |     Mark     |      90       |
-|    002     |     Ford     |      80       |
-|    003     |     Alan     |      95       |
-</code></pre></li>
+<pre><code>  |long_long_id|long_long_name|long_long_score|
+  |    ---     |    :---:     |     ---:      |
+  |    001     |     Mark     |      90       |
+  |    002     |     Ford     |      80       |
+  |    003     |     Alan     |      95       |
+</code></pre>
+</li>
 </ul>
 <h3 id="footnote">脚注</h3>
 
@@ -847,53 +865,61 @@ categories: [技术]
 <pre><code>这是脚注一[^1]
 
 [^1]: 脚注一
-</code></pre><h3 id="formula">公式</h3>
+</code></pre>
+<h3 id="formula">公式</h3>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/formula.jpg" alt="formula"></p>
 <ul>
 <li><p>方法一：使用Google Chart</p>
-<pre><code>&lt;img src=&quot;http://chart.googleapis.com/chart?cht=tx&amp;chl=\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}&quot; style=&quot;border:none;&quot;&gt;
-</code></pre></li>
+<pre><code>  &lt;img src=&quot;http://chart.googleapis.com/chart?cht=tx&amp;chl=\Large x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;&quot; style=&quot;border:none;&quot;&gt;
+</code></pre>
+</li>
 <li><p>方法二：使用forkosh</p>
-<pre><code>&lt;img src=&quot;http://chart.googleapis.com/chart?cht=tx&amp;chl=\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}&quot; style=&quot;border:none;&quot;&gt;
-</code></pre></li>
+<pre><code>  &lt;img src=&quot;http://chart.googleapis.com/chart?cht=tx&amp;chl=\Large x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;&quot; style=&quot;border:none;&quot;&gt;
+</code></pre>
+</li>
 <li><p>方法三：使用codecogs</p>
-<pre><code>&lt;a href=&quot;https://www.codecogs.com/eqnedit.php?latex=x=\frac{-b\pm&amp;space;\sqrt{b^{2}-4ac}}{2a}&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://latex.codecogs.com/gif.latex?x=\frac{-b\pm&amp;space;\sqrt{b^{2}-4ac}}{2a}&quot; title=&quot;x=\frac{-b\pm \sqrt{b^{2}-4ac}}{2a}&quot; /&gt;&lt;/a&gt;
-</code></pre></li>
+<pre><code>  &lt;a href=&quot;https://www.codecogs.com/eqnedit.php?latex=x=\frac&#123;-b\pm&amp;space;\sqrt&#123;b^&#123;2&#125;-4ac&#125;&#125;&#123;2a&#125;&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://latex.codecogs.com/gif.latex?x=\frac&#123;-b\pm&amp;space;\sqrt&#123;b^&#123;2&#125;-4ac&#125;&#125;&#123;2a&#125;&quot; title=&quot;x=\frac&#123;-b\pm \sqrt&#123;b^&#123;2&#125;-4ac&#125;&#125;&#123;2a&#125;&quot; /&gt;&lt;/a&gt;
+</code></pre>
+</li>
 <li><p>方法四：使用MathJax引擎——先加载脚本<code>&lt;script&gt;</code>，后解析公式。</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
-
-$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
-</code></pre></li>
+<pre><code>  &lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+  
+  $$x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;$$
+</code></pre>
+</li>
 </ul>
 <h3 id="flowsheet">流程图</h3>
 
 <p><img src="http://cdn2.wiz.cn/wp-content/uploads/2015/11/QQ20151123-0.png" alt="flowsheet"></p>
 <p>像流程图这种复杂的功能不推荐在 Markdown 中使用，因为很多编辑器都不支持，我使用了几个编辑器都不能生成流程图，所以上图是在为知笔记官方 Markdown 新手指南中找到的。</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/flowsheetcode.jpg" alt="flowsheetcode"></p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Start</span><br><span class="line">e=&gt;end: End</span><br><span class="line">op1=&gt;operation: My Operation</span><br><span class="line">sub1=&gt;subroutine: My Subroutine</span><br><span class="line">cond=&gt;condition: Yes or No?</span><br><span class="line">io=&gt;inputoutput: catch something...</span><br><span class="line">st-&gt;op1-&gt;cond</span><br><span class="line">cond(yes)-&gt;io-&gt;e</span><br><span class="line">cond(no)-&gt;sub1(right)-&gt;op1</span><br></pre></td></tr></table></figure>
-</code></pre><p>更多关于流程图的语法说明：</p>
-<p><a href="https://github.com/adrai/flowchart.js" target="_blank" rel="noopener">https://github.com/adrai/flowchart.js</a></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Start</span><br><span class="line">e=&gt;end: End</span><br><span class="line">op1=&gt;operation: My Operation</span><br><span class="line">sub1=&gt;subroutine: My Subroutine</span><br><span class="line">cond=&gt;condition: Yes or No?</span><br><span class="line">io=&gt;inputoutput: catch something...</span><br><span class="line">st-&gt;op1-&gt;cond</span><br><span class="line">cond(yes)-&gt;io-&gt;e</span><br><span class="line">cond(no)-&gt;sub1(right)-&gt;op1</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>更多关于流程图的语法说明：</p>
+<p><a href="https://github.com/adrai/flowchart.js">https://github.com/adrai/flowchart.js</a></p>
 <h3 id="sequencemap">序列图</h3>
 
 <p><img src="http://cdn2.wiz.cn/wp-content/uploads/2015/11/QQ20151123-1.png" alt="sequencemap"></p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/sequencemapcode.jpg" alt="sequencemapcode"></p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Alice-&gt;Bob: Hello Bob, how are you?</span><br><span class="line">Note right of Bob: Bob thinks</span><br><span class="line">Bob--&gt;Alice: I am good thanks!</span><br></pre></td></tr></table></figure>
-</code></pre><p>更多关于时序图的语法说明：</p>
-<p><a href="https://github.com/bramp/js-sequence-diagrams" target="_blank" rel="noopener">https://github.com/bramp/js-sequence-diagrams</a></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Alice-&gt;Bob: Hello Bob, how are you?</span><br><span class="line">Note right of Bob: Bob thinks</span><br><span class="line">Bob--&gt;Alice: I am good thanks!</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>更多关于时序图的语法说明：</p>
+<p><a href="https://github.com/bramp/js-sequence-diagrams">https://github.com/bramp/js-sequence-diagrams</a></p>
 <h2 id="others">其他语法</h2>
 
 <h3 id="html">兼容HTML</h3>
 
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/html.jpg" alt="html"></p>
 <p>Markdown 可以和 HTML 混编，甚至可以完全用 HTML 语法来写。要注意在 HTML 标签中的 Markdown 代码是不起作用的。</p>
-<pre><code>&lt;font color=&apos;blue&apos; style=&apos;font-size:30px&apos;&gt;蓝色&lt;/font&gt;
+<pre><code>&lt;font color=&#39;blue&#39; style=&#39;font-size:30px&#39;&gt;蓝色&lt;/font&gt;
 
 &lt;div&gt;
 # HTML 标签里面的 Markdown 语法不起作用
 **你看我没有变粗**
 &lt;/div&gt;
-</code></pre><h3 id="autoescape">特殊字符自动转换</h3>
+</code></pre>
+<h3 id="autoescape">特殊字符自动转换</h3>
 
 <ul>
 <li><p>HTML 语法——在 HTML 中所有<code>&lt;</code>和<code>&amp;</code>都要转换，包括链接（URL）</p>
@@ -911,12 +937,13 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
 <p>*literal asterisks*</p>
 <p>可用</p>
 <pre><code>\*literal asterisks\*
-</code></pre><p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
+</code></pre>
+<p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
 <pre><code>\   反斜线
 `   反引号
 *   星号
 _   底线
-{}  花括号
+&#123;&#125;  花括号
 []  方括号
 ()  括弧
 #   井字号
@@ -924,34 +951,37 @@ _   底线
 -   减号
 .   英文句点
 !   惊叹号
-</code></pre><h3 id="autolink">自动链接</h3>
-
+</code></pre>
+<h3 id="autolink">自动链接</h3>
+    
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/autolink.jpg" alt="autolink"></p>
 <ul>
 <li><p>网址自动链接</p>
-<pre><code>&lt;https://huihut.github.io/&gt;
-</code></pre></li>
+<pre><code>  &lt;https://huihut.github.io/&gt;
+</code></pre>
+</li>
 <li><p>电子邮件自动链接</p>
-<pre><code>&lt;huihut@outlook.com&gt;
-</code></pre></li>
+<pre><code>  &lt;huihut@outlook.com&gt;
+</code></pre>
+</li>
 </ul>
 <h2 id="reference">感谢</h2>
 
 <blockquote>
-<p><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="noopener">Markdown: Syntax</a></p>
-<p><a href="http://wowubuntu.com/markdown/" target="_blank" rel="noopener">Markdown 语法说明 (简体中文版)</a></p>
-<p><a href="http://www.jianshu.com/p/1e402922ee32/" target="_blank" rel="noopener">Markdown——入门指南</a></p>
-<p><a href="https://www.zybuluo.com/xxliixin1993/note/125827" target="_blank" rel="noopener">Markdown语法手册</a></p>
-<p><a href="http://www.williamlong.info/archives/4319.html" target="_blank" rel="noopener">好用的Markdown编辑器一览</a></p>
-<p><a href="https://www.zhihu.com/question/23378396" target="_blank" rel="noopener">markdown中插入图片怎么定义图片的大小或比例？</a></p>
-<p><a href="http://www.jianshu.com/p/0b257de21eb5" target="_blank" rel="noopener">Markdown进阶语法整理</a></p>
-<p><a href="http://www.wiz.cn/feature-markdown.html" target="_blank" rel="noopener">为知笔记 Markdown 新手指南</a></p>
-<p><a href="http://blog.csdn.net/xiahouzuoxin/article/details/26478179" target="_blank" rel="noopener">Markdown中插入数学公式的方法</a></p>
-<p><a href="https://github.com/i5ting/i5ting_ztree_toc" target="_blank" rel="noopener">i5ting/i5ting_ztree_toc</a></p>
-<p><a href="http://flowchart.js.org/" target="_blank" rel="noopener">flowchart.js</a></p>
-<p><a href="https://github.com/adrai/flowchart.js" target="_blank" rel="noopener">adrai/flowchart.js</a></p>
-<p><a href="https://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="noopener">js-sequence-diagrams</a></p>
-<p><a href="https://github.com/bramp/js-sequence-diagrams" target="_blank" rel="noopener">bramp/js-sequence-diagrams</a></p>
+<p><a href="http://daringfireball.net/projects/markdown/syntax">Markdown: Syntax</a></p>
+<p><a href="http://wowubuntu.com/markdown/">Markdown 语法说明 (简体中文版)</a></p>
+<p><a href="http://www.jianshu.com/p/1e402922ee32/">Markdown——入门指南</a></p>
+<p><a href="https://www.zybuluo.com/xxliixin1993/note/125827">Markdown语法手册</a></p>
+<p><a href="http://www.williamlong.info/archives/4319.html">好用的Markdown编辑器一览</a></p>
+<p><a href="https://www.zhihu.com/question/23378396">markdown中插入图片怎么定义图片的大小或比例？</a></p>
+<p><a href="http://www.jianshu.com/p/0b257de21eb5">Markdown进阶语法整理</a></p>
+<p><a href="http://www.wiz.cn/feature-markdown.html">为知笔记 Markdown 新手指南</a></p>
+<p><a href="http://blog.csdn.net/xiahouzuoxin/article/details/26478179">Markdown中插入数学公式的方法</a></p>
+<p><a href="https://github.com/i5ting/i5ting_ztree_toc">i5ting&#x2F;i5ting_ztree_toc</a></p>
+<p><a href="http://flowchart.js.org/">flowchart.js</a></p>
+<p><a href="https://github.com/adrai/flowchart.js">adrai&#x2F;flowchart.js</a></p>
+<p><a href="https://bramp.github.io/js-sequence-diagrams/">js-sequence-diagrams</a></p>
+<p><a href="https://github.com/bramp/js-sequence-diagrams">bramp&#x2F;js-sequence-diagrams</a></p>
 </blockquote>
 
       
@@ -1083,10 +1113,10 @@ _   底线
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -1105,7 +1135,7 @@ _   底线
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1115,10 +1145,10 @@ _   底线
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -1196,7 +1226,7 @@ _   底线
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overview"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#summary"><span class="nav-number">1.1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#doc"><span class="nav-number">1.1.2.</span> <span class="nav-text">官方文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#editor"><span class="nav-number">1.1.3.</span> <span class="nav-text">Markdown编辑器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#primary"><span class="nav-number">1.2.</span> <span class="nav-text">初级语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MarkdownHeader"><span class="nav-number">1.2.1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bolditalic"><span class="nav-number">1.2.2.</span> <span class="nav-text">粗体和斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#paragraph"><span class="nav-number">1.2.3.</span> <span class="nav-text">段落和换行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hr"><span class="nav-number">1.2.4.</span> <span class="nav-text">分隔线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blockquote"><span class="nav-number">1.2.5.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.2.6.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#disorderlist"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sorderlist"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">有序列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">1.2.7.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linecode"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">行内代码块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#paragraphcode"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">段落代码块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#link"><span class="nav-number">1.2.8.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#urllink"><span class="nav-number">1.2.8.1.</span> <span class="nav-text">网址链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#picturelink"><span class="nav-number">1.2.8.2.</span> <span class="nav-text">图片链接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#picturelinksize"><span class="nav-number">1.2.8.2.1.</span> <span class="nav-text">指定图片宽高</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#picturelinkchain"><span class="nav-number">1.2.8.2.2.</span> <span class="nav-text">用图床获取外链</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.3.</span> <span class="nav-text">进阶语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#label"><span class="nav-number">1.3.1.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#content"><span class="nav-number">1.3.2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table"><span class="nav-number">1.3.3.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#footnote"><span class="nav-number">1.3.4.</span> <span class="nav-text">脚注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#formula"><span class="nav-number">1.3.5.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flowsheet"><span class="nav-number">1.3.6.</span> <span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sequencemap"><span class="nav-number">1.3.7.</span> <span class="nav-text">序列图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#others"><span class="nav-number">1.4.</span> <span class="nav-text">其他语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">1.4.1.</span> <span class="nav-text">兼容HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoescape"><span class="nav-number">1.4.2.</span> <span class="nav-text">特殊字符自动转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#backslash"><span class="nav-number">1.4.3.</span> <span class="nav-text">反斜杠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autolink"><span class="nav-number">1.4.4.</span> <span class="nav-text">自动链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">1.5.</span> <span class="nav-text">感谢</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overview"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#summary"><span class="nav-number">1.1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#doc"><span class="nav-number">1.1.2.</span> <span class="nav-text">官方文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#editor"><span class="nav-number">1.1.3.</span> <span class="nav-text">Markdown编辑器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#primary"><span class="nav-number">1.2.</span> <span class="nav-text">初级语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MarkdownHeader"><span class="nav-number">1.2.1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bolditalic"><span class="nav-number">1.2.2.</span> <span class="nav-text">粗体和斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#paragraph"><span class="nav-number">1.2.3.</span> <span class="nav-text">段落和换行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hr"><span class="nav-number">1.2.4.</span> <span class="nav-text">分隔线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blockquote"><span class="nav-number">1.2.5.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.2.6.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#disorderlist"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sorderlist"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">有序列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">1.2.7.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linecode"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">行内代码块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#paragraphcode"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">段落代码块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#link"><span class="nav-number">1.2.8.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#urllink"><span class="nav-number">1.2.8.1.</span> <span class="nav-text">网址链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#picturelink"><span class="nav-number">1.2.8.2.</span> <span class="nav-text">图片链接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#picturelinksize"><span class="nav-number">1.2.8.2.1.</span> <span class="nav-text">指定图片宽高</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#picturelinkchain"><span class="nav-number">1.2.8.2.2.</span> <span class="nav-text">用图床获取外链</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">1.3.</span> <span class="nav-text">进阶语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#label"><span class="nav-number">1.3.1.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#content"><span class="nav-number">1.3.2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table"><span class="nav-number">1.3.3.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#footnote"><span class="nav-number">1.3.4.</span> <span class="nav-text">脚注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#formula"><span class="nav-number">1.3.5.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flowsheet"><span class="nav-number">1.3.6.</span> <span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sequencemap"><span class="nav-number">1.3.7.</span> <span class="nav-text">序列图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#others"><span class="nav-number">1.4.</span> <span class="nav-text">其他语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">1.4.1.</span> <span class="nav-text">兼容HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoescape"><span class="nav-number">1.4.2.</span> <span class="nav-text">特殊字符自动转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#backslash"><span class="nav-number">1.4.3.</span> <span class="nav-text">反斜杠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autolink"><span class="nav-number">1.4.4.</span> <span class="nav-text">自动链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">1.5.</span> <span class="nav-text">感谢</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1219,7 +1249,7 @@ _   底线
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1494,5 +1524,5 @@ _   底线
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

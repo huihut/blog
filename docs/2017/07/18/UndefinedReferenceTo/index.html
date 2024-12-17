@@ -80,27 +80,26 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="描述我的代码中使用了libcstl库，在代码中声明： #include &amp;lt;cstl/cmap.h&amp;gt; 可是出现这个问题，无法识别libcstl库里调用的函数，如下图：">
-<meta name="keywords" content="链接装载库,C&#x2F;C++">
+<meta name="description" content="描述我的代码中使用了libcstl库，在代码中声明： #include &lt;cstl&#x2F;cmap.h&gt;  可是出现这个问题，无法识别libcstl库里调用的函数，如下图：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gcc&#x2F;mpicc 编译器 undefined reference to ... 问题的解决">
 <meta property="og:url" content="https://blog.huihut.com/2017/07/18/UndefinedReferenceTo/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="描述我的代码中使用了libcstl库，在代码中声明： #include &amp;lt;cstl/cmap.h&amp;gt; 可是出现这个问题，无法识别libcstl库里调用的函数，如下图：">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="描述我的代码中使用了libcstl库，在代码中声明： #include &lt;cstl&#x2F;cmap.h&gt;  可是出现这个问题，无法识别libcstl库里调用的函数，如下图：">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReference.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReferenceMakefile.png">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:published_time" content="2017-07-18T01:03:48.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="链接装载库">
+<meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gcc&#x2F;mpicc 编译器 undefined reference to ... 问题的解决">
-<meta name="twitter:description" content="描述我的代码中使用了libcstl库，在代码中声明： #include &amp;lt;cstl/cmap.h&amp;gt; 可是出现这个问题，无法识别libcstl库里调用的函数，如下图：">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReference.png">
 
 
@@ -108,9 +107,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -143,7 +142,7 @@
   });
 </script>
   <title> gcc/mpicc 编译器 undefined reference to ... 问题的解决 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -151,15 +150,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -317,7 +307,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/07/18/UndefinedReferenceTo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -410,20 +400,25 @@
       
         <h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>我的代码中使用了<code>libcstl</code>库，在代码中声明：</p>
 <pre><code>#include &lt;cstl/cmap.h&gt;
-</code></pre><p>可是出现这个问题，无法识别<code>libcstl</code>库里调用的函数，如下图：</p>
-<a id="more"></a>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReference.png" alt=""></p>
+</code></pre>
+<p>可是出现这个问题，无法识别<code>libcstl</code>库里调用的函数，如下图：</p>
+<span id="more"></span>
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReference.png"></p>
 <h2 id="猜想"><a href="#猜想" class="headerlink" title="猜想"></a>猜想</h2><ol>
 <li><code>#include &lt;cstl/cmap.h&gt;</code>这句话不报错说明库已经装好，环境变量也没有问题。</li>
 <li>可能是链接时的错误。</li>
 </ol>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>查看<code>Makefile</code>文件发现忘记添加cstl的链接库了。</p>
 <pre><code>-lcstl
-</code></pre><p>原来的代码是：</p>
+</code></pre>
+<p>原来的代码是：</p>
 <pre><code>mpicc -c main.c -std=c99 -lstdc++ -fopenmp -lm -o main.o
-</code></pre><p>应该改为：</p>
+</code></pre>
+<p>应该改为：</p>
 <pre><code>mpicc -c main.c -std=c99 -lcstl -lstdc++ -fopenmp -lm -o main.o
-</code></pre><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReferenceMakefile.png" alt=""></p>
+</code></pre>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReferenceMakefile.png"></p>
 <p>如上图，改好之后就解决了！</p>
 
       
@@ -469,7 +464,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/链接装载库/" rel="tag"># 链接装载库</a>
+            <a href="/tags/%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93/" rel="tag"># 链接装载库</a>
           
             <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
@@ -557,10 +552,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -579,7 +574,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -589,10 +584,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -670,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#猜想"><span class="nav-number">1.1.</span> <span class="nav-text">猜想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8C%9C%E6%83%B3"><span class="nav-number">1.1.</span> <span class="nav-text">猜想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -693,7 +688,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -968,5 +963,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

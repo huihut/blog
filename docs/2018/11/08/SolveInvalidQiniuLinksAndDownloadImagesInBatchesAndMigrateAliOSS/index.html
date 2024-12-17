@@ -80,27 +80,26 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&amp;#123;&quot;error&quot;:&quot;no such domain&quot;&amp;#125;">
-<meta name="keywords" content="C&#x2F;C++,OSS">
+<meta name="description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&#123;&quot;error&quot;:&quot;no such domain&quot;&#125;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS">
 <meta property="og:url" content="https://blog.huihut.com/2018/11/08/SolveInvalidQiniuLinksAndDownloadImagesInBatchesAndMigrateAliOSS/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&amp;#123;&quot;error&quot;:&quot;no such domain&quot;&amp;#125;">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&#123;&quot;error&quot;:&quot;no such domain&quot;&#125;">
+<meta property="og:locale">
 <meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuStorageSpaceTbody.png">
 <meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuQrsctlDownload.png">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:published_time" content="2018-11-08T06:28:00.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="OSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS">
-<meta name="twitter:description" content="起因七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误： 1&amp;#123;&quot;error&quot;:&quot;no such domain&quot;&amp;#125;">
 <meta name="twitter:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuStorageSpaceTbody.png">
 
 
@@ -108,9 +107,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -143,7 +142,7 @@
   });
 </script>
   <title> 解决七牛云链接失效以及批量下载图片并迁移阿里云 OSS | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -151,15 +150,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -317,7 +307,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/11/08/SolveInvalidQiniuLinksAndDownloadImagesInBatchesAndMigrateAliOSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -409,47 +399,48 @@
 
       
         <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>七牛云对测试域名进行回收，而我博文中图片用的链接仍然是测试域名的链接，因此导致部分链接失效，浏览器返回如下错误：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"error"</span>:<span class="string">"no such domain"</span>&#125;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;error&quot;</span><span class="punctuation">:</span><span class="string">&quot;no such domain&quot;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
 <h2 id="找回图片对象"><a href="#找回图片对象" class="headerlink" title="找回图片对象"></a>找回图片对象</h2><p>经过提交工单与七牛云工程师协商，知道了失效的图片并没有丢失，可通过某些方法找回，解决办法如下：</p>
 <ol>
-<li>绑定自定义域名：<a href="https://developer.qiniu.com/kodo/kb/5158/how-to-transition-from-test-domain-name-to-a-custom-domain-name" target="_blank" rel="noopener">如何从测试域名过渡到自定义域名</a>（绑定后则可用自定义域名访问失效的图片）</li>
-<li><p>下载单个图片：<a href="https://developer.qiniu.com/kodo/tools/1300/qrsctl" target="_blank" rel="noopener">命令行辅助工具(qrsctl)</a>（使用 qrsctl 工具的 get 下载），如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.\qrsctl.exe login huihut@outlook.com 123   # 假设密码为 123</span><br><span class="line">.\qrsctl.exe get temp H.png ./H.png         # 下载 temp 存储空间的 H.png 文件，保存到当前目录下</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下载多个对象</p>
-<ol>
+<li>绑定自定义域名：<a href="https://developer.qiniu.com/kodo/kb/5158/how-to-transition-from-test-domain-name-to-a-custom-domain-name">如何从测试域名过渡到自定义域名</a>（绑定后则可用自定义域名访问失效的图片）</li>
+<li>下载单个图片：<a href="https://developer.qiniu.com/kodo/tools/1300/qrsctl">命令行辅助工具(qrsctl)</a>（使用 qrsctl 工具的 get 下载），如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.\qrsctl.exe login huihut@outlook.com 123   # 假设密码为 123</span><br><span class="line">.\qrsctl.exe get temp H.png ./H.png         # 下载 temp 存储空间的 H.png 文件，保存到当前目录下</span><br></pre></td></tr></table></figure></li>
+<li>下载多个对象<ol>
 <li>先新建一个同区域存储空间，会分配一个新的测试域名到新空间</li>
-<li>通过 qshell batchcopy 到有域名的同区域空间然后再进行 qdownload 下载操作：<a href="https://developer.qiniu.com/kodo/tools/1302/qshell" target="_blank" rel="noopener">命令行工具(qshell)</a><ol>
-<li><code>qshell listbucket &lt;原bucket名&gt; list.txt</code> （list 出全部文件）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/listbucket.md" target="_blank" rel="noopener">https://github.com/qiniu/qshell/blob/master/docs/listbucket.md</a></li>
-<li><code>cat list.txt | awk &#39;{print $1}&#39; &gt;list_final.txt</code> （ 用awk获取list结果的第一列）</li>
-<li><code>qshell batchcopy &lt;原bucket名&gt; &lt;新bucket名&gt; list_final.txt</code> （复制到新bucket的文件和原bucket文件名一致）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/batchcopy.md" target="_blank" rel="noopener">https://github.com/qiniu/qshell/blob/master/docs/batchcopy.md</a></li>
-<li><code>qshell qdownload newfilelist.txt</code> （newfilelist.txt 为下载的配置文档）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/qdownload.md" target="_blank" rel="noopener">https://github.com/qiniu/qshell/blob/master/docs/qdownload.md</a></li>
+<li>通过 qshell batchcopy 到有域名的同区域空间然后再进行 qdownload 下载操作：<a href="https://developer.qiniu.com/kodo/tools/1302/qshell">命令行工具(qshell)</a><ol>
+<li><code>qshell listbucket &lt;原bucket名&gt; list.txt</code> （list 出全部文件）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/listbucket.md">https://github.com/qiniu/qshell/blob/master/docs/listbucket.md</a></li>
+<li><code>cat list.txt | awk &#39;&#123;print $1&#125;&#39; &gt;list_final.txt</code> （ 用awk获取list结果的第一列）</li>
+<li><code>qshell batchcopy &lt;原bucket名&gt; &lt;新bucket名&gt; list_final.txt</code> （复制到新bucket的文件和原bucket文件名一致）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/batchcopy.md">https://github.com/qiniu/qshell/blob/master/docs/batchcopy.md</a></li>
+<li><code>qshell qdownload newfilelist.txt</code> （newfilelist.txt 为下载的配置文档）<br> <a href="https://github.com/qiniu/qshell/blob/master/docs/qdownload.md">https://github.com/qiniu/qshell/blob/master/docs/qdownload.md</a></li>
 </ol>
 </li>
 </ol>
 </li>
 </ol>
 <blockquote>
-<p><a href="https://developer.qiniu.com/kodo/kb/3858/video-of-how-to-use-qrs-tools" target="_blank" rel="noopener">视频教程 – qshell qrsctl qfetch 命令行工具使用</a></p>
+<p><a href="https://developer.qiniu.com/kodo/kb/3858/video-of-how-to-use-qrs-tools">视频教程 – qshell qrsctl qfetch 命令行工具使用</a></p>
 </blockquote>
 <h2 id="准备迁移阿里云-OSS"><a href="#准备迁移阿里云-OSS" class="headerlink" title="准备迁移阿里云 OSS"></a>准备迁移阿里云 OSS</h2><p>上面的解决方法中，要想继续使用七牛云存储作为图床，必须要有个实名认证的域名（解决方法一），然后绑定之</p>
-<p>而我并没有，因此我打算把我的图片对象迁移到 <a href="https://cn.aliyun.com/product/oss" target="_blank" rel="noopener">阿里云 OSS 存储</a></p>
+<p>而我并没有，因此我打算把我的图片对象迁移到 <a href="https://cn.aliyun.com/product/oss">阿里云 OSS 存储</a></p>
 <p>上们的解决方法二、三都可以，但是二非常麻烦，三需要两个存储空间，也就需要对七牛账号进行实名认证</p>
 <p>而我又不想另外实名认证（<del>瞎折腾</del>），因此我用了第二种方法：下载单个图片！[捂脸]</p>
 <h2 id="C-程序下载七牛存储的对象"><a href="#C-程序下载七牛存储的对象" class="headerlink" title="C++ 程序下载七牛存储的对象"></a>C++ 程序下载七牛存储的对象</h2><p>使用 qrsctl 工具只能单个文件下载，为了避免重复的工作，我写了个 C++ 程序解决。</p>
 <h3 id="获取包含所有对象名的-html-文件"><a href="#获取包含所有对象名的-html-文件" class="headerlink" title="获取包含所有对象名的 html 文件"></a>获取包含所有对象名的 html 文件</h3><p>首先进入七牛云要下载的 bucket（存储空间）的 web 界面，把内容管理列表中全部对象显示出来（点底部加载更多直到全部显示），在 Chrome 浏览器 <code>右键</code> - <code>检查</code>，如下图，选中 <code>tbody</code> - <code>右键</code> - <code>Copy</code> - <code>Copy element</code></p>
 <p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuStorageSpaceTbody.png" alt="QiniuStorageSpaceTbody"></p>
 <p>然后把复制到的内容保存成 <code>html.html</code> 文件，放到一个目录下，如我的 <code>D:\code\test\</code>（以下均以此目录为工程目录）</p>
-<h3 id="下载并登录-qrsctl"><a href="#下载并登录-qrsctl" class="headerlink" title="下载并登录 qrsctl"></a>下载并登录 qrsctl</h3><p>下载 <a href="https://developer.qiniu.com/kodo/tools/1300/qrsctl" target="_blank" rel="noopener">命令行辅助工具(qrsctl)</a>，保存到 <code>D:\code\test\</code> 目录，并重命名为 <code>qrsctl.exe</code></p>
+<h3 id="下载并登录-qrsctl"><a href="#下载并登录-qrsctl" class="headerlink" title="下载并登录 qrsctl"></a>下载并登录 qrsctl</h3><p>下载 <a href="https://developer.qiniu.com/kodo/tools/1300/qrsctl">命令行辅助工具(qrsctl)</a>，保存到 <code>D:\code\test\</code> 目录，并重命名为 <code>qrsctl.exe</code></p>
 <p>在 <code>D:\code\test\</code> 目录的 CMD 或 PowerShell 中输入如下命令登录你的七牛账号</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\qrsctl.exe login huihut@outlook.com 123   # 假设密码为 123</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\qrsctl.exe login huihut@outlook.com 123   # 假设密码为 123</span><br></pre></td></tr></table></figure>
+
 <h3 id="编写批量下载程序"><a href="#编写批量下载程序" class="headerlink" title="编写批量下载程序"></a>编写批量下载程序</h3><p>在 <code>D:\code\test\</code> 下创建个 <code>QrsctlGet.cpp</code>，把下面 C++ 代码保存到刚创建的文件，修改存储空间名为你的存储空间名的名字（本文为 <code>temp</code>），用 <code>VS Code</code> 或其他工具编译运行，七牛存储的文件即会下载到同目录下。</p>
-<p>Github 仓库：<a href="https://github.com/huihut/QrsctlGet" target="_blank" rel="noopener">huihut/QrsctlGet</a>（有 <code>QrsctlGet.Cpp</code>、<code>qrsctl.exe</code>、<code>.vscode环境</code>）</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//==============================================================</span></span><br><span class="line"><span class="comment">//  作者：huihut</span></span><br><span class="line"><span class="comment">//  邮箱：huihut@outlook.com</span></span><br><span class="line"><span class="comment">//  时间：2018-11-08 14:28:00</span></span><br><span class="line"><span class="comment">//  说明：匹配 HTML 的七牛云存储的文件名，并使用 qrsctl 下载文件</span></span><br><span class="line"><span class="comment">//==============================================================</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;regex&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 存储空间名【需要修改为你的存储空间名】</span></span><br><span class="line">	<span class="built_in">string</span> bucket = <span class="string">"temp"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打开 html 文件</span></span><br><span class="line">	ifstream fhtml;</span><br><span class="line">	fhtml.open(<span class="string">"html.html"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 统计下载的文件对象数</span></span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (fhtml)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// tbody 里面符合 reg 的奇数为文件对象，偶数是文件类型，因此只取奇数匹配项</span></span><br><span class="line">		<span class="keyword">bool</span> isObj = <span class="literal">true</span>;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">stringstream</span> buffer;</span><br><span class="line">		buffer &lt;&lt; fhtml.rdbuf();</span><br><span class="line">		<span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">contents</span><span class="params">(buffer.str())</span></span>;</span><br><span class="line">		<span class="built_in">std</span>::smatch match;</span><br><span class="line">		<span class="built_in">std</span>::<span class="function">regex <span class="title">reg</span><span class="params">(<span class="string">"\\b(edit-word ng-binding\"&gt;)([^&lt;]*)"</span>)</span></span>;</span><br><span class="line">		<span class="keyword">while</span> (<span class="built_in">std</span>::regex_search(contents, match, reg)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (isObj)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 匹配到的文件对象</span></span><br><span class="line">				<span class="built_in">string</span> objfile = match.format(<span class="string">"$2"</span>);</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"Matched "</span> + objfile &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 合成下载命令</span></span><br><span class="line">				<span class="built_in">string</span> command = <span class="string">"qrsctl.exe get "</span> + bucket + <span class="string">" "</span> + objfile + <span class="string">" ./"</span> + objfile;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 下载文件</span></span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"Download "</span> + objfile + <span class="string">"..."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				system(command.c_str());</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 文件个数加一</span></span><br><span class="line">				num++;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 下一个非文件对象</span></span><br><span class="line">				isObj = <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 下一个是文件对象</span></span><br><span class="line">				isObj = <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			contents = match.suffix().str();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Failed to read html file!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		system(<span class="string">"pause"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Downloaded "</span> + to_string(num) + <span class="string">" files."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Github 仓库：<a href="https://github.com/huihut/QrsctlGet">huihut&#x2F;QrsctlGet</a>（有 <code>QrsctlGet.Cpp</code>、<code>qrsctl.exe</code>、<code>.vscode环境</code>）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//==============================================================</span></span><br><span class="line"><span class="comment">//  作者：huihut</span></span><br><span class="line"><span class="comment">//  邮箱：huihut@outlook.com</span></span><br><span class="line"><span class="comment">//  时间：2018-11-08 14:28:00</span></span><br><span class="line"><span class="comment">//  说明：匹配 HTML 的七牛云存储的文件名，并使用 qrsctl 下载文件</span></span><br><span class="line"><span class="comment">//==============================================================</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;regex&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 存储空间名【需要修改为你的存储空间名】</span></span><br><span class="line">	string bucket = <span class="string">&quot;temp&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打开 html 文件</span></span><br><span class="line">	ifstream fhtml;</span><br><span class="line">	fhtml.<span class="built_in">open</span>(<span class="string">&quot;html.html&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 统计下载的文件对象数</span></span><br><span class="line">	<span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (fhtml)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// tbody 里面符合 reg 的奇数为文件对象，偶数是文件类型，因此只取奇数匹配项</span></span><br><span class="line">		<span class="type">bool</span> isObj = <span class="literal">true</span>;</span><br><span class="line">		std::stringstream buffer;</span><br><span class="line">		buffer &lt;&lt; fhtml.<span class="built_in">rdbuf</span>();</span><br><span class="line">		<span class="function">std::string <span class="title">contents</span><span class="params">(buffer.str())</span></span>;</span><br><span class="line">		std::smatch match;</span><br><span class="line">		<span class="function">std::regex <span class="title">reg</span><span class="params">(<span class="string">&quot;\\b(edit-word ng-binding\&quot;&gt;)([^&lt;]*)&quot;</span>)</span></span>;</span><br><span class="line">		<span class="keyword">while</span> (std::<span class="built_in">regex_search</span>(contents, match, reg)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (isObj)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 匹配到的文件对象</span></span><br><span class="line">				string objfile = match.format(<span class="string">&quot;$2&quot;</span>);</span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;Matched &quot;</span> + objfile &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 合成下载命令</span></span><br><span class="line">				string command = <span class="string">&quot;qrsctl.exe get &quot;</span> + bucket + <span class="string">&quot; &quot;</span> + objfile + <span class="string">&quot; ./&quot;</span> + objfile;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 下载文件</span></span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;Download &quot;</span> + objfile + <span class="string">&quot;...&quot;</span> &lt;&lt; endl;</span><br><span class="line">				<span class="built_in">system</span>(command.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 文件个数加一</span></span><br><span class="line">				num++;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 下一个非文件对象</span></span><br><span class="line">				isObj = <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 下一个是文件对象</span></span><br><span class="line">				isObj = <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			contents = match.<span class="built_in">suffix</span>().<span class="built_in">str</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		cerr &lt;&lt; <span class="string">&quot;Failed to read html file!&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Downloaded &quot;</span> + <span class="built_in">to_string</span>(num) + <span class="string">&quot; files.&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/QiniuQrsctlDownload.png" alt="QiniuQrsctlDownload"></p>
-<h2 id="迁移阿里云-OSS"><a href="#迁移阿里云-OSS" class="headerlink" title="迁移阿里云 OSS"></a>迁移阿里云 OSS</h2><p>在 <a href="https://cn.aliyun.com/product/oss" target="_blank" rel="noopener">阿里云 OSS 存储</a> 创建阿里云账号，并在 OSS 中新建 Bucket，其中读写权限选中公共读（public-read），以便能在博文中读取</p>
-<p>把上面下载的图片上传到阿里云 OSS，可以使用客户端上传下载：<a href="https://github.com/aliyun/oss-browser" target="_blank" rel="noopener">aliyun/oss-browser</a></p>
+<h2 id="迁移阿里云-OSS"><a href="#迁移阿里云-OSS" class="headerlink" title="迁移阿里云 OSS"></a>迁移阿里云 OSS</h2><p>在 <a href="https://cn.aliyun.com/product/oss">阿里云 OSS 存储</a> 创建阿里云账号，并在 OSS 中新建 Bucket，其中读写权限选中公共读（public-read），以便能在博文中读取</p>
+<p>把上面下载的图片上传到阿里云 OSS，可以使用客户端上传下载：<a href="https://github.com/aliyun/oss-browser">aliyun&#x2F;oss-browser</a></p>
 <p>然后获取外链，批量修改我的博文，把所有七牛云链接改为阿里云就好了</p>
 
       
@@ -583,10 +574,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -605,7 +596,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -615,10 +606,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -696,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找回图片对象"><span class="nav-number">2.</span> <span class="nav-text">找回图片对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备迁移阿里云-OSS"><span class="nav-number">3.</span> <span class="nav-text">准备迁移阿里云 OSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-程序下载七牛存储的对象"><span class="nav-number">4.</span> <span class="nav-text">C++ 程序下载七牛存储的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取包含所有对象名的-html-文件"><span class="nav-number">4.1.</span> <span class="nav-text">获取包含所有对象名的 html 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并登录-qrsctl"><span class="nav-number">4.2.</span> <span class="nav-text">下载并登录 qrsctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写批量下载程序"><span class="nav-number">4.3.</span> <span class="nav-text">编写批量下载程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移阿里云-OSS"><span class="nav-number">5.</span> <span class="nav-text">迁移阿里云 OSS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%9B%9E%E5%9B%BE%E7%89%87%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">找回图片对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E8%BF%81%E7%A7%BB%E9%98%BF%E9%87%8C%E4%BA%91-OSS"><span class="nav-number">3.</span> <span class="nav-text">准备迁移阿里云 OSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E7%A8%8B%E5%BA%8F%E4%B8%8B%E8%BD%BD%E4%B8%83%E7%89%9B%E5%AD%98%E5%82%A8%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">C++ 程序下载七牛存储的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8C%85%E5%90%AB%E6%89%80%E6%9C%89%E5%AF%B9%E8%B1%A1%E5%90%8D%E7%9A%84-html-%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">获取包含所有对象名的 html 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E7%99%BB%E5%BD%95-qrsctl"><span class="nav-number">4.2.</span> <span class="nav-text">下载并登录 qrsctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.3.</span> <span class="nav-text">编写批量下载程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E9%98%BF%E9%87%8C%E4%BA%91-OSS"><span class="nav-number">5.</span> <span class="nav-text">迁移阿里云 OSS</span></a></li></ol></div>
             
 
           </div>
@@ -719,7 +710,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -994,5 +985,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

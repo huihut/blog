@@ -80,21 +80,18 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="前言本文主要聊聊一加3T卡刷第三方Rom，包括刷 TWRP 的 Recovery，卡刷流程，初始化，安装及使用Xposed框架和Magisk框架。 选择Rom刷机前要选择要刷的系统，即选择Rom。 Rom无非官方Rom或者第三方Rom。 官方Rom有氢OS(H2OS)、氧OS(OxygenOS)。第三方Rom就很多了，如MIUI、Flyme、CM、AICP、LineageOS等等。 官方Rom一般">
-<meta name="keywords" content="刷机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一加3T的刷机流程及玩机一些事">
 <meta property="og:url" content="https://blog.huihut.com/2017/08/27/Oneplus3TBrushAndPlay/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="前言本文主要聊聊一加3T卡刷第三方Rom，包括刷 TWRP 的 Recovery，卡刷流程，初始化，安装及使用Xposed框架和Magisk框架。 选择Rom刷机前要选择要刷的系统，即选择Rom。 Rom无非官方Rom或者第三方Rom。 官方Rom有氢OS(H2OS)、氧OS(OxygenOS)。第三方Rom就很多了，如MIUI、Flyme、CM、AICP、LineageOS等等。 官方Rom一般">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OnePixel.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/15secondsADBInstaller.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OnePixelInit.png">
@@ -102,10 +99,11 @@
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/XposedUnOfficial.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/XposedModuleDownload.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/PixelLauncherTransparentDock.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2017-08-27T05:54:57.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="刷机">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一加3T的刷机流程及玩机一些事">
-<meta name="twitter:description" content="前言本文主要聊聊一加3T卡刷第三方Rom，包括刷 TWRP 的 Recovery，卡刷流程，初始化，安装及使用Xposed框架和Magisk框架。 选择Rom刷机前要选择要刷的系统，即选择Rom。 Rom无非官方Rom或者第三方Rom。 官方Rom有氢OS(H2OS)、氧OS(OxygenOS)。第三方Rom就很多了，如MIUI、Flyme、CM、AICP、LineageOS等等。 官方Rom一般">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OnePixel.png">
 
 
@@ -113,9 +111,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -148,7 +146,7 @@
   });
 </script>
   <title> 一加3T的刷机流程及玩机一些事 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -156,15 +154,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -322,7 +311,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/08/27/Oneplus3TBrushAndPlay/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -420,11 +409,12 @@
 <p>官方Rom一般比较稳定、适配性好、能接收推送；第三方Rom一般自定义程度高、可玩性高。</p>
 <p>若是不想折腾还是官方Rom好；喜欢尝鲜可以试试第三方Rom。</p>
 <h3 id="官方Rom"><a href="#官方Rom" class="headerlink" title="官方Rom"></a>官方Rom</h3><p>一加官方Rom有氢OS(H2OS)和氧OS(OxygenOS)。氢OS(H2OS)主要面向国内，本土化定制；氧OS(OxygenOS)主要面向国外，预装谷歌服务。官方Rom无论线刷还是卡刷都比较简单方便，在此就不做过多介绍。</p>
-<a id="more"></a>
-<h4 id="氢OS-H2OS"><a href="#氢OS-H2OS" class="headerlink" title="氢OS(H2OS)"></a>氢OS(H2OS)</h4><p>下载：<a href="http://www.h2os.com/download" target="_blank" rel="noopener">H2OS官方下载</a></p>
-<h4 id="氧OS-OxygenOS"><a href="#氧OS-OxygenOS" class="headerlink" title="氧OS(OxygenOS)"></a>氧OS(OxygenOS)</h4><p>下载：<a href="http://downloads.oneplus.net/" target="_blank" rel="noopener">OxygenOS官方下载</a></p>
+<span id="more"></span>
+
+<h4 id="氢OS-H2OS"><a href="#氢OS-H2OS" class="headerlink" title="氢OS(H2OS)"></a>氢OS(H2OS)</h4><p>下载：<a href="http://www.h2os.com/download">H2OS官方下载</a></p>
+<h4 id="氧OS-OxygenOS"><a href="#氧OS-OxygenOS" class="headerlink" title="氧OS(OxygenOS)"></a>氧OS(OxygenOS)</h4><p>下载：<a href="http://downloads.oneplus.net/">OxygenOS官方下载</a></p>
 <h3 id="第三方Rom"><a href="#第三方Rom" class="headerlink" title="第三方Rom"></a>第三方Rom</h3><p>本文主要聊聊一加3T卡刷第三方Rom。</p>
-<p>第三方Rom在各大玩机论坛/Rom平台都能看到，如</p>
+<p>第三方Rom在各大玩机论坛&#x2F;Rom平台都能看到，如</p>
 <ul>
 <li>官方论坛（推荐）</li>
 <li>xda-developers（推荐）</li>
@@ -434,48 +424,51 @@
 </ul>
 <p>如一加3T的</p>
 <ul>
-<li><a href="http://www.oneplusbbs.com/forum-116-1.html" target="_blank" rel="noopener">一加社区 . 一加手机3T</a></li>
-<li><a href="https://forum.xda-developers.com/oneplus-3t/development#romList" target="_blank" rel="noopener">xda-developers . OnePlus 3T ROMs</a></li>
+<li><a href="http://www.oneplusbbs.com/forum-116-1.html">一加社区 . 一加手机3T</a></li>
+<li><a href="https://forum.xda-developers.com/oneplus-3t/development#romList">xda-developers . OnePlus 3T ROMs</a></li>
 </ul>
 <p>我选了个<code>OnePixel</code>，这是个基于氧OS的类Pixel版Rom，喜欢原生的朋友可以给你的爱机食用：</p>
-<p><a href="https://forum.xda-developers.com/oneplus-3t/development/onepixel-oos-based-custom-rom-pixel-t3650386" target="_blank" rel="noopener">[ROM][EAS][DEODEXED][OB13] OnePixel, OOS Based Custom Rom with Pixel Experience</a></p>
+<p><a href="https://forum.xda-developers.com/oneplus-3t/development/onepixel-oos-based-custom-rom-pixel-t3650386">[ROM][EAS][DEODEXED][OB13] OnePixel, OOS Based Custom Rom with Pixel Experience</a></p>
 <p>效果图</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OnePixel.png" alt="OnePixel"></p>
 <h2 id="安装-TWRP"><a href="#安装-TWRP" class="headerlink" title="安装 TWRP"></a>安装 TWRP</h2><p>因为一加官方 Recovery 功能较弱，所以先刷个 TWRP Recovery。</p>
 <h3 id="下载-TWRP"><a href="#下载-TWRP" class="headerlink" title="下载 TWRP"></a>下载 TWRP</h3><p>选择自己机型的TWRP下载</p>
-<p><a href="https://twrp.me/Devices/" target="_blank" rel="noopener">https://twrp.me/Devices/</a></p>
+<p><a href="https://twrp.me/Devices/">https://twrp.me/Devices/</a></p>
 <p>如我的一加3T下载的TWRP文件为：</p>
 <pre><code>twrp-3.1.1-2-oneplus3t.img
-</code></pre><h3 id="安装-ADB"><a href="#安装-ADB" class="headerlink" title="安装 ADB"></a>安装 ADB</h3><p>安装 ADB 可以使用一些一键安装工具（如：15秒ADB安装器）或者下载官方 Android SDK 的 platform-tools</p>
+</code></pre>
+<h3 id="安装-ADB"><a href="#安装-ADB" class="headerlink" title="安装 ADB"></a>安装 ADB</h3><p>安装 ADB 可以使用一些一键安装工具（如：15秒ADB安装器）或者下载官方 Android SDK 的 platform-tools</p>
 <h4 id="启用USB调试"><a href="#启用USB调试" class="headerlink" title="启用USB调试"></a>启用USB调试</h4><p>不管哪种方式都需要首先将手机连上电脑，启用USB调试。</p>
 <p>设置 &gt; 开发人员选项 &gt; USB调试</p>
 <h4 id="使用15秒ADB安装器安装"><a href="#使用15秒ADB安装器安装" class="headerlink" title="使用15秒ADB安装器安装"></a>使用15秒ADB安装器安装</h4><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/15secondsADBInstaller.png" alt="15 seconds ADB Installer"></p>
-<p>作者发的帖子: <a href="https://forum.xda-developers.com/showthread.php?p=48915118#post48915118" target="_blank" rel="noopener">[TOOL] [WINDOWS] ADB, Fastboot and Drivers - 15 seconds ADB Installer v1.4.3</a></p>
+<p>作者发的帖子: <a href="https://forum.xda-developers.com/showthread.php?p=48915118#post48915118">[TOOL] [WINDOWS] ADB, Fastboot and Drivers - 15 seconds ADB Installer v1.4.3</a></p>
 <p>国内百度云盘下载：</p>
-<p>链接：<a href="http://pan.baidu.com/s/1c1FWmTM" target="_blank" rel="noopener">http://pan.baidu.com/s/1c1FWmTM</a> 密码：vg0g</p>
+<p>链接：<a href="http://pan.baidu.com/s/1c1FWmTM">http://pan.baidu.com/s/1c1FWmTM</a> 密码：vg0g</p>
 <h4 id="使用-Android-SDK-的-platform-tools-安装"><a href="#使用-Android-SDK-的-platform-tools-安装" class="headerlink" title="使用 Android SDK 的 platform-tools 安装"></a>使用 Android SDK 的 platform-tools 安装</h4><h5 id="下载-platform-tools"><a href="#下载-platform-tools" class="headerlink" title="下载 platform-tools"></a>下载 platform-tools</h5><h6 id="Windows版"><a href="#Windows版" class="headerlink" title="Windows版"></a>Windows版</h6><ul>
-<li>官方下载：<a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip" target="_blank" rel="noopener">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a></li>
-<li>网盘下载链接：<a href="http://pan.baidu.com/s/1eRG8gXs" target="_blank" rel="noopener">http://pan.baidu.com/s/1eRG8gXs</a> 密码：72ac</li>
+<li>官方下载：<a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a></li>
+<li>网盘下载链接：<a href="http://pan.baidu.com/s/1eRG8gXs">http://pan.baidu.com/s/1eRG8gXs</a> 密码：72ac</li>
 </ul>
 <h6 id="MacOS版"><a href="#MacOS版" class="headerlink" title="MacOS版"></a>MacOS版</h6><ul>
-<li>官方下载：<a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip" target="_blank" rel="noopener">https://dl.google.com/android/repository/platform-tools-latest-darwin.zip</a></li>
-<li>网盘下载链接：<a href="http://pan.baidu.com/s/1pLQFvrt" target="_blank" rel="noopener">http://pan.baidu.com/s/1pLQFvrt</a> 密码：7qav</li>
+<li>官方下载：<a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip">https://dl.google.com/android/repository/platform-tools-latest-darwin.zip</a></li>
+<li>网盘下载链接：<a href="http://pan.baidu.com/s/1pLQFvrt">http://pan.baidu.com/s/1pLQFvrt</a> 密码：7qav</li>
 </ul>
 <h6 id="Linux版"><a href="#Linux版" class="headerlink" title="Linux版"></a>Linux版</h6><ul>
-<li>官方下载：<a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip" target="_blank" rel="noopener">https://dl.google.com/android/repository/platform-tools-latest-linux.zip</a></li>
-<li>网盘下载链接：<a href="http://pan.baidu.com/s/1nu8mvrF" target="_blank" rel="noopener">http://pan.baidu.com/s/1nu8mvrF</a> 密码：giug</li>
+<li>官方下载：<a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip">https://dl.google.com/android/repository/platform-tools-latest-linux.zip</a></li>
+<li>网盘下载链接：<a href="http://pan.baidu.com/s/1nu8mvrF">http://pan.baidu.com/s/1nu8mvrF</a> 密码：giug</li>
 </ul>
 <h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>解压，进入 platform-tools 目录</p>
 <p>把<code>twrp-3.1.1-2-oneplus3t.img</code>文件复制到<code>platform-tools</code>目录下，终端使用</p>
 <pre><code>adb reboot bootloader
-</code></pre><p>进入bootloader模式，输入命令</p>
+</code></pre>
+<p>进入bootloader模式，输入命令</p>
 <pre><code>fastboot flash recovery twrp-3.1.1-2-oneplus3t.img
-</code></pre><p>进行安装TWRP。</p>
+</code></pre>
+<p>进行安装TWRP。</p>
 <h2 id="刷机（卡刷）"><a href="#刷机（卡刷）" class="headerlink" title="刷机（卡刷）"></a>刷机（卡刷）</h2><h3 id="Wipe-清理系统和缓存"><a href="#Wipe-清理系统和缓存" class="headerlink" title="Wipe - 清理系统和缓存"></a>Wipe - 清理系统和缓存</h3><p>进入TWRP后，首先Wipe</p>
 <p>进入Wipe - Advanced Wipe</p>
 <p>勾选</p>
 <ul>
-<li>Dalvik/ART Cache</li>
+<li>Dalvik&#x2F;ART Cache</li>
 <li>Cache</li>
 <li>Data</li>
 <li>System</li>
@@ -488,27 +481,28 @@
 </ul>
 <h3 id="Install-安装Rom"><a href="#Install-安装Rom" class="headerlink" title="Install - 安装Rom"></a>Install - 安装Rom</h3><p>连上电脑在TWRP模式下，把下载的Rom拷贝到Internal Storage，然后在<code>Install</code>里面找到你的Rom，如</p>
 <pre><code>OnePixel_OB13_oneplus3t-7.1.1rc.zip
-</code></pre><p>划过<code>Swipe to confirm Flash</code>进行安装，装好后重启进入系统。</p>
+</code></pre>
+<p>划过<code>Swipe to confirm Flash</code>进行安装，装好后重启进入系统。</p>
 <h2 id="初始化设置"><a href="#初始化设置" class="headerlink" title="初始化设置"></a>初始化设置</h2><p>进入系统后进行初始化设置</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OnePixelInit.png" alt="OnePixelInit"></p>
-<p>注意：WiFi/数据连接没代理不要连接，断网设置，不然会一直连接不上Google而卡在那里的。</p>
+<p>注意：WiFi&#x2F;数据连接没代理不要连接，断网设置，不然会一直连接不上Google而卡在那里的。</p>
 <p>初始化好之后设置了些东西就是这样子啦</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OnePixelInstalled.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/OnePixelInstalled.jpg"></p>
 <h2 id="Xposed框架"><a href="#Xposed框架" class="headerlink" title="Xposed框架"></a>Xposed框架</h2><p>大名鼎鼎的Xposed框架，可以通过添加各种模块实现各种功能，不过官方版现在才更新到适配Android6.0</p>
-<p>官方链接：<a href="http://repo.xposed.info/module/de.robv.android.xposed.installer" target="_blank" rel="noopener">Xposed Installer</a></p>
+<p>官方链接：<a href="http://repo.xposed.info/module/de.robv.android.xposed.installer">Xposed Installer</a></p>
 <p>好在XDA社区有 Material Design 版的Xposed框架下载器（推荐）</p>
-<p><a href="https://forum.xda-developers.com/devdb/project/?id=13191#downloads" target="_blank" rel="noopener">xda-developers . Material Design Xposed Installer</a></p>
+<p><a href="https://forum.xda-developers.com/devdb/project/?id=13191#downloads">xda-developers . Material Design Xposed Installer</a></p>
 <p>安装 Material Design Xposed Installer 后在 UnOfficial 这栏选择适合自己手机型号的Xposed框架下载</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/XposedUnOfficial.jpg" alt="XposedUnOfficial"></p>
 <p>装好Xposed框架后，下载Xposed模块</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/XposedModuleDownload.jpg" alt="XposedModuleDownload"></p>
 <p>知乎上有些好的Xposed模块推荐</p>
-<p><a href="https://www.zhihu.com/question/22063862/answer/95339323" target="_blank" rel="noopener">知乎 . Android 系统上的 Xposed 框架中都有哪些值得推荐的模块？</a></p>
+<p><a href="https://www.zhihu.com/question/22063862/answer/95339323">知乎 . Android 系统上的 Xposed 框架中都有哪些值得推荐的模块？</a></p>
 <h2 id="Magisk框架"><a href="#Magisk框架" class="headerlink" title="Magisk框架"></a>Magisk框架</h2><p>Magisk是类似xposed的第三方应用接口，但是暂时模块较少。</p>
 <p>Magisk的介绍、下载、安装</p>
-<p><a href="https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445" target="_blank" rel="noopener">[2017.7.20] Magisk v13.3 - Root &amp; Universal Systemless Interface [Android 5.0+]</a></p>
+<p><a href="https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445">[2017.7.20] Magisk v13.3 - Root &amp; Universal Systemless Interface [Android 5.0+]</a></p>
 <p>下面是安利Magisk的帖子，里面有各种模块介绍：</p>
-<p><a href="http://www.oneplusbbs.com/thread-3302341-1-1.html" target="_blank" rel="noopener">[教程] (搬运XDA)magisk框架教程以及模块-xposed的替代品</a></p>
+<p><a href="http://www.oneplusbbs.com/thread-3302341-1-1.html">[教程] (搬运XDA)magisk框架教程以及模块-xposed的替代品</a></p>
 <p>我因为OnePixel Rom自带Magisk，也就顺便装了个<code>Pixel Launcher transparent dock</code>，让pixel luncher底栏的颜色变透明。</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/PixelLauncherTransparentDock.jpg" alt="PixelLauncherTransparentDock"></p>
 <p>效果如上面初始化设置那里的截图。</p>
@@ -556,7 +550,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/刷机/" rel="tag"># 刷机</a>
+            <a href="/tags/%E5%88%B7%E6%9C%BA/" rel="tag"># 刷机</a>
           
         </div>
       
@@ -642,10 +636,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -664,7 +658,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -674,10 +668,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -755,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择Rom"><span class="nav-number">2.</span> <span class="nav-text">选择Rom</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方Rom"><span class="nav-number">2.1.</span> <span class="nav-text">官方Rom</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#氢OS-H2OS"><span class="nav-number">2.1.1.</span> <span class="nav-text">氢OS(H2OS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#氧OS-OxygenOS"><span class="nav-number">2.1.2.</span> <span class="nav-text">氧OS(OxygenOS)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方Rom"><span class="nav-number">2.2.</span> <span class="nav-text">第三方Rom</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-TWRP"><span class="nav-number">3.</span> <span class="nav-text">安装 TWRP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载-TWRP"><span class="nav-number">3.1.</span> <span class="nav-text">下载 TWRP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-ADB"><span class="nav-number">3.2.</span> <span class="nav-text">安装 ADB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启用USB调试"><span class="nav-number">3.2.1.</span> <span class="nav-text">启用USB调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用15秒ADB安装器安装"><span class="nav-number">3.2.2.</span> <span class="nav-text">使用15秒ADB安装器安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-Android-SDK-的-platform-tools-安装"><span class="nav-number">3.2.3.</span> <span class="nav-text">使用 Android SDK 的 platform-tools 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下载-platform-tools"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">下载 platform-tools</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Windows版"><span class="nav-number">3.2.3.1.1.</span> <span class="nav-text">Windows版</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MacOS版"><span class="nav-number">3.2.3.1.2.</span> <span class="nav-text">MacOS版</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Linux版"><span class="nav-number">3.2.3.1.3.</span> <span class="nav-text">Linux版</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">安装</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#刷机（卡刷）"><span class="nav-number">4.</span> <span class="nav-text">刷机（卡刷）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wipe-清理系统和缓存"><span class="nav-number">4.1.</span> <span class="nav-text">Wipe - 清理系统和缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-安装Rom"><span class="nav-number">4.2.</span> <span class="nav-text">Install - 安装Rom</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化设置"><span class="nav-number">5.</span> <span class="nav-text">初始化设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xposed框架"><span class="nav-number">6.</span> <span class="nav-text">Xposed框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Magisk框架"><span class="nav-number">7.</span> <span class="nav-text">Magisk框架</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9Rom"><span class="nav-number">2.</span> <span class="nav-text">选择Rom</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9Rom"><span class="nav-number">2.1.</span> <span class="nav-text">官方Rom</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%A2OS-H2OS"><span class="nav-number">2.1.1.</span> <span class="nav-text">氢OS(H2OS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%A7OS-OxygenOS"><span class="nav-number">2.1.2.</span> <span class="nav-text">氧OS(OxygenOS)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9Rom"><span class="nav-number">2.2.</span> <span class="nav-text">第三方Rom</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-TWRP"><span class="nav-number">3.</span> <span class="nav-text">安装 TWRP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-TWRP"><span class="nav-number">3.1.</span> <span class="nav-text">下载 TWRP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ADB"><span class="nav-number">3.2.</span> <span class="nav-text">安装 ADB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8USB%E8%B0%83%E8%AF%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">启用USB调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A815%E7%A7%92ADB%E5%AE%89%E8%A3%85%E5%99%A8%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.2.</span> <span class="nav-text">使用15秒ADB安装器安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Android-SDK-%E7%9A%84-platform-tools-%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.3.</span> <span class="nav-text">使用 Android SDK 的 platform-tools 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-platform-tools"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">下载 platform-tools</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Windows%E7%89%88"><span class="nav-number">3.2.3.1.1.</span> <span class="nav-text">Windows版</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MacOS%E7%89%88"><span class="nav-number">3.2.3.1.2.</span> <span class="nav-text">MacOS版</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Linux%E7%89%88"><span class="nav-number">3.2.3.1.3.</span> <span class="nav-text">Linux版</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">安装</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B7%E6%9C%BA%EF%BC%88%E5%8D%A1%E5%88%B7%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">刷机（卡刷）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wipe-%E6%B8%85%E7%90%86%E7%B3%BB%E7%BB%9F%E5%92%8C%E7%BC%93%E5%AD%98"><span class="nav-number">4.1.</span> <span class="nav-text">Wipe - 清理系统和缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-%E5%AE%89%E8%A3%85Rom"><span class="nav-number">4.2.</span> <span class="nav-text">Install - 安装Rom</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">初始化设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xposed%E6%A1%86%E6%9E%B6"><span class="nav-number">6.</span> <span class="nav-text">Xposed框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Magisk%E6%A1%86%E6%9E%B6"><span class="nav-number">7.</span> <span class="nav-text">Magisk框架</span></a></li></ol></div>
             
 
           </div>
@@ -778,7 +772,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1053,5 +1047,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

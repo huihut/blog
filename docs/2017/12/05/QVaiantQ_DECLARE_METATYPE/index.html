@@ -80,26 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="报错123E:\Qt\Qt5.9.3\5.9.3\mingw53_32\include\QtCore\qglobal.h:738: error: static assertion failed: Type is not registered, please use the Q_DECLARE_METATYPE macro to make it known to Qt&amp;apos;s meta-obj">
-<meta name="keywords" content="QT">
+<meta name="description" content="报错123E:\Qt\Qt5.9.3\5.9.3\mingw53_32\include\QtCore\qglobal.h:738: error: static assertion failed: Type is not registered, please use the Q_DECLARE_METATYPE macro to make it known to Qt&#x27;s meta-obj">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qt的QVaiant中使用非QMetaType类型缺少Q_DECLARE_METATYPE宏定义错误">
 <meta property="og:url" content="https://blog.huihut.com/2017/12/05/QVaiantQ_DECLARE_METATYPE/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="报错123E:\Qt\Qt5.9.3\5.9.3\mingw53_32\include\QtCore\qglobal.h:738: error: static assertion failed: Type is not registered, please use the Q_DECLARE_METATYPE macro to make it known to Qt&amp;apos;s meta-obj">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="报错123E:\Qt\Qt5.9.3\5.9.3\mingw53_32\include\QtCore\qglobal.h:738: error: static assertion failed: Type is not registered, please use the Q_DECLARE_METATYPE macro to make it known to Qt&#x27;s meta-obj">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Q_DECLARE_METATYPE.png">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:published_time" content="2017-12-05T10:08:47.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="QT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qt的QVaiant中使用非QMetaType类型缺少Q_DECLARE_METATYPE宏定义错误">
-<meta name="twitter:description" content="报错123E:\Qt\Qt5.9.3\5.9.3\mingw53_32\include\QtCore\qglobal.h:738: error: static assertion failed: Type is not registered, please use the Q_DECLARE_METATYPE macro to make it known to Qt&amp;apos;s meta-obj">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Q_DECLARE_METATYPE.png">
 
 
@@ -107,9 +105,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -142,7 +140,7 @@
   });
 </script>
   <title> Qt的QVaiant中使用非QMetaType类型缺少Q_DECLARE_METATYPE宏定义错误 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -150,15 +148,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -316,7 +305,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/12/05/QVaiantQ_DECLARE_METATYPE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -407,13 +396,17 @@
       
 
       
-        <h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:\Qt\Qt5.9.3\5.9.3\mingw53_32\include\QtCore\qglobal.h:738: error: static assertion failed: Type is not registered, please use the Q_DECLARE_METATYPE macro to make it known to Qt&apos;s meta-object system</span><br><span class="line"> #define Q_STATIC_ASSERT_X(Condition, Message) static_assert(bool(Condition), Message)</span><br><span class="line">                                               ^</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Q_DECLARE_METATYPE.png" alt=""></p>
-<h2 id="报错代码"><a href="#报错代码" class="headerlink" title="报错代码"></a>报错代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const QCameraInfo &amp;cameraInfo</span><br><span class="line">...</span><br><span class="line">QVariant::fromValue(cameraInfo)</span><br></pre></td></tr></table></figure>
+        <h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:\Qt\Qt5.9.3\5.9.3\mingw53_32\include\QtCore\qglobal.h:738: error: static assertion failed: Type is not registered, please use the Q_DECLARE_METATYPE macro to make it known to Qt&#x27;s meta-object system</span><br><span class="line"> #define Q_STATIC_ASSERT_X(Condition, Message) static_assert(bool(Condition), Message)</span><br><span class="line">                                               ^</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Q_DECLARE_METATYPE.png"></p>
+<h2 id="报错代码"><a href="#报错代码" class="headerlink" title="报错代码"></a>报错代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const QCameraInfo &amp;cameraInfo</span><br><span class="line">...</span><br><span class="line">QVariant::fromValue(cameraInfo)</span><br></pre></td></tr></table></figure>
+
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>QVaiant 不能识别自定义类型和其他非 QMetaType 内置类型， 而 QCameraInfo 是非 QMetaType 内置类型，因此使用 <code>QVariant::fromValue(cameraInfo)</code> 之前，需要使用 <code>Q_DECLARE_METATYPE</code> 宏对 QCameraInfo 进行声明。</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>在代码中加个宏定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q_DECLARE_METATYPE(QCameraInfo)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q_DECLARE_METATYPE(QCameraInfo)</span><br></pre></td></tr></table></figure>
+
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li>Q_DECLARE_METATYPE<ul>
 <li>如果要使自定义类型或其他非 QMetaType 内置类型在 QVaiant 中使用，必须使用该宏</li>
@@ -427,9 +420,9 @@
 </li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://blog.sina.com.cn/s/blog_640531380100yfei.html" target="_blank" rel="noopener">Q_DECLARE_METATYPE与qRegisterMetaType学习</a></li>
-<li><a href="https://stackoverflow.com/questions/34278017/how-to-use-qvariantfromvalue-with-qstring" target="_blank" rel="noopener">How to use QVariant::fromValue with QString?</a></li>
-<li><a href="http://doc.qt.io/qt-5/qmetatype.html#Q_DECLARE_METATYPE" target="_blank" rel="noopener">QMetaType Class - Q_DECLARE_METATYPE(Type)</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_640531380100yfei.html">Q_DECLARE_METATYPE与qRegisterMetaType学习</a></li>
+<li><a href="https://stackoverflow.com/questions/34278017/how-to-use-qvariantfromvalue-with-qstring">How to use QVariant::fromValue with QString?</a></li>
+<li><a href="http://doc.qt.io/qt-5/qmetatype.html#Q_DECLARE_METATYPE">QMetaType Class - Q_DECLARE_METATYPE(Type)</a></li>
 </ul>
 
       
@@ -561,10 +554,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -583,7 +576,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -593,10 +586,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -674,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#报错"><span class="nav-number">1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报错代码"><span class="nav-number">2.</span> <span class="nav-text">报错代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">4.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">报错代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">4.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -697,7 +690,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -972,5 +965,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

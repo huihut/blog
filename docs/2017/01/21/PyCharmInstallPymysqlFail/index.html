@@ -80,26 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="问题描述：在PyCharm中新建Web2Py项目后提示没有pymysql，自动安装失败，如图：">
-<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PyCharm自动安装pymysql包失败">
 <meta property="og:url" content="https://blog.huihut.com/2017/01/21/PyCharmInstallPymysqlFail/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="问题描述：在PyCharm中新建Web2Py项目后提示没有pymysql，自动安装失败，如图：">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/pymysqlError.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2017-01-21T13:41:07.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PyCharm自动安装pymysql包失败">
-<meta name="twitter:description" content="问题描述：在PyCharm中新建Web2Py项目后提示没有pymysql，自动安装失败，如图：">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/pymysqlError.jpg">
 
 
@@ -107,9 +105,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -142,7 +140,7 @@
   });
 </script>
   <title> PyCharm自动安装pymysql包失败 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -150,15 +148,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -316,7 +305,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/01/21/PyCharmInstallPymysqlFail/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -408,37 +397,41 @@
 
       
         <h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>在PyCharm中新建Web2Py项目后提示没有pymysql，自动安装失败，如图：  </p>
-<a id="more"></a>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/pymysqlError.jpg" alt="">  </p>
+<span id="more"></span>
+
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/pymysqlError.jpg">  </p>
 <h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><h3 id="1-安装pip"><a href="#1-安装pip" class="headerlink" title="1. 安装pip"></a>1. 安装pip</h3><p>在终端输入</p>
 <pre><code>pip -V 
-</code></pre><p>如果显示版本路径，就说明pip已经安装了<br>如果没有安装pip则需要在终端安装  </p>
+</code></pre>
+<p>如果显示版本路径，就说明pip已经安装了<br>如果没有安装pip则需要在终端安装  </p>
 <p>  ①使用脚本安装pip：</p>
 <ul>
 <li><p>各平台（管理员运行）：  </p>
-<pre><code>python get-pip.py
-</code></pre></li>
+<pre><code>  python get-pip.py
+</code></pre>
+</li>
 </ul>
 <p>②使用包管理器安装pip：</p>
 <ul>
 <li><p>Mac：  </p>
-<pre><code>sudo easy_install pip
-</code></pre></li>
-</ul>
-<ul>
+<pre><code>  sudo easy_install pip
+</code></pre>
+</li>
 <li><p>Debian &amp; Ubuntu:  </p>
-<pre><code>sudo apt-get install python-pip
-</code></pre></li>
-</ul>
-<ul>
+<pre><code>  sudo apt-get install python-pip
+</code></pre>
+</li>
 <li><p>Fedora:    </p>
-<pre><code>sudo yum install python-pip
-</code></pre></li>
+<pre><code>  sudo yum install python-pip
+</code></pre>
+</li>
 </ul>
 <h3 id="2-安装pymysql"><a href="#2-安装pymysql" class="headerlink" title="2. 安装pymysql"></a>2. 安装pymysql</h3><pre><code>pip install pymysql
-</code></pre><h3 id="3-正常情况下以上两步就行了。"><a href="#3-正常情况下以上两步就行了。" class="headerlink" title="3. 正常情况下以上两步就行了。"></a>3. 正常情况下以上两步就行了。</h3><p>然而我的项目中依然提示没有pymysql，结果发现只是Python版本选错了<br>(ノ▼Д▼)ノ<br>我pymysql是安装到Python2.7，而PyCharm项目是用Python2.6<br>所以就到<code>Preferences</code> &gt; <code>Project Interpreter</code>中调成Python2.7就行了，</p>
+</code></pre>
+<h3 id="3-正常情况下以上两步就行了。"><a href="#3-正常情况下以上两步就行了。" class="headerlink" title="3. 正常情况下以上两步就行了。"></a>3. 正常情况下以上两步就行了。</h3><p>然而我的项目中依然提示没有pymysql，结果发现只是Python版本选错了<br>(ノ▼Д▼)ノ<br>我pymysql是安装到Python2.7，而PyCharm项目是用Python2.6<br>所以就到<code>Preferences</code> &gt; <code>Project Interpreter</code>中调成Python2.7就行了，</p>
 <h3 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h3><blockquote>
-<p><a href="http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages" target="_blank" rel="noopener">http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages</a></p>
+<p><a href="http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages">http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages</a></p>
 </blockquote>
 
       
@@ -566,10 +559,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -588,7 +581,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -598,10 +591,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -679,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述："><span class="nav-number">1.</span> <span class="nav-text">问题描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案："><span class="nav-number">2.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装pip"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装pymysql"><span class="nav-number">2.2.</span> <span class="nav-text">2. 安装pymysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-正常情况下以上两步就行了。"><span class="nav-number">2.3.</span> <span class="nav-text">3. 正常情况下以上两步就行了。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thanks"><span class="nav-number">2.4.</span> <span class="nav-text">Thanks</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">问题描述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85pip"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85pymysql"><span class="nav-number">2.2.</span> <span class="nav-text">2. 安装pymysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%AD%A3%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B%E4%BB%A5%E4%B8%8A%E4%B8%A4%E6%AD%A5%E5%B0%B1%E8%A1%8C%E4%BA%86%E3%80%82"><span class="nav-number">2.3.</span> <span class="nav-text">3. 正常情况下以上两步就行了。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thanks"><span class="nav-number">2.4.</span> <span class="nav-text">Thanks</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -702,7 +695,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -977,5 +970,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

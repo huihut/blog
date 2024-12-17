@@ -80,34 +80,32 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="表现1sudo pip install matplotlib 安装 matplotlib 时出现以下错误">
-<meta name="keywords" content="Python">
+<meta name="description" content="表现1sudo pip install matplotlib  安装 matplotlib 时出现以下错误">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python-dev 库缺失导致安装 matplotlib 出错">
 <meta property="og:url" content="https://blog.huihut.com/2018/10/13/MissingPython-devCausesErrorInInstallingMatplotlib/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="表现1sudo pip install matplotlib 安装 matplotlib 时出现以下错误">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="og:description" content="表现1sudo pip install matplotlib  安装 matplotlib 时出现以下错误">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-10-13T03:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python-dev 库缺失导致安装 matplotlib 出错">
-<meta name="twitter:description" content="表现1sudo pip install matplotlib 安装 matplotlib 时出现以下错误">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -140,7 +138,7 @@
   });
 </script>
   <title> python-dev 库缺失导致安装 matplotlib 出错 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -148,15 +146,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -314,7 +303,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/10/13/MissingPython-devCausesErrorInInstallingMatplotlib/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -405,26 +394,29 @@
       
 
       
-        <h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install matplotlib</span><br></pre></td></tr></table></figure>
+        <h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install matplotlib</span><br></pre></td></tr></table></figure>
+
 <p>安装 matplotlib 时出现以下错误</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">Installing collected packages: subprocess32, cycler, backports.functools-lru-cache, pyparsing, kiwisolver, matplotlib</span><br><span class="line">  Running setup.py install for subprocess32 ... error</span><br><span class="line">    Complete output from command /usr/bin/python2 -u -c &quot;import setuptools, tokenize;__file__=&apos;/tmp/pip-install-azXKeu/subprocess32/setup.py&apos;;f=getattr(tokenize, &apos;open&apos;, open)(__file__);code=f.read().replace(&apos;\r\n&apos;, &apos;\n&apos;);f.close();exec(compile(code, __file__, &apos;exec&apos;))&quot; install --record /tmp/pip-record-5SM9_6/install-record.txt --single-version-externally-managed --compile:</span><br><span class="line">    /usr/lib64/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: &apos;python_requires&apos;</span><br><span class="line">      warnings.warn(msg)</span><br><span class="line">    running install</span><br><span class="line">    running build</span><br><span class="line">    running build_py</span><br><span class="line">    creating build</span><br><span class="line">    creating build/lib.linux-x86_64-2.7</span><br><span class="line">    copying subprocess32.py -&gt; build/lib.linux-x86_64-2.7</span><br><span class="line">    running build_ext</span><br><span class="line">    running build_configure</span><br><span class="line">    checking for gcc... gcc</span><br><span class="line">    checking whether the C compiler works... yes</span><br><span class="line">    checking for C compiler default output file name... a.out</span><br><span class="line">    checking for suffix of executables...</span><br><span class="line">    checking whether we are cross compiling... no</span><br><span class="line">    checking for suffix of object files... o</span><br><span class="line">    checking whether we are using the GNU C compiler... yes</span><br><span class="line">    checking whether gcc accepts -g... yes</span><br><span class="line">    checking for gcc option to accept ISO C89... none needed</span><br><span class="line">    checking how to run the C preprocessor... gcc -E</span><br><span class="line">    checking for grep that handles long lines and -e... /bin/grep</span><br><span class="line">    checking for egrep... /bin/grep -E</span><br><span class="line">    checking for ANSI C header files... yes</span><br><span class="line">    checking for sys/types.h... yes</span><br><span class="line">    checking for sys/stat.h... yes</span><br><span class="line">    checking for stdlib.h... yes</span><br><span class="line">    checking for string.h... yes</span><br><span class="line">    checking for memory.h... yes</span><br><span class="line">    checking for strings.h... yes</span><br><span class="line">    checking for inttypes.h... yes</span><br><span class="line">    checking for stdint.h... yes</span><br><span class="line">    checking for unistd.h... yes</span><br><span class="line">    checking for unistd.h... (cached) yes</span><br><span class="line">    checking fcntl.h usability... yes</span><br><span class="line">    checking fcntl.h presence... yes</span><br><span class="line">    checking for fcntl.h... yes</span><br><span class="line">    checking signal.h usability... yes</span><br><span class="line">    checking signal.h presence... yes</span><br><span class="line">    checking for signal.h... yes</span><br><span class="line">    checking sys/cdefs.h usability... yes</span><br><span class="line">    checking sys/cdefs.h presence... yes</span><br><span class="line">    checking for sys/cdefs.h... yes</span><br><span class="line">    checking for sys/types.h... (cached) yes</span><br><span class="line">    checking for sys/stat.h... (cached) yes</span><br><span class="line">    checking sys/syscall.h usability... yes</span><br><span class="line">    checking sys/syscall.h presence... yes</span><br><span class="line">    checking for sys/syscall.h... yes</span><br><span class="line">    checking for dirent.h that defines DIR... yes</span><br><span class="line">    checking for library containing opendir... none required</span><br><span class="line">    checking for pipe2... yes</span><br><span class="line">    checking for setsid... yes</span><br><span class="line">    checking whether dirfd is declared... yes</span><br><span class="line">    configure: creating ./config.status</span><br><span class="line">    config.status: creating _posixsubprocess_config.h</span><br><span class="line">    building &apos;_posixsubprocess32&apos; extension</span><br><span class="line">    creating build/temp.linux-x86_64-2.7</span><br><span class="line">    gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I/usr/include/python2.7 -c _posixsubprocess.c -o build/temp.linux-x86_64-2.7/_posixsubprocess.o</span><br><span class="line">    _posixsubprocess.c:16:20: fatal error: Python.h: No such file or directory</span><br><span class="line">     #include &quot;Python.h&quot;</span><br><span class="line">                        ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &apos;gcc&apos; failed with exit status 1</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">Installing collected packages: subprocess32, cycler, backports.functools-lru-cache, pyparsing, kiwisolver, matplotlib</span><br><span class="line">  Running setup.py install for subprocess32 ... error</span><br><span class="line">    Complete output from command /usr/bin/python2 -u -c &quot;import setuptools, tokenize;__file__=&#x27;/tmp/pip-install-azXKeu/subprocess32/setup.py&#x27;;f=getattr(tokenize, &#x27;open&#x27;, open)(__file__);code=f.read().replace(&#x27;\r\n&#x27;, &#x27;\n&#x27;);f.close();exec(compile(code, __file__, &#x27;exec&#x27;))&quot; install --record /tmp/pip-record-5SM9_6/install-record.txt --single-version-externally-managed --compile:</span><br><span class="line">    /usr/lib64/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: &#x27;python_requires&#x27;</span><br><span class="line">      warnings.warn(msg)</span><br><span class="line">    running install</span><br><span class="line">    running build</span><br><span class="line">    running build_py</span><br><span class="line">    creating build</span><br><span class="line">    creating build/lib.linux-x86_64-2.7</span><br><span class="line">    copying subprocess32.py -&gt; build/lib.linux-x86_64-2.7</span><br><span class="line">    running build_ext</span><br><span class="line">    running build_configure</span><br><span class="line">    checking for gcc... gcc</span><br><span class="line">    checking whether the C compiler works... yes</span><br><span class="line">    checking for C compiler default output file name... a.out</span><br><span class="line">    checking for suffix of executables...</span><br><span class="line">    checking whether we are cross compiling... no</span><br><span class="line">    checking for suffix of object files... o</span><br><span class="line">    checking whether we are using the GNU C compiler... yes</span><br><span class="line">    checking whether gcc accepts -g... yes</span><br><span class="line">    checking for gcc option to accept ISO C89... none needed</span><br><span class="line">    checking how to run the C preprocessor... gcc -E</span><br><span class="line">    checking for grep that handles long lines and -e... /bin/grep</span><br><span class="line">    checking for egrep... /bin/grep -E</span><br><span class="line">    checking for ANSI C header files... yes</span><br><span class="line">    checking for sys/types.h... yes</span><br><span class="line">    checking for sys/stat.h... yes</span><br><span class="line">    checking for stdlib.h... yes</span><br><span class="line">    checking for string.h... yes</span><br><span class="line">    checking for memory.h... yes</span><br><span class="line">    checking for strings.h... yes</span><br><span class="line">    checking for inttypes.h... yes</span><br><span class="line">    checking for stdint.h... yes</span><br><span class="line">    checking for unistd.h... yes</span><br><span class="line">    checking for unistd.h... (cached) yes</span><br><span class="line">    checking fcntl.h usability... yes</span><br><span class="line">    checking fcntl.h presence... yes</span><br><span class="line">    checking for fcntl.h... yes</span><br><span class="line">    checking signal.h usability... yes</span><br><span class="line">    checking signal.h presence... yes</span><br><span class="line">    checking for signal.h... yes</span><br><span class="line">    checking sys/cdefs.h usability... yes</span><br><span class="line">    checking sys/cdefs.h presence... yes</span><br><span class="line">    checking for sys/cdefs.h... yes</span><br><span class="line">    checking for sys/types.h... (cached) yes</span><br><span class="line">    checking for sys/stat.h... (cached) yes</span><br><span class="line">    checking sys/syscall.h usability... yes</span><br><span class="line">    checking sys/syscall.h presence... yes</span><br><span class="line">    checking for sys/syscall.h... yes</span><br><span class="line">    checking for dirent.h that defines DIR... yes</span><br><span class="line">    checking for library containing opendir... none required</span><br><span class="line">    checking for pipe2... yes</span><br><span class="line">    checking for setsid... yes</span><br><span class="line">    checking whether dirfd is declared... yes</span><br><span class="line">    configure: creating ./config.status</span><br><span class="line">    config.status: creating _posixsubprocess_config.h</span><br><span class="line">    building &#x27;_posixsubprocess32&#x27; extension</span><br><span class="line">    creating build/temp.linux-x86_64-2.7</span><br><span class="line">    gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I/usr/include/python2.7 -c _posixsubprocess.c -o build/temp.linux-x86_64-2.7/_posixsubprocess.o</span><br><span class="line">    _posixsubprocess.c:16:20: fatal error: Python.h: No such file or directory</span><br><span class="line">     #include &quot;Python.h&quot;</span><br><span class="line">                        ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#x27;gcc&#x27; failed with exit status 1</span><br></pre></td></tr></table></figure>
+
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>无法找到 python 库，<code>#include &quot;Python.h&quot;</code> 出错</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ul>
 <li><p>使用 apt (Ubuntu, Debian…) 安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev   # for python2.x installs</span><br><span class="line">sudo apt-get install python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev   # for python2.x installs</span><br><span class="line">sudo apt-get install python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用 yum (CentOS, RHEL…) 安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install python-devel   # for python2.x installs</span><br><span class="line">sudo yum install python34-devel   # for python3.4 installs</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install python-devel   # for python2.x installs</span><br><span class="line">sudo yum install python34-devel   # for python3.4 installs</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用 dnf (Fedora…) 安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install python2-devel  # for python2.x installs</span><br><span class="line">sudo dnf install python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install python2-devel  # for python2.x installs</span><br><span class="line">sudo dnf install python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用 zypper (openSUSE…) 安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo zypper in python-devel   # for python2.x installs</span><br><span class="line">sudo zypper in python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo zypper in python-devel   # for python2.x installs</span><br><span class="line">sudo zypper in python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用 apk (Alpine…) 安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apk add python2-dev  # for python2.x installs</span><br><span class="line">sudo apk add python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apk add python2-dev  # for python2.x installs</span><br><span class="line">sudo apk add python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -556,10 +548,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -578,7 +570,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -588,10 +580,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -669,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表现"><span class="nav-number">1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li></ol></div>
             
 
           </div>
@@ -692,7 +684,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -967,5 +959,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

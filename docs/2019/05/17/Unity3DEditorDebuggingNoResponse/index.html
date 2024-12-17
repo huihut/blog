@@ -80,26 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="问题描述使用 VS 在 Unity 编辑器中调试代码，点击 VS 的 附加到 Unity，Unity 编辑器按下 Play 之后，就会一直等待并且无其他响应，只能结束 Unity 进程。">
-<meta name="keywords" content="Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity3D 编辑器调试无响应问题">
 <meta property="og:url" content="https://blog.huihut.com/2019/05/17/Unity3DEditorDebuggingNoResponse/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="问题描述使用 VS 在 Unity 编辑器中调试代码，点击 VS 的 附加到 Unity，Unity 编辑器按下 Play 之后，就会一直等待并且无其他响应，只能结束 Unity 进程。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%ADUnity%E6%97%A0%E5%93%8D%E5%BA%94.png">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:published_time" content="2019-05-17T07:14:00.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.671Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unity3D 编辑器调试无响应问题">
-<meta name="twitter:description" content="问题描述使用 VS 在 Unity 编辑器中调试代码，点击 VS 的 附加到 Unity，Unity 编辑器按下 Play 之后，就会一直等待并且无其他响应，只能结束 Unity 进程。">
 <meta name="twitter:image" content="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%ADUnity%E6%97%A0%E5%93%8D%E5%BA%94.png">
 
 
@@ -107,9 +105,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -142,7 +140,7 @@
   });
 </script>
   <title> Unity3D 编辑器调试无响应问题 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -150,15 +148,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -316,7 +305,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2019/05/17/Unity3DEditorDebuggingNoResponse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -408,7 +397,8 @@
 
       
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>使用 VS 在 Unity 编辑器中调试代码，点击 VS 的 <code>附加到 Unity</code>，Unity 编辑器按下 <code>Play</code> 之后，就会一直等待并且无其他响应，只能结束 Unity 进程。</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <p><img src="https://huihut-img.oss-cn-shenzhen.aliyuncs.com/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%ADUnity%E6%97%A0%E5%93%8D%E5%BA%94.png" alt="任务管理器中 Unity 无响应"></p>
 <h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>经过分析与测试，发现去掉代码中一个单例类的析构方法中的断点即可调试了，具体原因未知。</p>
 <p>再测试了一下，在那个单例类的构造、析构方法中分别打断点，如下表：</p>
@@ -421,8 +411,7 @@
 <th>结果</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>1</td>
 <td></td>
 <td></td>
@@ -446,8 +435,7 @@
 <td>*</td>
 <td>无响应</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <blockquote>
 <p>表中 <code>*</code> 代表打断点 </p>
 </blockquote>
@@ -583,10 +571,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -605,7 +593,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -615,10 +603,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -696,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因分析"><span class="nav-number">2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
             
 
           </div>
@@ -719,7 +707,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -994,5 +982,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

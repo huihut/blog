@@ -80,26 +80,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 / 源码  使用MFC的CDC类绘制三维坐标系及球面函数 / 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
-<meta name="keywords" content="图形学,MFC">
+<meta name="description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 &#x2F; 源码  使用MFC的CDC类绘制三维坐标系及球面函数 &#x2F; 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用MFC的CDC类绘制二维坐标系及正余弦函数">
 <meta property="og:url" content="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 / 源码  使用MFC的CDC类绘制三维坐标系及球面函数 / 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 &#x2F; 源码  使用MFC的CDC类绘制三维坐标系及球面函数 &#x2F; 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GraphicsExercise2DCapture.png">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2017-10-12T16:55:09.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="图形学">
+<meta property="article:tag" content="MFC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用MFC的CDC类绘制二维坐标系及正余弦函数">
-<meta name="twitter:description" content="系列链接 使用MFC的CDC类绘制二维坐标系及正余弦函数 / 源码  使用MFC的CDC类绘制三维坐标系及球面函数 / 源码   概述本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GraphicsExercise2DCapture.png">
 
 
@@ -107,9 +106,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -142,7 +141,7 @@
   });
 </script>
   <title> 使用MFC的CDC类绘制二维坐标系及正余弦函数 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -150,15 +149,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -316,7 +306,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -408,32 +398,37 @@
 
       
         <h2 id="系列链接"><a href="#系列链接" class="headerlink" title="系列链接"></a>系列链接</h2><ul>
-<li><p><a href="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/">使用MFC的CDC类绘制二维坐标系及正余弦函数</a> / <a href="https://github.com/huihut/GraphicsExercise2D" target="_blank" rel="noopener">源码</a></p>
+<li><p><a href="https://blog.huihut.com/2017/10/13/GraphicsExercise2D/">使用MFC的CDC类绘制二维坐标系及正余弦函数</a> &#x2F; <a href="https://github.com/huihut/GraphicsExercise2D">源码</a></p>
 </li>
-<li><p><a href="https://blog.huihut.com/2017/10/13/GraphicsExercise3D/">使用MFC的CDC类绘制三维坐标系及球面函数</a> / <a href="https://github.com/huihut/GraphicsExercise3D" target="_blank" rel="noopener">源码</a></p>
+<li><p><a href="https://blog.huihut.com/2017/10/13/GraphicsExercise3D/">使用MFC的CDC类绘制三维坐标系及球面函数</a> &#x2F; <a href="https://github.com/huihut/GraphicsExercise3D">源码</a></p>
 </li>
 </ul>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文使用MFC的CDC类绘制二维坐标系及正余弦函数，可以进行坐标变换、规模变换，可以设置绘制的函数。通过输入自变量的范围及步长，绘制出相应的函数图形。</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <h2 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h2><p><code>Visual Studio</code>- <code>新建项目</code> - <code>MFC应用程序</code> - 命名为<code>CGraphicsExercise2D</code> - <code>确定</code> - <code>下一步</code> - 应用程序类型选择<code>单个文档</code> - <code>完成</code></p>
 <h2 id="绘制函数"><a href="#绘制函数" class="headerlink" title="绘制函数"></a>绘制函数</h2><p>Visual Studio为我们创建了很多无用的代码，而我们的绘制函数在在<code>CGraphicsExercise2DView.cpp</code>的</p>
 <pre><code>void CGraphicsExercise2DView::OnDraw(CDC* /*pDC*/)
-{
+&#123;
   CGraphicsExercise2DDoc* pDoc = GetDocument();
   ASSERT_VALID(pDoc);
   if (!pDoc)
   return;
 
   // TODO: 在此处为本机数据添加绘制代码
-}
-</code></pre><p>取消<code>pDC</code>的注释，变成</p>
+&#125;
+</code></pre>
+<p>取消<code>pDC</code>的注释，变成</p>
 <pre><code>void CGraphicsExercise2DView::OnDraw(CDC* pDC)
-</code></pre><p>在</p>
+</code></pre>
+<p>在</p>
 <pre><code>// TODO: 在此处为本机数据添加绘制代码
-</code></pre><p>下面编写你自己的程序，如画一条线：</p>
+</code></pre>
+<p>下面编写你自己的程序，如画一条线：</p>
 <pre><code>pDC-&gt;MoveTo(20, 30);    // 画笔移到从左上角往右20像素、往下30像素
 pDC-&gt;LineTo(100, 100);    // 画一条线到右100、下100的位置
-</code></pre><p>运行下看下效果吧！</p>
+</code></pre>
+<p>运行下看下效果吧！</p>
 <p>现在删掉上面两行那条线，开始正式编写二维坐标系了。</p>
 <h2 id="规模变换函数"><a href="#规模变换函数" class="headerlink" title="规模变换函数"></a>规模变换函数</h2><p>上面的<code>MoveTo(20, 30)</code>中的20、30是在显示器上的像素点，如果绘制的坐标系是以像素为大小的话，那1、2这样小的单位在显示器上就难以看到，因此需要规模变换。通常是把小单位乘上放大规模（倍数）就可以了。</p>
 <p>在<code>CGraphicsExercise2DView.h</code></p>
@@ -443,82 +438,96 @@ pDC-&gt;LineTo(100, 100);    // 画一条线到右100、下100的位置
 
 private:
     int scale;
-</code></pre><p>在<code>CGraphicsExercise2DView.cpp</code></p>
+</code></pre>
+<p>在<code>CGraphicsExercise2DView.cpp</code></p>
 <pre><code>// 设置规模
 void CGraphicsExercise2DView::SetScale(int scale)
-{
+&#123;
   this-&gt;scale = scale;
-}
+&#125;
 
 // 变换规模
 float CGraphicsExercise2DView::TransformScale(float num)
-{
+&#123;
   return num * scale;
-}
-</code></pre><p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
+&#125;
+</code></pre>
+<p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
 <pre><code>// 设置规模比例
 SetScale(70);
-</code></pre><h2 id="变换坐标和规模"><a href="#变换坐标和规模" class="headerlink" title="变换坐标和规模"></a>变换坐标和规模</h2><p>在<code>CGraphicsExercise2DView.h</code></p>
+</code></pre>
+<h2 id="变换坐标和规模"><a href="#变换坐标和规模" class="headerlink" title="变换坐标和规模"></a>变换坐标和规模</h2><p>在<code>CGraphicsExercise2DView.h</code></p>
 <pre><code>public:
   float TransformCoordinateScaleX(float x);
   float TransformCoordinateScaleY(float y);
-</code></pre><p>在<code>CGraphicsExercise2DView.cpp</code></p>
+</code></pre>
+<p>在<code>CGraphicsExercise2DView.cpp</code></p>
 <pre><code>// 变换x的坐标和规模
 float CGraphicsExercise2DView::TransformCoordinateScaleX(float x)
-{
+&#123;
      return TransformScale(x + 2);
-}
+&#125;
 
 // 变换y的坐标和规模
 float CGraphicsExercise2DView::TransformCoordinateScaleY(float y)
-{
+&#123;
      return TransformScale(y + 4);
-}
-</code></pre><h2 id="设置绘制的函数类型"><a href="#设置绘制的函数类型" class="headerlink" title="设置绘制的函数类型"></a>设置绘制的函数类型</h2><p>在<code>CGraphicsExercise2DView.h</code></p>
+&#125;
+</code></pre>
+<h2 id="设置绘制的函数类型"><a href="#设置绘制的函数类型" class="headerlink" title="设置绘制的函数类型"></a>设置绘制的函数类型</h2><p>在<code>CGraphicsExercise2DView.h</code></p>
 <p>类外面定义</p>
 <pre><code>// 支持绘制的函数类型
-enum Function { Sin, Cos };
-</code></pre><p>类里面定义</p>
+enum Function &#123; Sin, Cos &#125;;
+</code></pre>
+<p>类里面定义</p>
 <pre><code>public:
   void SetDrawFunction(Function fun);
 
 private:
   Function fun;
-</code></pre><p>在<code>GraphicsExerciseView.cpp</code></p>
+</code></pre>
+<p>在<code>GraphicsExerciseView.cpp</code></p>
 <pre><code>#include &lt;math.h&gt;
 
 // 设置绘制的函数
 void CGraphicsExercise2DView::SetDrawFunction(Function fun)
-{
+&#123;
     this-&gt;fun = fun;
-}
-</code></pre><p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
+&#125;
+</code></pre>
+<p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
 <pre><code>// 设置绘制的函数
 SetDrawFunction(Sin);
-</code></pre><h2 id="函数范围和步长"><a href="#函数范围和步长" class="headerlink" title="函数范围和步长"></a>函数范围和步长</h2><p>设置正余弦函数的x取值范围如<code>[0, 2*π]</code>，设置x的取样步长如<code>0.01</code>。</p>
+</code></pre>
+<h2 id="函数范围和步长"><a href="#函数范围和步长" class="headerlink" title="函数范围和步长"></a>函数范围和步长</h2><p>设置正余弦函数的x取值范围如<code>[0, 2*π]</code>，设置x的取样步长如<code>0.01</code>。</p>
 <p>在<code>CGraphicsExercise2DView.h</code></p>
 <pre><code>public:
   void SetPlotSin(float startX, float endX, float step);
 
 private:
   float startX, endX, step;
-</code></pre><p>在<code>CGraphicsExercise2DView.cpp</code></p>
+</code></pre>
+<p>在<code>CGraphicsExercise2DView.cpp</code></p>
 <pre><code>// 设置范围和步长
 void CGraphicsExercise2DView::SetPlotSin(float startX, float endX, float step)
-{
+&#123;
      this-&gt;startX = startX;
      this-&gt;endX = endX;
      this-&gt;step = step;
-}
-</code></pre><p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
+&#125;
+</code></pre>
+<p>并在<code>CGraphicsExercise2DView()</code>函数添加</p>
 <pre><code>// 设置自变量x范围[startX, endX]、取样步长step
 SetPlotSin((float)0.0, (float)6.3, (float)0.01);
-</code></pre><h2 id="绘制坐标系"><a href="#绘制坐标系" class="headerlink" title="绘制坐标系"></a>绘制坐标系</h2><p>坐标系是距离左上角右下各2 * 规模个像素开始绘制的（即y轴的顶点是（2 * 放大规模, 2 * 放大规模））</p>
+</code></pre>
+<h2 id="绘制坐标系"><a href="#绘制坐标系" class="headerlink" title="绘制坐标系"></a>绘制坐标系</h2><p>坐标系是距离左上角右下各2 * 规模个像素开始绘制的（即y轴的顶点是（2 * 放大规模, 2 * 放大规模））</p>
 <p>在<code>OnDraw()</code>函数的<code>// TODO: 在此处为本机数据添加绘制代码</code>下面添加如下代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">// -------------------- 绘制坐标系 -------------------------</span><br><span class="line"></span><br><span class="line">float endPointX = 2 + endX + 2;</span><br><span class="line"></span><br><span class="line">// 坐标y轴</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(2), (int)TransformScale(6));</span><br><span class="line"></span><br><span class="line">// 坐标x轴</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(4));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX), (int)TransformScale(4));</span><br><span class="line"></span><br><span class="line">// 坐标y轴的箭头</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale((float)1.8), (int)TransformScale((float)2.2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(2), (int)TransformScale(2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale((float)2.2), (int)TransformScale((float)2.2));</span><br><span class="line"></span><br><span class="line">// 坐标x轴的箭头</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(endPointX - (float)0.2), (int)TransformScale((float)3.8));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX), (int)TransformScale(4));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX - (float)0.2), (int)TransformScale((float)4.2));</span><br><span class="line"></span><br><span class="line">// -------------------- 绘制刻度线 -------------------------</span><br><span class="line"></span><br><span class="line">// 绘制y轴刻度线</span><br><span class="line">for (float scaleY = 3; scaleY &lt;= 5; scaleY += 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(scaleY));</span><br><span class="line">  pDC-&gt;LineTo((int)TransformScale((float)2.1), (int)TransformScale(scaleY));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制x轴刻度线</span><br><span class="line">for (float scaleX = 2.2; scaleX &lt; endPointX - 1; scaleX += 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  pDC-&gt;MoveTo((int)TransformScale(scaleX), (int)TransformScale(4));</span><br><span class="line">  pDC-&gt;LineTo((int)TransformScale(scaleX), (int)TransformScale(3.9));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// -------------------- 绘制文字 -------------------------</span><br><span class="line"></span><br><span class="line">// 绘制y轴的y</span><br><span class="line">pDC-&gt;TextOutW((int)TransformScale(1.8), (int)TransformScale(2.3), CString(&quot;y&quot;));</span><br><span class="line">// 绘制x轴的x</span><br><span class="line">pDC-&gt;TextOutW((int)TransformScale(endPointX - (float)0.5), (int)TransformScale(4.1), CString(&quot;x&quot;));</span><br><span class="line"></span><br><span class="line">CString s;</span><br><span class="line">// 绘制y轴刻度文字</span><br><span class="line">for (float ScaleTextY = 2.9, text = 1.0; ScaleTextY &lt;= 4.9; ScaleTextY += 0.2, text -= 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  s.Format(_T(&quot;%.1f&quot;), text);</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(1.6), (int)TransformScale(ScaleTextY), s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制x轴刻度文字</span><br><span class="line">for (float ScaleTextX = 2.3; ScaleTextX &lt; endPointX - 1; ScaleTextX += 0.4)</span><br><span class="line">&#123;</span><br><span class="line">  s.Format(_T(&quot;%.1f&quot;), ScaleTextX - 1.9);</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(ScaleTextX), (int)TransformScale(4.1), s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制函数图的Title</span><br><span class="line">// 判断调用的函数</span><br><span class="line">switch (fun)</span><br><span class="line">&#123;</span><br><span class="line">case Sin:</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(4), (int)TransformScale(6), CString(&quot;y = sin( x )&quot;));</span><br><span class="line">  break;</span><br><span class="line">case Cos:</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(4), (int)TransformScale(6), CString(&quot;y = cos( x )&quot;));</span><br><span class="line">  break;</span><br><span class="line">default:</span><br><span class="line">  break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">// -------------------- 绘制坐标系 -------------------------</span><br><span class="line"></span><br><span class="line">float endPointX = 2 + endX + 2;</span><br><span class="line"></span><br><span class="line">// 坐标y轴</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(2), (int)TransformScale(6));</span><br><span class="line"></span><br><span class="line">// 坐标x轴</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(4));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX), (int)TransformScale(4));</span><br><span class="line"></span><br><span class="line">// 坐标y轴的箭头</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale((float)1.8), (int)TransformScale((float)2.2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(2), (int)TransformScale(2));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale((float)2.2), (int)TransformScale((float)2.2));</span><br><span class="line"></span><br><span class="line">// 坐标x轴的箭头</span><br><span class="line">pDC-&gt;MoveTo((int)TransformScale(endPointX - (float)0.2), (int)TransformScale((float)3.8));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX), (int)TransformScale(4));</span><br><span class="line">pDC-&gt;LineTo((int)TransformScale(endPointX - (float)0.2), (int)TransformScale((float)4.2));</span><br><span class="line"></span><br><span class="line">// -------------------- 绘制刻度线 -------------------------</span><br><span class="line"></span><br><span class="line">// 绘制y轴刻度线</span><br><span class="line">for (float scaleY = 3; scaleY &lt;= 5; scaleY += 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  pDC-&gt;MoveTo((int)TransformScale(2), (int)TransformScale(scaleY));</span><br><span class="line">  pDC-&gt;LineTo((int)TransformScale((float)2.1), (int)TransformScale(scaleY));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制x轴刻度线</span><br><span class="line">for (float scaleX = 2.2; scaleX &lt; endPointX - 1; scaleX += 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  pDC-&gt;MoveTo((int)TransformScale(scaleX), (int)TransformScale(4));</span><br><span class="line">  pDC-&gt;LineTo((int)TransformScale(scaleX), (int)TransformScale(3.9));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// -------------------- 绘制文字 -------------------------</span><br><span class="line"></span><br><span class="line">// 绘制y轴的y</span><br><span class="line">pDC-&gt;TextOutW((int)TransformScale(1.8), (int)TransformScale(2.3), CString(&quot;y&quot;));</span><br><span class="line">// 绘制x轴的x</span><br><span class="line">pDC-&gt;TextOutW((int)TransformScale(endPointX - (float)0.5), (int)TransformScale(4.1), CString(&quot;x&quot;));</span><br><span class="line"></span><br><span class="line">CString s;</span><br><span class="line">// 绘制y轴刻度文字</span><br><span class="line">for (float ScaleTextY = 2.9, text = 1.0; ScaleTextY &lt;= 4.9; ScaleTextY += 0.2, text -= 0.2)</span><br><span class="line">&#123;</span><br><span class="line">  s.Format(_T(&quot;%.1f&quot;), text);</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(1.6), (int)TransformScale(ScaleTextY), s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制x轴刻度文字</span><br><span class="line">for (float ScaleTextX = 2.3; ScaleTextX &lt; endPointX - 1; ScaleTextX += 0.4)</span><br><span class="line">&#123;</span><br><span class="line">  s.Format(_T(&quot;%.1f&quot;), ScaleTextX - 1.9);</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(ScaleTextX), (int)TransformScale(4.1), s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绘制函数图的Title</span><br><span class="line">// 判断调用的函数</span><br><span class="line">switch (fun)</span><br><span class="line">&#123;</span><br><span class="line">case Sin:</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(4), (int)TransformScale(6), CString(&quot;y = sin( x )&quot;));</span><br><span class="line">  break;</span><br><span class="line">case Cos:</span><br><span class="line">  pDC-&gt;TextOutW((int)TransformScale(4), (int)TransformScale(6), CString(&quot;y = cos( x )&quot;));</span><br><span class="line">  break;</span><br><span class="line">default:</span><br><span class="line">  break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="绘制函数-1"><a href="#绘制函数-1" class="headerlink" title="绘制函数"></a>绘制函数</h2><p>x从startX绘制到endX，每间隔step绘制一次。</p>
 <p>也是在<code>OnDraw()</code>函数下面添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// -------------------- 绘制函数 -------------------------</span><br><span class="line"></span><br><span class="line">// 不改变坐标和规模的xy</span><br><span class="line">float x, y;</span><br><span class="line"></span><br><span class="line">for (x = startX; x &lt;= endX; x += step)</span><br><span class="line">&#123;</span><br><span class="line">  // 判断调用的函数</span><br><span class="line">  switch (fun)</span><br><span class="line">  &#123;</span><br><span class="line">  case Sin:</span><br><span class="line">    y = (float)sin(x);</span><br><span class="line">    break;</span><br><span class="line">  case Cos:</span><br><span class="line">    y = (float)cos(x);</span><br><span class="line">    break;</span><br><span class="line">  default:</span><br><span class="line">    break;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 对xy改变坐标和规模再显示点</span><br><span class="line">  pDC-&gt;SetPixel((int)TransformCoordinateScaleX(x), (int)TransformCoordinateScaleY(y), 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// -------------------- 绘制函数 -------------------------</span><br><span class="line"></span><br><span class="line">// 不改变坐标和规模的xy</span><br><span class="line">float x, y;</span><br><span class="line"></span><br><span class="line">for (x = startX; x &lt;= endX; x += step)</span><br><span class="line">&#123;</span><br><span class="line">  // 判断调用的函数</span><br><span class="line">  switch (fun)</span><br><span class="line">  &#123;</span><br><span class="line">  case Sin:</span><br><span class="line">    y = (float)sin(x);</span><br><span class="line">    break;</span><br><span class="line">  case Cos:</span><br><span class="line">    y = (float)cos(x);</span><br><span class="line">    break;</span><br><span class="line">  default:</span><br><span class="line">    break;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 对xy改变坐标和规模再显示点</span><br><span class="line">  pDC-&gt;SetPixel((int)TransformCoordinateScaleX(x), (int)TransformCoordinateScaleY(y), 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GraphicsExercise2DCapture.png" alt="GraphicsExercise2DCapture"></p>
 
       
@@ -564,7 +573,7 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
       
         <div class="post-tags">
           
-            <a href="/tags/图形学/" rel="tag"># 图形学</a>
+            <a href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag"># 图形学</a>
           
             <a href="/tags/MFC/" rel="tag"># MFC</a>
           
@@ -652,10 +661,10 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -674,7 +683,7 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -684,10 +693,10 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -765,7 +774,7 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列链接"><span class="nav-number">1.</span> <span class="nav-text">系列链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建项目"><span class="nav-number">3.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制函数"><span class="nav-number">4.</span> <span class="nav-text">绘制函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规模变换函数"><span class="nav-number">5.</span> <span class="nav-text">规模变换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变换坐标和规模"><span class="nav-number">6.</span> <span class="nav-text">变换坐标和规模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置绘制的函数类型"><span class="nav-number">7.</span> <span class="nav-text">设置绘制的函数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数范围和步长"><span class="nav-number">8.</span> <span class="nav-text">函数范围和步长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制坐标系"><span class="nav-number">9.</span> <span class="nav-text">绘制坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制函数-1"><span class="nav-number">10.</span> <span class="nav-text">绘制函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">11.</span> <span class="nav-text">效果图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E5%88%97%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">系列链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">绘制函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E6%A8%A1%E5%8F%98%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">规模变换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2%E5%9D%90%E6%A0%87%E5%92%8C%E8%A7%84%E6%A8%A1"><span class="nav-number">6.</span> <span class="nav-text">变换坐标和规模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BB%98%E5%88%B6%E7%9A%84%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">设置绘制的函数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%8C%83%E5%9B%B4%E5%92%8C%E6%AD%A5%E9%95%BF"><span class="nav-number">8.</span> <span class="nav-text">函数范围和步长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">9.</span> <span class="nav-text">绘制坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%87%BD%E6%95%B0-1"><span class="nav-number">10.</span> <span class="nav-text">绘制函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="nav-number">11.</span> <span class="nav-text">效果图</span></a></li></ol></div>
             
 
           </div>
@@ -788,7 +797,7 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1063,5 +1072,5 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

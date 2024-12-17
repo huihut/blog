@@ -80,34 +80,32 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="File open：打开 save：保存 Global Shift settings：设置最大绝对坐标，最大实体对角线 Primitive Factory：对点云进行原始加工，改变原始点云的形状 3D mouse：对3D鼠标（如3Dconnexion）的支持 Close all：关闭所有打开的实体 Quit：退出">
-<meta name="keywords" content="CloudCompare">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CloudCompare功能概要">
 <meta property="og:url" content="https://blog.huihut.com/2017/03/21/CloudCompareFunction/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="File open：打开 save：保存 Global Shift settings：设置最大绝对坐标，最大实体对角线 Primitive Factory：对点云进行原始加工，改变原始点云的形状 3D mouse：对3D鼠标（如3Dconnexion）的支持 Close all：关闭所有打开的实体 Quit：退出">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.589Z">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-03-21T11:28:31.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.589Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="CloudCompare">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CloudCompare功能概要">
-<meta name="twitter:description" content="File open：打开 save：保存 Global Shift settings：设置最大绝对坐标，最大实体对角线 Primitive Factory：对点云进行原始加工，改变原始点云的形状 3D mouse：对3D鼠标（如3Dconnexion）的支持 Close all：关闭所有打开的实体 Quit：退出">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -140,7 +138,7 @@
   });
 </script>
   <title> CloudCompare功能概要 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -148,15 +146,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -314,7 +303,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/03/21/CloudCompareFunction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -414,14 +403,15 @@
 <li>Close all：关闭所有打开的实体</li>
 <li>Quit：退出</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
+
 <h2 id="Edit："><a href="#Edit：" class="headerlink" title="Edit："></a>Edit：</h2><ul>
 <li>Clone：克隆选中的点云</li>
 <li>Merge：合并两个或者多个实体。可以合并点云（原始云会被删除）；可以合并网格（原始网不会修改，CC会创建一个新的网格结构）</li>
 <li>Subsample：采集原始点云的子样本，可以用随机、立体、基于八叉树的方式采集，子样本会保持原始点云的标量、颜色、法线等性质。</li>
 <li>Apply Transformation：可以对选中的实体做变换（4*4矩阵、轴线角，欧拉角）</li>
-<li>Multiply / Scale：让选中实体的坐标倍增。</li>
-<li>Translate / Rotate (Interactive Transformation Tool)：可以相对于另外一个实体或者坐标系移动选中的实体</li>
+<li>Multiply &#x2F; Scale：让选中实体的坐标倍增。</li>
+<li>Translate &#x2F; Rotate (Interactive Transformation Tool)：可以相对于另外一个实体或者坐标系移动选中的实体</li>
 <li>Segment (Interactive Segmentation Tool)：通过画2D多边形分隔选中的实体</li>
 <li>Crop：分割一个或多个在3D-Box里面的点云。</li>
 <li>Edit global shift and scale：进行全局变换和和比例缩放。</li>
@@ -445,22 +435,22 @@
 <li>Octree &gt; Resample：通过代替每个八叉树单元内的所有点来重新取样</li>
 <li>Mesh &gt; Delaunay 2.5D (XY plane)：计算点云在xy平面上的2.5D三角剖分（Delaunay 2.5D triangulation，德洛内2.5D三角算法）</li>
 <li>Mesh &gt; Delaunay 2.5D (best fit plane)：计算点云在最佳平面的2.5D三角剖分（Delaunay 2.5D triangulation，德洛内2.5D三角算法）</li>
-<li>Mesh &gt; Convert texture/material to RGB：将选定网格的网格材料和纹理信息转换为逐个点的 RGB 字段</li>
+<li>Mesh &gt; Convert texture&#x2F;material to RGB：将选定网格的网格材料和纹理信息转换为逐个点的 RGB 字段</li>
 <li>Mesh &gt; Sample points：在一个网格中随机取样</li>
 <li>Mesh &gt; Smooth (Laplacian)：平滑一个网格（Laplacian smoothing，拉普拉斯平滑算法）</li>
 <li>Mesh &gt; Subdivide：细分网格，此算法递归细分网格三角形，直到他们的表面细分到用户指定值之下。</li>
 <li>Mesh &gt; Measure surface：测量网格的总体表面积和每个三角形的平均表面积，在控制台输出</li>
 <li>Mesh &gt; Measure volume：测量闭合网格的体积，在控制台输出</li>
-<li>Mesh &gt; Flag vertices：检查网格的基本特性，为每个网格样本做标志：0 = normal，1 = border，2 = non-manifold</li>
+<li>Mesh &gt; Flag vertices：检查网格的基本特性，为每个网格样本做标志：0 &#x3D; normal，1 &#x3D; border，2 &#x3D; non-manifold</li>
 <li>Mesh &gt; Scalar field &gt; Smooth：平滑网格顶点相关联的标量场。此方法与高斯滤波（Gaussian Filter）相反。运用qPCV插件后，此方法特别有用</li>
 <li>Mesh &gt; Scalar field &gt; Enhance：增强与网格顶点相关联的标量场。运用qPCV插件后，此方法特别有用</li>
 <li>Sensors &gt; Edit：修改指定传感器内外在参数</li>
-<li>Sensors &gt; Ground Based Lidar &gt; Create：创建’Ground Based Lidar’ (= TLS)传感器实体，附加到所选的点云</li>
+<li>Sensors &gt; Ground Based Lidar &gt; Create：创建’Ground Based Lidar’ (&#x3D; TLS)传感器实体，附加到所选的点云</li>
 <li>Sensors &gt; Ground Based Lidar &gt; Show Depth Buffer：显示选中的Ground Based Lidar的深度</li>
 <li>Sensors &gt; Ground Based Lidar &gt; Export Depth Buffer：以ASCII文件的形式导出选中的Ground Based Lidar传感器的深度图</li>
 <li>Sensors &gt; Camera Sensor &gt; Create：创建影像传感器</li>
 <li>Sensors &gt; Camera Sensor &gt; Project uncertainty：输出影像模块不确定的点云，输出不确定的x、y、z、3D信息</li>
-<li>Sensors &gt; Camera Sensor &gt; Compute points visibility (with octree)：统计选中影像传感器选中的点云。0=NOT VISIBLE，1=VISIBLE</li>
+<li>Sensors &gt; Camera Sensor &gt; Compute points visibility (with octree)：统计选中影像传感器选中的点云。0&#x3D;NOT VISIBLE，1&#x3D;VISIBLE</li>
 <li>Sensors &gt; View from sensor：更改当前的 3D 视图影像设置以匹配选定的传感器的设置 （用泡沫视图模式）</li>
 <li>Sensors &gt; Compute ranges：计算全部点（对于任何点云）相对于指定传感器的范围</li>
 <li>Sensors &gt; Compute scattering angles：计算全部点（对于任何有法线的云）相对于选中传感器分散的角度</li>
@@ -477,7 +467,7 @@
 <li>Scalar fields &gt; Add point indexes as SF：用点索引的方式为所选点云创建一个新的标量域</li>
 <li>Scalar fields &gt; Export coordinate(s) to SF(s)：导出坐标到标量域</li>
 <li>Scalar fields &gt; Set SF as coordinate(s)：为选中的点云设置标量域的坐标</li>
-<li>Scalar fields &gt; Arithmetic：可以对在同一个点云的两个标量域进行标准运算（+，-，*，/），或者对单个标量域进行函数运算</li>
+<li>Scalar fields &gt; Arithmetic：可以对在同一个点云的两个标量域进行标准运算（+，-，*，&#x2F;），或者对单个标量域进行函数运算</li>
 <li>Scalar fields &gt; Color Scales Manager：色阶管理，可以管理和创建新色域</li>
 <li>Scalar fields &gt; Delete：对选中的实体删除有效的标量域</li>
 <li>Scalar fields &gt; Delete all (!)：对选中的实体删除全部的有效标量域</li>
@@ -495,8 +485,8 @@
 <li>Registration &gt; Match scales：匹配所有选中实体的规模</li>
 <li>Registration &gt; Align (point pairs picking)：在两个实体中挑选至少三个对应的点来对齐两个实体</li>
 <li>Registration &gt; Fine registration (ICP)：自动精确地融合两个实体。前提是：①两个云大体上相融；②表现为同样的对象或者至少有同样的形状</li>
-<li>Distances &gt; Cloud/Cloud dist. (cloud-to-cloud distance)：计算两个点云之间的距离</li>
-<li>Distances &gt; Cloud/Mesh dist. (cloud-to-mesh distance)：计算点云和网格之间的距离</li>
+<li>Distances &gt; Cloud&#x2F;Cloud dist. (cloud-to-cloud distance)：计算两个点云之间的距离</li>
+<li>Distances &gt; Cloud&#x2F;Mesh dist. (cloud-to-mesh distance)：计算点云和网格之间的距离</li>
 <li>Distances &gt; Closest Point Set：计算两个点云之间最近的点的集合</li>
 <li>Statistics &gt; Local Statistical Test：可以以标量域的局部统计为基础进行分割和过滤点云</li>
 <li>Statistics &gt; Compute Stat. Params：计算统计分布（高斯分布、威布尔分布）</li>
@@ -531,20 +521,20 @@
 <li>Active scalar field &gt; Toggle color scale：为所选活动的实体切换色阶</li>
 <li>Active scalar field &gt; Show previous SF：改变当前所选对象的标量域，激活先前的标量域</li>
 <li>Active scalar field &gt; Show next SF：改变当前所选对象的标量域，激活下一个的标量域</li>
-<li>Console：控制台（显示/隐藏）</li>
+<li>Console：控制台（显示&#x2F;隐藏）</li>
 <li>Toolbars：工具栏，包括主工具栏、标量域、视图、插件、GL滤镜</li>
 <li>Reset all GUI elements：退出钱自动存储当前GUI信息（位置和工具栏的可见性等），可以恢复原始配置</li>
 </ul>
 <h2 id="Plugins："><a href="#Plugins：" class="headerlink" title="Plugins："></a>Plugins：</h2><h4 id="Standard-plugins："><a href="#Standard-plugins：" class="headerlink" title="Standard plugins："></a>Standard plugins：</h4><ul>
 <li>qHPR (Hidden Point Removal)：如果点云是闭合曲面，则可以过滤（删除）掉通过当前3D影像不能看到的云</li>
 <li>qPCL (Point Cloud Library Wrapper)：有PCL库一些方法的接口，主要包括：①计算法线和曲率②异常点和噪声点的去除③平滑点云（移动最小二乘法）</li>
-<li>qPCV (ShadeVis / Ambient Occlusion)：计算点云的明亮度，类似于光线来自于对象周围的半球或球体（可以自定义光线距离）</li>
+<li>qPCV (ShadeVis &#x2F; Ambient Occlusion)：计算点云的明亮度，类似于光线来自于对象周围的半球或球体（可以自定义光线距离）</li>
 <li>qPoissonRecon (Poisson Surface Reconstruction)：Poisson表面重建，用三角网络生成算法构建的简单的表面</li>
 <li>qRansacSD (RANSAC Shape Detection)：随机抽样一致形状检测，运用自动形状检测算法的简单接口</li>
 <li>qSRA (Surface of Revolution Analysis)：计算一个点云和一个假定旋转平面之间的距离（旋转平面用2D轮廓定义），距离计算好后，用户可以创建一个偏差的2D图或者圆柱或圆锥的投影</li>
 <li>qCANUPO (Point Cloud Classification)：可自动对点云进行分类，也可以手动分类</li>
 <li>qM3C2 (Robust C2C Distances Computation)：用独特的方法计算两个点云之间的有向（稳健）距离</li>
-<li>qCork (Boolean Operations on Meshes)：可以执行网格中的布尔操作（也称CSG = 构造实体几何），它基于Cork库</li>
+<li>qCork (Boolean Operations on Meshes)：可以执行网格中的布尔操作（也称CSG &#x3D; 构造实体几何），它基于Cork库</li>
 <li>qAnimation：动画渲染插件</li>
 <li>qFacets：可以从点云中自动提取二维切面，以它们的垂直距离分开</li>
 <li>qCSF (Cloth Simulation Filter)：基于布模拟滤波算法，能实现地面点与非地面点的分离，去除非地面点</li>
@@ -573,14 +563,14 @@
 <li>Previous：激活顺序创建的上一个3D视图</li>
 </ul>
 <h2 id="Help："><a href="#Help：" class="headerlink" title="Help："></a>Help：</h2><ul>
-<li>Help：<a href="http://www.cloudcompare.org/doc" target="_blank" rel="noopener">帮助文档</a></li>
+<li>Help：<a href="http://www.cloudcompare.org/doc">帮助文档</a></li>
 <li>About：CloudCompare版本信息</li>
 <li>About Plugins：插件信息</li>
 </ul>
 <h2 id="Thanks："><a href="#Thanks：" class="headerlink" title="Thanks："></a>Thanks：</h2><ul>
-<li><a href="http://www.danielgm.net/cc/" target="_blank" rel="noopener">CloudCompare Documentation</a></li>
-<li><a href="http://www.cloudcompare.org/doc/wiki" target="_blank" rel="noopener">CloudCompare Wiki</a></li>
-<li><a href="https://www.wikipedia.org/" target="_blank" rel="noopener">Wikipedia</a></li>
+<li><a href="http://www.danielgm.net/cc/">CloudCompare Documentation</a></li>
+<li><a href="http://www.cloudcompare.org/doc/wiki">CloudCompare Wiki</a></li>
+<li><a href="https://www.wikipedia.org/">Wikipedia</a></li>
 </ul>
 
       
@@ -712,10 +702,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -734,7 +724,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -744,10 +734,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -825,7 +815,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#File"><span class="nav-number">1.</span> <span class="nav-text">File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edit："><span class="nav-number">2.</span> <span class="nav-text">Edit：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools："><span class="nav-number">3.</span> <span class="nav-text">Tools：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Display："><span class="nav-number">4.</span> <span class="nav-text">Display：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugins："><span class="nav-number">5.</span> <span class="nav-text">Plugins：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Standard-plugins："><span class="nav-number">5.0.1.</span> <span class="nav-text">Standard plugins：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenGL-‘shaders’-plugins："><span class="nav-number">5.0.2.</span> <span class="nav-text">OpenGL ‘shaders’ plugins：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deprecated"><span class="nav-number">5.0.3.</span> <span class="nav-text">Deprecated</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Views："><span class="nav-number">6.</span> <span class="nav-text">3D Views：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Help："><span class="nav-number">7.</span> <span class="nav-text">Help：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks："><span class="nav-number">8.</span> <span class="nav-text">Thanks：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#File"><span class="nav-number">1.</span> <span class="nav-text">File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edit%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">Edit：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">Tools：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Display%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">Display：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugins%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">Plugins：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Standard-plugins%EF%BC%9A"><span class="nav-number">5.0.1.</span> <span class="nav-text">Standard plugins：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenGL-%E2%80%98shaders%E2%80%99-plugins%EF%BC%9A"><span class="nav-number">5.0.2.</span> <span class="nav-text">OpenGL ‘shaders’ plugins：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deprecated"><span class="nav-number">5.0.3.</span> <span class="nav-text">Deprecated</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Views%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">3D Views：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Help%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">Help：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">Thanks：</span></a></li></ol></div>
             
 
           </div>
@@ -848,7 +838,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1123,5 +1113,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

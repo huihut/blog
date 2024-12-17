@@ -80,21 +80,18 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="前言本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。 原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。 装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(">
-<meta name="keywords" content="Mac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6">
 <meta property="og:url" content="https://blog.huihut.com/2018/10/13/GIGABYTE_Z370_HD3P_i7-8700K_GTX1080_Install_Hackintosh_HighSierra10.13.6/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="前言本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。 原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。 装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-High-Sierra-10.13.6.jpeg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/etcher-create-hackintosh.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/IMG_20181007_204929.jpg">
@@ -114,10 +111,11 @@
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-bluetooth.jpg">
 <meta property="og:image" content="https://camo.githubusercontent.com/df4adb0f442a1baf2ec59cf17f3442253619af6f/687474703a2f2f692e696d67626f782e636f6d2f346773734c6453492e706e67">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181013-001702.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2018-10-13T05:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="Mac">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6">
-<meta name="twitter:description" content="前言本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。 原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。 装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-High-Sierra-10.13.6.jpeg">
 
 
@@ -125,9 +123,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -160,7 +158,7 @@
   });
 </script>
   <title> 技嘉Z370 HD3P + i7-8700K + GTX1080 装黑苹果 High Sierra 10.13.6 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -168,15 +166,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -334,7 +323,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2018/10/13/GIGABYTE_Z370_HD3P_i7-8700K_GTX1080_Install_Hackintosh_HighSierra10.13.6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -428,7 +417,8 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博文记录了组装台式机装黑苹果 High Sierra 10.13.6 的经历。</p>
 <p>原本想装 Mojave 10.14 的，可惜发现在 Mojave 下还没有 GTX1080 的驱动，所以只能退而求其次装 High Sierra 了。</p>
 <p>装 High Sierra 的过程中，第一次使用 10.13.6(17G2112) 镜像遇到个问题（下文有描述），无法进入安装界面，因此后来使用 10.13.5(17F77) 镜像装好后在 AppStore 更新 10.13.6</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-High-Sierra-10.13.6.jpeg" alt="Hackintosh-High-Sierra-10.13.6"></p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
 <li>主板：技嘉 Z370 HD3P</li>
@@ -444,26 +434,26 @@
 </ul>
 <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>本博文使用的一些软件工具驱动，下文则不赘述。</p>
 <ul>
-<li><a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/" target="_blank" rel="noopener">带 Clover 镜像</a><ul>
-<li>10.13.6(17G2112) 镜像：<a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/macOS%20High%20Sierra%2010.13.6%2817G2112%29%20Installer%20with%20Clover%204606.dmg" target="_blank" rel="noopener">macOS High Sierra 10.13.6(17G2112) Installer with Clover 4606.dmg</a></li>
-<li>10.13.5(17F77)镜像：<a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/macOS%20High%20Sierra%2010.13.5%2817F77%29%20Installer%20with%20Clover%204512.dmg" target="_blank" rel="noopener">macOS High Sierra 10.13.5(17F77) Installer with Clover 4512.dmg</a></li>
+<li><a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/">带 Clover 镜像</a><ul>
+<li>10.13.6(17G2112) 镜像：<a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/macOS%20High%20Sierra%2010.13.6%2817G2112%29%20Installer%20with%20Clover%204606.dmg">macOS High Sierra 10.13.6(17G2112) Installer with Clover 4606.dmg</a></li>
+<li>10.13.5(17F77)镜像：<a href="https://mirrors.dtops.cc/iso/MacOS/daliansky_macos/macOS%20High%20Sierra%2010.13.5%2817F77%29%20Installer%20with%20Clover%204512.dmg">macOS High Sierra 10.13.5(17F77) Installer with Clover 4512.dmg</a></li>
 </ul>
 </li>
 <li>EFI 分区<ul>
-<li><a href="https://github.com/huihut/Hackintosh-Z370/tree/master/EFI" target="_blank" rel="noopener">huihut . Hackintosh-Z370/EFI</a></li>
+<li><a href="https://github.com/huihut/Hackintosh-Z370/tree/master/EFI">huihut . Hackintosh-Z370&#x2F;EFI</a></li>
 </ul>
 </li>
 <li>工具<ul>
-<li>U盘刻录工具 Etcher：<a href="https://etcher.io/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1EAarG7mLxhI0xwQEXerUEg" target="_blank" rel="noopener">百度网盘</a></li>
-<li>Clover 配置工具 Clover Configurator：<a href="https://www.tonymacx86.com/resources/clover-configurator.335/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1adKnfyIT0MVwHGl_Lke_Fg" target="_blank" rel="noopener">百度网盘</a></li>
-<li>内核注入工具 Kext Wizard：<a href="https://mac.softpedia.com/get/Utilities/Kext-Wizard.shtml" target="_blank" rel="noopener">网络</a> | <a href="https://pan.baidu.com/s/1bnsRR4s3FYmc6jCRiVYRew" target="_blank" rel="noopener">百度网盘</a></li>
-<li>文本编辑器 BBEdit 12：<a href="https://www.barebones.com/products/bbedit/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1pWO_hFMcHIjzoFGSOdUgDQ" target="_blank" rel="noopener">百度网盘</a></li>
+<li>U盘刻录工具 Etcher：<a href="https://etcher.io/">官网</a> | <a href="https://pan.baidu.com/s/1EAarG7mLxhI0xwQEXerUEg">百度网盘</a></li>
+<li>Clover 配置工具 Clover Configurator：<a href="https://www.tonymacx86.com/resources/clover-configurator.335/">官网</a> | <a href="https://pan.baidu.com/s/1adKnfyIT0MVwHGl_Lke_Fg">百度网盘</a></li>
+<li>内核注入工具 Kext Wizard：<a href="https://mac.softpedia.com/get/Utilities/Kext-Wizard.shtml">网络</a> | <a href="https://pan.baidu.com/s/1bnsRR4s3FYmc6jCRiVYRew">百度网盘</a></li>
+<li>文本编辑器 BBEdit 12：<a href="https://www.barebones.com/products/bbedit/">官网</a> | <a href="https://pan.baidu.com/s/1pWO_hFMcHIjzoFGSOdUgDQ">百度网盘</a></li>
 </ul>
 </li>
 <li>驱动<ul>
-<li>驱动安装工具 MultiBeast 10.4.0 - High Sierra：<a href="https://www.tonymacx86.com/resources/multibeast-10-4-0-high-sierra.401/" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1QBX514ELiqltAJ_EcHan0g" target="_blank" rel="noopener">百度网盘</a></li>
-<li>Nvidia Web 驱动 387.10.10.10.40.105（适用于 10.13.6）：<a href="https://www.nvidia.com/download/driverResults.aspx/136062/en-us" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/1pgf06gmxiwpK1256_7QmcQ" target="_blank" rel="noopener">百度网盘</a></li>
-<li>Nvidia Web 驱动 387.10.10.10.35.106（适用于 10.13.5）：<a href="https://www.nvidia.com/download/driverResults.aspx/134834/en-us" target="_blank" rel="noopener">官网</a> | <a href="https://pan.baidu.com/s/13ObVcKgRqr1XIvDv2d96Eg" target="_blank" rel="noopener">百度网盘</a></li>
+<li>驱动安装工具 MultiBeast 10.4.0 - High Sierra：<a href="https://www.tonymacx86.com/resources/multibeast-10-4-0-high-sierra.401/">官网</a> | <a href="https://pan.baidu.com/s/1QBX514ELiqltAJ_EcHan0g">百度网盘</a></li>
+<li>Nvidia Web 驱动 387.10.10.10.40.105（适用于 10.13.6）：<a href="https://www.nvidia.com/download/driverResults.aspx/136062/en-us">官网</a> | <a href="https://pan.baidu.com/s/1pgf06gmxiwpK1256_7QmcQ">百度网盘</a></li>
+<li>Nvidia Web 驱动 387.10.10.10.35.106（适用于 10.13.5）：<a href="https://www.nvidia.com/download/driverResults.aspx/134834/en-us">官网</a> | <a href="https://pan.baidu.com/s/13ObVcKgRqr1XIvDv2d96Eg">百度网盘</a></li>
 </ul>
 </li>
 </ul>
@@ -484,7 +474,7 @@
 <p>保存 BIOS 配置</p>
 <h2 id="引导出错"><a href="#引导出错" class="headerlink" title="引导出错"></a>引导出错</h2><p>重启进入刻录好的U盘，选择 <code>Boot macOS Install from Install macOS High Sierra</code></p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/IMG_20181007_204929.jpg" alt="Clover"></p>
-<p>唠叨模式滚代码的时候出错：please go to <a href="https://panic.apple.com" target="_blank" rel="noopener">https://panic.apple.com</a> to report this panic</p>
+<p>唠叨模式滚代码的时候出错：please go to <a href="https://panic.apple.com/">https://panic.apple.com</a> to report this panic</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/IMG_20181007_211514.jpg" alt="please go to https://panic.apple.com to report this panic"></p>
 <h2 id="重新刻录"><a href="#重新刻录" class="headerlink" title="重新刻录"></a>重新刻录</h2><p>上面的问题 Google 了一圈并未发现解决办法，因此重新刻录 <code>macOS High Sierra 10.13.5(17F77) Installer with Clover 4512.dmg</code>，先装 10.13.5(17F77) 。</p>
 <h2 id="引导安装"><a href="#引导安装" class="headerlink" title="引导安装"></a>引导安装</h2><p>这次的 10.13.5(17F77)  成功进入安装界面了。</p>
@@ -495,15 +485,20 @@
 <h2 id="安装-Clover"><a href="#安装-Clover" class="headerlink" title="安装 Clover"></a>安装 Clover</h2><h3 id="Clover-选择"><a href="#Clover-选择" class="headerlink" title="Clover 选择"></a>Clover 选择</h3><p>进入系统后发现 1080 独显不能驱动、八代 CPU 不能识别，这个先不管，先装 Clover 到磁盘的 EFI 分区。</p>
 <p>安装 Clover 有两种：</p>
 <ul>
-<li>使用原版 CLover：<a href="https://sourceforge.net/projects/cloverefiboot/" target="_blank" rel="noopener">Clover EFI bootloader 官方下载</a></li>
+<li>使用原版 CLover：<a href="https://sourceforge.net/projects/cloverefiboot/">Clover EFI bootloader 官方下载</a></li>
 <li>使用 U 盘 EFI 分区的 Clover</li>
 </ul>
 <p>由于 U 盘的 Clover 是已经试验过能引导的，所以我就用了 U 盘的。</p>
 <h3 id="挂载-EFI-分区"><a href="#挂载-EFI-分区" class="headerlink" title="挂载 EFI 分区"></a>挂载 EFI 分区</h3><p>在终端上执行 <code>diskutil list</code>，找到两个 EFI 分区（磁盘的 EFI 和 U 盘的 EFI），如下的 <code>disk0 s1</code> 和 <code>disk3 s1</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">HuiMac:~ huihut$ diskutil list</span><br><span class="line">/dev/disk0 (internal, physical):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                        *1.0 TB     disk0</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk0s1</span><br><span class="line">   2:                 Apple_APFS Container disk2         128.8 GB   disk0s2</span><br><span class="line">   3:       Microsoft Basic Data Document                85.9 GB    disk0s3</span><br><span class="line">   4:       Microsoft Basic Data Software                161.1 GB   disk0s4</span><br><span class="line">   5:       Microsoft Basic Data Data                    624.2 GB   disk0s5</span><br><span class="line"></span><br><span class="line">/dev/disk1 (internal):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                         250.1 GB   disk1</span><br><span class="line">   1:         Microsoft Reserved                         16.8 MB    disk1s1</span><br><span class="line">   2:       Microsoft Basic Data                         249.2 GB   disk1s2</span><br><span class="line">   3:           Windows Recovery                         847.2 MB   disk1s3</span><br><span class="line"></span><br><span class="line">/dev/disk2 (synthesized):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      APFS Container Scheme -                      +128.8 GB   disk2</span><br><span class="line">                                 Physical Store disk0s2</span><br><span class="line">   1:                APFS Volume MacOS                   84.8 GB    disk2s1</span><br><span class="line">   2:                APFS Volume Preboot                 67.7 MB    disk2s2</span><br><span class="line">   3:                APFS Volume Recovery                1.0 GB     disk2s3</span><br><span class="line">   4:                APFS Volume VM                      20.5 KB    disk2s4</span><br><span class="line"></span><br><span class="line">/dev/disk3 (external, physical):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                        *31.0 GB    disk3</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk3s1</span><br><span class="line">   2:                  Apple_HFS Install macOS High S... 5.7 GB     disk3s2</span><br><span class="line"></span><br><span class="line">HuiMac:~ huihut$</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">HuiMac:~ huihut$ diskutil list</span><br><span class="line">/dev/disk0 (internal, physical):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                        *1.0 TB     disk0</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk0s1</span><br><span class="line">   2:                 Apple_APFS Container disk2         128.8 GB   disk0s2</span><br><span class="line">   3:       Microsoft Basic Data Document                85.9 GB    disk0s3</span><br><span class="line">   4:       Microsoft Basic Data Software                161.1 GB   disk0s4</span><br><span class="line">   5:       Microsoft Basic Data Data                    624.2 GB   disk0s5</span><br><span class="line"></span><br><span class="line">/dev/disk1 (internal):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                         250.1 GB   disk1</span><br><span class="line">   1:         Microsoft Reserved                         16.8 MB    disk1s1</span><br><span class="line">   2:       Microsoft Basic Data                         249.2 GB   disk1s2</span><br><span class="line">   3:           Windows Recovery                         847.2 MB   disk1s3</span><br><span class="line"></span><br><span class="line">/dev/disk2 (synthesized):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      APFS Container Scheme -                      +128.8 GB   disk2</span><br><span class="line">                                 Physical Store disk0s2</span><br><span class="line">   1:                APFS Volume MacOS                   84.8 GB    disk2s1</span><br><span class="line">   2:                APFS Volume Preboot                 67.7 MB    disk2s2</span><br><span class="line">   3:                APFS Volume Recovery                1.0 GB     disk2s3</span><br><span class="line">   4:                APFS Volume VM                      20.5 KB    disk2s4</span><br><span class="line"></span><br><span class="line">/dev/disk3 (external, physical):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                        *31.0 GB    disk3</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk3s1</span><br><span class="line">   2:                  Apple_HFS Install macOS High S... 5.7 GB     disk3s2</span><br><span class="line"></span><br><span class="line">HuiMac:~ huihut$ </span><br></pre></td></tr></table></figure>
+
 <p>分别挂载到不同名字的卷</p>
-<p>挂载磁盘 EFI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /Volumes/efidisk</span><br><span class="line">sudo mount -t msdos /dev/disk0s1 /Volumes/efidisk</span><br></pre></td></tr></table></figure></p>
-<p>挂载 U 盘 EFI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /Volumes/efiusb</span><br><span class="line">sudo mount -t msdos /dev/disk3s1 /Volumes/efiusb</span><br></pre></td></tr></table></figure></p>
+<p>挂载磁盘 EFI</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /Volumes/efidisk</span><br><span class="line">sudo mount -t msdos /dev/disk0s1 /Volumes/efidisk</span><br></pre></td></tr></table></figure>
+
+<p>挂载 U 盘 EFI</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /Volumes/efiusb</span><br><span class="line">sudo mount -t msdos /dev/disk3s1 /Volumes/efiusb</span><br></pre></td></tr></table></figure>
+
 <h3 id="复制-Clover"><a href="#复制-Clover" class="headerlink" title="复制 Clover"></a>复制 Clover</h3><p>然后把 U 盘的 <code>EFI/CLOVER</code> 这个文件夹复制到 磁盘的 <code>EFI</code> 下 </p>
 <h2 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h2><p>使用 MultiBeast 安装驱动，使用 Nvidia WebDriver 安装显卡驱动（MultiBeast 的 WebDriver 不能驱动我的 1080）。</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-221705.jpg" alt="MultiBeast-config"></p>
@@ -516,35 +511,35 @@
 <li>USB3.0无法驱动</li>
 </ul>
 <h3 id="驱动独显"><a href="#驱动独显" class="headerlink" title="驱动独显"></a>驱动独显</h3><p>使用适用于 10.13.6 的 WebDriver-387.10.10.10.40.105.pkg，装好重启后就 OK 了</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-gpu.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-gpu.jpg"></p>
 <h3 id="修复-CPU-识别"><a href="#修复-CPU-识别" class="headerlink" title="修复 CPU 识别"></a>修复 CPU 识别</h3><blockquote>
-<p>参见 <a href="https://osx.cx/8-dai-cpu-installed-black-apple.html" target="_blank" rel="noopener">八代处理器安装黑苹果 关于本机显示“未知”解决办法</a></p>
+<p>参见 <a href="https://osx.cx/8-dai-cpu-installed-black-apple.html">八代处理器安装黑苹果 关于本机显示“未知”解决办法</a></p>
 </blockquote>
 <p>挂载磁盘 EFI 分区（操作如上），使用 Clover Configurator 打开 <code>/EFI/CLOVER/config.plist</code></p>
 <p>在 CPU 页面的 Type 中填入 Unknown，保存。</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-232553.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-232553.jpg"></p>
 <p>使用文本编辑器（如 BBEdit）打开 <code>/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/zh_CN.lproj/AppleSystemInfo.strings</code> 文件</p>
 <p>修改 <code>UnknownCPUKind</code> 的值为 <code>3.7 GHz Intel Core i7-8700K</code></p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-233544.jpg" alt="3.7 GHz Intel Core i7-8700K"></p>
 <p>保存重启即可。</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-system-information.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-system-information.jpg"></p>
 <h3 id="修复声卡驱动"><a href="#修复声卡驱动" class="headerlink" title="修复声卡驱动"></a>修复声卡驱动</h3><blockquote>
-<p>参见 <a href="https://imac.hk/applealc-kext-use.html" target="_blank" rel="noopener">黑苹果AppleALC声卡驱动安装使用教程</a></p>
+<p>参见 <a href="https://imac.hk/applealc-kext-use.html">黑苹果AppleALC声卡驱动安装使用教程</a></p>
 </blockquote>
 <p>我使用 MultiBeast 安装的 ALC1220 驱动在 10.13.6 下不能驱动我的声卡，试过 MultiBeast 的其他驱动也不行，因此使用另一种方法修复。</p>
-<p>在 <a href="https://github.com/acidanthera/AppleALC/releases" target="_blank" rel="noopener">acidanthera/AppleALC/releases</a> 下载最新的 AppleALC 的 RELEASE 版 <code>AppleALC.kext</code>，使用 Kext Wizard 注入这个内核，如下图</p>
+<p>在 <a href="https://github.com/acidanthera/AppleALC/releases">acidanthera&#x2F;AppleALC&#x2F;releases</a> 下载最新的 AppleALC 的 RELEASE 版 <code>AppleALC.kext</code>，使用 Kext Wizard 注入这个内核，如下图</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-225717.jpg" alt="Kext Wizard AppleALC.kext"><br><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-225733.jpg" alt="Kext Wizard AppleALC.kext"></p>
 <p>然后挂载磁盘 EFI 分区（操作如上），把 <code>AppleALC.kext</code> 放入磁盘 EFI 分区的 <code>EFI/CLOVER/kexts/Other/</code>目录中。</p>
-<p>然后在 <a href="https://github.com/acidanthera/AppleALC/tree/master/Resources" target="_blank" rel="noopener">acidanthera/AppleALC/Resources</a> 找到你的声卡型号的文件夹，进入（如我的是 <code>ALC1220</code>）。</p>
+<p>然后在 <a href="https://github.com/acidanthera/AppleALC/tree/master/Resources">acidanthera&#x2F;AppleALC&#x2F;Resources</a> 找到你的声卡型号的文件夹，进入（如我的是 <code>ALC1220</code>）。</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-230207.jpg" alt="ALC1220"></p>
 <p>我的声卡型号看到有 <code>layout1.xml</code>、<code>layout2.xml</code>、<code>layout5.xml</code>、<code>layout7.xml</code>、<code>layout11.xml</code>、<code>layout13.xml</code></p>
 <p>然后在 1、2、5、7、11、13 中随便取一个数。</p>
 <p>使用文本编辑器打开磁盘 EFI 分区的 <code>EFI/CLOVER/config.plist</code> 文件，搜索 <code>&lt;key&gt;Audio&lt;/key&gt;</code>，把它的 <code>integer</code> 改为刚刚取的那个数（如 <code>1</code>）。</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-231402.jpg" alt="Audio"></p>
 <p>保存重启即可。</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-audio.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-audio.jpg"></p>
 <h3 id="修复-USB3-0"><a href="#修复-USB3-0" class="headerlink" title="修复 USB3.0"></a>修复 USB3.0</h3><blockquote>
-<p>参见 <a href="https://hackintosher.com/guides/hackintosh-high-sierra-10-13-6-update-guide/" target="_blank" rel="noopener">HACKINTOSH HIGH SIERRA 10.13.6 UPDATE GUIDE</a></p>
+<p>参见 <a href="https://hackintosher.com/guides/hackintosh-high-sierra-10-13-6-update-guide/">HACKINTOSH HIGH SIERRA 10.13.6 UPDATE GUIDE</a></p>
 </blockquote>
 <p>使用上文描述的操作挂载磁盘的 EFI 分区</p>
 <p>使用 Clover Configurator 打开 <code>/EFI/CLOVER/config.plist</code></p>
@@ -558,29 +553,29 @@
 </ul>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181007-223654.jpg" alt="Clover Configurator USB3.0"></p>
 <p>保存重启即可。</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hackintosh-usb3.jpg" alt=""></p>
-<h3 id="蓝牙免驱"><a href="#蓝牙免驱" class="headerlink" title="蓝牙免驱"></a>蓝牙免驱</h3><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-bluetooth.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hackintosh-usb3.jpg"></p>
+<h3 id="蓝牙免驱"><a href="#蓝牙免驱" class="headerlink" title="蓝牙免驱"></a>蓝牙免驱</h3><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Hackintosh-bluetooth.jpg"></p>
 <h3 id="iMessage、序列号问题"><a href="#iMessage、序列号问题" class="headerlink" title="iMessage、序列号问题"></a>iMessage、序列号问题</h3><blockquote>
-<p>参见 <a href="http://www.ituring.com.cn/article/274156" target="_blank" rel="noopener">[Hackintosh]解决黑苹果无法使用Siri、iMessage等服务</a></p>
+<p>参见 <a href="http://www.ituring.com.cn/article/274156">[Hackintosh]解决黑苹果无法使用Siri、iMessage等服务</a></p>
 </blockquote>
 <h2 id="更换Clover主题"><a href="#更换Clover主题" class="headerlink" title="更换Clover主题"></a>更换Clover主题</h2><p>Clover主题可以到官方仓库下载：</p>
 <ul>
-<li><a href="https://clover-wiki.zetam.org/theme-database" target="_blank" rel="noopener">Clover Theme Repository</a></li>
+<li><a href="https://clover-wiki.zetam.org/theme-database">Clover Theme Repository</a></li>
 </ul>
 <p>也可以使用其他的，比如我使用这个简洁风格的：</p>
 <ul>
-<li><a href="https://github.com/al3xtjames/clover-theme-minimal" target="_blank" rel="noopener">Clover Minimal - A clean theme for the Clover UEFI bootloader</a></li>
+<li><a href="https://github.com/al3xtjames/clover-theme-minimal">Clover Minimal - A clean theme for the Clover UEFI bootloader</a></li>
 </ul>
 <p><img src="https://camo.githubusercontent.com/df4adb0f442a1baf2ec59cf17f3442253619af6f/687474703a2f2f692e696d67626f782e636f6d2f346773734c6453492e706e67" alt="clover-theme-minimal"></p>
 <p>只需下载下来，放到 <code>/EFI/CLOVER/themes</code> 文件夹下，然后使用 Clover Configurator 打开 <code>/EFI/CLOVER/config.plist</code> 更换到这个主题就好啦。</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Jietu20181013-001702.jpg" alt="更换Clover主题"></p>
 <p>另外这个显示启动盘的标签的 <code>Label</code> 建议勾上，这样才知道选择的是哪个盘，保存重启即可。</p>
 <h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><ul>
-<li><a href="https://www.tonymacx86.com/" target="_blank" rel="noopener">tonymacx86</a></li>
-<li><a href="https://blog.daliansky.net/" target="_blank" rel="noopener">黑果小兵的部落阁</a></li>
-<li><a href="https://imac.hk/" target="_blank" rel="noopener">黑苹果乐园</a></li>
-<li><a href="https://www.tonymacx86.com/threads/success-gigabyte-z370-hd3p-i7-8700k-gigabyte-rx580-4gb-mojave-10-14-0.256221/" target="_blank" rel="noopener">[Success] Gigabyte Z370 HD3P - i7 8700K - Gigabyte RX580 4GB - Mojave 10.14.0</a></li>
-<li><a href="https://9to5mac.com/2017/04/28/building-a-gtx-1080-ti-powered-hackintosh-installing-macos-sierra-step-by-step-video/" target="_blank" rel="noopener">Building a GTX 1080 Ti-powered Hackintosh: Installing macOS Sierra step-by-step [Video]</a></li>
+<li><a href="https://www.tonymacx86.com/">tonymacx86</a></li>
+<li><a href="https://blog.daliansky.net/">黑果小兵的部落阁</a></li>
+<li><a href="https://imac.hk/">黑苹果乐园</a></li>
+<li><a href="https://www.tonymacx86.com/threads/success-gigabyte-z370-hd3p-i7-8700k-gigabyte-rx580-4gb-mojave-10-14-0.256221/">[Success] Gigabyte Z370 HD3P - i7 8700K - Gigabyte RX580 4GB - Mojave 10.14.0</a></li>
+<li><a href="https://9to5mac.com/2017/04/28/building-a-gtx-1080-ti-powered-hackintosh-installing-macos-sierra-step-by-step-video/">Building a GTX 1080 Ti-powered Hackintosh: Installing macOS Sierra step-by-step [Video]</a></li>
 </ul>
 
       
@@ -712,10 +707,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -734,7 +729,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -744,10 +739,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -825,7 +820,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">3.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#刻录镜像"><span class="nav-number">4.</span> <span class="nav-text">刻录镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-BIOS"><span class="nav-number">5.</span> <span class="nav-text">设置 BIOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引导出错"><span class="nav-number">6.</span> <span class="nav-text">引导出错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新刻录"><span class="nav-number">7.</span> <span class="nav-text">重新刻录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引导安装"><span class="nav-number">8.</span> <span class="nav-text">引导安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Clover"><span class="nav-number">9.</span> <span class="nav-text">安装 Clover</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Clover-选择"><span class="nav-number">9.1.</span> <span class="nav-text">Clover 选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载-EFI-分区"><span class="nav-number">9.2.</span> <span class="nav-text">挂载 EFI 分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制-Clover"><span class="nav-number">9.3.</span> <span class="nav-text">复制 Clover</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装驱动"><span class="nav-number">10.</span> <span class="nav-text">安装驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新后安装驱动"><span class="nav-number">11.</span> <span class="nav-text">更新后安装驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#驱动独显"><span class="nav-number">11.1.</span> <span class="nav-text">驱动独显</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复-CPU-识别"><span class="nav-number">11.2.</span> <span class="nav-text">修复 CPU 识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复声卡驱动"><span class="nav-number">11.3.</span> <span class="nav-text">修复声卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复-USB3-0"><span class="nav-number">11.4.</span> <span class="nav-text">修复 USB3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#蓝牙免驱"><span class="nav-number">11.5.</span> <span class="nav-text">蓝牙免驱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iMessage、序列号问题"><span class="nav-number">11.6.</span> <span class="nav-text">iMessage、序列号问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换Clover主题"><span class="nav-number">12.</span> <span class="nav-text">更换Clover主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感谢"><span class="nav-number">13.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%BB%E5%BD%95%E9%95%9C%E5%83%8F"><span class="nav-number">4.</span> <span class="nav-text">刻录镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-BIOS"><span class="nav-number">5.</span> <span class="nav-text">设置 BIOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%AF%BC%E5%87%BA%E9%94%99"><span class="nav-number">6.</span> <span class="nav-text">引导出错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E5%88%BB%E5%BD%95"><span class="nav-number">7.</span> <span class="nav-text">重新刻录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%AF%BC%E5%AE%89%E8%A3%85"><span class="nav-number">8.</span> <span class="nav-text">引导安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Clover"><span class="nav-number">9.</span> <span class="nav-text">安装 Clover</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Clover-%E9%80%89%E6%8B%A9"><span class="nav-number">9.1.</span> <span class="nav-text">Clover 选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD-EFI-%E5%88%86%E5%8C%BA"><span class="nav-number">9.2.</span> <span class="nav-text">挂载 EFI 分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6-Clover"><span class="nav-number">9.3.</span> <span class="nav-text">复制 Clover</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%A9%B1%E5%8A%A8"><span class="nav-number">10.</span> <span class="nav-text">安装驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%90%8E%E5%AE%89%E8%A3%85%E9%A9%B1%E5%8A%A8"><span class="nav-number">11.</span> <span class="nav-text">更新后安装驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E7%8B%AC%E6%98%BE"><span class="nav-number">11.1.</span> <span class="nav-text">驱动独显</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8D-CPU-%E8%AF%86%E5%88%AB"><span class="nav-number">11.2.</span> <span class="nav-text">修复 CPU 识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8D%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8"><span class="nav-number">11.3.</span> <span class="nav-text">修复声卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8D-USB3-0"><span class="nav-number">11.4.</span> <span class="nav-text">修复 USB3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%93%9D%E7%89%99%E5%85%8D%E9%A9%B1"><span class="nav-number">11.5.</span> <span class="nav-text">蓝牙免驱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iMessage%E3%80%81%E5%BA%8F%E5%88%97%E5%8F%B7%E9%97%AE%E9%A2%98"><span class="nav-number">11.6.</span> <span class="nav-text">iMessage、序列号问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2Clover%E4%B8%BB%E9%A2%98"><span class="nav-number">12.</span> <span class="nav-text">更换Clover主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%9F%E8%B0%A2"><span class="nav-number">13.</span> <span class="nav-text">感谢</span></a></li></ol></div>
             
 
           </div>
@@ -848,7 +843,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1123,5 +1118,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

@@ -80,27 +80,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="前言本文基本上能完美解决这种库文件无法找到问题。 文中以IceUtil库为例子，你可以推广到其他库，方法相同。 问题描述在 Mac 下用 Homebrew 安装 ZeroC Ice 这个中间件后发现 IceUtil 库缺失，IDE 报了个链接错误，如下图：">
-<meta name="keywords" content="链接装载库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过直接添加或者手动编译添加库，解决 library not found for -lxxx 等的问题">
 <meta property="og:url" content="https://blog.huihut.com/2017/08/23/AddLibraryToSolveLibraryNotFound/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="前言本文基本上能完美解决这种库文件无法找到问题。 文中以IceUtil库为例子，你可以推广到其他库，方法相同。 问题描述在 Mac 下用 Homebrew 安装 ZeroC Ice 这个中间件后发现 IceUtil 库缺失，IDE 报了个链接错误，如下图：">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/LibraryNoFoundForIIceUtil.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeLibIceUtil.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.589Z">
+<meta property="article:published_time" content="2017-08-23T02:48:26.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.589Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="链接装载库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="通过直接添加或者手动编译添加库，解决 library not found for -lxxx 等的问题">
-<meta name="twitter:description" content="前言本文基本上能完美解决这种库文件无法找到问题。 文中以IceUtil库为例子，你可以推广到其他库，方法相同。 问题描述在 Mac 下用 Homebrew 安装 ZeroC Ice 这个中间件后发现 IceUtil 库缺失，IDE 报了个链接错误，如下图：">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/LibraryNoFoundForIIceUtil.jpg">
 
 
@@ -108,9 +106,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -143,7 +141,7 @@
   });
 </script>
   <title> 通过直接添加或者手动编译添加库，解决 library not found for -lxxx 等的问题 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -151,15 +149,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -317,7 +306,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/08/23/AddLibraryToSolveLibraryNotFound/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -411,17 +400,20 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文基本上能完美解决这种库文件无法找到问题。</p>
 <p>文中以<code>IceUtil</code>库为例子，你可以推广到其他库，方法相同。</p>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在 Mac 下用 Homebrew 安装 ZeroC Ice 这个中间件后发现 IceUtil 库缺失，IDE 报了个链接错误，如下图：</p>
-<a id="more"></a>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/LibraryNoFoundForIIceUtil.jpg" alt=""></p>
+<span id="more"></span>
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/LibraryNoFoundForIIceUtil.jpg"></p>
 <h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>这个问题是说链接器在链接的时候找不到 IceUtil 这个库，那我们就告诉它（添加库的路径），让它找到就好啦！</p>
 <p>扩展：</p>
 <ul>
 <li><p>静态库无法链接报错：</p>
-<pre><code>library not found for -lxxx
-</code></pre></li>
+<pre><code>  library not found for -lxxx
+</code></pre>
+</li>
 <li><p>动态库无法装载报错：</p>
-<pre><code>dyld: library not loaded …/libxxx.dylib
-</code></pre></li>
+<pre><code>  dyld: library not loaded …/libxxx.dylib
+</code></pre>
+</li>
 </ul>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><h3 id="方法一：直接添加库"><a href="#方法一：直接添加库" class="headerlink" title="方法一：直接添加库"></a>方法一：直接添加库</h3><p>通常解决办法是：库存在，直接添加路径。</p>
 <p>也就是通常遇到这个问题的时候，库是已经编译安装好了的，但是 IED 不能找到。这样的话就直接添加库的路径就好了。</p>
@@ -429,14 +421,16 @@
 <p>库一般放在系统默认处或者安装到特定地方。</p>
 <ol>
 <li><p>Linux 系统默认库放在：</p>
-<pre><code>/lib
-/usr/lib
-/usr/local/lib
-...
-</code></pre></li>
+<pre><code> /lib
+ /usr/lib
+ /usr/local/lib
+ ...
+</code></pre>
+</li>
 <li><p>安装到特定地方，如我 Mac 的用 Homebrew 安装到：</p>
-<pre><code>/usr/local/Cellar/ice/3.7.0/lib
-</code></pre></li>
+<pre><code> /usr/local/Cellar/ice/3.7.0/lib
+</code></pre>
+</li>
 </ol>
 <h4 id="第二步：添加路径"><a href="#第二步：添加路径" class="headerlink" title="第二步：添加路径"></a>第二步：添加路径</h4><p>添加库一般以下三种方法任选其一：</p>
 <ol>
@@ -446,29 +440,19 @@
 </ol>
 </li>
 </ol>
-<pre><code>#添加库的bin文件夹路径
-export PATH =$PATH:$HOME/bin
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#添加库的bin文件夹路径</span><br><span class="line">export PATH =$PATH:$HOME/bin</span><br><span class="line"></span><br><span class="line">#添加到gcc头文件</span><br><span class="line">export C_INCLUDE_PATH=$C_INCLUDE_PATH:/MyLib</span><br><span class="line"></span><br><span class="line">#添加到g++头文件路径</span><br><span class="line">export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/MyLib</span><br><span class="line"></span><br><span class="line">#添加到动态库</span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/MyLib</span><br><span class="line"></span><br><span class="line">#添加到静态库</span><br><span class="line">export LIBRARY_PATH=$LIBRARY_PATH:/MyLib</span><br></pre></td></tr></table></figure>
 
-#添加到gcc头文件
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:/MyLib
 
-#添加到g++头文件路径
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/MyLib
-
-#添加到动态库
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/MyLib
-
-#添加到静态库
-export LIBRARY_PATH=$LIBRARY_PATH:/MyLib
-</code></pre><ol start="2">
+<ol start="2">
 <li><p>IED 编译环境添加</p>
 <p> 因 IDE 不同而不同，如 Qt 在<code>项目</code>-<code>构建设置</code>-<code>构建环境</code>处添加</p>
 <p> 具体请参考：<a href="https://blog.huihut.com/2017/06/05/QtDyldLibraryNotLoaded/">QT 无法链接动态库 dyld library not loaded … libhdf5.100.dylib</a></p>
 </li>
 <li><p>代码添加</p>
-<pre><code># 如 Qt pro 文件添加
-LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
-</code></pre></li>
+<pre><code> # 如 Qt pro 文件添加
+ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
+</code></pre>
+</li>
 </ol>
 <p>这样，IDE就能找到库啦！</p>
 <h3 id="方法二：手动编译添加库"><a href="#方法二：手动编译添加库" class="headerlink" title="方法二：手动编译添加库"></a>方法二：手动编译添加库</h3><p>若是你的库不存在，也就是说安装的时候没有编译生成这个库文件或者安装后莫名的不见了，这样只能重新安装或者手动编译添加库。以下讲手动编译添加库。</p>
@@ -476,10 +460,12 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
 <h4 id="第一步：找库-1"><a href="#第一步：找库-1" class="headerlink" title="第一步：找库"></a>第一步：找库</h4><p>对的，还是要找找的，不然怎么知道没有呢！[捂脸]</p>
 <p>可以在一些常放库的文件夹下找，尽量靠近根目录，如：</p>
 <pre><code>sudo find /usr -name &quot;libIceUtil*&quot;
-</code></pre><p>扩展：</p>
+</code></pre>
+<p>扩展：</p>
 <p>如果找到名为<code>libIceUtil.3.7.0.a</code>的库，但是找不到<code>libIceUtil.a</code>的库，可以试着拷贝<code>libIceUtil.3.7.0.a</code>库成名为<code>libIceUtil.a</code>的库</p>
 <pre><code>cp ./libIceUtil.3.7.0.a ./libIceUtil.a
-</code></pre><p>这个方法适用于：</p>
+</code></pre>
+<p>这个方法适用于：</p>
 <ul>
 <li>同版本下，缺失没版本号的库文件</li>
 <li>不同版本下，库文件没因为版本的改变而发生改变</li>
@@ -492,16 +478,20 @@ cd ice/cpp
 
 #直接编译
 make
-</code></pre><p>编译好后就能找到这个库了：<code>cpp/lib/libIceUtil.a</code></p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeLibIceUtil.jpg" alt=""></p>
+</code></pre>
+<p>编译好后就能找到这个库了：<code>cpp/lib/libIceUtil.a</code></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/MakeLibIceUtil.jpg"></p>
 <p>其他库请参考官方的编译安装教程</p>
-<p>附：<a href="https://github.com/zeroc-ice/ice/blob/master/cpp/BuildInstructionsMacOS.md" target="_blank" rel="noopener">Building Ice for C++ on macOS</a></p>
+<p>附：<a href="https://github.com/zeroc-ice/ice/blob/master/cpp/BuildInstructionsMacOS.md">Building Ice for C++ on macOS</a></p>
 <h4 id="第三步，拷贝库到安装后的文件夹"><a href="#第三步，拷贝库到安装后的文件夹" class="headerlink" title="第三步，拷贝库到安装后的文件夹"></a>第三步，拷贝库到安装后的文件夹</h4><p>到<code>ice/cpp/lib</code>目录下：</p>
-<pre><code>cp ./libIceUtil.a /usr/local/Cellar/ice/3.7.0/lib
-</code></pre><h4 id="第四步：添加路径"><a href="#第四步：添加路径" class="headerlink" title="第四步：添加路径"></a>第四步：添加路径</h4><p>上面已经说了三种方法，这里直接代码添加：</p>
+<pre><code> cp ./libIceUtil.a /usr/local/Cellar/ice/3.7.0/lib
+ 
+</code></pre>
+<h4 id="第四步：添加路径"><a href="#第四步：添加路径" class="headerlink" title="第四步：添加路径"></a>第四步：添加路径</h4><p>上面已经说了三种方法，这里直接代码添加：</p>
 <pre><code> # 如 Qt pro 文件添加
 LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
-</code></pre><p>这样就解决了！</p>
+</code></pre>
+<p>这样就解决了！</p>
 <h2 id="唠叨"><a href="#唠叨" class="headerlink" title="唠叨"></a>唠叨</h2><p>以上这些方法基本上能完美解决这种库文件无法找到问题，如果有本文没有提及的欢迎留言讨论。</p>
 
       
@@ -547,7 +537,7 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
       
         <div class="post-tags">
           
-            <a href="/tags/链接装载库/" rel="tag"># 链接装载库</a>
+            <a href="/tags/%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93/" rel="tag"># 链接装载库</a>
           
         </div>
       
@@ -633,10 +623,10 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -655,7 +645,7 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -665,10 +655,10 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -746,7 +736,7 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析"><span class="nav-number">3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">4.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：直接添加库"><span class="nav-number">4.1.</span> <span class="nav-text">方法一：直接添加库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步：找库"><span class="nav-number">4.1.1.</span> <span class="nav-text">第一步：找库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步：添加路径"><span class="nav-number">4.1.2.</span> <span class="nav-text">第二步：添加路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：手动编译添加库"><span class="nav-number">4.2.</span> <span class="nav-text">方法二：手动编译添加库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步：找库-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">第一步：找库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步，手动编译"><span class="nav-number">4.2.2.</span> <span class="nav-text">第二步，手动编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三步，拷贝库到安装后的文件夹"><span class="nav-number">4.2.3.</span> <span class="nav-text">第三步，拷贝库到安装后的文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四步：添加路径"><span class="nav-number">4.2.4.</span> <span class="nav-text">第四步：添加路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唠叨"><span class="nav-number">5.</span> <span class="nav-text">唠叨</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E5%BA%93"><span class="nav-number">4.1.</span> <span class="nav-text">方法一：直接添加库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%89%BE%E5%BA%93"><span class="nav-number">4.1.1.</span> <span class="nav-text">第一步：找库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%B7%BB%E5%8A%A0%E8%B7%AF%E5%BE%84"><span class="nav-number">4.1.2.</span> <span class="nav-text">第二步：添加路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%B7%BB%E5%8A%A0%E5%BA%93"><span class="nav-number">4.2.</span> <span class="nav-text">方法二：手动编译添加库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%89%BE%E5%BA%93-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">第一步：找库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%8C%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91"><span class="nav-number">4.2.2.</span> <span class="nav-text">第二步，手动编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%8C%E6%8B%B7%E8%B4%9D%E5%BA%93%E5%88%B0%E5%AE%89%E8%A3%85%E5%90%8E%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">4.2.3.</span> <span class="nav-text">第三步，拷贝库到安装后的文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%B7%BB%E5%8A%A0%E8%B7%AF%E5%BE%84"><span class="nav-number">4.2.4.</span> <span class="nav-text">第四步：添加路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%94%A0%E5%8F%A8"><span class="nav-number">5.</span> <span class="nav-text">唠叨</span></a></li></ol></div>
             
 
           </div>
@@ -769,7 +759,7 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1044,5 +1034,5 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

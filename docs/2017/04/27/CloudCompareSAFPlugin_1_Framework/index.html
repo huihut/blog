@@ -80,31 +80,30 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
-
 
 
 
 
 
 <meta name="description" content="唠叨本文唠叨了些CloudComapre这个开源软件的插件编写。 虽然这篇是入门教程，但是作为一只有梦想的程序猿，怎能像很多入门教程那样写个残缺的入门教程呢！ 所以这是一个完整插件的入门教程，我们要写的插件是qSAF(Scan Angle Filter)，这是可以过滤给定范围内点的扫描角度的插件。 下面分三篇来介绍，分别是插件框架篇、数据结构篇、算法实现篇。 这是第一篇，插件框架篇，你可以根据本文">
-<meta name="keywords" content="CloudCompare,QT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CloudCompare插件编写一（插件框架）">
 <meta property="og:url" content="https://blog.huihut.com/2017/04/27/CloudCompareSAFPlugin_1_Framework/index.html">
 <meta property="og:site_name" content="HuiHut">
 <meta property="og:description" content="唠叨本文唠叨了些CloudComapre这个开源软件的插件编写。 虽然这篇是入门教程，但是作为一只有梦想的程序猿，怎能像很多入门教程那样写个残缺的入门教程呢！ 所以这是一个完整插件的入门教程，我们要写的插件是qSAF(Scan Angle Filter)，这是可以过滤给定范围内点的扫描角度的插件。 下面分三篇来介绍，分别是插件框架篇、数据结构篇、算法实现篇。 这是第一篇，插件框架篇，你可以根据本文">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
 <meta property="og:image" content="http://www.cloudcompare.org/images/snapshot2_small.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFFile.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFFile2.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTqSAFPluginsPro.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFShoudNotBeUsedAsIs.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFStartFromError.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.647Z">
+<meta property="article:published_time" content="2017-04-27T10:11:53.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.647Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="CloudCompare">
+<meta property="article:tag" content="QT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CloudCompare插件编写一（插件框架）">
-<meta name="twitter:description" content="唠叨本文唠叨了些CloudComapre这个开源软件的插件编写。 虽然这篇是入门教程，但是作为一只有梦想的程序猿，怎能像很多入门教程那样写个残缺的入门教程呢！ 所以这是一个完整插件的入门教程，我们要写的插件是qSAF(Scan Angle Filter)，这是可以过滤给定范围内点的扫描角度的插件。 下面分三篇来介绍，分别是插件框架篇、数据结构篇、算法实现篇。 这是第一篇，插件框架篇，你可以根据本文">
 <meta name="twitter:image" content="http://www.cloudcompare.org/images/snapshot2_small.jpg">
 
 
@@ -112,9 +111,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -147,7 +146,7 @@
   });
 </script>
   <title> CloudCompare插件编写一（插件框架） | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -155,15 +154,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -321,7 +311,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/04/27/CloudCompareSAFPlugin_1_Framework/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -418,50 +408,53 @@
 <p>下面分三篇来介绍，分别是<a href="https://blog.huihut.com/2017/04/27/CloudCompareSAFPlugin_1_Framework/">插件框架篇</a>、<a href="https://blog.huihut.com/2017/04/27/CloudCompareSAFPlugin_2_DataStructure/">数据结构篇</a>、<a href="https://blog.huihut.com/2017/04/27/CloudCompareSAFPlugin_3_Algorithm/">算法实现篇</a>。</p>
 <p>这是第一篇，<strong>插件框架篇</strong>，你可以根据本文改成自己的插件，待卿临幸。</p>
 <p><strong>特别注意</strong>：本文的CloudCompare源码构建的是Qt工程并使用Qt Creator开发，并不是Visual Studio。</p>
-<p>qSAF源码：<a href="https://github.com/huihut/qSAF" target="_blank" rel="noopener">Github . qSAF</a></p>
+<p>qSAF源码：<a href="https://github.com/huihut/qSAF">Github . qSAF</a></p>
 <h2 id="CloudComapre"><a href="#CloudComapre" class="headerlink" title="CloudComapre"></a>CloudComapre</h2><p>CloudComapre是一个开源的3D点云和网格的处理软件，开可以处理各类点云格式的数据。</p>
 <blockquote>
 <ul>
-<li>官网：<a href="http://www.cloudcompare.org/" target="_blank" rel="noopener">http://www.cloudcompare.org/</a></li>
-<li>Github：<a href="https://github.com/cloudcompare/cloudcompare" target="_blank" rel="noopener">https://github.com/cloudcompare/cloudcompare</a></li>
+<li>官网：<a href="http://www.cloudcompare.org/">http://www.cloudcompare.org/</a></li>
+<li>Github：<a href="https://github.com/cloudcompare/cloudcompare">https://github.com/cloudcompare/cloudcompare</a></li>
 </ul>
 </blockquote>
-<a id="more"></a>
-<p><img src="http://www.cloudcompare.org/images/snapshot2_small.jpg" alt=""></p>
-<h2 id="CloudComapre插件编写"><a href="#CloudComapre插件编写" class="headerlink" title="CloudComapre插件编写"></a>CloudComapre插件编写</h2><h3 id="使用qDummyPlugin插件模板创建自己的插件"><a href="#使用qDummyPlugin插件模板创建自己的插件" class="headerlink" title="使用qDummyPlugin插件模板创建自己的插件"></a>使用qDummyPlugin插件模板创建自己的插件</h3><p>【2018年5月30日改：现在Github上CloudComapre仓库的master分支已经移除qDummyPlugin插件，取而代之的是 ExamplePlugin插件： <a href="https://github.com/CloudCompare/CloudCompare/tree/master/plugins/example/ExamplePlugin" target="_blank" rel="noopener">CloudCompare/plugins/example/ExamplePlugin</a> ，原qDummyPlugin插件可在2.9.x分支或者其他早期分支上找到：<a href="https://github.com/CloudCompare/CloudCompare/tree/2.9.x/plugins/qDummyPlugin" target="_blank" rel="noopener">qDummyPlugin</a>】</p>
+<span id="more"></span>
+
+
+<p><img src="http://www.cloudcompare.org/images/snapshot2_small.jpg"></p>
+<h2 id="CloudComapre插件编写"><a href="#CloudComapre插件编写" class="headerlink" title="CloudComapre插件编写"></a>CloudComapre插件编写</h2><h3 id="使用qDummyPlugin插件模板创建自己的插件"><a href="#使用qDummyPlugin插件模板创建自己的插件" class="headerlink" title="使用qDummyPlugin插件模板创建自己的插件"></a>使用qDummyPlugin插件模板创建自己的插件</h3><p>【2018年5月30日改：现在Github上CloudComapre仓库的master分支已经移除qDummyPlugin插件，取而代之的是 ExamplePlugin插件： <a href="https://github.com/CloudCompare/CloudCompare/tree/master/plugins/example/ExamplePlugin">CloudCompare&#x2F;plugins&#x2F;example&#x2F;ExamplePlugin</a> ，原qDummyPlugin插件可在2.9.x分支或者其他早期分支上找到：<a href="https://github.com/CloudCompare/CloudCompare/tree/2.9.x/plugins/qDummyPlugin">qDummyPlugin</a>】</p>
 <p>首先在Github上git下CloudComapre的源码，</p>
 <p>再到 <code>CloudComapre/plugins/qDummyPlugin</code> 下</p>
 <p>这个<code>qDummyPlugin</code>就是个插件的模板，用它来写自己的插件。</p>
 <p>我们把这个模板插件文件夹拷贝一份，改为自己的插件名<code>qSAF</code>（当然，你也可以改为其他你喜欢的，以下不做累述）</p>
 <p>现在<code>qSAF</code>里面有如下几个文件</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFFile.jpg" alt="qSAFFile.jpg"></p>
-<p>我们需要做的是<strong>把里面的<code>qDummyPlugin</code>及类似的名字改为自己的<code>qSAF</code></strong>。</p>
+<p>我们需要做的是**把里面的<code>qDummyPlugin</code>及类似的名字改为自己的<code>qSAF</code>**。</p>
 <p><strong>注意：文件名和文件里面内容都要修改！</strong></p>
 <p>如：</p>
 <p>原本<code>CMakeLists.txt</code>文件里面是这样的：</p>
 <pre><code>cmake_minimum_required(VERSION 3.0)
 
-#REPLACE ALL &apos;DUMMY&apos; OCCURENCES BY YOUR PLUGIN NAME
+#REPLACE ALL &#39;DUMMY&#39; OCCURENCES BY YOUR PLUGIN NAME
 #AND ADAPT THE CODE BELOW TO YOUR OWN NEEDS!
 
 option( INSTALL_QDUMMY_PLUGIN &quot;Check to install qDUMMY plugin&quot; OFF )
 
-# CloudCompare &apos;DUMMY&apos; plugin
+# CloudCompare &#39;DUMMY&#39; plugin
 if (INSTALL_QDUMMY_PLUGIN)
     project( QDUMMY_PLUGIN )
 
     #load necessary libraries (see qPCV for an example)
     #add_subdirectory (LIB1)
 
-    #if the plugin is an &apos;OpenGL filter&apos;, uncomment the line below
+    #if the plugin is an &#39;OpenGL filter&#39;, uncomment the line below
     #set( CC_OPENGL_FILTER ON BOOL)
     include( ../CMakePluginTpl.cmake )
 
     #set dependencies to necessary libraries (see qPCV for an example)
-    #target_link_libraries( ${PROJECT_NAME} LIB1 )
-    #include_directories( ${LIB1_INCLUDE_DIR} )
+    #target_link_libraries( $&#123;PROJECT_NAME&#125; LIB1 )
+    #include_directories( $&#123;LIB1_INCLUDE_DIR&#125; )
 endif()
-</code></pre><p>修改后的<code>CMakeLists.txt</code>文件里面是这样的：</p>
+</code></pre>
+<p>修改后的<code>CMakeLists.txt</code>文件里面是这样的：</p>
 <pre><code>cmake_minimum_required(VERSION 3.0)
 
 option( INSTALL_QSAF_PLUGIN &quot;Check to install qSAF plugin&quot; OFF )
@@ -475,29 +468,31 @@ if (INSTALL_QSAF_PLUGIN)
     include( ../CMakePluginTpl.cmake )
 
 endif()
-</code></pre><p>剩下的<code>qSAF.h</code>、<code>qSAF.cpp</code>和<code>qSAF.qrc</code>就不一一列出了</p>
+</code></pre>
+<p>剩下的<code>qSAF.h</code>、<code>qSAF.cpp</code>和<code>qSAF.qrc</code>就不一一列出了</p>
 <p>修改后变成这样：</p>
 <p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFFile2.jpg" alt="qSAFFile2"></p>
 <h3 id="使用qmake构建pro文件"><a href="#使用qmake构建pro文件" class="headerlink" title="使用qmake构建pro文件"></a>使用qmake构建pro文件</h3><p>在终端进入到你的插件的<code>qSAF</code>目录，执行：</p>
 <pre><code>qmake -project -r CMakeLists.txt
-</code></pre><p>就会在<code>qSAF</code>目录下构建一个项目的pro文件。</p>
+</code></pre>
+<p>就会在<code>qSAF</code>目录下构建一个项目的pro文件。</p>
 <h3 id="导入工程到QT"><a href="#导入工程到QT" class="headerlink" title="导入工程到QT"></a>导入工程到QT</h3><p>现在把CloudComapre导入到QT，</p>
 <p>在<code>CloudComapre-plugins-plugins.pro</code>中，加上自己的插件：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTqSAFPluginsPro.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTqSAFPluginsPro.jpg"></p>
 <p>保存刷新后就会在项目上看到了。</p>
 <h3 id="pro文件编写"><a href="#pro文件编写" class="headerlink" title="pro文件编写"></a>pro文件编写</h3><p>由于qmake自动生成的pro文件不适合我们要写的插件，所以要自己修改pro文件。</p>
 <p>pro文件的编写可以参考：</p>
 <p><a href="https://blog.huihut.com/2017/04/26/QTProFile/">QT的pro文件编写</a></p>
 <p>里面的常规pro文件就是qSAF的。</p>
 <p>里面的路径可以不用修改，具体看你项目的Release生成的位置，</p>
-<p><strong><em>特别注意：指定生成路径中的libs和plugins要正确</em></strong></p>
+<p><em><strong>特别注意：指定生成路径中的libs和plugins要正确</strong></em></p>
 <h3 id="完成模板插件框架"><a href="#完成模板插件框架" class="headerlink" title="完成模板插件框架"></a>完成模板插件框架</h3><p>没错！这就完成了，你的插件已经做出来了！现在可以Run一下或者Debug一下看看啦~</p>
 <p>选中点云，使用<code>qSAF</code>，会这样：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFShoudNotBeUsedAsIs.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFShoudNotBeUsedAsIs.jpg"></p>
 <p>莫慌！这是正常现象，因为你的<code>qSAF</code>具体实现还没有写呢！</p>
 <h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><h4 id="1-编译出错"><a href="#1-编译出错" class="headerlink" title="1. 编译出错"></a>1. 编译出错</h4><p>可能原因：</p>
 <ul>
-<li><code>qSAF.h</code>、<code>qSAF.cpp</code>和<code>qSAF.qrc</code>这三个文件里面的<strong><code>qDummyPlugin</code>及类似的名字要改为自己的<code>qSAF</code></strong>，如果改错或没改，可能报错。</li>
+<li><code>qSAF.h</code>、<code>qSAF.cpp</code>和<code>qSAF.qrc</code>这三个文件里面的**<code>qDummyPlugin</code>及类似的名字要改为自己的<code>qSAF</code>**，如果改错或没改，可能报错。</li>
 <li>自己写的代码有错，这个视情况而定</li>
 </ul>
 <h4 id="2-运行的CloudComapre插件上没有你编写的插件的快捷方式"><a href="#2-运行的CloudComapre插件上没有你编写的插件的快捷方式" class="headerlink" title="2. 运行的CloudComapre插件上没有你编写的插件的快捷方式"></a>2. 运行的CloudComapre插件上没有你编写的插件的快捷方式</h4><p>可能原因</p>
@@ -510,20 +505,21 @@ endif()
 Q_PLUGIN_METADATA(IID &quot;cccorp.cloudcompare.plugin.qSAF&quot;)
 
 // 设置插件名字
-virtual QString getName() const override { return &quot;SAF&quot;; }
+virtual QString getName() const override &#123; return &quot;SAF&quot;; &#125;
 
 // 设置插件的描述
-virtual QString getDescription() const override { return &quot;Filter the scanning angle in a range of points&quot;; }
+virtual QString getDescription() const override &#123; return &quot;Filter the scanning angle in a range of points&quot;; &#125;
 
 // 设置插件图标，这个要在 qSAF.cpp 里设置图标路径
 virtual QIcon getIcon() const override;
 
 // 设置插件要执行的操作（重点）
 void doAction();
-</code></pre><h3 id="插件doAction"><a href="#插件doAction" class="headerlink" title="插件doAction()"></a>插件doAction()</h3><p>我们编写插件是要做些事情，在<code>CloudComapre</code>插件中就是在doAction()中实现按下插件<code>SAF</code>后要做的事。</p>
+</code></pre>
+<h3 id="插件doAction"><a href="#插件doAction" class="headerlink" title="插件doAction()"></a>插件doAction()</h3><p>我们编写插件是要做些事情，在<code>CloudComapre</code>插件中就是在doAction()中实现按下插件<code>SAF</code>后要做的事。</p>
 <p>这个函数在<code>qSAF.cpp</code>中，你会发现复制的模板插件的<code>doAction()</code>是这样的（把<code>qDummyPlugin</code>改为<code>qSAF</code>啦）：</p>
 <pre><code>void qSAF::doAction()
-{
+&#123;
     //m_app should have already been initialized by CC when plugin is loaded!
     //(--&gt; pure internal check)
     assert(m_app);
@@ -537,23 +533,27 @@ void doAction();
 
     //This is how you can output messages
     m_app-&gt;dispToConsole(&quot;[qSAF] Hello world!&quot;,ccMainAppInterface::STD_CONSOLE_MESSAGE); //a standard message is displayed in the console
-    m_app-&gt;dispToConsole(&quot;[qSAF] Warning: qSAF plugin shouldn&apos;t be used as is!&quot;,ccMainAppInterface::WRN_CONSOLE_MESSAGE); //a warning message is displayed in the console
-    m_app-&gt;dispToConsole(&quot;qSAF plugin shouldn&apos;t be used as is!&quot;,ccMainAppInterface::ERR_CONSOLE_MESSAGE); //an error message is displayed in the console AND an error box will pop-up!
+    m_app-&gt;dispToConsole(&quot;[qSAF] Warning: qSAF plugin shouldn&#39;t be used as is!&quot;,ccMainAppInterface::WRN_CONSOLE_MESSAGE); //a warning message is displayed in the console
+    m_app-&gt;dispToConsole(&quot;qSAF plugin shouldn&#39;t be used as is!&quot;,ccMainAppInterface::ERR_CONSOLE_MESSAGE); //an error message is displayed in the console AND an error box will pop-up!
 
     /*** HERE ENDS THE ACTION ***/
 
-}
-</code></pre><p>我们要做的就是在</p>
+&#125;
+</code></pre>
+<p>我们要做的就是在</p>
 <pre><code>/*** HERE STARTS THE ACTION ***/
-</code></pre><p>下面写自己的插件代码。</p>
+</code></pre>
+<p>下面写自己的插件代码。</p>
 <p>刚才你看的错误信息就是这句：</p>
-<pre><code>m_app-&gt;dispToConsole(&quot;qSAF plugin shouldn&apos;t be used as is!&quot;,ccMainAppInterface::ERR_CONSOLE_MESSAGE); 
-</code></pre><p>这是控制台输出的错误信息。</p>
+<pre><code>m_app-&gt;dispToConsole(&quot;qSAF plugin shouldn&#39;t be used as is!&quot;,ccMainAppInterface::ERR_CONSOLE_MESSAGE); 
+</code></pre>
+<p>这是控制台输出的错误信息。</p>
 <p>错误信息(<code>ERR_CONSOLE_MESSAGE</code>)同时在控制台和窗体形式出现，而其他标准信息(<code>STD_CONSOLE_MESSAGE</code>)、警告信息(<code>WRN_CONSOLE_MESSAGE</code>)，则只在控制台显示。</p>
 <p>现在删掉<code>/*** HERE STARTS THE ACTION ***/</code>下面的，改为自己的一句：</p>
 <pre><code>m_app-&gt;dispToConsole(&quot;[qSAF] 程序是从错误开始的！&quot;,ccMainAppInterface::ERR_CONSOLE_MESSAGE);
-</code></pre><p>结果如下：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFStartFromError.jpg" alt=""></p>
+</code></pre>
+<p>结果如下：</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/qSAFStartFromError.jpg"></p>
 <h2 id="插件框架完成"><a href="#插件框架完成" class="headerlink" title="插件框架完成"></a>插件框架完成</h2><p>现在已经完成了插件框架的编写啦。</p>
 <p>其实只要使用<code>CloudComapre</code>提供的插件模板<code>qDummyPlugin</code>，改成自己的就可以啦。</p>
 <p>现在可以发挥你的想象力，在<code>doAction()</code>里面随心所欲地做各种事情啦。</p>
@@ -693,10 +693,10 @@ void doAction();
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -715,7 +715,7 @@ void doAction();
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -725,10 +725,10 @@ void doAction();
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -806,7 +806,7 @@ void doAction();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#唠叨"><span class="nav-number">1.</span> <span class="nav-text">唠叨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CloudComapre"><span class="nav-number">2.</span> <span class="nav-text">CloudComapre</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CloudComapre插件编写"><span class="nav-number">3.</span> <span class="nav-text">CloudComapre插件编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用qDummyPlugin插件模板创建自己的插件"><span class="nav-number">3.1.</span> <span class="nav-text">使用qDummyPlugin插件模板创建自己的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用qmake构建pro文件"><span class="nav-number">3.2.</span> <span class="nav-text">使用qmake构建pro文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入工程到QT"><span class="nav-number">3.3.</span> <span class="nav-text">导入工程到QT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pro文件编写"><span class="nav-number">3.4.</span> <span class="nav-text">pro文件编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完成模板插件框架"><span class="nav-number">3.5.</span> <span class="nav-text">完成模板插件框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到问题"><span class="nav-number">3.6.</span> <span class="nav-text">遇到问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-编译出错"><span class="nav-number">3.6.1.</span> <span class="nav-text">1. 编译出错</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-运行的CloudComapre插件上没有你编写的插件的快捷方式"><span class="nav-number">3.6.2.</span> <span class="nav-text">2. 运行的CloudComapre插件上没有你编写的插件的快捷方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个性化插件"><span class="nav-number">3.7.</span> <span class="nav-text">个性化插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件doAction"><span class="nav-number">3.8.</span> <span class="nav-text">插件doAction()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件框架完成"><span class="nav-number">4.</span> <span class="nav-text">插件框架完成</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%94%A0%E5%8F%A8"><span class="nav-number">1.</span> <span class="nav-text">唠叨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CloudComapre"><span class="nav-number">2.</span> <span class="nav-text">CloudComapre</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CloudComapre%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99"><span class="nav-number">3.</span> <span class="nav-text">CloudComapre插件编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8qDummyPlugin%E6%8F%92%E4%BB%B6%E6%A8%A1%E6%9D%BF%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">使用qDummyPlugin插件模板创建自己的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8qmake%E6%9E%84%E5%BB%BApro%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">使用qmake构建pro文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%B7%A5%E7%A8%8B%E5%88%B0QT"><span class="nav-number">3.3.</span> <span class="nav-text">导入工程到QT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pro%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99"><span class="nav-number">3.4.</span> <span class="nav-text">pro文件编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E6%A8%A1%E6%9D%BF%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6"><span class="nav-number">3.5.</span> <span class="nav-text">完成模板插件框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.6.</span> <span class="nav-text">遇到问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BC%96%E8%AF%91%E5%87%BA%E9%94%99"><span class="nav-number">3.6.1.</span> <span class="nav-text">1. 编译出错</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%BF%90%E8%A1%8C%E7%9A%84CloudComapre%E6%8F%92%E4%BB%B6%E4%B8%8A%E6%B2%A1%E6%9C%89%E4%BD%A0%E7%BC%96%E5%86%99%E7%9A%84%E6%8F%92%E4%BB%B6%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F"><span class="nav-number">3.6.2.</span> <span class="nav-text">2. 运行的CloudComapre插件上没有你编写的插件的快捷方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AA%E6%80%A7%E5%8C%96%E6%8F%92%E4%BB%B6"><span class="nav-number">3.7.</span> <span class="nav-text">个性化插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6doAction"><span class="nav-number">3.8.</span> <span class="nav-text">插件doAction()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6%E5%AE%8C%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">插件框架完成</span></a></li></ol></div>
             
 
           </div>
@@ -829,7 +829,7 @@ void doAction();
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1104,5 +1104,5 @@ void doAction();
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

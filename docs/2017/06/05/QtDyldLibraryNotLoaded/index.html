@@ -80,29 +80,28 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="qt dyld library not loaded …/libhdf5.100.dylib 分析无法链接动态库，考虑手动添加链接。">
-<meta name="keywords" content="链接装载库,QT">
+<meta name="description" content="qt dyld library not loaded …&#x2F;libhdf5.100.dylib 分析无法链接动态库，考虑手动添加链接。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QT 无法链接动态库 dyld library not loaded ... libhdf5.100.dylib">
 <meta property="og:url" content="https://blog.huihut.com/2017/06/05/QtDyldLibraryNotLoaded/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="qt dyld library not loaded …/libhdf5.100.dylib 分析无法链接动态库，考虑手动添加链接。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="qt dyld library not loaded …&#x2F;libhdf5.100.dylib 分析无法链接动态库，考虑手动添加链接。">
+<meta property="og:locale">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hdf5-lib-dylib.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTRunEnvironment.jpg">
 <meta property="og:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QtDebugEnvironment.jpg">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:published_time" content="2017-06-05T08:14:05.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="链接装载库">
+<meta property="article:tag" content="QT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QT 无法链接动态库 dyld library not loaded ... libhdf5.100.dylib">
-<meta name="twitter:description" content="qt dyld library not loaded …/libhdf5.100.dylib 分析无法链接动态库，考虑手动添加链接。">
 <meta name="twitter:image" content="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png">
 
 
@@ -110,9 +109,9 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -145,7 +144,7 @@
   });
 </script>
   <title> QT 无法链接动态库 dyld library not loaded ... libhdf5.100.dylib | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -153,15 +152,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -319,7 +309,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/06/05/QtDyldLibraryNotLoaded/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -410,19 +400,21 @@
       
 
       
-        <h2 id="qt-dyld-library-not-loaded-…-libhdf5-100-dylib"><a href="#qt-dyld-library-not-loaded-…-libhdf5-100-dylib" class="headerlink" title="qt dyld library not loaded …/libhdf5.100.dylib"></a>qt dyld library not loaded …/libhdf5.100.dylib</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png" alt="DyldLibraryNotLoaded"></p>
+        <h2 id="qt-dyld-library-not-loaded-…-libhdf5-100-dylib"><a href="#qt-dyld-library-not-loaded-…-libhdf5-100-dylib" class="headerlink" title="qt dyld library not loaded …&#x2F;libhdf5.100.dylib"></a>qt dyld library not loaded …&#x2F;libhdf5.100.dylib</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png" alt="DyldLibraryNotLoaded"></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>无法链接动态库，考虑手动添加链接。</p>
-<a id="more"></a>
-<h2 id="找到-libhdf5-100-dylib-文件及路径"><a href="#找到-libhdf5-100-dylib-文件及路径" class="headerlink" title="找到 libhdf5.100.dylib 文件及路径"></a>找到 libhdf5.100.dylib 文件及路径</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hdf5-lib-dylib.jpg" alt=""></p>
+<span id="more"></span>
+
+<h2 id="找到-libhdf5-100-dylib-文件及路径"><a href="#找到-libhdf5-100-dylib-文件及路径" class="headerlink" title="找到 libhdf5.100.dylib 文件及路径"></a>找到 libhdf5.100.dylib 文件及路径</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hdf5-lib-dylib.jpg"></p>
 <pre><code>/usr/local/opt/hdf5/lib
-</code></pre><h2 id="添加到-QT-Run-Environment"><a href="#添加到-QT-Run-Environment" class="headerlink" title="添加到 QT Run Environment"></a>添加到 QT Run Environment</h2><p>把路径添加到<code>Run Environment</code>中的<code>DYLD_LIBRARY_PATH</code>变量的值中。</p>
+</code></pre>
+<h2 id="添加到-QT-Run-Environment"><a href="#添加到-QT-Run-Environment" class="headerlink" title="添加到 QT Run Environment"></a>添加到 QT Run Environment</h2><p>把路径添加到<code>Run Environment</code>中的<code>DYLD_LIBRARY_PATH</code>变量的值中。</p>
 <p>若无此变量则添加，若已有则按编辑并在后面加上路径。</p>
 <p>Run!</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTRunEnvironment.jpg" alt=""></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTRunEnvironment.jpg"></p>
 <h2 id="补充：添加到构建设置-构建环境中"><a href="#补充：添加到构建设置-构建环境中" class="headerlink" title="补充：添加到构建设置-构建环境中"></a>补充：添加到构建设置-构建环境中</h2><p>如果添加到 <code>Run Environment</code> 中还是不行，可以添加到<code>Build</code>-<code>构建设置</code>-<code>构建环境</code>中。</p>
 <p>Debug!</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QtDebugEnvironment.jpg" alt=""></p>
-<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://stackoverflow.com/questions/13611740/qt-mac-osx-10-8-dyld-library-not-loaded-image-not-found" target="_blank" rel="noopener">stackoverflow . qt mac osx 10.8 dyld: library not loaded…image not found</a></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QtDebugEnvironment.jpg"></p>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://stackoverflow.com/questions/13611740/qt-mac-osx-10-8-dyld-library-not-loaded-image-not-found">stackoverflow . qt mac osx 10.8 dyld: library not loaded…image not found</a></p>
 
       
     </div>
@@ -467,7 +459,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/链接装载库/" rel="tag"># 链接装载库</a>
+            <a href="/tags/%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93/" rel="tag"># 链接装载库</a>
           
             <a href="/tags/QT/" rel="tag"># QT</a>
           
@@ -555,10 +547,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -577,7 +569,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -587,10 +579,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -668,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#qt-dyld-library-not-loaded-…-libhdf5-100-dylib"><span class="nav-number">1.</span> <span class="nav-text">qt dyld library not loaded …/libhdf5.100.dylib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找到-libhdf5-100-dylib-文件及路径"><span class="nav-number">3.</span> <span class="nav-text">找到 libhdf5.100.dylib 文件及路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加到-QT-Run-Environment"><span class="nav-number">4.</span> <span class="nav-text">添加到 QT Run Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：添加到构建设置-构建环境中"><span class="nav-number">5.</span> <span class="nav-text">补充：添加到构建设置-构建环境中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks"><span class="nav-number">6.</span> <span class="nav-text">Thanks</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#qt-dyld-library-not-loaded-%E2%80%A6-libhdf5-100-dylib"><span class="nav-number">1.</span> <span class="nav-text">qt dyld library not loaded …&#x2F;libhdf5.100.dylib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%88%B0-libhdf5-100-dylib-%E6%96%87%E4%BB%B6%E5%8F%8A%E8%B7%AF%E5%BE%84"><span class="nav-number">3.</span> <span class="nav-text">找到 libhdf5.100.dylib 文件及路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%B0-QT-Run-Environment"><span class="nav-number">4.</span> <span class="nav-text">添加到 QT Run Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9E%84%E5%BB%BA%E8%AE%BE%E7%BD%AE-%E6%9E%84%E5%BB%BA%E7%8E%AF%E5%A2%83%E4%B8%AD"><span class="nav-number">5.</span> <span class="nav-text">补充：添加到构建设置-构建环境中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks"><span class="nav-number">6.</span> <span class="nav-text">Thanks</span></a></li></ol></div>
             
 
           </div>
@@ -691,7 +683,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -966,5 +958,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

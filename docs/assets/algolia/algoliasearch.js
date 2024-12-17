@@ -1,4 +1,4 @@
-/*! algoliasearch 3.30.0 | © 2014, 2015 Algolia SAS | github.com/algolia/algoliasearch-client-js */
+/*! algoliasearch 3.35.1 | © 2014, 2015 Algolia SAS | github.com/algolia/algoliasearch-client-js */
 (function(f){var g;if(typeof window!=='undefined'){g=window}else if(typeof self!=='undefined'){g=self}g.ALGOLIA_MIGRATION_LAYER=f()})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 module.exports = function load (src, opts, cb) {
@@ -2651,6 +2651,92 @@ process.umask = function() { return 0; };
 
 'use strict';
 
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+module.exports = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
+
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty(obj, k)) {
+      obj[k] = v;
+    } else if (isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+},{}],14:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+'use strict';
+
 var stringifyPrimitive = function(v) {
   switch (typeof v) {
     case 'string':
@@ -2714,15 +2800,21 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
+'use strict';
+
+exports.decode = exports.parse = require(13);
+exports.encode = exports.stringify = require(14);
+
+},{"13":13,"14":14}],16:[function(require,module,exports){
 module.exports = AlgoliaSearch;
 
-var Index = require(16);
-var deprecate = require(26);
-var deprecatedMessage = require(27);
-var AlgoliaSearchCore = require(15);
+var Index = require(18);
+var deprecate = require(28);
+var deprecatedMessage = require(29);
+var AlgoliaSearchCore = require(17);
 var inherits = require(7);
-var errors = require(28);
+var errors = require(30);
 
 function AlgoliaSearch() {
   AlgoliaSearchCore.apply(this, arguments);
@@ -2814,7 +2906,7 @@ AlgoliaSearch.prototype.copyIndex = function(srcIndexName, dstIndexName, scopeOr
  *  content: the server answer that contains the task ID
  */
 AlgoliaSearch.prototype.getLogs = function(offset, length, callback) {
-  var clone = require(24);
+  var clone = require(26);
   var params = {};
   if (typeof offset === 'object') {
     // getLogs(params)
@@ -2888,7 +2980,7 @@ AlgoliaSearch.prototype.initAnalytics = function(opts) {
   // - move initAnalytics to a property on the main module (algoliasearch.initAnalytics),
   // same as places.
   // The current API was made mostly to mimic the one made in PHP
-  var createAnalyticsClient = require(25);
+  var createAnalyticsClient = require(27);
   return createAnalyticsClient(this.applicationID, this.apiKey, opts);
 };
 
@@ -2957,6 +3049,27 @@ AlgoliaSearch.prototype.deleteApiKey = function(key, callback) {
   return this._jsonRequest({
     method: 'DELETE',
     url: '/1/keys/' + key,
+    hostType: 'write',
+    callback: callback
+  });
+};
+
+/**
+ * Restore a deleted API key
+ *
+ * @param {String} key - The key to restore
+ * @param {Function} callback - The result callback called with two arguments
+ *   error: null or Error('message')
+ *   content: the server answer with the restored API key
+ * @return {Promise|undefined} Returns a promise if no callback given
+ * @example
+ * client.restoreApiKey('APIKEY')
+ * @see {@link https://www.algolia.com/doc/rest-api/search/#restore-api-key|Algolia REST API Documentation}
+ */
+AlgoliaSearch.prototype.restoreApiKey = function(key, callback) {
+  return this._jsonRequest({
+    method: 'POST',
+    url: '/1/keys/' + key + '/restore',
     hostType: 'write',
     callback: callback
   });
@@ -3166,7 +3279,7 @@ AlgoliaSearch.prototype.sendQueriesBatch = deprecate(function sendQueriesBatchDe
 }, deprecatedMessage('client.sendQueriesBatch()', 'client.search()'));
 
 /**
- * Perform write operations accross multiple indexes.
+ * Perform write operations across multiple indexes.
  *
  * To reduce the amount of time spent on network round trips,
  * you can create, update, or delete several objects in one call,
@@ -3239,6 +3352,31 @@ AlgoliaSearch.prototype.assignUserID = function(data, callback) {
     headers: {
       'x-algolia-user-id': data.userID
     }
+  });
+};
+
+/**
+ * Assign a array of userIDs to a cluster.
+ *
+ * @param {Array} data.userIDs The array of userIDs to assign to a new cluster
+ * @param {string} data.cluster The cluster to assign the user to
+ * @return {Promise|undefined} Returns a promise if no callback given
+ * @example
+ * client.assignUserIDs({ cluster: 'c1-test', userIDs: ['some-user-1', 'some-user-2'] });
+ */
+AlgoliaSearch.prototype.assignUserIDs = function(data, callback) {
+  if (!data.userIDs || !data.cluster) {
+    throw new errors.AlgoliaSearchError('You have to provide both an array of userIDs and cluster', data);
+  }
+  return this._jsonRequest({
+    method: 'POST',
+    url: '/1/clusters/mapping/batch',
+    hostType: 'write',
+    body: {
+      cluster: data.cluster,
+      users: data.userIDs
+    },
+    callback: callback
   });
 };
 
@@ -3370,6 +3508,57 @@ AlgoliaSearch.prototype.searchUserIDs = function(data, callback) {
   });
 };
 
+/**
+ * Set strategy for personalization
+ *
+ * @param {Object} data
+ * @param {Object} data.eventsScoring Associate a score to an event
+ * @param {Object} data.eventsScoring.<eventName> The name of the event
+ * @param {Number} data.eventsScoring.<eventName>.score The score to associate to <eventName>
+ * @param {String} data.eventsScoring.<eventName>.type Either "click", "conversion" or "view"
+ * @param {Object} data.facetsScoring Associate a score to a facet
+ * @param {Object} data.facetsScoring.<facetName> The name of the facet
+ * @param {Number} data.facetsScoring.<facetName>.score The score to associate to <facetName>
+ * @return {Promise|undefined} Returns a promise if no callback given
+ * @example
+ * client.setPersonalizationStrategy({
+ *   eventsScoring: {
+ *      "Add to cart": { score: 50, type: "conversion" },
+ *      Purchase: { score: 100, type: "conversion" }
+ *   },
+ *   facetsScoring: {
+ *      brand: { score: 100 },
+ *      categories: { score: 10 }
+ *   }
+ * });
+ */
+AlgoliaSearch.prototype.setPersonalizationStrategy = function(data, callback) {
+  return this._jsonRequest({
+    method: 'POST',
+    url: '/1/recommendation/personalization/strategy',
+    body: data,
+    hostType: 'write',
+    callback: callback
+  });
+};
+
+/**
+ * Get strategy for personalization
+ *
+ * @return {Promise|undefined} Returns a promise if no callback given
+ * @example
+ * client.getPersonalizationStrategy();
+ */
+
+AlgoliaSearch.prototype.getPersonalizationStrategy = function(callback) {
+  return this._jsonRequest({
+    method: 'GET',
+    url: '/1/recommendation/personalization/strategy',
+    hostType: 'read',
+    callback: callback
+  });
+};
+
 // environment specific methods
 AlgoliaSearch.prototype.destroy = notImplemented;
 AlgoliaSearch.prototype.enableRateLimitForward = notImplemented;
@@ -3377,6 +3566,7 @@ AlgoliaSearch.prototype.disableRateLimitForward = notImplemented;
 AlgoliaSearch.prototype.useSecuredAPIKey = notImplemented;
 AlgoliaSearch.prototype.disableSecuredAPIKey = notImplemented;
 AlgoliaSearch.prototype.generateSecuredApiKey = notImplemented;
+AlgoliaSearch.prototype.getSecuredApiKeyRemainingValidity = notImplemented;
 
 function notImplemented() {
   var message = 'Not implemented in this environment.\n' +
@@ -3385,14 +3575,14 @@ function notImplemented() {
   throw new errors.AlgoliaSearchError(message);
 }
 
-},{"15":15,"16":16,"24":24,"25":25,"26":26,"27":27,"28":28,"7":7,"8":8}],15:[function(require,module,exports){
+},{"17":17,"18":18,"26":26,"27":27,"28":28,"29":29,"30":30,"7":7,"8":8}],17:[function(require,module,exports){
 (function (process){
 module.exports = AlgoliaSearchCore;
 
-var errors = require(28);
-var exitPromise = require(29);
-var IndexCore = require(18);
-var store = require(34);
+var errors = require(30);
+var exitPromise = require(31);
+var IndexCore = require(20);
+var store = require(36);
 
 // We will always put the API KEY in the JSON body in case of too long API KEY,
 // to avoid query string being too long and failing in various conditions (our server limit, browser limit,
@@ -3429,9 +3619,9 @@ var RESET_APP_DATA_TIMER =
 function AlgoliaSearchCore(applicationID, apiKey, opts) {
   var debug = require(1)('algoliasearch');
 
-  var clone = require(24);
+  var clone = require(26);
   var isArray = require(8);
-  var map = require(30);
+  var map = require(32);
 
   var usage = 'Usage: algoliasearch(applicationID, apiKey, opts)';
 
@@ -3560,8 +3750,10 @@ AlgoliaSearchCore.prototype.unsetExtraHeader = function(name) {
 * @param algoliaAgent the agent to add
 */
 AlgoliaSearchCore.prototype.addAlgoliaAgent = function(algoliaAgent) {
-  if (this._ua.indexOf(';' + algoliaAgent) === -1) {
-    this._ua += ';' + algoliaAgent;
+  var algoliaAgentWithDelimiter = '; ' + algoliaAgent;
+
+  if (this._ua.indexOf(algoliaAgentWithDelimiter) === -1) {
+    this._ua += algoliaAgentWithDelimiter;
   }
 };
 
@@ -3818,7 +4010,7 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
         return client._promise.reject(err);
       }
 
-      // When a timeout occured, retry by raising timeout
+      // When a timeout occurred, retry by raising timeout
       if (err instanceof errors.RequestTimeout) {
         return retryRequestWithHigherTimeout();
       }
@@ -3957,7 +4149,7 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(options) {
   var forEach = require(5);
 
   var ua = options.additionalUA ?
-    this._ua + ';' + options.additionalUA :
+    this._ua + '; ' + options.additionalUA :
     this._ua;
 
   var requestHeaders = {
@@ -4005,7 +4197,7 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(options) {
  */
 AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
   var isArray = require(8);
-  var map = require(30);
+  var map = require(32);
 
   var usage = 'Usage: client.search(arrayOfQueries[, callback])';
 
@@ -4088,7 +4280,7 @@ AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
 */
 AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
   var isArray = require(8);
-  var map = require(30);
+  var map = require(32);
 
   var usage = 'Usage: client.searchForFacetValues([{indexName, params: {facetName, facetQuery, ...params}}, ...queries])'; // eslint-disable-line max-len
 
@@ -4108,8 +4300,8 @@ AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
       throw new Error(usage);
     }
 
-    var clone = require(24);
-    var omit = require(32);
+    var clone = require(26);
+    var omit = require(34);
 
     var indexName = query.indexName;
     var params = query.params;
@@ -4261,7 +4453,7 @@ AlgoliaSearchCore.prototype._getHostIndexByType = function(hostType) {
 };
 
 AlgoliaSearchCore.prototype._setHostIndexByType = function(hostIndex, hostType) {
-  var clone = require(24);
+  var clone = require(26);
   var newHostIndexes = clone(this._hostIndexes);
   newHostIndexes[hostType] = hostIndex;
   this._partialAppIdDataUpdate({hostIndexes: newHostIndexes});
@@ -4355,13 +4547,13 @@ function removeCredentials(headers) {
 }
 
 }).call(this,require(12))
-},{"1":1,"12":12,"18":18,"24":24,"28":28,"29":29,"30":30,"32":32,"34":34,"5":5,"8":8}],16:[function(require,module,exports){
+},{"1":1,"12":12,"20":20,"26":26,"30":30,"31":31,"32":32,"34":34,"36":36,"5":5,"8":8}],18:[function(require,module,exports){
 var inherits = require(7);
-var IndexCore = require(18);
-var deprecate = require(26);
-var deprecatedMessage = require(27);
-var exitPromise = require(29);
-var errors = require(28);
+var IndexCore = require(20);
+var deprecate = require(28);
+var deprecatedMessage = require(29);
+var exitPromise = require(31);
+var errors = require(30);
 
 var deprecateForwardToSlaves = deprecate(
   function() {},
@@ -4613,7 +4805,7 @@ Index.prototype.deleteObject = function(objectID, callback) {
 */
 Index.prototype.deleteObjects = function(objectIDs, callback) {
   var isArray = require(8);
-  var map = require(30);
+  var map = require(32);
 
   var usage = 'Usage: index.deleteObjects(arrayOfObjectIDs[, callback])';
 
@@ -4653,8 +4845,8 @@ Index.prototype.deleteObjects = function(objectIDs, callback) {
 * @deprecated see index.deleteBy
 */
 Index.prototype.deleteByQuery = deprecate(function(query, params, callback) {
-  var clone = require(24);
-  var map = require(30);
+  var clone = require(26);
+  var map = require(32);
 
   var indexObj = this;
   var client = indexObj.as;
@@ -4788,9 +4980,9 @@ Index.prototype.browseAll = function(query, queryParameters) {
     query = undefined;
   }
 
-  var merge = require(31);
+  var merge = require(33);
 
-  var IndexBrowser = require(17);
+  var IndexBrowser = require(19);
 
   var browser = new IndexBrowser();
   var client = this.as;
@@ -4951,7 +5143,7 @@ Index.prototype.waitTask = function(taskID, callback) {
 *
 * @param callback (optional) the result callback called with two arguments
 *  error: null or Error('message')
-*  content: the settings object or the error message if a failure occured
+*  content: the settings object or the error message if a failure occurred
 */
 Index.prototype.clearIndex = function(callback) {
   var indexObj = this;
@@ -5259,10 +5451,95 @@ Index.prototype.batchRules = function(rules, opts, callback) {
   });
 };
 
+Index.prototype.exists = function(callback) {
+  var result = this.getSettings().then(function() {
+    return true;
+  }).catch(function(err) {
+    if (err instanceof errors.AlgoliaSearchError && err.statusCode === 404) {
+      return false;
+    }
+
+    throw err;
+  });
+
+  if (typeof callback !== 'function') {
+    return result;
+  }
+
+  result.then(function(res) {
+    callback(null, res);
+  }).catch(function(err) {
+    callback(err);
+  });
+};
+
+Index.prototype.findObject = function(findCallback, requestOptions, callback) {
+  requestOptions = requestOptions === undefined ? {} : requestOptions;
+  var paginate = requestOptions.paginate !== undefined ? requestOptions.paginate : true;
+  var query = requestOptions.query !== undefined ? requestOptions.query : '';
+
+  var that = this;
+  var page = 0;
+
+  var paginateLoop = function() {
+    requestOptions.page = page;
+
+    return that.search(query, requestOptions).then(function(result) {
+      var hits = result.hits;
+
+      for (var position = 0; position < hits.length; position++) {
+        var hit = hits[position];
+        if (findCallback(hit)) {
+          return {
+            object: hit,
+            position: position,
+            page: page
+          };
+        }
+      }
+
+      page += 1;
+
+      // paginate if option was set and has next page
+      if (!paginate || page >= result.nbPages) {
+        throw new errors.ObjectNotFound('Object not found');
+      }
+
+      return paginateLoop();
+    });
+  };
+
+  var promise = paginateLoop(page);
+
+  if (callback === undefined) {
+    return promise;
+  }
+
+  promise
+    .then(function(res) {
+      callback(null, res);
+    })
+    .catch(function(err) {
+      callback(err);
+    });
+};
+
+Index.prototype.getObjectPosition = function(result, objectID) {
+  var hits = result.hits;
+
+  for (var position = 0; position < hits.length; position++) {
+    if (hits[position].objectID === objectID) {
+      return position;
+    }
+  }
+
+  return -1;
+};
+
 /*
 * Set settings for this index
 *
-* @param settigns the settings object that can contains :
+* @param settings the settings object that can contains :
 * - minWordSizefor1Typo: (integer) the minimum number of characters to accept one typo (default = 3).
 * - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7).
 * - hitsPerPage: (integer) the number of hits per page (default = 10).
@@ -5328,7 +5605,7 @@ Index.prototype.batchRules = function(rules, opts, callback) {
 * be considered as optional when found in the query.
 * @param callback (optional) the result callback called with two arguments
 *  error: null or Error('message')
-*  content: the server answer or the error message if a failure occured
+*  content: the server answer or the error message if a failure occurred
 */
 Index.prototype.setSettings = function(settings, opts, callback) {
   if (arguments.length === 1 || typeof opts === 'function') {
@@ -5606,7 +5883,7 @@ Index.prototype.updateApiKey = deprecate(function(key, acls, params, callback) {
   });
 }, deprecatedMessage('index.updateApiKey()', 'client.updateApiKey()'));
 
-},{"17":17,"18":18,"24":24,"26":26,"27":27,"28":28,"29":29,"30":30,"31":31,"7":7,"8":8}],17:[function(require,module,exports){
+},{"19":19,"20":20,"26":26,"28":28,"29":29,"30":30,"31":31,"32":32,"33":33,"7":7,"8":8}],19:[function(require,module,exports){
 'use strict';
 
 // This is the object returned by the `index.browseAll()` method
@@ -5647,10 +5924,10 @@ IndexBrowser.prototype._clean = function() {
   this.removeAllListeners('result');
 };
 
-},{"4":4,"7":7}],18:[function(require,module,exports){
-var buildSearchMethod = require(23);
-var deprecate = require(26);
-var deprecatedMessage = require(27);
+},{"4":4,"7":7}],20:[function(require,module,exports){
+var buildSearchMethod = require(25);
+var deprecate = require(28);
+var deprecatedMessage = require(29);
 
 module.exports = IndexCore;
 
@@ -5782,7 +6059,13 @@ IndexCore.prototype.search = buildSearchMethod('query');
 *   All search parameters are supported (see search function), restrictSearchableAttributes and facetFilters
 *   are the two most useful to restrict the similar results and get more relevant content
 */
-IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
+IndexCore.prototype.similarSearch = deprecate(
+  buildSearchMethod('similarQuery'),
+  deprecatedMessage(
+    'index.similarSearch(query[, callback])',
+    'index.search({ similarQuery: query }[, callback])'
+  )
+);
 
 /*
 * Browse index content. The response content will have a `cursor` property that you can use
@@ -5802,7 +6085,7 @@ IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
 * @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
 */
 IndexCore.prototype.browse = function(query, queryParameters, callback) {
-  var merge = require(31);
+  var merge = require(33);
 
   var indexObj = this;
 
@@ -5897,8 +6180,8 @@ IndexCore.prototype.browseFrom = function(cursor, callback) {
 * @param callback (optional)
 */
 IndexCore.prototype.searchForFacetValues = function(params, callback) {
-  var clone = require(24);
-  var omit = require(32);
+  var clone = require(26);
+  var omit = require(34);
   var usage = 'Usage: index.searchForFacetValues({facetName, facetQuery, ...params}[, callback])';
 
   if (params.facetName === undefined || params.facetQuery === undefined) {
@@ -5952,7 +6235,7 @@ IndexCore.prototype._search = function(params, url, callback, additionalUA) {
 * @param attrs (optional) if set, contains the array of attribute names to retrieve
 * @param callback (optional) the result callback called with two arguments
 *  error: null or Error('message')
-*  content: the object to retrieve or the error message if a failure occured
+*  content: the object to retrieve or the error message if a failure occurred
 */
 IndexCore.prototype.getObject = function(objectID, attrs, callback) {
   var indexObj = this;
@@ -5988,7 +6271,7 @@ IndexCore.prototype.getObject = function(objectID, attrs, callback) {
 */
 IndexCore.prototype.getObjects = function(objectIDs, attributesToRetrieve, callback) {
   var isArray = require(8);
-  var map = require(30);
+  var map = require(32);
 
   var usage = 'Usage: index.getObjects(arrayOfObjectIDs[, callback])';
 
@@ -6032,15 +6315,15 @@ IndexCore.prototype.indexName = null;
 IndexCore.prototype.typeAheadArgs = null;
 IndexCore.prototype.typeAheadValueOption = null;
 
-},{"23":23,"24":24,"26":26,"27":27,"30":30,"31":31,"32":32,"8":8}],19:[function(require,module,exports){
+},{"25":25,"26":26,"28":28,"29":29,"32":32,"33":33,"34":34,"8":8}],21:[function(require,module,exports){
 'use strict';
 
-var AlgoliaSearch = require(14);
-var createAlgoliasearch = require(20);
+var AlgoliaSearch = require(16);
+var createAlgoliasearch = require(22);
 
-module.exports = createAlgoliasearch(AlgoliaSearch);
+module.exports = createAlgoliasearch(AlgoliaSearch, 'Browser');
 
-},{"14":14,"20":20}],20:[function(require,module,exports){
+},{"16":16,"22":22}],22:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6052,10 +6335,10 @@ var Promise = global.Promise || require(3).Promise;
 // using XMLHttpRequest, XDomainRequest and JSONP as fallback
 module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   var inherits = require(7);
-  var errors = require(28);
-  var inlineHeaders = require(21);
-  var jsonpRequest = require(22);
-  var places = require(33);
+  var errors = require(30);
+  var inlineHeaders = require(23);
+  var jsonpRequest = require(24);
+  var places = require(35);
   uaSuffix = uaSuffix || '';
 
   if (process.env.NODE_ENV === 'debug') {
@@ -6063,7 +6346,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   }
 
   function algoliasearch(applicationID, apiKey, opts) {
-    var cloneDeep = require(24);
+    var cloneDeep = require(26);
 
     opts = cloneDeep(opts || {});
 
@@ -6072,8 +6355,11 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
     return new AlgoliaSearchBrowser(applicationID, apiKey, opts);
   }
 
-  algoliasearch.version = require(35);
-  algoliasearch.ua = 'Algolia for vanilla JavaScript ' + uaSuffix + algoliasearch.version;
+  algoliasearch.version = require(37);
+
+  algoliasearch.ua =
+    'Algolia for JavaScript (' + algoliasearch.version + '); ' + uaSuffix;
+
   algoliasearch.initPlaces = places(algoliasearch);
 
   // we expose into window no matter how we are used, this will allow
@@ -6277,12 +6563,12 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
 };
 
 }).call(this,require(12))
-},{"1":1,"12":12,"21":21,"22":22,"24":24,"28":28,"3":3,"33":33,"35":35,"6":6,"7":7}],21:[function(require,module,exports){
+},{"1":1,"12":12,"23":23,"24":24,"26":26,"3":3,"30":30,"35":35,"37":37,"6":6,"7":7}],23:[function(require,module,exports){
 'use strict';
 
 module.exports = inlineHeaders;
 
-var encode = require(13);
+var encode = require(14);
 
 function inlineHeaders(url, headers) {
   if (/\?/.test(url)) {
@@ -6294,12 +6580,12 @@ function inlineHeaders(url, headers) {
   return url + encode(headers);
 }
 
-},{"13":13}],22:[function(require,module,exports){
+},{"14":14}],24:[function(require,module,exports){
 'use strict';
 
 module.exports = jsonpRequest;
 
-var errors = require(28);
+var errors = require(30);
 
 var JSONPCounter = 0;
 
@@ -6422,10 +6708,10 @@ function jsonpRequest(url, opts, cb) {
   }
 }
 
-},{"28":28}],23:[function(require,module,exports){
+},{"30":30}],25:[function(require,module,exports){
 module.exports = buildSearchMethod;
 
-var errors = require(28);
+var errors = require(30);
 
 /**
  * Creates a search method to be used in clients
@@ -6491,15 +6777,15 @@ function buildSearchMethod(queryParam, url) {
   };
 }
 
-},{"28":28}],24:[function(require,module,exports){
+},{"30":30}],26:[function(require,module,exports){
 module.exports = function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 };
 
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 module.exports = createAnalyticsClient;
 
-var algoliasearch = require(19);
+var algoliasearch = require(21);
 
 function createAnalyticsClient(appId, apiKey, opts) {
   var analytics = {};
@@ -6583,7 +6869,7 @@ function createAnalyticsClient(appId, apiKey, opts) {
   return analytics;
 }
 
-},{"19":19}],26:[function(require,module,exports){
+},{"21":21}],28:[function(require,module,exports){
 module.exports = function deprecate(fn, message) {
   var warned = false;
 
@@ -6600,7 +6886,7 @@ module.exports = function deprecate(fn, message) {
   return deprecated;
 };
 
-},{}],27:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports = function deprecatedMessage(previousUsage, newUsage) {
   var githubAnchorLink = previousUsage.toLowerCase()
     .replace(/[\.\(\)]/g, '');
@@ -6609,7 +6895,7 @@ module.exports = function deprecatedMessage(previousUsage, newUsage) {
     '`. Please see https://github.com/algolia/algoliasearch-client-javascript/wiki/Deprecated#' + githubAnchorLink;
 };
 
-},{}],28:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 // This file hosts our error definitions
@@ -6669,7 +6955,7 @@ module.exports = {
   ),
   RequestTimeout: createCustomError(
     'RequestTimeout',
-    'Request timedout before getting a response'
+    'Request timed out before getting a response'
   ),
   Network: createCustomError(
     'Network',
@@ -6679,9 +6965,17 @@ module.exports = {
     'JSONPScriptFail',
     '<script> was loaded but did not call our provided callback'
   ),
+  ValidUntilNotFound: createCustomError(
+    'ValidUntilNotFound',
+    'The SecuredAPIKey does not have a validUntil parameter.'
+  ),
   JSONPScriptError: createCustomError(
     'JSONPScriptError',
     '<script> unable to load due to an `error` event on it'
+  ),
+  ObjectNotFound: createCustomError(
+    'ObjectNotFound',
+    'Object not found'
   ),
   Unknown: createCustomError(
     'Unknown',
@@ -6689,7 +6983,7 @@ module.exports = {
   )
 };
 
-},{"5":5,"7":7}],29:[function(require,module,exports){
+},{"5":5,"7":7}],31:[function(require,module,exports){
 // Parse cloud does not supports setTimeout
 // We do not store a setTimeout reference in the client everytime
 // We only fallback to a fake setTimeout when not available
@@ -6698,7 +6992,7 @@ module.exports = function exitPromise(fn, _setTimeout) {
   _setTimeout(fn, 0);
 };
 
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 var foreach = require(5);
 
 module.exports = function map(arr, fn) {
@@ -6709,7 +7003,7 @@ module.exports = function map(arr, fn) {
   return newArr;
 };
 
-},{"5":5}],31:[function(require,module,exports){
+},{"5":5}],33:[function(require,module,exports){
 var foreach = require(5);
 
 module.exports = function merge(destination/* , sources */) {
@@ -6730,7 +7024,7 @@ module.exports = function merge(destination/* , sources */) {
   return destination;
 };
 
-},{"5":5}],32:[function(require,module,exports){
+},{"5":5}],34:[function(require,module,exports){
 module.exports = function omit(obj, test) {
   var keys = require(10);
   var foreach = require(5);
@@ -6746,14 +7040,15 @@ module.exports = function omit(obj, test) {
   return filtered;
 };
 
-},{"10":10,"5":5}],33:[function(require,module,exports){
+},{"10":10,"5":5}],35:[function(require,module,exports){
 module.exports = createPlacesClient;
 
-var buildSearchMethod = require(23);
+var qs3 = require(15);
+var buildSearchMethod = require(25);
 
 function createPlacesClient(algoliasearch) {
   return function places(appID, apiKey, opts) {
-    var cloneDeep = require(24);
+    var cloneDeep = require(26);
 
     opts = opts && cloneDeep(opts) || {};
     opts.hosts = opts.hosts || [
@@ -6773,6 +7068,17 @@ function createPlacesClient(algoliasearch) {
     var client = algoliasearch(appID, apiKey, opts);
     var index = client.initIndex('places');
     index.search = buildSearchMethod('query', '/1/places/query');
+    index.reverse = function(options, callback) {
+      var encoded = qs3.encode(options);
+
+      return this.as._jsonRequest({
+        method: 'GET',
+        url: '/1/places/reverse?' + encoded,
+        hostType: 'read',
+        callback: callback
+      });
+    };
+
     index.getObject = function(objectID, callback) {
       return this.as._jsonRequest({
         method: 'GET',
@@ -6785,7 +7091,7 @@ function createPlacesClient(algoliasearch) {
   };
 }
 
-},{"23":23,"24":24}],34:[function(require,module,exports){
+},{"15":15,"25":25,"26":26}],36:[function(require,module,exports){
 (function (global){
 var debug = require(1)('algoliasearch:src/hostIndexState.js');
 var localStorageNamespace = 'algoliasearch-client-js';
@@ -6875,10 +7181,10 @@ function cleanup() {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"1":1}],35:[function(require,module,exports){
+},{"1":1}],37:[function(require,module,exports){
 'use strict';
 
-module.exports = '3.30.0';
+module.exports = '3.35.1';
 
-},{}]},{},[19])(19)
+},{}]},{},[21])(21)
 });

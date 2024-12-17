@@ -80,34 +80,33 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
 
 
 
 
 
-
-<meta name="description" content="缺失 mcpp 库报错/usr/bin/ld: cannot find -lmcpp 解决 下载最新的 nux-dextop-release*rpm 包  http://li.nux.ro/download/nux/dextop/el7/x86_64/  安装 nux-dextop-release 包 sudo rpm -Uvh nux-dextop-release*rpm  安装 mcpp su">
-<meta name="keywords" content="链接装载库,ZeroC-Ice">
+<meta name="description" content="缺失 mcpp 库报错&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lmcpp  解决 下载最新的 nux-dextop-release*rpm 包  http:&#x2F;&#x2F;li.nux.ro&#x2F;download&#x2F;nux&#x2F;dextop&#x2F;el7&#x2F;x86_64&#x2F;  安装 nux-dextop-release 包  sudo rpm -Uvh nux-dextop-release*rpm   安装 mcpp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决源码编译 ZeroC Ice 缺失 mcpp、bzip2、expat 库的问题">
 <meta property="og:url" content="https://blog.huihut.com/2017/09/06/CompileIceMissingLibrary/index.html">
 <meta property="og:site_name" content="HuiHut">
-<meta property="og:description" content="缺失 mcpp 库报错/usr/bin/ld: cannot find -lmcpp 解决 下载最新的 nux-dextop-release*rpm 包  http://li.nux.ro/download/nux/dextop/el7/x86_64/  安装 nux-dextop-release 包 sudo rpm -Uvh nux-dextop-release*rpm  安装 mcpp su">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-03T14:37:05.670Z">
+<meta property="og:description" content="缺失 mcpp 库报错&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lmcpp  解决 下载最新的 nux-dextop-release*rpm 包  http:&#x2F;&#x2F;li.nux.ro&#x2F;download&#x2F;nux&#x2F;dextop&#x2F;el7&#x2F;x86_64&#x2F;  安装 nux-dextop-release 包  sudo rpm -Uvh nux-dextop-release*rpm   安装 mcpp">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-09-06T15:50:18.000Z">
+<meta property="article:modified_time" content="2023-11-03T14:37:05.670Z">
+<meta property="article:author" content="huihut">
+<meta property="article:tag" content="链接装载库">
+<meta property="article:tag" content="ZeroC-Ice">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决源码编译 ZeroC Ice 缺失 mcpp、bzip2、expat 库的问题">
-<meta name="twitter:description" content="缺失 mcpp 库报错/usr/bin/ld: cannot find -lmcpp 解决 下载最新的 nux-dextop-release*rpm 包  http://li.nux.ro/download/nux/dextop/el7/x86_64/  安装 nux-dextop-release 包 sudo rpm -Uvh nux-dextop-release*rpm  安装 mcpp su">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: false,
     duoshuo: {
@@ -140,7 +139,7 @@
   });
 </script>
   <title> 解决源码编译 ZeroC Ice 缺失 mcpp、bzip2、expat 库的问题 | HuiHut </title>
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -148,15 +147,6 @@
 
 
 
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-96169060-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -314,7 +304,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.huihut.com/2017/09/06/CompileIceMissingLibrary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huihut">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/favicon.png">
     </span>
@@ -406,31 +396,39 @@
 
       
         <h2 id="缺失-mcpp-库"><a href="#缺失-mcpp-库" class="headerlink" title="缺失 mcpp 库"></a>缺失 mcpp 库</h2><h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><pre><code>/usr/bin/ld: cannot find -lmcpp
-</code></pre><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ol>
+</code></pre>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ol>
 <li><p>下载最新的 nux-dextop-release*rpm 包</p>
-<p> <a href="http://li.nux.ro/download/nux/dextop/el7/x86_64/" target="_blank" rel="noopener">http://li.nux.ro/download/nux/dextop/el7/x86_64/</a></p>
+<p> <a href="http://li.nux.ro/download/nux/dextop/el7/x86_64/">http://li.nux.ro/download/nux/dextop/el7/x86_64/</a></p>
 </li>
 <li><p>安装 nux-dextop-release 包</p>
-<pre><code>sudo rpm -Uvh nux-dextop-release*rpm
-</code></pre></li>
+<pre><code> sudo rpm -Uvh nux-dextop-release*rpm
+</code></pre>
+</li>
 <li><p>安装 mcpp</p>
-<pre><code>sudo yum install libmcpp-devel
-</code></pre></li>
+<pre><code> sudo yum install libmcpp-devel
+</code></pre>
+</li>
 </ol>
-<a id="more"></a>
+<span id="more"></span>
+
 <h2 id="缺失-bzip2-库"><a href="#缺失-bzip2-库" class="headerlink" title="缺失 bzip2 库"></a>缺失 bzip2 库</h2><h3 id="报错-1"><a href="#报错-1" class="headerlink" title="报错"></a>报错</h3><pre><code>src/Ice/ConnectionI.cpp:32:21: fatal error: bzlib.h: No such file or directory
 #  include &lt;bzlib.h&gt;
              ^
 compilation terminated.
 make: *** [src/Ice/build/x64/shared/pic/ConnectionI.o] Error 1
-</code></pre><h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><pre><code>sudo yum install bzip2-devel
-</code></pre><h2 id="缺失-expat-库"><a href="#缺失-expat-库" class="headerlink" title="缺失 expat 库"></a>缺失 expat 库</h2><h3 id="报错-2"><a href="#报错-2" class="headerlink" title="报错"></a>报错</h3><pre><code>src/IceXML/Parser.cpp:12:19: fatal error: expat.h: No such file or directory
+</code></pre>
+<h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><pre><code>sudo yum install bzip2-devel
+</code></pre>
+<h2 id="缺失-expat-库"><a href="#缺失-expat-库" class="headerlink" title="缺失 expat 库"></a>缺失 expat 库</h2><h3 id="报错-2"><a href="#报错-2" class="headerlink" title="报错"></a>报错</h3><pre><code>src/IceXML/Parser.cpp:12:19: fatal error: expat.h: No such file or directory
 #include &lt;expat.h&gt;
                ^
 compilation terminated.
 make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
-</code></pre><h3 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h3><pre><code>sudo yum install expat-devel
 </code></pre>
+<h3 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h3><pre><code>sudo yum install expat-devel
+</code></pre>
+
       
     </div>
 
@@ -474,7 +472,7 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
       
         <div class="post-tags">
           
-            <a href="/tags/链接装载库/" rel="tag"># 链接装载库</a>
+            <a href="/tags/%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93/" rel="tag"># 链接装载库</a>
           
             <a href="/tags/ZeroC-Ice/" rel="tag"># ZeroC-Ice</a>
           
@@ -562,10 +560,10 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/favicon.png"
-               alt="huihut" />
-          <p class="site-author-name" itemprop="name">huihut</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">专业修电脑, 副业补衣服</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -584,7 +582,7 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -594,10 +592,10 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">29</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -675,7 +673,7 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失-mcpp-库"><span class="nav-number">1.</span> <span class="nav-text">缺失 mcpp 库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报错"><span class="nav-number">1.1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失-bzip2-库"><span class="nav-number">2.</span> <span class="nav-text">缺失 bzip2 库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报错-1"><span class="nav-number">2.1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-1"><span class="nav-number">2.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失-expat-库"><span class="nav-number">3.</span> <span class="nav-text">缺失 expat 库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报错-2"><span class="nav-number">3.1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-2"><span class="nav-number">3.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1-mcpp-%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">缺失 mcpp 库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">1.1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1-bzip2-%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">缺失 bzip2 库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99-1"><span class="nav-number">2.1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-1"><span class="nav-number">2.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1-expat-%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">缺失 expat 库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99-2"><span class="nav-number">3.1.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-2"><span class="nav-number">3.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -698,7 +696,7 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -973,5 +971,5 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>
