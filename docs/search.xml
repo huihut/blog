@@ -108,59 +108,6 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
       </tags>
   </entry>
   <entry>
-    <title>C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error!</title>
-    <url>/2018/11/07/CSharpUnzipAnd7zLibraryMissingError/</url>
-    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><p>C# 程序解压 7z 文件的时候抛出异常</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Can not load 7-zip library or internal COM error! Message: DLL file does not exist.</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>程序无法找到 7z 库，导致无法解压 7z 文件</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：使用-NuGet-包管理器下载安装"><a href="#方法一：使用-NuGet-包管理器下载安装" class="headerlink" title="方法一：使用 NuGet 包管理器下载安装"></a>方法一：使用 NuGet 包管理器下载安装</h3><p>选择 Visual Studio 某个项目 - 右键引用 - 管理 NuGet 程序包 - 浏览 - 搜索 <code>7z</code>，选择一个 <code>7z</code> 包，如 <code>7z.Libs</code> 安装即可。</p>
-<h3 id="方法二：手动下载安装"><a href="#方法二：手动下载安装" class="headerlink" title="方法二：手动下载安装"></a>方法二：手动下载安装</h3><p>在官网 <a href="https://www.7-zip.org/download.html">Download 7-Zip </a> 下载下面的 7z 库</p>
-<table>
-<thead>
-<tr>
-<th>Link</th>
-<th>Type</th>
-<th>Windows</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://www.7-zip.org/a/7z1805-extra.7z">Download</a></td>
-<td>.7z</td>
-<td>x86 &#x2F; x64</td>
-<td>7-Zip Extra: standalone console version, 7z DLL, Plugin for Far Manager</td>
-</tr>
-</tbody></table>
-<p>解压重命名到 <code>C:\Program Files\7-Zip</code></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 解压压缩包</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;file_path&quot;&gt;</span>压缩包路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;save_path&quot;&gt;</span>解压后保存路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>是否解压成功<span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="built_in">bool</span> <span class="title">UncompressFile</span>(<span class="params"><span class="built_in">string</span> file_path, <span class="built_in">string</span> save_path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (System.IO.Directory.Exists(save_path))</span><br><span class="line">        &#123;</span><br><span class="line">            System.IO.Directory.Delete(save_path, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 若手动安装，需要指定路径</span></span><br><span class="line">        <span class="comment">//SevenZip.SevenZipExtractor.SetLibraryPath(@&quot;C:\Program Files\7-Zip\7za.dll&quot;);</span></span><br><span class="line">        SevenZip.SevenZipExtractor extractor = <span class="keyword">new</span> SevenZip.SevenZipExtractor(file_path);</span><br><span class="line">        extractor.ExtractArchive(save_path);</span><br><span class="line">        extractor.Dispose();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e1)</span><br><span class="line">    &#123;</span><br><span class="line">        System.Diagnostics.Debug.WriteLine(e1.Message);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Dotnet</tag>
-        <tag>C#</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</title>
-    <url>/2017/07/28/AnUnrealProcessHasCrashed/</url>
-    <content><![CDATA[<h2 id="Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题"><a href="#Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题" class="headerlink" title="Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题"></a>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在 Launcher 启动 UE4 引擎，引擎奔溃，出现奔溃报告： An Unreal process has crashed:UE4-……</p>
-<span id="more"></span>
-
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/AnUnrealProcessHasCrashed.png"></p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>以管理员身份运行 Launcher，并启动 UE4 引擎则能正常启动。</p>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Unreal</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Centos 7 挂载 NTFS 分区</title>
     <url>/2017/03/29/Centos7NTFS/</url>
     <content><![CDATA[<h1 id="NTFS-3G"><a href="#NTFS-3G" class="headerlink" title="NTFS-3G"></a>NTFS-3G</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 NTFS-3G 实现，可以挂载 NTFS，还可以挂载 HFS+ 等，以下是在 Centos 7 下安装 NTFS-3G 及挂载 NTFS 分区</p>
@@ -240,6 +187,59 @@ chmod +x /etc/rc.d/rc.local
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error!</title>
+    <url>/2018/11/07/CSharpUnzipAnd7zLibraryMissingError/</url>
+    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><p>C# 程序解压 7z 文件的时候抛出异常</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Can not load 7-zip library or internal COM error! Message: DLL file does not exist.</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>程序无法找到 7z 库，导致无法解压 7z 文件</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：使用-NuGet-包管理器下载安装"><a href="#方法一：使用-NuGet-包管理器下载安装" class="headerlink" title="方法一：使用 NuGet 包管理器下载安装"></a>方法一：使用 NuGet 包管理器下载安装</h3><p>选择 Visual Studio 某个项目 - 右键引用 - 管理 NuGet 程序包 - 浏览 - 搜索 <code>7z</code>，选择一个 <code>7z</code> 包，如 <code>7z.Libs</code> 安装即可。</p>
+<h3 id="方法二：手动下载安装"><a href="#方法二：手动下载安装" class="headerlink" title="方法二：手动下载安装"></a>方法二：手动下载安装</h3><p>在官网 <a href="https://www.7-zip.org/download.html">Download 7-Zip </a> 下载下面的 7z 库</p>
+<table>
+<thead>
+<tr>
+<th>Link</th>
+<th>Type</th>
+<th>Windows</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.7-zip.org/a/7z1805-extra.7z">Download</a></td>
+<td>.7z</td>
+<td>x86 &#x2F; x64</td>
+<td>7-Zip Extra: standalone console version, 7z DLL, Plugin for Far Manager</td>
+</tr>
+</tbody></table>
+<p>解压重命名到 <code>C:\Program Files\7-Zip</code></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 解压压缩包</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;file_path&quot;&gt;</span>压缩包路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;save_path&quot;&gt;</span>解压后保存路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>是否解压成功<span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="built_in">bool</span> <span class="title">UncompressFile</span>(<span class="params"><span class="built_in">string</span> file_path, <span class="built_in">string</span> save_path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (System.IO.Directory.Exists(save_path))</span><br><span class="line">        &#123;</span><br><span class="line">            System.IO.Directory.Delete(save_path, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 若手动安装，需要指定路径</span></span><br><span class="line">        <span class="comment">//SevenZip.SevenZipExtractor.SetLibraryPath(@&quot;C:\Program Files\7-Zip\7za.dll&quot;);</span></span><br><span class="line">        SevenZip.SevenZipExtractor extractor = <span class="keyword">new</span> SevenZip.SevenZipExtractor(file_path);</span><br><span class="line">        extractor.ExtractArchive(save_path);</span><br><span class="line">        extractor.Dispose();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e1)</span><br><span class="line">    &#123;</span><br><span class="line">        System.Diagnostics.Debug.WriteLine(e1.Message);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Dotnet</tag>
+        <tag>C#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</title>
+    <url>/2017/07/28/AnUnrealProcessHasCrashed/</url>
+    <content><![CDATA[<h2 id="Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题"><a href="#Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题" class="headerlink" title="Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题"></a>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在 Launcher 启动 UE4 引擎，引擎奔溃，出现奔溃报告： An Unreal process has crashed:UE4-……</p>
+<span id="more"></span>
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/AnUnrealProcessHasCrashed.png"></p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>以管理员身份运行 Launcher，并启动 UE4 引擎则能正常启动。</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Unreal</tag>
       </tags>
   </entry>
   <entry>
@@ -1341,6 +1341,19 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
       </tags>
   </entry>
   <entry>
+    <title>C++ 调用 Python 模块</title>
+    <url>/2018/06/12/CppCallPython/</url>
+    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ call Python module </span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/b4597d097123a8c8388c71b3f0ff21e5</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// C++ call Python module</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CppCallPython</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Python initialize</span></span><br><span class="line">    <span class="built_in">Py_Initialize</span>();</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">Py_IsInitialized</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Python initialization failed!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If my MyPython.py file is in &quot;/Users/xx/code&quot;, set the working path to &quot;/Users/xx/code&quot;</span></span><br><span class="line">    std::string path = <span class="string">&quot;/Users/xx/code&quot;</span>;</span><br><span class="line">    <span class="built_in">PySys_SetPath</span>(&amp;path[<span class="number">0u</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Import MyPython.py module</span></span><br><span class="line">    PyObject* pModule = <span class="built_in">PyImport_ImportModule</span>(<span class="string">&quot;MyPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pModule)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt;<span class="string">&quot;Cannot open Python file!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the HelloPython() function in the module</span></span><br><span class="line">    PyObject* pFunhello = <span class="built_in">PyObject_GetAttrString</span>(pModule, <span class="string">&quot;HelloPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pFunhello)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Failed to get this function!&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Call HelloPython()</span></span><br><span class="line">    <span class="built_in">PyObject_CallFunction</span>(pFunhello, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Finalize</span></span><br><span class="line">    <span class="built_in">Py_Finalize</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>C/C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenCV使用CMake和MinGW-w64的编译安装</title>
     <url>/2018/07/31/CompiledOpenCVWithMinGW64/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前写过的一篇博文：<a href="https://blog.huihut.com/2017/12/03/CompiledOpenCVRunInQt/">OpenCV使用CMake和MinGW的编译安装及其在Qt配置运行</a> 是使用 32 位的 MinGW 在 Windows 下编译 OpenCV 生成 32 位的 dll。</p>
@@ -1450,19 +1463,6 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
       </categories>
       <tags>
         <tag>链接装载库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++ 调用 Python 模块</title>
-    <url>/2018/06/12/CppCallPython/</url>
-    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ call Python module </span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/b4597d097123a8c8388c71b3f0ff21e5</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// C++ call Python module</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CppCallPython</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Python initialize</span></span><br><span class="line">    <span class="built_in">Py_Initialize</span>();</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">Py_IsInitialized</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Python initialization failed!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If my MyPython.py file is in &quot;/Users/xx/code&quot;, set the working path to &quot;/Users/xx/code&quot;</span></span><br><span class="line">    std::string path = <span class="string">&quot;/Users/xx/code&quot;</span>;</span><br><span class="line">    <span class="built_in">PySys_SetPath</span>(&amp;path[<span class="number">0u</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Import MyPython.py module</span></span><br><span class="line">    PyObject* pModule = <span class="built_in">PyImport_ImportModule</span>(<span class="string">&quot;MyPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pModule)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt;<span class="string">&quot;Cannot open Python file!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the HelloPython() function in the module</span></span><br><span class="line">    PyObject* pFunhello = <span class="built_in">PyObject_GetAttrString</span>(pModule, <span class="string">&quot;HelloPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pFunhello)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Failed to get this function!&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Call HelloPython()</span></span><br><span class="line">    <span class="built_in">PyObject_CallFunction</span>(pFunhello, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Finalize</span></span><br><span class="line">    <span class="built_in">Py_Finalize</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1695,92 +1695,6 @@ infile.close();
       </tags>
   </entry>
   <entry>
-    <title>一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌（OpenCV+Dlib+Live2D+图灵机器人+讯飞IAT语音听写+讯飞TTS语音合成）</title>
-    <url>/2018/02/08/Facemoji1/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌</p>
-<p>这是个 Unity 项目，其暂时有两个模块 ：</p>
-<ul>
-<li>【模块一】是实时人脸卡通化（FaceTracking），使用 <a href="https://enoxsoftware.com/opencvforunity/">OpenCV</a> 和 <a href="https://enoxsoftware.com/dlibfacelandmarkdetector/">Dlib</a> 检测面部表情，并实时转化为 <a href="http://sites.cybernoids.jp/cubism-sdk2_e/unity_2-1">Live2D</a> 模型，然后可 <a href="https://github.com/Chman/Moments">录制</a> 成 gif 图；</li>
-<li>【模块二】是人工智能（AI）使用 <a href="http://www.tuling123.com/">图灵机器人</a>、<a href="http://www.xfyun.cn/services/voicedictation">讯飞IAT语音听写</a>、<a href="http://www.xfyun.cn/services/online_tts">讯飞TTS语音合成</a> 进行语音聊天。</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Facemoji%E6%95%88%E6%9E%9C%E5%9B%BE_cn.png" alt="Facemoji效果图_cn"></p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>源码：<a href="https://github.com/huihut/Facemoji">Github . huihut&#x2F;Facemoji</a></p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
-<li><a href="https://www.coolapk.com/apk/192260">酷安 . Facemoji 废萌</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.huihut.facemoji">Google Play (需要梯子)</a></li>
-<li><a href="https://github.com/huihut/Facemoji/releases">Github . Facemoji&#x2F;releases</a></li>
-<li><a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘 . Facemoji&#x2F;Platform</a></li>
-<li><a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘 . Facemoji&#x2F;Platform</a></li>
-</ul>
-<h2 id="为什么叫废萌（Facemoji）"><a href="#为什么叫废萌（Facemoji）" class="headerlink" title="为什么叫废萌（Facemoji）"></a>为什么叫废萌（Facemoji）</h2><p>首先，为什么叫废萌（Facemoji）？…emmm…这个项目其实是由 Animoji 启发的，由于当时 Animoji 没有开放 api，所以想开发个跨平台（Unity）的类似的项目，就叫 Facemoji。</p>
-<p>至于中文名废萌嘛？…emmm…总觉得她除了卖萌没什么作用，所以就叫废（Face）萌（Moji）了。</p>
-<h2 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h2><ol>
-<li><p>从 <a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘</a> 或者 <a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘</a>下载<code>shape_predictor_68_face_landmarks.dat</code>（已训练好的人脸检测模型）和 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>（精简的 OpenCV, Dlib, Live2D 和 Iflytek 库）</p>
-</li>
-<li><p>克隆下源码：<code>git clone git@github.com:huihut/Facemoji.git</code></p>
-</li>
-<li><p>创建一个新的 Unity 项目，命名为 Facemoji</p>
-</li>
-<li><p>把 <code>Facemoji-master</code> 文件夹中的 <code>Assets</code> 和 <code>ProjectSettings</code> 替换 <code>Facemoji</code> 的同名文件夹</p>
-</li>
-<li><p>把 <code>shape_predictor_68_face_landmarks.dat</code> 复制到 <code>Facemoji/Assets/StreamingAssets/</code></p>
-</li>
-<li><p>导入 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>。导入后的文件结构如下：<br> <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/FacemojiDirectoryStructure1.5.0.png" alt="FacemojiDirectoryStructure1.5.0.png"></p>
-</li>
-<li><p>转换平台到 Android（其他平台未适配）</p>
-</li>
-<li><p>Build &amp; Run</p>
-</li>
-</ol>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="实时人脸卡通化（FaceTracking）"><a href="#实时人脸卡通化（FaceTracking）" class="headerlink" title="实时人脸卡通化（FaceTracking）"></a>实时人脸卡通化（FaceTracking）</h3><p>使用 OpenCV 和 Dlib 检测面部表情，并实时转化为 Live2D 模型；</p>
-<p>她可以跟着你的头部表情动，试着摇头看看吧。</p>
-<h3 id="录制-gif-图"><a href="#录制-gif-图" class="headerlink" title="录制 gif 图"></a>录制 gif 图</h3><p>点击顶部中间的录制键可以录制 3 秒的 gif；</p>
-<p>录制状态为：Recording（准备录制）、PreProcessing（正在录制）、Paused（正在压缩成gif图）</p>
-<p>生成的 gif 存储在 <code>Application.dataPath</code>，Android 平台的话在<br><code>/storage/emulated/0/Android/data/com.huihut.facemoji/files/</code></p>
-<h3 id="语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）"><a href="#语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）" class="headerlink" title="语音和文字聊天（聊天机器人？ 她说她是 AI，不是机器人！ hhhh…）"></a>语音和文字聊天（<del>聊天机器人？</del> 她说她是 AI，不是机器人！ hhhh…）</h3><p>使用 <strong>图灵机器人</strong>、<strong>讯飞 IAT 语音听写</strong>、<strong>讯飞 TTS 语音合成</strong></p>
-<p>她很智能（<del>zhizhang</del>），可以：</p>
-<ul>
-<li>聊天对话</li>
-<li>生活百科</li>
-<li>数学计算</li>
-<li>故事大全</li>
-<li>笑话大全</li>
-<li>成语接龙</li>
-<li>星座运势</li>
-<li>天气查询</li>
-<li>…</li>
-</ul>
-<p>但是由于她是个中国 AI（<del>机器人</del>），图灵机器人只支持中文，所以她只能进行中文聊天，和她讲英文她只会翻译。</p>
-<p>不过她以后会学习英文的（<del>换个会讲英文的</del>）。</p>
-<h2 id="Gif演示"><a href="#Gif演示" class="headerlink" title="Gif演示"></a>Gif演示</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GifCapture-201802072218435427.gif" alt="GifCapture-201802072218435427.gif">    </p>
-<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><h3 id="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1"><a href="#人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1" class="headerlink" title="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji&#x2F;issues&#x2F;1"></a>人不动时模型抖动问题（特别是眼睛眉毛）<a href="https://github.com/huihut/Facemoji/issues/1">Facemoji&#x2F;issues&#x2F;1</a></h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>手&#x2F;眼&#x2F;眉等的轻微抖动</li>
-<li>Dlib 检测到的每一帧人脸特征点的位置会有轻微差距</li>
-</ul>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ul>
-<li><p>调整模型参数</p>
-<p>  如果人眼睛小的话，可以修改 <code>FaceTracking.cs</code> 中 <a href="https://github.com/huihut/Facemoji/blob/v1.4.1/Assets/Scripts/FaceTracking.cs#L294">live2DModelUpdate</a> 方法，把睁开眼的区间改大一点，如下：</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// eye_open_L                               // 左眼</span><br><span class="line">float eyeOpen_L = getRaitoOfEyeOpen_L (points);</span><br><span class="line">if (eyeOpen_L &gt; 0.4f &amp;&amp; eyeOpen_L &lt; 1.0f)</span><br><span class="line">    eyeOpen_L = 1;                          // 睁开眼</span><br><span class="line">else if (eyeOpen_L &gt;= 1.0f)</span><br><span class="line">    eyeOpen_L = 2;                          // 睁大眼</span><br><span class="line">else if (eyeOpen_L &lt;= 0.4f)</span><br><span class="line">    eyeOpen_L = 0;                          // 闭上眼</span><br><span class="line">live2DModel.PARAM_EYE_L_OPEN = eyeOpen_L;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>考虑使用卡尔曼滤波器或者其他滤波器过滤（未尝试）</li>
-</ul>
-<h2 id="修改说明"><a href="#修改说明" class="headerlink" title="修改说明"></a>修改说明</h2><blockquote>
-<p>2018年03月23日因项目更新 v1.5.0 版本而对此博文做了修改。因博文内容不常改动，项目部署、文档等以Github为准。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Unity</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Effective C++ 概要</title>
     <url>/2019/01/05/EffectiveCppSummary/</url>
     <content><![CDATA[<blockquote>
@@ -1953,6 +1867,92 @@ colorscheme solarized
       </categories>
       <tags>
         <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌（OpenCV+Dlib+Live2D+图灵机器人+讯飞IAT语音听写+讯飞TTS语音合成）</title>
+    <url>/2018/02/08/Facemoji1/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌</p>
+<p>这是个 Unity 项目，其暂时有两个模块 ：</p>
+<ul>
+<li>【模块一】是实时人脸卡通化（FaceTracking），使用 <a href="https://enoxsoftware.com/opencvforunity/">OpenCV</a> 和 <a href="https://enoxsoftware.com/dlibfacelandmarkdetector/">Dlib</a> 检测面部表情，并实时转化为 <a href="http://sites.cybernoids.jp/cubism-sdk2_e/unity_2-1">Live2D</a> 模型，然后可 <a href="https://github.com/Chman/Moments">录制</a> 成 gif 图；</li>
+<li>【模块二】是人工智能（AI）使用 <a href="http://www.tuling123.com/">图灵机器人</a>、<a href="http://www.xfyun.cn/services/voicedictation">讯飞IAT语音听写</a>、<a href="http://www.xfyun.cn/services/online_tts">讯飞TTS语音合成</a> 进行语音聊天。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Facemoji%E6%95%88%E6%9E%9C%E5%9B%BE_cn.png" alt="Facemoji效果图_cn"></p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>源码：<a href="https://github.com/huihut/Facemoji">Github . huihut&#x2F;Facemoji</a></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
+<li><a href="https://www.coolapk.com/apk/192260">酷安 . Facemoji 废萌</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.huihut.facemoji">Google Play (需要梯子)</a></li>
+<li><a href="https://github.com/huihut/Facemoji/releases">Github . Facemoji&#x2F;releases</a></li>
+<li><a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘 . Facemoji&#x2F;Platform</a></li>
+<li><a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘 . Facemoji&#x2F;Platform</a></li>
+</ul>
+<h2 id="为什么叫废萌（Facemoji）"><a href="#为什么叫废萌（Facemoji）" class="headerlink" title="为什么叫废萌（Facemoji）"></a>为什么叫废萌（Facemoji）</h2><p>首先，为什么叫废萌（Facemoji）？…emmm…这个项目其实是由 Animoji 启发的，由于当时 Animoji 没有开放 api，所以想开发个跨平台（Unity）的类似的项目，就叫 Facemoji。</p>
+<p>至于中文名废萌嘛？…emmm…总觉得她除了卖萌没什么作用，所以就叫废（Face）萌（Moji）了。</p>
+<h2 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h2><ol>
+<li><p>从 <a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘</a> 或者 <a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘</a>下载<code>shape_predictor_68_face_landmarks.dat</code>（已训练好的人脸检测模型）和 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>（精简的 OpenCV, Dlib, Live2D 和 Iflytek 库）</p>
+</li>
+<li><p>克隆下源码：<code>git clone git@github.com:huihut/Facemoji.git</code></p>
+</li>
+<li><p>创建一个新的 Unity 项目，命名为 Facemoji</p>
+</li>
+<li><p>把 <code>Facemoji-master</code> 文件夹中的 <code>Assets</code> 和 <code>ProjectSettings</code> 替换 <code>Facemoji</code> 的同名文件夹</p>
+</li>
+<li><p>把 <code>shape_predictor_68_face_landmarks.dat</code> 复制到 <code>Facemoji/Assets/StreamingAssets/</code></p>
+</li>
+<li><p>导入 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>。导入后的文件结构如下：<br> <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/FacemojiDirectoryStructure1.5.0.png" alt="FacemojiDirectoryStructure1.5.0.png"></p>
+</li>
+<li><p>转换平台到 Android（其他平台未适配）</p>
+</li>
+<li><p>Build &amp; Run</p>
+</li>
+</ol>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="实时人脸卡通化（FaceTracking）"><a href="#实时人脸卡通化（FaceTracking）" class="headerlink" title="实时人脸卡通化（FaceTracking）"></a>实时人脸卡通化（FaceTracking）</h3><p>使用 OpenCV 和 Dlib 检测面部表情，并实时转化为 Live2D 模型；</p>
+<p>她可以跟着你的头部表情动，试着摇头看看吧。</p>
+<h3 id="录制-gif-图"><a href="#录制-gif-图" class="headerlink" title="录制 gif 图"></a>录制 gif 图</h3><p>点击顶部中间的录制键可以录制 3 秒的 gif；</p>
+<p>录制状态为：Recording（准备录制）、PreProcessing（正在录制）、Paused（正在压缩成gif图）</p>
+<p>生成的 gif 存储在 <code>Application.dataPath</code>，Android 平台的话在<br><code>/storage/emulated/0/Android/data/com.huihut.facemoji/files/</code></p>
+<h3 id="语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）"><a href="#语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）" class="headerlink" title="语音和文字聊天（聊天机器人？ 她说她是 AI，不是机器人！ hhhh…）"></a>语音和文字聊天（<del>聊天机器人？</del> 她说她是 AI，不是机器人！ hhhh…）</h3><p>使用 <strong>图灵机器人</strong>、<strong>讯飞 IAT 语音听写</strong>、<strong>讯飞 TTS 语音合成</strong></p>
+<p>她很智能（<del>zhizhang</del>），可以：</p>
+<ul>
+<li>聊天对话</li>
+<li>生活百科</li>
+<li>数学计算</li>
+<li>故事大全</li>
+<li>笑话大全</li>
+<li>成语接龙</li>
+<li>星座运势</li>
+<li>天气查询</li>
+<li>…</li>
+</ul>
+<p>但是由于她是个中国 AI（<del>机器人</del>），图灵机器人只支持中文，所以她只能进行中文聊天，和她讲英文她只会翻译。</p>
+<p>不过她以后会学习英文的（<del>换个会讲英文的</del>）。</p>
+<h2 id="Gif演示"><a href="#Gif演示" class="headerlink" title="Gif演示"></a>Gif演示</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GifCapture-201802072218435427.gif" alt="GifCapture-201802072218435427.gif">    </p>
+<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><h3 id="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1"><a href="#人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1" class="headerlink" title="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji&#x2F;issues&#x2F;1"></a>人不动时模型抖动问题（特别是眼睛眉毛）<a href="https://github.com/huihut/Facemoji/issues/1">Facemoji&#x2F;issues&#x2F;1</a></h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>手&#x2F;眼&#x2F;眉等的轻微抖动</li>
+<li>Dlib 检测到的每一帧人脸特征点的位置会有轻微差距</li>
+</ul>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ul>
+<li><p>调整模型参数</p>
+<p>  如果人眼睛小的话，可以修改 <code>FaceTracking.cs</code> 中 <a href="https://github.com/huihut/Facemoji/blob/v1.4.1/Assets/Scripts/FaceTracking.cs#L294">live2DModelUpdate</a> 方法，把睁开眼的区间改大一点，如下：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// eye_open_L                               // 左眼</span><br><span class="line">float eyeOpen_L = getRaitoOfEyeOpen_L (points);</span><br><span class="line">if (eyeOpen_L &gt; 0.4f &amp;&amp; eyeOpen_L &lt; 1.0f)</span><br><span class="line">    eyeOpen_L = 1;                          // 睁开眼</span><br><span class="line">else if (eyeOpen_L &gt;= 1.0f)</span><br><span class="line">    eyeOpen_L = 2;                          // 睁大眼</span><br><span class="line">else if (eyeOpen_L &lt;= 0.4f)</span><br><span class="line">    eyeOpen_L = 0;                          // 闭上眼</span><br><span class="line">live2DModel.PARAM_EYE_L_OPEN = eyeOpen_L;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>考虑使用卡尔曼滤波器或者其他滤波器过滤（未尝试）</li>
+</ul>
+<h2 id="修改说明"><a href="#修改说明" class="headerlink" title="修改说明"></a>修改说明</h2><blockquote>
+<p>2018年03月23日因项目更新 v1.5.0 版本而对此博文做了修改。因博文内容不常改动，项目部署、文档等以Github为准。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
       </tags>
   </entry>
   <entry>
@@ -2443,6 +2443,31 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
       </tags>
   </entry>
   <entry>
+    <title>hexo 构建静态文件无法生成 index.html 等文件</title>
+    <url>/2017/05/13/HexoNPMERR/</url>
+    <content><![CDATA[<h2 id="hexo-g-无法生成-index"><a href="#hexo-g-无法生成-index" class="headerlink" title="hexo g 无法生成 index"></a>hexo g 无法生成 index</h2><p>构建情况如下图：</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNoIndex.png"></p>
+<p>但是一些文件没有生成，如 <code>index.html</code> 文件。</p>
+<span id="more"></span>
+
+<h2 id="查看-npm-安装各-hexo-插件的情况"><a href="#查看-npm-安装各-hexo-插件的情况" class="headerlink" title="查看 npm 安装各 hexo 插件的情况"></a>查看 npm 安装各 hexo 插件的情况</h2><pre><code>npm ls --depth 0
+</code></pre>
+<h2 id="hexo-的一些插件未安装插件"><a href="#hexo-的一些插件未安装插件" class="headerlink" title="hexo 的一些插件未安装插件"></a>hexo 的一些插件未安装插件</h2><p><strong>npm ERR! missing npm ERR! missing hexo-generator-archive…</strong></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNPMls.png"></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>逐一安装缺失的包</p>
+<pre><code>npm install hexo-generator-archive --save
+...
+</code></pre>
+<p>安装完后重新构建即可解决。</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用MFC的CDC类绘制三维坐标系及球面函数</title>
     <url>/2017/10/13/GraphicsExercise3D/</url>
     <content><![CDATA[<h2 id="系列链接"><a href="#系列链接" class="headerlink" title="系列链接"></a>系列链接</h2><ul>
@@ -2492,31 +2517,6 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
       <tags>
         <tag>图形学</tag>
         <tag>MFC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo 构建静态文件无法生成 index.html 等文件</title>
-    <url>/2017/05/13/HexoNPMERR/</url>
-    <content><![CDATA[<h2 id="hexo-g-无法生成-index"><a href="#hexo-g-无法生成-index" class="headerlink" title="hexo g 无法生成 index"></a>hexo g 无法生成 index</h2><p>构建情况如下图：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNoIndex.png"></p>
-<p>但是一些文件没有生成，如 <code>index.html</code> 文件。</p>
-<span id="more"></span>
-
-<h2 id="查看-npm-安装各-hexo-插件的情况"><a href="#查看-npm-安装各-hexo-插件的情况" class="headerlink" title="查看 npm 安装各 hexo 插件的情况"></a>查看 npm 安装各 hexo 插件的情况</h2><pre><code>npm ls --depth 0
-</code></pre>
-<h2 id="hexo-的一些插件未安装插件"><a href="#hexo-的一些插件未安装插件" class="headerlink" title="hexo 的一些插件未安装插件"></a>hexo 的一些插件未安装插件</h2><p><strong>npm ERR! missing npm ERR! missing hexo-generator-archive…</strong></p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNPMls.png"></p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>逐一安装缺失的包</p>
-<pre><code>npm install hexo-generator-archive --save
-...
-</code></pre>
-<p>安装完后重新构建即可解决。</p>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -3567,6 +3567,28 @@ _   底线
       </tags>
   </entry>
   <entry>
+    <title>pyparsing 无法卸载导致安装 matplotlib 出错</title>
+    <url>/2018/10/13/PyparsingFailsToUninstallCausingErrorInInstallingMatplotlib/</url>
+    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install matplotlib</span><br></pre></td></tr></table></figure>
+
+<p>安装 matplotlib 时出现以下错误</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> Found existing installation: pyparsing 1.5.6</span><br><span class="line">Cannot uninstall &#x27;pyparsing&#x27;. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>安装 matplotlib 需要卸载我已安装的 1.5.6 版本的 pyparsing，再重新装新版本，但是无法卸载</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>手动重装最新版 pyparsing</p>
+<p>首先，去官网查看最新版是什么版本：<a href="https://pypi.org/project/pyparsing/">https://pypi.org/project/pyparsing/</a></p>
+<p>当前最新版是 <code>pyparsing 2.2.0</code>，所以执行如下重新安装最新版：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install -I pyparsing==2.2.0</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PyCharm自动安装pymysql包失败</title>
     <url>/2017/01/21/PyCharmInstallPymysqlFail/</url>
     <content><![CDATA[<h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>在PyCharm中新建Web2Py项目后提示没有pymysql，自动安装失败，如图：  </p>
@@ -3606,52 +3628,6 @@ _   底线
 <h3 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h3><blockquote>
 <p><a href="http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages">http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages</a></p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>pyparsing 无法卸载导致安装 matplotlib 出错</title>
-    <url>/2018/10/13/PyparsingFailsToUninstallCausingErrorInInstallingMatplotlib/</url>
-    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install matplotlib</span><br></pre></td></tr></table></figure>
-
-<p>安装 matplotlib 时出现以下错误</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> Found existing installation: pyparsing 1.5.6</span><br><span class="line">Cannot uninstall &#x27;pyparsing&#x27;. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>安装 matplotlib 需要卸载我已安装的 1.5.6 版本的 pyparsing，再重新装新版本，但是无法卸载</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>手动重装最新版 pyparsing</p>
-<p>首先，去官网查看最新版是什么版本：<a href="https://pypi.org/project/pyparsing/">https://pypi.org/project/pyparsing/</a></p>
-<p>当前最新版是 <code>pyparsing 2.2.0</code>，所以执行如下重新安装最新版：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install -I pyparsing==2.2.0</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python DeprecationWarning the imp module is deprecated in favour of importlib</title>
-    <url>/2019/01/21/PythonDeprecationWarningTheImpModuleIsDeprecatedInFavourOfImportlib/</url>
-    <content><![CDATA[<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module&#x27;s documentation for alternative uses</span><br><span class="line">  import imp</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>imp 从 Python 3.4 之后弃用了，建议使用 importlib 代替</p>
-<span id="more"></span>
-
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>打开 <code>E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py</code> 文件，做如下两步修改：</p>
-<ol>
-<li><p>在第一行，注释掉 <code>imp</code>，导入 <code>importlib</code></p>
- <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#import imp</span></span><br><span class="line"><span class="keyword">import</span> importlib</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在第 230 行的 <code>loadSource</code> 函数中，注释 <code>imp.load_source</code>，使用 <code>importlib.machinery.SourceFileLoader</code> 加载模块</p>
- <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#module = imp.load_source(moduleName, fileName)</span></span><br><span class="line">module = importlib.machinery.SourceFileLoader(moduleName, fileName).load_module()</span><br></pre></td></tr></table></figure></li>
-</ol>
 ]]></content>
       <categories>
         <category>CS</category>
@@ -3756,6 +3732,30 @@ win32 &#123;
       </categories>
       <tags>
         <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python DeprecationWarning the imp module is deprecated in favour of importlib</title>
+    <url>/2019/01/21/PythonDeprecationWarningTheImpModuleIsDeprecatedInFavourOfImportlib/</url>
+    <content><![CDATA[<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module&#x27;s documentation for alternative uses</span><br><span class="line">  import imp</span><br></pre></td></tr></table></figure>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>imp 从 Python 3.4 之后弃用了，建议使用 importlib 代替</p>
+<span id="more"></span>
+
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>打开 <code>E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py</code> 文件，做如下两步修改：</p>
+<ol>
+<li><p>在第一行，注释掉 <code>imp</code>，导入 <code>importlib</code></p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#import imp</span></span><br><span class="line"><span class="keyword">import</span> importlib</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在第 230 行的 <code>loadSource</code> 函数中，注释 <code>imp.load_source</code>，使用 <code>importlib.machinery.SourceFileLoader</code> 加载模块</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#module = imp.load_source(moduleName, fileName)</span></span><br><span class="line">module = importlib.machinery.SourceFileLoader(moduleName, fileName).load_module()</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -3867,33 +3867,6 @@ dialog.setWindowModality(Qt::ApplicationModal);
       </tags>
   </entry>
   <entry>
-    <title>QT 无法链接动态库 dyld library not loaded ... libhdf5.100.dylib</title>
-    <url>/2017/06/05/QtDyldLibraryNotLoaded/</url>
-    <content><![CDATA[<h2 id="qt-dyld-library-not-loaded-…-libhdf5-100-dylib"><a href="#qt-dyld-library-not-loaded-…-libhdf5-100-dylib" class="headerlink" title="qt dyld library not loaded …&#x2F;libhdf5.100.dylib"></a>qt dyld library not loaded …&#x2F;libhdf5.100.dylib</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png" alt="DyldLibraryNotLoaded"></p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>无法链接动态库，考虑手动添加链接。</p>
-<span id="more"></span>
-
-<h2 id="找到-libhdf5-100-dylib-文件及路径"><a href="#找到-libhdf5-100-dylib-文件及路径" class="headerlink" title="找到 libhdf5.100.dylib 文件及路径"></a>找到 libhdf5.100.dylib 文件及路径</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hdf5-lib-dylib.jpg"></p>
-<pre><code>/usr/local/opt/hdf5/lib
-</code></pre>
-<h2 id="添加到-QT-Run-Environment"><a href="#添加到-QT-Run-Environment" class="headerlink" title="添加到 QT Run Environment"></a>添加到 QT Run Environment</h2><p>把路径添加到<code>Run Environment</code>中的<code>DYLD_LIBRARY_PATH</code>变量的值中。</p>
-<p>若无此变量则添加，若已有则按编辑并在后面加上路径。</p>
-<p>Run!</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTRunEnvironment.jpg"></p>
-<h2 id="补充：添加到构建设置-构建环境中"><a href="#补充：添加到构建设置-构建环境中" class="headerlink" title="补充：添加到构建设置-构建环境中"></a>补充：添加到构建设置-构建环境中</h2><p>如果添加到 <code>Run Environment</code> 中还是不行，可以添加到<code>Build</code>-<code>构建设置</code>-<code>构建环境</code>中。</p>
-<p>Debug!</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QtDebugEnvironment.jpg"></p>
-<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://stackoverflow.com/questions/13611740/qt-mac-osx-10-8-dyld-library-not-loaded-image-not-found">stackoverflow . qt mac osx 10.8 dyld: library not loaded…image not found</a></p>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>链接装载库</tag>
-        <tag>QT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Qt GDB 无法调试 MSVC 编译的程序而报错：file format not recognized</title>
     <url>/2018/06/02/QtNotInExecutableFormat/</url>
     <content><![CDATA[<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
@@ -3918,6 +3891,33 @@ dialog.setWindowModality(Qt::ApplicationModal);
         <category>CS</category>
       </categories>
       <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QT 无法链接动态库 dyld library not loaded ... libhdf5.100.dylib</title>
+    <url>/2017/06/05/QtDyldLibraryNotLoaded/</url>
+    <content><![CDATA[<h2 id="qt-dyld-library-not-loaded-…-libhdf5-100-dylib"><a href="#qt-dyld-library-not-loaded-…-libhdf5-100-dylib" class="headerlink" title="qt dyld library not loaded …&#x2F;libhdf5.100.dylib"></a>qt dyld library not loaded …&#x2F;libhdf5.100.dylib</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png" alt="DyldLibraryNotLoaded"></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>无法链接动态库，考虑手动添加链接。</p>
+<span id="more"></span>
+
+<h2 id="找到-libhdf5-100-dylib-文件及路径"><a href="#找到-libhdf5-100-dylib-文件及路径" class="headerlink" title="找到 libhdf5.100.dylib 文件及路径"></a>找到 libhdf5.100.dylib 文件及路径</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hdf5-lib-dylib.jpg"></p>
+<pre><code>/usr/local/opt/hdf5/lib
+</code></pre>
+<h2 id="添加到-QT-Run-Environment"><a href="#添加到-QT-Run-Environment" class="headerlink" title="添加到 QT Run Environment"></a>添加到 QT Run Environment</h2><p>把路径添加到<code>Run Environment</code>中的<code>DYLD_LIBRARY_PATH</code>变量的值中。</p>
+<p>若无此变量则添加，若已有则按编辑并在后面加上路径。</p>
+<p>Run!</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTRunEnvironment.jpg"></p>
+<h2 id="补充：添加到构建设置-构建环境中"><a href="#补充：添加到构建设置-构建环境中" class="headerlink" title="补充：添加到构建设置-构建环境中"></a>补充：添加到构建设置-构建环境中</h2><p>如果添加到 <code>Run Environment</code> 中还是不行，可以添加到<code>Build</code>-<code>构建设置</code>-<code>构建环境</code>中。</p>
+<p>Debug!</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QtDebugEnvironment.jpg"></p>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://stackoverflow.com/questions/13611740/qt-mac-osx-10-8-dyld-library-not-loaded-image-not-found">stackoverflow . qt mac osx 10.8 dyld: library not loaded…image not found</a></p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>链接装载库</tag>
         <tag>QT</tag>
       </tags>
   </entry>
@@ -3975,18 +3975,6 @@ dialog.setWindowModality(Qt::ApplicationModal);
       <tags>
         <tag>C/C++</tag>
         <tag>OSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WinRT(C++/CX) Platform::String^ 与 std::string 的类型转换</title>
-    <url>/2018/08/23/TypeConversionBetweenPlatformStringAndStdstring/</url>
-    <content><![CDATA[<p>Gist 仓库地址：<a href="https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920">https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920</a></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Managed_Str_To_Std_Str</span><span class="params">(Platform::String^ ms)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::wstring <span class="title">w_str</span><span class="params">(ms-&gt;Begin())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">string</span>(w_str.<span class="built_in">begin</span>(), w_str.<span class="built_in">end</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ <span class="built_in">Std_Str_To_Managed_Str</span>(<span class="type">const</span> std::string &amp; input)</span><br><span class="line">&#123;</span><br><span class="line">    std::wstring w_str = std::<span class="built_in">wstring</span>(input.<span class="built_in">begin</span>(), input.<span class="built_in">end</span>());</span><br><span class="line">    <span class="type">const</span> <span class="type">wchar_t</span>* w_chars = w_str.<span class="built_in">c_str</span>();</span><br><span class="line">    <span class="keyword">return</span> (ref <span class="keyword">new</span> Platform::<span class="built_in">String</span>(w_chars));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
@@ -4062,6 +4050,18 @@ _T1 first;
       <tags>
         <tag>Dotnet</tag>
         <tag>UWP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WinRT(C++/CX) Platform::String^ 与 std::string 的类型转换</title>
+    <url>/2018/08/23/TypeConversionBetweenPlatformStringAndStdstring/</url>
+    <content><![CDATA[<p>Gist 仓库地址：<a href="https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920">https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Managed_Str_To_Std_Str</span><span class="params">(Platform::String^ ms)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::wstring <span class="title">w_str</span><span class="params">(ms-&gt;Begin())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">string</span>(w_str.<span class="built_in">begin</span>(), w_str.<span class="built_in">end</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ <span class="built_in">Std_Str_To_Managed_Str</span>(<span class="type">const</span> std::string &amp; input)</span><br><span class="line">&#123;</span><br><span class="line">    std::wstring w_str = std::<span class="built_in">wstring</span>(input.<span class="built_in">begin</span>(), input.<span class="built_in">end</span>());</span><br><span class="line">    <span class="type">const</span> <span class="type">wchar_t</span>* w_chars = w_str.<span class="built_in">c_str</span>();</span><br><span class="line">    <span class="keyword">return</span> (ref <span class="keyword">new</span> Platform::<span class="built_in">String</span>(w_chars));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
@@ -4176,6 +4176,18 @@ _T1 first;
       </tags>
   </entry>
   <entry>
+    <title>Python 生成带标签数据集的 CSV 文件</title>
+    <url>/2018/06/17/UsingPythonToCreateCSV/</url>
+    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件</span></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签从0开始自动升序：0,1,2,3...</span></span><br><span class="line"><span class="comment"># 作者：huihut</span></span><br><span class="line"><span class="comment"># 仓库：https://gist.github.com/huihut/9881c98a1d9279d4fa9dfd8475e3fe4b</span></span><br><span class="line"><span class="comment"># 参考：https://github.com/opencv/opencv_attic/blob/master/opencv/modules/contrib/doc/facerec/src/create_csv.py</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用脚本：</span></span><br><span class="line"><span class="string">* python create_csv.py &lt;base_path&gt; [save_path]</span></span><br><span class="line"><span class="string">例如：</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── README</span></span><br><span class="line"><span class="string">├── dataset_csv.txt</span></span><br><span class="line"><span class="string">├── s01</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">├── s02</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">└── s10</span></span><br><span class="line"><span class="string">    ├── 01.pgm</span></span><br><span class="line"><span class="string">    ├── ...</span></span><br><span class="line"><span class="string">    └── 10.pgm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/01.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/02.pgm;0</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/10.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/01.pgm;1</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/02.pgm;1</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/01.pgm;9</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/02.pgm;9</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/10.pgm;9</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    </span><br><span class="line">    SAVE_PATH = <span class="string">&quot;./dataset_csv.txt&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">len</span>(sys.argv) != <span class="number">2</span> <span class="keyword">and</span> <span class="built_in">len</span>(sys.argv) != <span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;usage:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py &lt;base_path&gt; [save_path]&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;example:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt&quot;</span></span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">len</span>(sys.argv) == <span class="number">3</span>):</span><br><span class="line">        SAVE_PATH = sys.argv[<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    BASE_PATH = sys.argv[<span class="number">1</span>]</span><br><span class="line">    SEPARATOR = <span class="string">&quot;;&quot;</span></span><br><span class="line">    fh = <span class="built_in">open</span>(SAVE_PATH,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    label = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> dirname, dirnames, filenames <span class="keyword">in</span> os.walk(BASE_PATH):</span><br><span class="line">        <span class="keyword">for</span> subdirname <span class="keyword">in</span> dirnames:</span><br><span class="line">            subject_path = os.path.join(dirname, subdirname)</span><br><span class="line">            <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(subject_path):</span><br><span class="line">                abs_path = <span class="string">&quot;%s/%s&quot;</span> % (subject_path, filename)</span><br><span class="line">                <span class="built_in">print</span> <span class="string">&quot;%s%s%d&quot;</span> % (abs_path, SEPARATOR, label)</span><br><span class="line">                fh.write(abs_path + SEPARATOR + <span class="built_in">str</span>(label) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            label = label + <span class="number">1</span></span><br><span class="line">    fh.close()</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>ML</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Unreal 源码编译运行 Missing cached shader map... 的问题</title>
     <url>/2017/07/28/UnrealMissingCachedShaderMap/</url>
     <content><![CDATA[<h2 id="Unreal-源码编译运行-Missing-cached-shader-map…-的问题"><a href="#Unreal-源码编译运行-Missing-cached-shader-map…-的问题" class="headerlink" title="Unreal 源码编译运行 Missing cached shader map… 的问题"></a>Unreal 源码编译运行 Missing cached shader map… 的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Unreal 源码是 Github-release 分支，版本是4.16。</p>
@@ -4197,30 +4209,6 @@ _T1 first;
       </categories>
       <tags>
         <tag>Unreal</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python 生成带标签数据集的 CSV 文件</title>
-    <url>/2018/06/17/UsingPythonToCreateCSV/</url>
-    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件</span></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签从0开始自动升序：0,1,2,3...</span></span><br><span class="line"><span class="comment"># 作者：huihut</span></span><br><span class="line"><span class="comment"># 仓库：https://gist.github.com/huihut/9881c98a1d9279d4fa9dfd8475e3fe4b</span></span><br><span class="line"><span class="comment"># 参考：https://github.com/opencv/opencv_attic/blob/master/opencv/modules/contrib/doc/facerec/src/create_csv.py</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用脚本：</span></span><br><span class="line"><span class="string">* python create_csv.py &lt;base_path&gt; [save_path]</span></span><br><span class="line"><span class="string">例如：</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── README</span></span><br><span class="line"><span class="string">├── dataset_csv.txt</span></span><br><span class="line"><span class="string">├── s01</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">├── s02</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">└── s10</span></span><br><span class="line"><span class="string">    ├── 01.pgm</span></span><br><span class="line"><span class="string">    ├── ...</span></span><br><span class="line"><span class="string">    └── 10.pgm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/01.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/02.pgm;0</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/10.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/01.pgm;1</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/02.pgm;1</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/01.pgm;9</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/02.pgm;9</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/10.pgm;9</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    </span><br><span class="line">    SAVE_PATH = <span class="string">&quot;./dataset_csv.txt&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">len</span>(sys.argv) != <span class="number">2</span> <span class="keyword">and</span> <span class="built_in">len</span>(sys.argv) != <span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;usage:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py &lt;base_path&gt; [save_path]&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;example:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt&quot;</span></span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">len</span>(sys.argv) == <span class="number">3</span>):</span><br><span class="line">        SAVE_PATH = sys.argv[<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    BASE_PATH = sys.argv[<span class="number">1</span>]</span><br><span class="line">    SEPARATOR = <span class="string">&quot;;&quot;</span></span><br><span class="line">    fh = <span class="built_in">open</span>(SAVE_PATH,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    label = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> dirname, dirnames, filenames <span class="keyword">in</span> os.walk(BASE_PATH):</span><br><span class="line">        <span class="keyword">for</span> subdirname <span class="keyword">in</span> dirnames:</span><br><span class="line">            subject_path = os.path.join(dirname, subdirname)</span><br><span class="line">            <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(subject_path):</span><br><span class="line">                abs_path = <span class="string">&quot;%s/%s&quot;</span> % (subject_path, filename)</span><br><span class="line">                <span class="built_in">print</span> <span class="string">&quot;%s%s%d&quot;</span> % (abs_path, SEPARATOR, label)</span><br><span class="line">                fh.write(abs_path + SEPARATOR + <span class="built_in">str</span>(label) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            label = label + <span class="number">1</span></span><br><span class="line">    fh.close()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>ML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++ 使用 Qt 生成带标签数据集的 CSV 文件</title>
-    <url>/2018/06/12/UsingQtToCreateCSV/</url>
-    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ 使用 Qt 生成 CSV 文件</span></span><br><span class="line"><span class="comment">// 以下函数实现生成特定类型的 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签为图片上一级的文件夹名字。</span></span><br><span class="line"><span class="comment">// 作者：huihut</span></span><br><span class="line"><span class="comment">// 仓库：https://gist.github.com/huihut/c9f43e276ef7652f0471725482a1e4f6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="comment">.</span></span><br><span class="line"><span class="comment">├── README</span></span><br><span class="line"><span class="comment">├── dataset_csv.txt</span></span><br><span class="line"><span class="comment">├── s01</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">├── s02</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">└── s10</span></span><br><span class="line"><span class="comment">    ├── 01.pgm</span></span><br><span class="line"><span class="comment">    ├── ...</span></span><br><span class="line"><span class="comment">    └── 10.pgm</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">-----------------------------------------------------------</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/01.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/02.pgm,s01</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/10.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/01.pgm,s02</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/02.pgm,s02</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/01.pgm,s10</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/02.pgm,s10</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/10.pgm,s10</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDir&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDirIterator&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CreateCSV</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 数据集的基础路径</span></span><br><span class="line">    QString datasetdir = <span class="string">&quot;/Users/xx/code/dataset&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成的 CSV 文件的名字</span></span><br><span class="line">    QString csvName = <span class="string">&quot;dataset_csv.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据集路径与数据集名字的分隔符</span></span><br><span class="line">    <span class="type">char</span> separator = <span class="string">&#x27;,&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 数据集路径、数据集名字</span></span><br><span class="line">    QString datasetPath, datasetName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器：获取指定类型（以下是 pgm、png、jpg 三种类型）的数据集文件</span></span><br><span class="line">    <span class="function">QDirIterator <span class="title">it</span><span class="params">(datasetdir, QStringList() &lt;&lt; <span class="string">&quot;*.pgm&quot;</span> &lt;&lt; <span class="string">&quot;*.png&quot;</span> &lt;&lt; <span class="string">&quot;*.jpg&quot;</span>, QDir::Files, QDirIterator::Subdirectories)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(!it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;当前路径下数据集为空！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建及打开 CSV 文件</span></span><br><span class="line">    <span class="function">QFile <span class="title">file</span><span class="params">(datasetdir + QDir::toNativeSeparators(<span class="string">&quot;/&quot;</span>) + csvName)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!file.<span class="built_in">open</span>(QIODevice::WriteOnly | QIODevice::Text))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;打开 CSV 文件失败！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 文件写的文本流</span></span><br><span class="line">    <span class="function">QTextStream <span class="title">csv_ts</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器中有指定数据集文件则依次迭代</span></span><br><span class="line">    <span class="keyword">while</span> (it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 数据集路径</span></span><br><span class="line">        datasetPath = it.<span class="built_in">next</span>();</span><br><span class="line">        <span class="comment">// 数据集名字</span></span><br><span class="line">        datasetName = datasetPath.<span class="built_in">section</span>(QDir::<span class="built_in">toNativeSeparators</span>(<span class="string">&quot;/&quot;</span>), <span class="number">-2</span>, <span class="number">-2</span>);</span><br><span class="line">        <span class="comment">// 写入文本流</span></span><br><span class="line">        csv_ts &lt;&lt; datasetPath &lt;&lt; separator &lt;&lt; datasetName &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 关闭文本流</span></span><br><span class="line">    file.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
-        <tag>ML</tag>
       </tags>
   </entry>
   <entry>
@@ -4267,6 +4255,18 @@ _T1 first;
       </categories>
       <tags>
         <tag>CEF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ 使用 Qt 生成带标签数据集的 CSV 文件</title>
+    <url>/2018/06/12/UsingQtToCreateCSV/</url>
+    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ 使用 Qt 生成 CSV 文件</span></span><br><span class="line"><span class="comment">// 以下函数实现生成特定类型的 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签为图片上一级的文件夹名字。</span></span><br><span class="line"><span class="comment">// 作者：huihut</span></span><br><span class="line"><span class="comment">// 仓库：https://gist.github.com/huihut/c9f43e276ef7652f0471725482a1e4f6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="comment">.</span></span><br><span class="line"><span class="comment">├── README</span></span><br><span class="line"><span class="comment">├── dataset_csv.txt</span></span><br><span class="line"><span class="comment">├── s01</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">├── s02</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">└── s10</span></span><br><span class="line"><span class="comment">    ├── 01.pgm</span></span><br><span class="line"><span class="comment">    ├── ...</span></span><br><span class="line"><span class="comment">    └── 10.pgm</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">-----------------------------------------------------------</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/01.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/02.pgm,s01</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/10.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/01.pgm,s02</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/02.pgm,s02</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/01.pgm,s10</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/02.pgm,s10</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/10.pgm,s10</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDir&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDirIterator&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CreateCSV</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 数据集的基础路径</span></span><br><span class="line">    QString datasetdir = <span class="string">&quot;/Users/xx/code/dataset&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成的 CSV 文件的名字</span></span><br><span class="line">    QString csvName = <span class="string">&quot;dataset_csv.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据集路径与数据集名字的分隔符</span></span><br><span class="line">    <span class="type">char</span> separator = <span class="string">&#x27;,&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 数据集路径、数据集名字</span></span><br><span class="line">    QString datasetPath, datasetName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器：获取指定类型（以下是 pgm、png、jpg 三种类型）的数据集文件</span></span><br><span class="line">    <span class="function">QDirIterator <span class="title">it</span><span class="params">(datasetdir, QStringList() &lt;&lt; <span class="string">&quot;*.pgm&quot;</span> &lt;&lt; <span class="string">&quot;*.png&quot;</span> &lt;&lt; <span class="string">&quot;*.jpg&quot;</span>, QDir::Files, QDirIterator::Subdirectories)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(!it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;当前路径下数据集为空！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建及打开 CSV 文件</span></span><br><span class="line">    <span class="function">QFile <span class="title">file</span><span class="params">(datasetdir + QDir::toNativeSeparators(<span class="string">&quot;/&quot;</span>) + csvName)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!file.<span class="built_in">open</span>(QIODevice::WriteOnly | QIODevice::Text))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;打开 CSV 文件失败！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 文件写的文本流</span></span><br><span class="line">    <span class="function">QTextStream <span class="title">csv_ts</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器中有指定数据集文件则依次迭代</span></span><br><span class="line">    <span class="keyword">while</span> (it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 数据集路径</span></span><br><span class="line">        datasetPath = it.<span class="built_in">next</span>();</span><br><span class="line">        <span class="comment">// 数据集名字</span></span><br><span class="line">        datasetName = datasetPath.<span class="built_in">section</span>(QDir::<span class="built_in">toNativeSeparators</span>(<span class="string">&quot;/&quot;</span>), <span class="number">-2</span>, <span class="number">-2</span>);</span><br><span class="line">        <span class="comment">// 写入文本流</span></span><br><span class="line">        csv_ts &lt;&lt; datasetPath &lt;&lt; separator &lt;&lt; datasetName &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 关闭文本流</span></span><br><span class="line">    file.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+        <tag>ML</tag>
       </tags>
   </entry>
   <entry>

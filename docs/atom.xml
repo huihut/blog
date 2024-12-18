@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>HuiHut</title>
   
-  <subtitle>专业修电脑，副业补衣服</subtitle>
+  <subtitle>专业修电脑，副业补衣服。</subtitle>
   <link href="https://blog.huihut.com/atom.xml" rel="self"/>
   
   <link href="https://blog.huihut.com/"/>
@@ -13,6 +13,10 @@
     <name>huihut</name>
     
   </author>
+  <follow_challenge>
+    <feedId>89322862701642752</feedId>
+    <userId>9nQZ_Xx2F97lT9yalOhlD</userId>
+  </follow_challenge>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
