@@ -108,6 +108,59 @@ LIBS += -L/usr/local/Cellar/ice/3.7.0/lib -lIceUtil
       </tags>
   </entry>
   <entry>
+    <title>C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error!</title>
+    <url>/2018/11/07/CSharpUnzipAnd7zLibraryMissingError/</url>
+    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><p>C# 程序解压 7z 文件的时候抛出异常</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Can not load 7-zip library or internal COM error! Message: DLL file does not exist.</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>程序无法找到 7z 库，导致无法解压 7z 文件</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：使用-NuGet-包管理器下载安装"><a href="#方法一：使用-NuGet-包管理器下载安装" class="headerlink" title="方法一：使用 NuGet 包管理器下载安装"></a>方法一：使用 NuGet 包管理器下载安装</h3><p>选择 Visual Studio 某个项目 - 右键引用 - 管理 NuGet 程序包 - 浏览 - 搜索 <code>7z</code>，选择一个 <code>7z</code> 包，如 <code>7z.Libs</code> 安装即可。</p>
+<h3 id="方法二：手动下载安装"><a href="#方法二：手动下载安装" class="headerlink" title="方法二：手动下载安装"></a>方法二：手动下载安装</h3><p>在官网 <a href="https://www.7-zip.org/download.html">Download 7-Zip </a> 下载下面的 7z 库</p>
+<table>
+<thead>
+<tr>
+<th>Link</th>
+<th>Type</th>
+<th>Windows</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.7-zip.org/a/7z1805-extra.7z">Download</a></td>
+<td>.7z</td>
+<td>x86 &#x2F; x64</td>
+<td>7-Zip Extra: standalone console version, 7z DLL, Plugin for Far Manager</td>
+</tr>
+</tbody></table>
+<p>解压重命名到 <code>C:\Program Files\7-Zip</code></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 解压压缩包</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;file_path&quot;&gt;</span>压缩包路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;save_path&quot;&gt;</span>解压后保存路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>是否解压成功<span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="built_in">bool</span> <span class="title">UncompressFile</span>(<span class="params"><span class="built_in">string</span> file_path, <span class="built_in">string</span> save_path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (System.IO.Directory.Exists(save_path))</span><br><span class="line">        &#123;</span><br><span class="line">            System.IO.Directory.Delete(save_path, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 若手动安装，需要指定路径</span></span><br><span class="line">        <span class="comment">//SevenZip.SevenZipExtractor.SetLibraryPath(@&quot;C:\Program Files\7-Zip\7za.dll&quot;);</span></span><br><span class="line">        SevenZip.SevenZipExtractor extractor = <span class="keyword">new</span> SevenZip.SevenZipExtractor(file_path);</span><br><span class="line">        extractor.ExtractArchive(save_path);</span><br><span class="line">        extractor.Dispose();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e1)</span><br><span class="line">    &#123;</span><br><span class="line">        System.Diagnostics.Debug.WriteLine(e1.Message);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Dotnet</tag>
+        <tag>C#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</title>
+    <url>/2017/07/28/AnUnrealProcessHasCrashed/</url>
+    <content><![CDATA[<h2 id="Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题"><a href="#Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题" class="headerlink" title="Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题"></a>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在 Launcher 启动 UE4 引擎，引擎奔溃，出现奔溃报告： An Unreal process has crashed:UE4-……</p>
+<span id="more"></span>
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/AnUnrealProcessHasCrashed.png"></p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>以管理员身份运行 Launcher，并启动 UE4 引擎则能正常启动。</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Unreal</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Centos 7 挂载 NTFS 分区</title>
     <url>/2017/03/29/Centos7NTFS/</url>
     <content><![CDATA[<h1 id="NTFS-3G"><a href="#NTFS-3G" class="headerlink" title="NTFS-3G"></a>NTFS-3G</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 NTFS-3G 实现，可以挂载 NTFS，还可以挂载 HFS+ 等，以下是在 Centos 7 下安装 NTFS-3G 及挂载 NTFS 分区</p>
@@ -187,59 +240,6 @@ chmod +x /etc/rc.d/rc.local
       </categories>
       <tags>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C# 解压压缩包及 7z 库缺失导致 Can not load 7-zip library or internal COM error!</title>
-    <url>/2018/11/07/CSharpUnzipAnd7zLibraryMissingError/</url>
-    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><p>C# 程序解压 7z 文件的时候抛出异常</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Can not load 7-zip library or internal COM error! Message: DLL file does not exist.</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>程序无法找到 7z 库，导致无法解压 7z 文件</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：使用-NuGet-包管理器下载安装"><a href="#方法一：使用-NuGet-包管理器下载安装" class="headerlink" title="方法一：使用 NuGet 包管理器下载安装"></a>方法一：使用 NuGet 包管理器下载安装</h3><p>选择 Visual Studio 某个项目 - 右键引用 - 管理 NuGet 程序包 - 浏览 - 搜索 <code>7z</code>，选择一个 <code>7z</code> 包，如 <code>7z.Libs</code> 安装即可。</p>
-<h3 id="方法二：手动下载安装"><a href="#方法二：手动下载安装" class="headerlink" title="方法二：手动下载安装"></a>方法二：手动下载安装</h3><p>在官网 <a href="https://www.7-zip.org/download.html">Download 7-Zip </a> 下载下面的 7z 库</p>
-<table>
-<thead>
-<tr>
-<th>Link</th>
-<th>Type</th>
-<th>Windows</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://www.7-zip.org/a/7z1805-extra.7z">Download</a></td>
-<td>.7z</td>
-<td>x86 &#x2F; x64</td>
-<td>7-Zip Extra: standalone console version, 7z DLL, Plugin for Far Manager</td>
-</tr>
-</tbody></table>
-<p>解压重命名到 <code>C:\Program Files\7-Zip</code></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 解压压缩包</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;file_path&quot;&gt;</span>压缩包路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;save_path&quot;&gt;</span>解压后保存路径<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>是否解压成功<span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="built_in">bool</span> <span class="title">UncompressFile</span>(<span class="params"><span class="built_in">string</span> file_path, <span class="built_in">string</span> save_path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (System.IO.Directory.Exists(save_path))</span><br><span class="line">        &#123;</span><br><span class="line">            System.IO.Directory.Delete(save_path, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 若手动安装，需要指定路径</span></span><br><span class="line">        <span class="comment">//SevenZip.SevenZipExtractor.SetLibraryPath(@&quot;C:\Program Files\7-Zip\7za.dll&quot;);</span></span><br><span class="line">        SevenZip.SevenZipExtractor extractor = <span class="keyword">new</span> SevenZip.SevenZipExtractor(file_path);</span><br><span class="line">        extractor.ExtractArchive(save_path);</span><br><span class="line">        extractor.Dispose();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e1)</span><br><span class="line">    &#123;</span><br><span class="line">        System.Diagnostics.Debug.WriteLine(e1.Message);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Dotnet</tag>
-        <tag>C#</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</title>
-    <url>/2017/07/28/AnUnrealProcessHasCrashed/</url>
-    <content><![CDATA[<h2 id="Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题"><a href="#Launcher-启动-UE4-引擎出现-An-Unreal-process-has-crashed-的问题" class="headerlink" title="Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题"></a>Launcher 启动 UE4 引擎出现 An Unreal process has crashed 的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在 Launcher 启动 UE4 引擎，引擎奔溃，出现奔溃报告： An Unreal process has crashed:UE4-……</p>
-<span id="more"></span>
-
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/AnUnrealProcessHasCrashed.png"></p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>以管理员身份运行 Launcher，并启动 UE4 引擎则能正常启动。</p>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Unreal</tag>
       </tags>
   </entry>
   <entry>
@@ -1341,19 +1341,6 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
       </tags>
   </entry>
   <entry>
-    <title>C++ 调用 Python 模块</title>
-    <url>/2018/06/12/CppCallPython/</url>
-    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ call Python module </span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/b4597d097123a8c8388c71b3f0ff21e5</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// C++ call Python module</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CppCallPython</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Python initialize</span></span><br><span class="line">    <span class="built_in">Py_Initialize</span>();</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">Py_IsInitialized</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Python initialization failed!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If my MyPython.py file is in &quot;/Users/xx/code&quot;, set the working path to &quot;/Users/xx/code&quot;</span></span><br><span class="line">    std::string path = <span class="string">&quot;/Users/xx/code&quot;</span>;</span><br><span class="line">    <span class="built_in">PySys_SetPath</span>(&amp;path[<span class="number">0u</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Import MyPython.py module</span></span><br><span class="line">    PyObject* pModule = <span class="built_in">PyImport_ImportModule</span>(<span class="string">&quot;MyPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pModule)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt;<span class="string">&quot;Cannot open Python file!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the HelloPython() function in the module</span></span><br><span class="line">    PyObject* pFunhello = <span class="built_in">PyObject_GetAttrString</span>(pModule, <span class="string">&quot;HelloPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pFunhello)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Failed to get this function!&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Call HelloPython()</span></span><br><span class="line">    <span class="built_in">PyObject_CallFunction</span>(pFunhello, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Finalize</span></span><br><span class="line">    <span class="built_in">Py_Finalize</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>C/C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OpenCV使用CMake和MinGW-w64的编译安装</title>
     <url>/2018/07/31/CompiledOpenCVWithMinGW64/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前写过的一篇博文：<a href="https://blog.huihut.com/2017/12/03/CompiledOpenCVRunInQt/">OpenCV使用CMake和MinGW的编译安装及其在Qt配置运行</a> 是使用 32 位的 MinGW 在 Windows 下编译 OpenCV 生成 32 位的 dll。</p>
@@ -1463,6 +1450,90 @@ make: *** [src/IceXML/build/x64/shared/pic/Parser.o] Error 1
       </categories>
       <tags>
         <tag>链接装载库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ 调用 Python 模块</title>
+    <url>/2018/06/12/CppCallPython/</url>
+    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ call Python module </span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/b4597d097123a8c8388c71b3f0ff21e5</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// C++ call Python module</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CppCallPython</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Python initialize</span></span><br><span class="line">    <span class="built_in">Py_Initialize</span>();</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">Py_IsInitialized</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Python initialization failed!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If my MyPython.py file is in &quot;/Users/xx/code&quot;, set the working path to &quot;/Users/xx/code&quot;</span></span><br><span class="line">    std::string path = <span class="string">&quot;/Users/xx/code&quot;</span>;</span><br><span class="line">    <span class="built_in">PySys_SetPath</span>(&amp;path[<span class="number">0u</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Import MyPython.py module</span></span><br><span class="line">    PyObject* pModule = <span class="built_in">PyImport_ImportModule</span>(<span class="string">&quot;MyPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pModule)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt;<span class="string">&quot;Cannot open Python file!\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the HelloPython() function in the module</span></span><br><span class="line">    PyObject* pFunhello = <span class="built_in">PyObject_GetAttrString</span>(pModule, <span class="string">&quot;HelloPython&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pFunhello)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Failed to get this function!&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Call HelloPython()</span></span><br><span class="line">    <span class="built_in">PyObject_CallFunction</span>(pFunhello, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Finalize</span></span><br><span class="line">    <span class="built_in">Py_Finalize</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>C/C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Effective C++ 概要</title>
+    <url>/2019/01/05/EffectiveCppSummary/</url>
+    <content><![CDATA[<blockquote>
+<p>本文是 <a href="https://github.com/huihut/interview">huihut . C&#x2F;C++面试基础知识总结</a> 仓库的一部分，定位链接：<a href="https://github.com/huihut/interview#effective-c">Effective C++</a></p>
+</blockquote>
+<h3 id="Effective-C"><a href="#Effective-C" class="headerlink" title="Effective C++"></a>Effective C++</h3><ol>
+<li>视 C++ 为一个语言联邦（C、Object-Oriented C++、Template C++、STL）</li>
+<li>宁可以编译器替换预处理器（尽量以 <code>const</code>、<code>enum</code>、<code>inline</code> 替换 <code>#define</code>）</li>
+<li>尽可能使用 const</li>
+<li>确定对象被使用前已先被初始化（构造时赋值（copy 构造函数）比 default 构造后赋值（copy assignment）效率高）</li>
+<li>了解 C++ 默默编写并调用哪些函数（编译器暗自为 class 创建 default 构造函数、copy 构造函数、copy assignment 操作符、析构函数）</li>
+<li>若不想使用编译器自动生成的函数，就应该明确拒绝（将不想使用的成员函数声明为 private，并且不予实现）</li>
+<li>为多态基类声明 virtual 析构函数（如果 class 带有任何 virtual 函数，它就应该拥有一个 virtual 析构函数）</li>
+<li>别让异常逃离析构函数（析构函数应该吞下不传播异常，或者结束程序，而不是吐出异常；如果要处理异常应该在非析构的普通函数处理）</li>
+<li>绝不在构造和析构过程中调用 virtual 函数（因为这类调用从不下降至 derived class）</li>
+<li>令 <code>operator=</code> 返回一个 <code>reference to *this</code> （用于连锁赋值）<span id="more"></span></li>
+<li>在 <code>operator=</code> 中处理 “自我赋值”</li>
+<li>赋值对象时应确保复制 “对象内的所有成员变量” 及 “所有 base class 成分”（调用基类复制构造函数）</li>
+<li>以对象管理资源（资源在构造函数获得，在析构函数释放，建议使用智能指针，资源取得时机便是初始化时机（Resource Acquisition Is Initialization，RAII））</li>
+<li>在资源管理类中小心 copying 行为（普遍的 RAII class copying 行为是：抑制 copying、引用计数、深度拷贝、转移底部资源拥有权（类似 auto_ptr））</li>
+<li>在资源管理类中提供对原始资源（raw resources）的访问（对原始资源的访问可能经过显式转换或隐式转换，一般而言显示转换比较安全，隐式转换对客户比较方便）</li>
+<li>成对使用 new 和 delete 时要采取相同形式（<code>new</code> 中使用 <code>[]</code> 则 <code>delete []</code>，<code>new</code> 中不使用 <code>[]</code> 则 <code>delete</code>）</li>
+<li>以独立语句将 newed 对象存储于（置入）智能指针（如果不这样做，可能会因为编译器优化，导致难以察觉的资源泄漏）</li>
+<li>让接口容易被正确使用，不易被误用（促进正常使用的办法：接口的一致性、内置类型的行为兼容；阻止误用的办法：建立新类型，限制类型上的操作，约束对象值、消除客户的资源管理责任）</li>
+<li>设计 class 犹如设计 type，需要考虑对象创建、销毁、初始化、赋值、值传递、合法值、继承关系、转换、一般化等等。</li>
+<li>宁以 pass-by-reference-to-const 替换 pass-by-value （前者通常更高效、避免切割问题（slicing problem），但不适用于内置类型、STL迭代器、函数对象）</li>
+<li>必须返回对象时，别妄想返回其 reference（绝不返回 pointer 或 reference 指向一个 local stack 对象，或返回 reference 指向一个 heap-allocated 对象，或返回 pointer 或 reference 指向一个 local static 对象而有可能同时需要多个这样的对象。）</li>
+<li>将成员变量声明为 private（为了封装、一致性、对其读写精确控制等）</li>
+<li>宁以 non-member、non-friend 替换 member 函数（可增加封装性、包裹弹性（packaging flexibility）、机能扩充性）</li>
+<li>若所有参数（包括被this指针所指的那个隐喻参数）皆须要类型转换，请为此采用 non-member 函数</li>
+<li>考虑写一个不抛异常的 swap 函数</li>
+<li>尽可能延后变量定义式的出现时间（可增加程序清晰度并改善程序效率）</li>
+<li>尽量少做转型动作（旧式：<code>(T)expression</code>、<code>T(expression)</code>；新式：<code>const_cast&lt;T&gt;(expression)</code>、<code>dynamic_cast&lt;T&gt;(expression)</code>、<code>reinterpret_cast&lt;T&gt;(expression)</code>、<code>static_cast&lt;T&gt;(expression)</code>、；尽量避免转型、注重效率避免 dynamic_casts、尽量设计成无需转型、可把转型封装成函数、宁可用新式转型）</li>
+<li>避免使用 handles（包括 引用、指针、迭代器）指向对象内部（以增加封装性、使 const 成员函数的行为更像 const、降低 “虚吊号码牌”（dangling handles，如悬空指针等）的可能性）</li>
+<li>为 “异常安全” 而努力是值得的（异常安全函数（Exception-safe functions）即使发生异常也不会泄露资源或允许任何数据结构败坏，分为三种可能的保证：基本型、强列型、不抛异常型）</li>
+<li>透彻了解 inlining 的里里外外（inlining 在大多数 C++ 程序中是编译期的行为；inline 函数是否真正 inline，取决于编译器；大部分编译器拒绝太过复杂（如带有循环或递归）的函数 inlining，而所有对 virtual 函数的调用（除非是最平淡无奇的）也都会使 inlining 落空；inline 造成的代码膨胀可能带来效率损失；inline 函数无法随着程序库的升级而升级）</li>
+<li>将文件间的编译依存关系降至最低（如果使用 object references 或 object pointers 可以完成任务，就不要使用 objects；如果能过够，尽量以 class 声明式替换 class 定义式；为声明式和定义式提供不同的头文件）</li>
+<li>确定你的 public 继承塑模出 is-a（是一种）关系（适用于 base classes 身上的每一件事情一定适用于 derived classes 身上，因为每一个 derived class 对象也都是一个 base class 对象）</li>
+<li>避免遮掩继承而来的名字（可使用 using 声明式或转交函数（forwarding functions）来让被遮掩的名字再见天日）</li>
+<li>区分接口继承和实现继承（在 public 继承之下，derived classes 总是继承 base class 的接口；pure virtual 函数只具体指定接口继承；非纯 impure virtual 函数具体指定接口继承及缺省实现继承；non-virtual 函数具体指定接口继承以及强制性实现继承）</li>
+<li>考虑 virtual 函数以外的其他选择（如 Template Method 设计模式的 non-virtual interface（NVI）手法，将 virtual 函数替换为 “函数指针成员变量”，以 <code>tr1::function</code> 成员变量替换 virtual 函数，将继承体系内的 virtual 函数替换为另一个继承体系内的 virtual 函数）</li>
+<li>绝不重新定义继承而来的 non-virtual 函数</li>
+<li>绝不重新定义继承而来的缺省参数值，因为缺省参数值是静态绑定（statically bound），而 virtual 函数却是动态绑定（dynamically bound）</li>
+<li>通过复合塑模 has-a（有一个）或 “根据某物实现出”（在应用域（application domain），复合意味 has-a（有一个）；在实现域（implementation domain），复合意味着 is-implemented-in-terms-of（根据某物实现出））</li>
+<li>明智而审慎地使用 private 继承（private 继承意味着 is-implemented-in-terms-of（根据某物实现出），尽可能使用复合，当 derived class 需要访问 protected base class 的成员，或需要重新定义继承而来的时候 virtual 函数，或需要 empty base 最优化时，才使用 private 继承）</li>
+<li>明智而审慎地使用多重继承（多继承比单一继承复杂，可能导致新的歧义性，以及对 virtual 继承的需要，但确有正当用途，如 “public 继承某个 interface class” 和 “private 继承某个协助实现的 class”；virtual 继承可解决多继承下菱形继承的二义性问题，但会增加大小、速度、初始化及赋值的复杂度等等成本）</li>
+<li>了解隐式接口和编译期多态（class 和 templates 都支持接口（interfaces）和多态（polymorphism）；class 的接口是以签名为中心的显式的（explicit），多态则是通过 virtual 函数发生于运行期；template 的接口是奠基于有效表达式的隐式的（implicit），多态则是通过 template 具现化和函数重载解析（function overloading resolution）发生于编译期）</li>
+<li>了解 typename 的双重意义（声明 template 类型参数是，前缀关键字 class 和 typename 的意义完全相同；请使用关键字 typename 标识嵌套从属类型名称，但不得在基类列（base class lists）或成员初值列（member initialization list）内以它作为 basee class 修饰符）</li>
+<li>学习处理模板化基类内的名称（可在 derived class templates 内通过 <code>this-&gt;</code> 指涉 base class templates 内的成员名称，或藉由一个明白写出的 “base class 资格修饰符” 完成）</li>
+<li>将与参数无关的代码抽离 templates（因类型模板参数（non-type template parameters）而造成代码膨胀往往可以通过函数参数或 class 成员变量替换 template 参数来消除；因类型参数（type parameters）而造成的代码膨胀往往可以通过让带有完全相同二进制表述（binary representations）的实现类型（instantiation types）共享实现码）</li>
+<li>运用成员函数模板接受所有兼容类型（请使用成员函数模板（member function templates）生成 “可接受所有兼容类型” 的函数；声明 member templates 用于 “泛化 copy 构造” 或 “泛化 assignment 操作” 时还需要声明正常的 copy 构造函数和 copy assignment 操作符）</li>
+<li>需要类型转换时请为模板定义非成员函数（当我们编写一个 class template，而它所提供之 “与此 template 相关的” 函数支持 “所有参数之隐式类型转换” 时，请将那些函数定义为 “class template 内部的 friend 函数”）</li>
+<li>请使用 traits classes 表现类型信息（traits classes 通过 templates 和 “templates 特化” 使得 “类型相关信息” 在编译期可用，通过重载技术（overloading）实现在编译期对类型执行 if…else 测试）</li>
+<li>认识 template 元编程（模板元编程（TMP，template metaprogramming）可将工作由运行期移往编译期，因此得以实现早期错误侦测和更高的执行效率；TMP 可被用来生成 “给予政策选择组合”（based on combinations of policy choices）的客户定制代码，也可用来避免生成对某些特殊类型并不适合的代码）</li>
+<li>了解 new-handler 的行为（set_new_handler 允许客户指定一个在内存分配无法获得满足时被调用的函数；nothrow new 是一个颇具局限的工具，因为它只适用于内存分配（operator new），后继的构造函数调用还是可能抛出异常）</li>
+<li>了解 new 和 delete 的合理替换时机（为了检测运用错误、收集动态分配内存之使用统计信息、增加分配和归还速度、降低缺省内存管理器带来的空间额外开销、弥补缺省分配器中的非最佳齐位、将相关对象成簇集中、获得非传统的行为）</li>
+<li>编写 new 和 delete 时需固守常规（operator new 应该内涵一个无穷循环，并在其中尝试分配内存，如果它无法满足内存需求，就应该调用 new-handler，它也应该有能力处理 0 bytes 申请，class 专属版本则还应该处理 “比正确大小更大的（错误）申请”；operator delete 应该在收到 null 指针时不做任何事，class 专属版本则还应该处理 “比正确大小更大的（错误）申请”）</li>
+<li>写了 placement new 也要写 placement delete（当你写一个 placement operator new，请确定也写出了对应的 placement operator delete，否则可能会发生隐微而时断时续的内存泄漏；当你声明 placement new 和 placement delete，请确定不要无意识（非故意）地遮掩了它们地正常版本）</li>
+<li>不要轻忽编译器的警告</li>
+<li>让自己熟悉包括 TR1 在内的标准程序库（TR1，C++ Technical Report 1，C++11 标准的草稿文件）</li>
+<li>让自己熟悉 Boost（准标准库）</li>
+</ol>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1695,74 +1766,89 @@ infile.close();
       </tags>
   </entry>
   <entry>
-    <title>Effective C++ 概要</title>
-    <url>/2019/01/05/EffectiveCppSummary/</url>
-    <content><![CDATA[<blockquote>
-<p>本文是 <a href="https://github.com/huihut/interview">huihut . C&#x2F;C++面试基础知识总结</a> 仓库的一部分，定位链接：<a href="https://github.com/huihut/interview#effective-c">Effective C++</a></p>
-</blockquote>
-<h3 id="Effective-C"><a href="#Effective-C" class="headerlink" title="Effective C++"></a>Effective C++</h3><ol>
-<li>视 C++ 为一个语言联邦（C、Object-Oriented C++、Template C++、STL）</li>
-<li>宁可以编译器替换预处理器（尽量以 <code>const</code>、<code>enum</code>、<code>inline</code> 替换 <code>#define</code>）</li>
-<li>尽可能使用 const</li>
-<li>确定对象被使用前已先被初始化（构造时赋值（copy 构造函数）比 default 构造后赋值（copy assignment）效率高）</li>
-<li>了解 C++ 默默编写并调用哪些函数（编译器暗自为 class 创建 default 构造函数、copy 构造函数、copy assignment 操作符、析构函数）</li>
-<li>若不想使用编译器自动生成的函数，就应该明确拒绝（将不想使用的成员函数声明为 private，并且不予实现）</li>
-<li>为多态基类声明 virtual 析构函数（如果 class 带有任何 virtual 函数，它就应该拥有一个 virtual 析构函数）</li>
-<li>别让异常逃离析构函数（析构函数应该吞下不传播异常，或者结束程序，而不是吐出异常；如果要处理异常应该在非析构的普通函数处理）</li>
-<li>绝不在构造和析构过程中调用 virtual 函数（因为这类调用从不下降至 derived class）</li>
-<li>令 <code>operator=</code> 返回一个 <code>reference to *this</code> （用于连锁赋值）<span id="more"></span></li>
-<li>在 <code>operator=</code> 中处理 “自我赋值”</li>
-<li>赋值对象时应确保复制 “对象内的所有成员变量” 及 “所有 base class 成分”（调用基类复制构造函数）</li>
-<li>以对象管理资源（资源在构造函数获得，在析构函数释放，建议使用智能指针，资源取得时机便是初始化时机（Resource Acquisition Is Initialization，RAII））</li>
-<li>在资源管理类中小心 copying 行为（普遍的 RAII class copying 行为是：抑制 copying、引用计数、深度拷贝、转移底部资源拥有权（类似 auto_ptr））</li>
-<li>在资源管理类中提供对原始资源（raw resources）的访问（对原始资源的访问可能经过显式转换或隐式转换，一般而言显示转换比较安全，隐式转换对客户比较方便）</li>
-<li>成对使用 new 和 delete 时要采取相同形式（<code>new</code> 中使用 <code>[]</code> 则 <code>delete []</code>，<code>new</code> 中不使用 <code>[]</code> 则 <code>delete</code>）</li>
-<li>以独立语句将 newed 对象存储于（置入）智能指针（如果不这样做，可能会因为编译器优化，导致难以察觉的资源泄漏）</li>
-<li>让接口容易被正确使用，不易被误用（促进正常使用的办法：接口的一致性、内置类型的行为兼容；阻止误用的办法：建立新类型，限制类型上的操作，约束对象值、消除客户的资源管理责任）</li>
-<li>设计 class 犹如设计 type，需要考虑对象创建、销毁、初始化、赋值、值传递、合法值、继承关系、转换、一般化等等。</li>
-<li>宁以 pass-by-reference-to-const 替换 pass-by-value （前者通常更高效、避免切割问题（slicing problem），但不适用于内置类型、STL迭代器、函数对象）</li>
-<li>必须返回对象时，别妄想返回其 reference（绝不返回 pointer 或 reference 指向一个 local stack 对象，或返回 reference 指向一个 heap-allocated 对象，或返回 pointer 或 reference 指向一个 local static 对象而有可能同时需要多个这样的对象。）</li>
-<li>将成员变量声明为 private（为了封装、一致性、对其读写精确控制等）</li>
-<li>宁以 non-member、non-friend 替换 member 函数（可增加封装性、包裹弹性（packaging flexibility）、机能扩充性）</li>
-<li>若所有参数（包括被this指针所指的那个隐喻参数）皆须要类型转换，请为此采用 non-member 函数</li>
-<li>考虑写一个不抛异常的 swap 函数</li>
-<li>尽可能延后变量定义式的出现时间（可增加程序清晰度并改善程序效率）</li>
-<li>尽量少做转型动作（旧式：<code>(T)expression</code>、<code>T(expression)</code>；新式：<code>const_cast&lt;T&gt;(expression)</code>、<code>dynamic_cast&lt;T&gt;(expression)</code>、<code>reinterpret_cast&lt;T&gt;(expression)</code>、<code>static_cast&lt;T&gt;(expression)</code>、；尽量避免转型、注重效率避免 dynamic_casts、尽量设计成无需转型、可把转型封装成函数、宁可用新式转型）</li>
-<li>避免使用 handles（包括 引用、指针、迭代器）指向对象内部（以增加封装性、使 const 成员函数的行为更像 const、降低 “虚吊号码牌”（dangling handles，如悬空指针等）的可能性）</li>
-<li>为 “异常安全” 而努力是值得的（异常安全函数（Exception-safe functions）即使发生异常也不会泄露资源或允许任何数据结构败坏，分为三种可能的保证：基本型、强列型、不抛异常型）</li>
-<li>透彻了解 inlining 的里里外外（inlining 在大多数 C++ 程序中是编译期的行为；inline 函数是否真正 inline，取决于编译器；大部分编译器拒绝太过复杂（如带有循环或递归）的函数 inlining，而所有对 virtual 函数的调用（除非是最平淡无奇的）也都会使 inlining 落空；inline 造成的代码膨胀可能带来效率损失；inline 函数无法随着程序库的升级而升级）</li>
-<li>将文件间的编译依存关系降至最低（如果使用 object references 或 object pointers 可以完成任务，就不要使用 objects；如果能过够，尽量以 class 声明式替换 class 定义式；为声明式和定义式提供不同的头文件）</li>
-<li>确定你的 public 继承塑模出 is-a（是一种）关系（适用于 base classes 身上的每一件事情一定适用于 derived classes 身上，因为每一个 derived class 对象也都是一个 base class 对象）</li>
-<li>避免遮掩继承而来的名字（可使用 using 声明式或转交函数（forwarding functions）来让被遮掩的名字再见天日）</li>
-<li>区分接口继承和实现继承（在 public 继承之下，derived classes 总是继承 base class 的接口；pure virtual 函数只具体指定接口继承；非纯 impure virtual 函数具体指定接口继承及缺省实现继承；non-virtual 函数具体指定接口继承以及强制性实现继承）</li>
-<li>考虑 virtual 函数以外的其他选择（如 Template Method 设计模式的 non-virtual interface（NVI）手法，将 virtual 函数替换为 “函数指针成员变量”，以 <code>tr1::function</code> 成员变量替换 virtual 函数，将继承体系内的 virtual 函数替换为另一个继承体系内的 virtual 函数）</li>
-<li>绝不重新定义继承而来的 non-virtual 函数</li>
-<li>绝不重新定义继承而来的缺省参数值，因为缺省参数值是静态绑定（statically bound），而 virtual 函数却是动态绑定（dynamically bound）</li>
-<li>通过复合塑模 has-a（有一个）或 “根据某物实现出”（在应用域（application domain），复合意味 has-a（有一个）；在实现域（implementation domain），复合意味着 is-implemented-in-terms-of（根据某物实现出））</li>
-<li>明智而审慎地使用 private 继承（private 继承意味着 is-implemented-in-terms-of（根据某物实现出），尽可能使用复合，当 derived class 需要访问 protected base class 的成员，或需要重新定义继承而来的时候 virtual 函数，或需要 empty base 最优化时，才使用 private 继承）</li>
-<li>明智而审慎地使用多重继承（多继承比单一继承复杂，可能导致新的歧义性，以及对 virtual 继承的需要，但确有正当用途，如 “public 继承某个 interface class” 和 “private 继承某个协助实现的 class”；virtual 继承可解决多继承下菱形继承的二义性问题，但会增加大小、速度、初始化及赋值的复杂度等等成本）</li>
-<li>了解隐式接口和编译期多态（class 和 templates 都支持接口（interfaces）和多态（polymorphism）；class 的接口是以签名为中心的显式的（explicit），多态则是通过 virtual 函数发生于运行期；template 的接口是奠基于有效表达式的隐式的（implicit），多态则是通过 template 具现化和函数重载解析（function overloading resolution）发生于编译期）</li>
-<li>了解 typename 的双重意义（声明 template 类型参数是，前缀关键字 class 和 typename 的意义完全相同；请使用关键字 typename 标识嵌套从属类型名称，但不得在基类列（base class lists）或成员初值列（member initialization list）内以它作为 basee class 修饰符）</li>
-<li>学习处理模板化基类内的名称（可在 derived class templates 内通过 <code>this-&gt;</code> 指涉 base class templates 内的成员名称，或藉由一个明白写出的 “base class 资格修饰符” 完成）</li>
-<li>将与参数无关的代码抽离 templates（因类型模板参数（non-type template parameters）而造成代码膨胀往往可以通过函数参数或 class 成员变量替换 template 参数来消除；因类型参数（type parameters）而造成的代码膨胀往往可以通过让带有完全相同二进制表述（binary representations）的实现类型（instantiation types）共享实现码）</li>
-<li>运用成员函数模板接受所有兼容类型（请使用成员函数模板（member function templates）生成 “可接受所有兼容类型” 的函数；声明 member templates 用于 “泛化 copy 构造” 或 “泛化 assignment 操作” 时还需要声明正常的 copy 构造函数和 copy assignment 操作符）</li>
-<li>需要类型转换时请为模板定义非成员函数（当我们编写一个 class template，而它所提供之 “与此 template 相关的” 函数支持 “所有参数之隐式类型转换” 时，请将那些函数定义为 “class template 内部的 friend 函数”）</li>
-<li>请使用 traits classes 表现类型信息（traits classes 通过 templates 和 “templates 特化” 使得 “类型相关信息” 在编译期可用，通过重载技术（overloading）实现在编译期对类型执行 if…else 测试）</li>
-<li>认识 template 元编程（模板元编程（TMP，template metaprogramming）可将工作由运行期移往编译期，因此得以实现早期错误侦测和更高的执行效率；TMP 可被用来生成 “给予政策选择组合”（based on combinations of policy choices）的客户定制代码，也可用来避免生成对某些特殊类型并不适合的代码）</li>
-<li>了解 new-handler 的行为（set_new_handler 允许客户指定一个在内存分配无法获得满足时被调用的函数；nothrow new 是一个颇具局限的工具，因为它只适用于内存分配（operator new），后继的构造函数调用还是可能抛出异常）</li>
-<li>了解 new 和 delete 的合理替换时机（为了检测运用错误、收集动态分配内存之使用统计信息、增加分配和归还速度、降低缺省内存管理器带来的空间额外开销、弥补缺省分配器中的非最佳齐位、将相关对象成簇集中、获得非传统的行为）</li>
-<li>编写 new 和 delete 时需固守常规（operator new 应该内涵一个无穷循环，并在其中尝试分配内存，如果它无法满足内存需求，就应该调用 new-handler，它也应该有能力处理 0 bytes 申请，class 专属版本则还应该处理 “比正确大小更大的（错误）申请”；operator delete 应该在收到 null 指针时不做任何事，class 专属版本则还应该处理 “比正确大小更大的（错误）申请”）</li>
-<li>写了 placement new 也要写 placement delete（当你写一个 placement operator new，请确定也写出了对应的 placement operator delete，否则可能会发生隐微而时断时续的内存泄漏；当你声明 placement new 和 placement delete，请确定不要无意识（非故意）地遮掩了它们地正常版本）</li>
-<li>不要轻忽编译器的警告</li>
-<li>让自己熟悉包括 TR1 在内的标准程序库（TR1，C++ Technical Report 1，C++11 标准的草稿文件）</li>
-<li>让自己熟悉 Boost（准标准库）</li>
+    <title>一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌（OpenCV+Dlib+Live2D+图灵机器人+讯飞IAT语音听写+讯飞TTS语音合成）</title>
+    <url>/2018/02/08/Facemoji1/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌</p>
+<p>这是个 Unity 项目，其暂时有两个模块 ：</p>
+<ul>
+<li>【模块一】是实时人脸卡通化（FaceTracking），使用 <a href="https://enoxsoftware.com/opencvforunity/">OpenCV</a> 和 <a href="https://enoxsoftware.com/dlibfacelandmarkdetector/">Dlib</a> 检测面部表情，并实时转化为 <a href="http://sites.cybernoids.jp/cubism-sdk2_e/unity_2-1">Live2D</a> 模型，然后可 <a href="https://github.com/Chman/Moments">录制</a> 成 gif 图；</li>
+<li>【模块二】是人工智能（AI）使用 <a href="http://www.tuling123.com/">图灵机器人</a>、<a href="http://www.xfyun.cn/services/voicedictation">讯飞IAT语音听写</a>、<a href="http://www.xfyun.cn/services/online_tts">讯飞TTS语音合成</a> 进行语音聊天。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Facemoji%E6%95%88%E6%9E%9C%E5%9B%BE_cn.png" alt="Facemoji效果图_cn"></p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>源码：<a href="https://github.com/huihut/Facemoji">Github . huihut&#x2F;Facemoji</a></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
+<li><a href="https://www.coolapk.com/apk/192260">酷安 . Facemoji 废萌</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.huihut.facemoji">Google Play (需要梯子)</a></li>
+<li><a href="https://github.com/huihut/Facemoji/releases">Github . Facemoji&#x2F;releases</a></li>
+<li><a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘 . Facemoji&#x2F;Platform</a></li>
+<li><a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘 . Facemoji&#x2F;Platform</a></li>
+</ul>
+<h2 id="为什么叫废萌（Facemoji）"><a href="#为什么叫废萌（Facemoji）" class="headerlink" title="为什么叫废萌（Facemoji）"></a>为什么叫废萌（Facemoji）</h2><p>首先，为什么叫废萌（Facemoji）？…emmm…这个项目其实是由 Animoji 启发的，由于当时 Animoji 没有开放 api，所以想开发个跨平台（Unity）的类似的项目，就叫 Facemoji。</p>
+<p>至于中文名废萌嘛？…emmm…总觉得她除了卖萌没什么作用，所以就叫废（Face）萌（Moji）了。</p>
+<h2 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h2><ol>
+<li><p>从 <a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘</a> 或者 <a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘</a>下载<code>shape_predictor_68_face_landmarks.dat</code>（已训练好的人脸检测模型）和 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>（精简的 OpenCV, Dlib, Live2D 和 Iflytek 库）</p>
+</li>
+<li><p>克隆下源码：<code>git clone git@github.com:huihut/Facemoji.git</code></p>
+</li>
+<li><p>创建一个新的 Unity 项目，命名为 Facemoji</p>
+</li>
+<li><p>把 <code>Facemoji-master</code> 文件夹中的 <code>Assets</code> 和 <code>ProjectSettings</code> 替换 <code>Facemoji</code> 的同名文件夹</p>
+</li>
+<li><p>把 <code>shape_predictor_68_face_landmarks.dat</code> 复制到 <code>Facemoji/Assets/StreamingAssets/</code></p>
+</li>
+<li><p>导入 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>。导入后的文件结构如下：<br> <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/FacemojiDirectoryStructure1.5.0.png" alt="FacemojiDirectoryStructure1.5.0.png"></p>
+</li>
+<li><p>转换平台到 Android（其他平台未适配）</p>
+</li>
+<li><p>Build &amp; Run</p>
+</li>
 </ol>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="实时人脸卡通化（FaceTracking）"><a href="#实时人脸卡通化（FaceTracking）" class="headerlink" title="实时人脸卡通化（FaceTracking）"></a>实时人脸卡通化（FaceTracking）</h3><p>使用 OpenCV 和 Dlib 检测面部表情，并实时转化为 Live2D 模型；</p>
+<p>她可以跟着你的头部表情动，试着摇头看看吧。</p>
+<h3 id="录制-gif-图"><a href="#录制-gif-图" class="headerlink" title="录制 gif 图"></a>录制 gif 图</h3><p>点击顶部中间的录制键可以录制 3 秒的 gif；</p>
+<p>录制状态为：Recording（准备录制）、PreProcessing（正在录制）、Paused（正在压缩成gif图）</p>
+<p>生成的 gif 存储在 <code>Application.dataPath</code>，Android 平台的话在<br><code>/storage/emulated/0/Android/data/com.huihut.facemoji/files/</code></p>
+<h3 id="语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）"><a href="#语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）" class="headerlink" title="语音和文字聊天（聊天机器人？ 她说她是 AI，不是机器人！ hhhh…）"></a>语音和文字聊天（<del>聊天机器人？</del> 她说她是 AI，不是机器人！ hhhh…）</h3><p>使用 <strong>图灵机器人</strong>、<strong>讯飞 IAT 语音听写</strong>、<strong>讯飞 TTS 语音合成</strong></p>
+<p>她很智能（<del>zhizhang</del>），可以：</p>
+<ul>
+<li>聊天对话</li>
+<li>生活百科</li>
+<li>数学计算</li>
+<li>故事大全</li>
+<li>笑话大全</li>
+<li>成语接龙</li>
+<li>星座运势</li>
+<li>天气查询</li>
+<li>…</li>
+</ul>
+<p>但是由于她是个中国 AI（<del>机器人</del>），图灵机器人只支持中文，所以她只能进行中文聊天，和她讲英文她只会翻译。</p>
+<p>不过她以后会学习英文的（<del>换个会讲英文的</del>）。</p>
+<h2 id="Gif演示"><a href="#Gif演示" class="headerlink" title="Gif演示"></a>Gif演示</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GifCapture-201802072218435427.gif" alt="GifCapture-201802072218435427.gif">    </p>
+<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><h3 id="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1"><a href="#人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1" class="headerlink" title="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji&#x2F;issues&#x2F;1"></a>人不动时模型抖动问题（特别是眼睛眉毛）<a href="https://github.com/huihut/Facemoji/issues/1">Facemoji&#x2F;issues&#x2F;1</a></h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>手&#x2F;眼&#x2F;眉等的轻微抖动</li>
+<li>Dlib 检测到的每一帧人脸特征点的位置会有轻微差距</li>
+</ul>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ul>
+<li><p>调整模型参数</p>
+<p>  如果人眼睛小的话，可以修改 <code>FaceTracking.cs</code> 中 <a href="https://github.com/huihut/Facemoji/blob/v1.4.1/Assets/Scripts/FaceTracking.cs#L294">live2DModelUpdate</a> 方法，把睁开眼的区间改大一点，如下：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// eye_open_L                               // 左眼</span><br><span class="line">float eyeOpen_L = getRaitoOfEyeOpen_L (points);</span><br><span class="line">if (eyeOpen_L &gt; 0.4f &amp;&amp; eyeOpen_L &lt; 1.0f)</span><br><span class="line">    eyeOpen_L = 1;                          // 睁开眼</span><br><span class="line">else if (eyeOpen_L &gt;= 1.0f)</span><br><span class="line">    eyeOpen_L = 2;                          // 睁大眼</span><br><span class="line">else if (eyeOpen_L &lt;= 0.4f)</span><br><span class="line">    eyeOpen_L = 0;                          // 闭上眼</span><br><span class="line">live2DModel.PARAM_EYE_L_OPEN = eyeOpen_L;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>考虑使用卡尔曼滤波器或者其他滤波器过滤（未尝试）</li>
+</ul>
+<h2 id="修改说明"><a href="#修改说明" class="headerlink" title="修改说明"></a>修改说明</h2><blockquote>
+<p>2018年03月23日因项目更新 v1.5.0 版本而对此博文做了修改。因博文内容不常改动，项目部署、文档等以Github为准。</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>CS</category>
       </categories>
       <tags>
-        <tag>C/C++</tag>
+        <tag>Unity</tag>
       </tags>
   </entry>
   <entry>
@@ -1867,92 +1953,6 @@ colorscheme solarized
       </categories>
       <tags>
         <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌（OpenCV+Dlib+Live2D+图灵机器人+讯飞IAT语音听写+讯飞TTS语音合成）</title>
-    <url>/2018/02/08/Facemoji1/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文介绍一个可以模仿你的表情的语音聊天机器人 —— Facemoji 废萌</p>
-<p>这是个 Unity 项目，其暂时有两个模块 ：</p>
-<ul>
-<li>【模块一】是实时人脸卡通化（FaceTracking），使用 <a href="https://enoxsoftware.com/opencvforunity/">OpenCV</a> 和 <a href="https://enoxsoftware.com/dlibfacelandmarkdetector/">Dlib</a> 检测面部表情，并实时转化为 <a href="http://sites.cybernoids.jp/cubism-sdk2_e/unity_2-1">Live2D</a> 模型，然后可 <a href="https://github.com/Chman/Moments">录制</a> 成 gif 图；</li>
-<li>【模块二】是人工智能（AI）使用 <a href="http://www.tuling123.com/">图灵机器人</a>、<a href="http://www.xfyun.cn/services/voicedictation">讯飞IAT语音听写</a>、<a href="http://www.xfyun.cn/services/online_tts">讯飞TTS语音合成</a> 进行语音聊天。</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/Facemoji%E6%95%88%E6%9E%9C%E5%9B%BE_cn.png" alt="Facemoji效果图_cn"></p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>源码：<a href="https://github.com/huihut/Facemoji">Github . huihut&#x2F;Facemoji</a></p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
-<li><a href="https://www.coolapk.com/apk/192260">酷安 . Facemoji 废萌</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.huihut.facemoji">Google Play (需要梯子)</a></li>
-<li><a href="https://github.com/huihut/Facemoji/releases">Github . Facemoji&#x2F;releases</a></li>
-<li><a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘 . Facemoji&#x2F;Platform</a></li>
-<li><a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘 . Facemoji&#x2F;Platform</a></li>
-</ul>
-<h2 id="为什么叫废萌（Facemoji）"><a href="#为什么叫废萌（Facemoji）" class="headerlink" title="为什么叫废萌（Facemoji）"></a>为什么叫废萌（Facemoji）</h2><p>首先，为什么叫废萌（Facemoji）？…emmm…这个项目其实是由 Animoji 启发的，由于当时 Animoji 没有开放 api，所以想开发个跨平台（Unity）的类似的项目，就叫 Facemoji。</p>
-<p>至于中文名废萌嘛？…emmm…总觉得她除了卖萌没什么作用，所以就叫废（Face）萌（Moji）了。</p>
-<h2 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h2><ol>
-<li><p>从 <a href="https://drive.google.com/open?id=1ofJMFIdzXCdYYO3qO5hvrTQPJUumgSY-">Google云盘</a> 或者 <a href="https://pan.baidu.com/s/1U08B_wPY67Zh1RTwFhrihA">Baidu网盘</a>下载<code>shape_predictor_68_face_landmarks.dat</code>（已训练好的人脸检测模型）和 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>（精简的 OpenCV, Dlib, Live2D 和 Iflytek 库）</p>
-</li>
-<li><p>克隆下源码：<code>git clone git@github.com:huihut/Facemoji.git</code></p>
-</li>
-<li><p>创建一个新的 Unity 项目，命名为 Facemoji</p>
-</li>
-<li><p>把 <code>Facemoji-master</code> 文件夹中的 <code>Assets</code> 和 <code>ProjectSettings</code> 替换 <code>Facemoji</code> 的同名文件夹</p>
-</li>
-<li><p>把 <code>shape_predictor_68_face_landmarks.dat</code> 复制到 <code>Facemoji/Assets/StreamingAssets/</code></p>
-</li>
-<li><p>导入 <code>Facemoji_Plugins_Assets_1.5.0.unitypackage</code>。导入后的文件结构如下：<br> <img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/FacemojiDirectoryStructure1.5.0.png" alt="FacemojiDirectoryStructure1.5.0.png"></p>
-</li>
-<li><p>转换平台到 Android（其他平台未适配）</p>
-</li>
-<li><p>Build &amp; Run</p>
-</li>
-</ol>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="实时人脸卡通化（FaceTracking）"><a href="#实时人脸卡通化（FaceTracking）" class="headerlink" title="实时人脸卡通化（FaceTracking）"></a>实时人脸卡通化（FaceTracking）</h3><p>使用 OpenCV 和 Dlib 检测面部表情，并实时转化为 Live2D 模型；</p>
-<p>她可以跟着你的头部表情动，试着摇头看看吧。</p>
-<h3 id="录制-gif-图"><a href="#录制-gif-图" class="headerlink" title="录制 gif 图"></a>录制 gif 图</h3><p>点击顶部中间的录制键可以录制 3 秒的 gif；</p>
-<p>录制状态为：Recording（准备录制）、PreProcessing（正在录制）、Paused（正在压缩成gif图）</p>
-<p>生成的 gif 存储在 <code>Application.dataPath</code>，Android 平台的话在<br><code>/storage/emulated/0/Android/data/com.huihut.facemoji/files/</code></p>
-<h3 id="语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）"><a href="#语音和文字聊天（聊天机器人？-她说她是-AI，不是机器人！-hhhh…）" class="headerlink" title="语音和文字聊天（聊天机器人？ 她说她是 AI，不是机器人！ hhhh…）"></a>语音和文字聊天（<del>聊天机器人？</del> 她说她是 AI，不是机器人！ hhhh…）</h3><p>使用 <strong>图灵机器人</strong>、<strong>讯飞 IAT 语音听写</strong>、<strong>讯飞 TTS 语音合成</strong></p>
-<p>她很智能（<del>zhizhang</del>），可以：</p>
-<ul>
-<li>聊天对话</li>
-<li>生活百科</li>
-<li>数学计算</li>
-<li>故事大全</li>
-<li>笑话大全</li>
-<li>成语接龙</li>
-<li>星座运势</li>
-<li>天气查询</li>
-<li>…</li>
-</ul>
-<p>但是由于她是个中国 AI（<del>机器人</del>），图灵机器人只支持中文，所以她只能进行中文聊天，和她讲英文她只会翻译。</p>
-<p>不过她以后会学习英文的（<del>换个会讲英文的</del>）。</p>
-<h2 id="Gif演示"><a href="#Gif演示" class="headerlink" title="Gif演示"></a>Gif演示</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/GifCapture-201802072218435427.gif" alt="GifCapture-201802072218435427.gif">    </p>
-<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><h3 id="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1"><a href="#人不动时模型抖动问题（特别是眼睛眉毛）Facemoji-issues-1" class="headerlink" title="人不动时模型抖动问题（特别是眼睛眉毛）Facemoji&#x2F;issues&#x2F;1"></a>人不动时模型抖动问题（特别是眼睛眉毛）<a href="https://github.com/huihut/Facemoji/issues/1">Facemoji&#x2F;issues&#x2F;1</a></h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>手&#x2F;眼&#x2F;眉等的轻微抖动</li>
-<li>Dlib 检测到的每一帧人脸特征点的位置会有轻微差距</li>
-</ul>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ul>
-<li><p>调整模型参数</p>
-<p>  如果人眼睛小的话，可以修改 <code>FaceTracking.cs</code> 中 <a href="https://github.com/huihut/Facemoji/blob/v1.4.1/Assets/Scripts/FaceTracking.cs#L294">live2DModelUpdate</a> 方法，把睁开眼的区间改大一点，如下：</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// eye_open_L                               // 左眼</span><br><span class="line">float eyeOpen_L = getRaitoOfEyeOpen_L (points);</span><br><span class="line">if (eyeOpen_L &gt; 0.4f &amp;&amp; eyeOpen_L &lt; 1.0f)</span><br><span class="line">    eyeOpen_L = 1;                          // 睁开眼</span><br><span class="line">else if (eyeOpen_L &gt;= 1.0f)</span><br><span class="line">    eyeOpen_L = 2;                          // 睁大眼</span><br><span class="line">else if (eyeOpen_L &lt;= 0.4f)</span><br><span class="line">    eyeOpen_L = 0;                          // 闭上眼</span><br><span class="line">live2DModel.PARAM_EYE_L_OPEN = eyeOpen_L;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>考虑使用卡尔曼滤波器或者其他滤波器过滤（未尝试）</li>
-</ul>
-<h2 id="修改说明"><a href="#修改说明" class="headerlink" title="修改说明"></a>修改说明</h2><blockquote>
-<p>2018年03月23日因项目更新 v1.5.0 版本而对此博文做了修改。因博文内容不常改动，项目部署、文档等以Github为准。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Unity</tag>
       </tags>
   </entry>
   <entry>
@@ -2443,31 +2443,6 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
       </tags>
   </entry>
   <entry>
-    <title>hexo 构建静态文件无法生成 index.html 等文件</title>
-    <url>/2017/05/13/HexoNPMERR/</url>
-    <content><![CDATA[<h2 id="hexo-g-无法生成-index"><a href="#hexo-g-无法生成-index" class="headerlink" title="hexo g 无法生成 index"></a>hexo g 无法生成 index</h2><p>构建情况如下图：</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNoIndex.png"></p>
-<p>但是一些文件没有生成，如 <code>index.html</code> 文件。</p>
-<span id="more"></span>
-
-<h2 id="查看-npm-安装各-hexo-插件的情况"><a href="#查看-npm-安装各-hexo-插件的情况" class="headerlink" title="查看 npm 安装各 hexo 插件的情况"></a>查看 npm 安装各 hexo 插件的情况</h2><pre><code>npm ls --depth 0
-</code></pre>
-<h2 id="hexo-的一些插件未安装插件"><a href="#hexo-的一些插件未安装插件" class="headerlink" title="hexo 的一些插件未安装插件"></a>hexo 的一些插件未安装插件</h2><p><strong>npm ERR! missing npm ERR! missing hexo-generator-archive…</strong></p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNPMls.png"></p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>逐一安装缺失的包</p>
-<pre><code>npm install hexo-generator-archive --save
-...
-</code></pre>
-<p>安装完后重新构建即可解决。</p>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用MFC的CDC类绘制三维坐标系及球面函数</title>
     <url>/2017/10/13/GraphicsExercise3D/</url>
     <content><![CDATA[<h2 id="系列链接"><a href="#系列链接" class="headerlink" title="系列链接"></a>系列链接</h2><ul>
@@ -2517,6 +2492,61 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
       <tags>
         <tag>图形学</tag>
         <tag>MFC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo 构建静态文件无法生成 index.html 等文件</title>
+    <url>/2017/05/13/HexoNPMERR/</url>
+    <content><![CDATA[<h2 id="hexo-g-无法生成-index"><a href="#hexo-g-无法生成-index" class="headerlink" title="hexo g 无法生成 index"></a>hexo g 无法生成 index</h2><p>构建情况如下图：</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNoIndex.png"></p>
+<p>但是一些文件没有生成，如 <code>index.html</code> 文件。</p>
+<span id="more"></span>
+
+<h2 id="查看-npm-安装各-hexo-插件的情况"><a href="#查看-npm-安装各-hexo-插件的情况" class="headerlink" title="查看 npm 安装各 hexo 插件的情况"></a>查看 npm 安装各 hexo 插件的情况</h2><pre><code>npm ls --depth 0
+</code></pre>
+<h2 id="hexo-的一些插件未安装插件"><a href="#hexo-的一些插件未安装插件" class="headerlink" title="hexo 的一些插件未安装插件"></a>hexo 的一些插件未安装插件</h2><p><strong>npm ERR! missing npm ERR! missing hexo-generator-archive…</strong></p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/ganningZHexoNPMls.png"></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>逐一安装缺失的包</p>
+<pre><code>npm install hexo-generator-archive --save
+...
+</code></pre>
+<p>安装完后重新构建即可解决。</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个基于 C# 的简单的线程安全日志模块</title>
+    <url>/2019/07/28/LogConsumer/</url>
+    <content><![CDATA[<p>一个基于 C# 的简单的线程安全日志模块，它使用生产者 - 消费者模式，可以在 .NET Framework 和 .Net Core 中使用。</p>
+<p>Github 地址：<a href="https://github.com/huihut/LogConsumer">LogConsumer</a></p>
+<span id="more"></span>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
+<li>将 <a href="https://github.com/huihut/LogConsumer/blob/master/LogConsumer/LogConsumer.cs">LogConsumer.cs</a> 添加到你的项目中</li>
+<li>将 <code>LogConsumer.cs</code> 中的 <code>logFileName</code> 修改为你的路径文件名</li>
+<li>在需要输出日志的地方使用它 <figure class="highlight cs"><table><tr><td class="code"><pre><span class="line">HuiHut.LogConsumer.LogConsumer.Instance.Write(<span class="string">&quot;your log content&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h2><ul>
+<li>命令行  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dotnet build</span><br><span class="line">dotnet .\LogConsumer\bin\Debug\netcoreapp2.1\LogConsumer.dll</span><br></pre></td></tr></table></figure></li>
+<li>Visual Studio  <ol>
+<li>打开 <code>LogConsumer.sln</code></li>
+<li>生成解决方案，运行测试</li>
+</ol>
+</li>
+</ul>
+<h2 id="测试的日志文件示例"><a href="#测试的日志文件示例" class="headerlink" title="测试的日志文件示例"></a>测试的日志文件示例</h2><p>10 个线程，每个线程抛出  10 条日志的测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Data       Time      Namespace          Class           Method    LogContent</span><br><span class="line">----------------------------------------------------------------------------------</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] Thread is finished.</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Dotnet</tag>
+        <tag>C#</tag>
       </tags>
   </entry>
   <entry>
@@ -2746,36 +2776,6 @@ SetPlotSin((float)0.0, (float)6.3, (float)0.01);
       </categories>
       <tags>
         <tag>C/C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个基于 C# 的简单的线程安全日志模块</title>
-    <url>/2019/07/28/LogConsumer/</url>
-    <content><![CDATA[<p>一个基于 C# 的简单的线程安全日志模块，它使用生产者 - 消费者模式，可以在 .NET Framework 和 .Net Core 中使用。</p>
-<p>Github 地址：<a href="https://github.com/huihut/LogConsumer">LogConsumer</a></p>
-<span id="more"></span>
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
-<li>将 <a href="https://github.com/huihut/LogConsumer/blob/master/LogConsumer/LogConsumer.cs">LogConsumer.cs</a> 添加到你的项目中</li>
-<li>将 <code>LogConsumer.cs</code> 中的 <code>logFileName</code> 修改为你的路径文件名</li>
-<li>在需要输出日志的地方使用它 <figure class="highlight cs"><table><tr><td class="code"><pre><span class="line">HuiHut.LogConsumer.LogConsumer.Instance.Write(<span class="string">&quot;your log content&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h2><ul>
-<li>命令行  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dotnet build</span><br><span class="line">dotnet .\LogConsumer\bin\Debug\netcoreapp2.1\LogConsumer.dll</span><br></pre></td></tr></table></figure></li>
-<li>Visual Studio  <ol>
-<li>打开 <code>LogConsumer.sln</code></li>
-<li>生成解决方案，运行测试</li>
-</ol>
-</li>
-</ul>
-<h2 id="测试的日志文件示例"><a href="#测试的日志文件示例" class="headerlink" title="测试的日志文件示例"></a>测试的日志文件示例</h2><p>10 个线程，每个线程抛出  10 条日志的测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Data       Time      Namespace          Class           Method    LogContent</span><br><span class="line">----------------------------------------------------------------------------------</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 0</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 1</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 2</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 3</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 4</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 5</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 6</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 7</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 5 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 8</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 2 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 3 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 6 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 7 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] index = 9</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 0 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 1 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 9 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 8 ] Thread is finished.</span><br><span class="line">2019-05-10 01:50:09  HuiHut.LogConsumer:LogConsumerTest.WriteLog  [ 4 ] Thread is finished.</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Dotnet</tag>
-        <tag>C#</tag>
       </tags>
   </entry>
   <entry>
@@ -3417,41 +3417,6 @@ _   底线
       </tags>
   </entry>
   <entry>
-    <title>python-dev 库缺失导致安装 matplotlib 出错</title>
-    <url>/2018/10/13/MissingPython-devCausesErrorInInstallingMatplotlib/</url>
-    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install matplotlib</span><br></pre></td></tr></table></figure>
-
-<p>安装 matplotlib 时出现以下错误</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Installing collected packages: subprocess32, cycler, backports.functools-lru-cache, pyparsing, kiwisolver, matplotlib</span><br><span class="line">  Running setup.py install for subprocess32 ... error</span><br><span class="line">    Complete output from command /usr/bin/python2 -u -c &quot;import setuptools, tokenize;__file__=&#x27;/tmp/pip-install-azXKeu/subprocess32/setup.py&#x27;;f=getattr(tokenize, &#x27;open&#x27;, open)(__file__);code=f.read().replace(&#x27;\r\n&#x27;, &#x27;\n&#x27;);f.close();exec(compile(code, __file__, &#x27;exec&#x27;))&quot; install --record /tmp/pip-record-5SM9_6/install-record.txt --single-version-externally-managed --compile:</span><br><span class="line">    /usr/lib64/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: &#x27;python_requires&#x27;</span><br><span class="line">      warnings.warn(msg)</span><br><span class="line">    running install</span><br><span class="line">    running build</span><br><span class="line">    running build_py</span><br><span class="line">    creating build</span><br><span class="line">    creating build/lib.linux-x86_64-2.7</span><br><span class="line">    copying subprocess32.py -&gt; build/lib.linux-x86_64-2.7</span><br><span class="line">    running build_ext</span><br><span class="line">    running build_configure</span><br><span class="line">    checking for gcc... gcc</span><br><span class="line">    checking whether the C compiler works... yes</span><br><span class="line">    checking for C compiler default output file name... a.out</span><br><span class="line">    checking for suffix of executables...</span><br><span class="line">    checking whether we are cross compiling... no</span><br><span class="line">    checking for suffix of object files... o</span><br><span class="line">    checking whether we are using the GNU C compiler... yes</span><br><span class="line">    checking whether gcc accepts -g... yes</span><br><span class="line">    checking for gcc option to accept ISO C89... none needed</span><br><span class="line">    checking how to run the C preprocessor... gcc -E</span><br><span class="line">    checking for grep that handles long lines and -e... /bin/grep</span><br><span class="line">    checking for egrep... /bin/grep -E</span><br><span class="line">    checking for ANSI C header files... yes</span><br><span class="line">    checking for sys/types.h... yes</span><br><span class="line">    checking for sys/stat.h... yes</span><br><span class="line">    checking for stdlib.h... yes</span><br><span class="line">    checking for string.h... yes</span><br><span class="line">    checking for memory.h... yes</span><br><span class="line">    checking for strings.h... yes</span><br><span class="line">    checking for inttypes.h... yes</span><br><span class="line">    checking for stdint.h... yes</span><br><span class="line">    checking for unistd.h... yes</span><br><span class="line">    checking for unistd.h... (cached) yes</span><br><span class="line">    checking fcntl.h usability... yes</span><br><span class="line">    checking fcntl.h presence... yes</span><br><span class="line">    checking for fcntl.h... yes</span><br><span class="line">    checking signal.h usability... yes</span><br><span class="line">    checking signal.h presence... yes</span><br><span class="line">    checking for signal.h... yes</span><br><span class="line">    checking sys/cdefs.h usability... yes</span><br><span class="line">    checking sys/cdefs.h presence... yes</span><br><span class="line">    checking for sys/cdefs.h... yes</span><br><span class="line">    checking for sys/types.h... (cached) yes</span><br><span class="line">    checking for sys/stat.h... (cached) yes</span><br><span class="line">    checking sys/syscall.h usability... yes</span><br><span class="line">    checking sys/syscall.h presence... yes</span><br><span class="line">    checking for sys/syscall.h... yes</span><br><span class="line">    checking for dirent.h that defines DIR... yes</span><br><span class="line">    checking for library containing opendir... none required</span><br><span class="line">    checking for pipe2... yes</span><br><span class="line">    checking for setsid... yes</span><br><span class="line">    checking whether dirfd is declared... yes</span><br><span class="line">    configure: creating ./config.status</span><br><span class="line">    config.status: creating _posixsubprocess_config.h</span><br><span class="line">    building &#x27;_posixsubprocess32&#x27; extension</span><br><span class="line">    creating build/temp.linux-x86_64-2.7</span><br><span class="line">    gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I/usr/include/python2.7 -c _posixsubprocess.c -o build/temp.linux-x86_64-2.7/_posixsubprocess.o</span><br><span class="line">    _posixsubprocess.c:16:20: fatal error: Python.h: No such file or directory</span><br><span class="line">     #include &quot;Python.h&quot;</span><br><span class="line">                        ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#x27;gcc&#x27; failed with exit status 1</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>无法找到 python 库，<code>#include &quot;Python.h&quot;</code> 出错</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ul>
-<li><p>使用 apt (Ubuntu, Debian…) 安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python-dev   # for python2.x installs</span><br><span class="line">sudo apt-get install python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 yum (CentOS, RHEL…) 安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install python-devel   # for python2.x installs</span><br><span class="line">sudo yum install python34-devel   # for python3.4 installs</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 dnf (Fedora…) 安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo dnf install python2-devel  # for python2.x installs</span><br><span class="line">sudo dnf install python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 zypper (openSUSE…) 安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo zypper in python-devel   # for python2.x installs</span><br><span class="line">sudo zypper in python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 apk (Alpine…) 安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apk add python2-dev  # for python2.x installs</span><br><span class="line">sudo apk add python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一加3T的刷机流程及玩机一些事</title>
     <url>/2017/08/27/Oneplus3TBrushAndPlay/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要聊聊一加3T卡刷第三方Rom，包括刷 TWRP 的 Recovery，卡刷流程，初始化，安装及使用Xposed框架和Magisk框架。</p>
@@ -3567,20 +3532,33 @@ _   底线
       </tags>
   </entry>
   <entry>
-    <title>pyparsing 无法卸载导致安装 matplotlib 出错</title>
-    <url>/2018/10/13/PyparsingFailsToUninstallCausingErrorInInstallingMatplotlib/</url>
+    <title>python-dev 库缺失导致安装 matplotlib 出错</title>
+    <url>/2018/10/13/MissingPython-devCausesErrorInInstallingMatplotlib/</url>
     <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install matplotlib</span><br></pre></td></tr></table></figure>
 
 <p>安装 matplotlib 时出现以下错误</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> Found existing installation: pyparsing 1.5.6</span><br><span class="line">Cannot uninstall &#x27;pyparsing&#x27;. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.</span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
 
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>安装 matplotlib 需要卸载我已安装的 1.5.6 版本的 pyparsing，再重新装新版本，但是无法卸载</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>手动重装最新版 pyparsing</p>
-<p>首先，去官网查看最新版是什么版本：<a href="https://pypi.org/project/pyparsing/">https://pypi.org/project/pyparsing/</a></p>
-<p>当前最新版是 <code>pyparsing 2.2.0</code>，所以执行如下重新安装最新版：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install -I pyparsing==2.2.0</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Installing collected packages: subprocess32, cycler, backports.functools-lru-cache, pyparsing, kiwisolver, matplotlib</span><br><span class="line">  Running setup.py install for subprocess32 ... error</span><br><span class="line">    Complete output from command /usr/bin/python2 -u -c &quot;import setuptools, tokenize;__file__=&#x27;/tmp/pip-install-azXKeu/subprocess32/setup.py&#x27;;f=getattr(tokenize, &#x27;open&#x27;, open)(__file__);code=f.read().replace(&#x27;\r\n&#x27;, &#x27;\n&#x27;);f.close();exec(compile(code, __file__, &#x27;exec&#x27;))&quot; install --record /tmp/pip-record-5SM9_6/install-record.txt --single-version-externally-managed --compile:</span><br><span class="line">    /usr/lib64/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: &#x27;python_requires&#x27;</span><br><span class="line">      warnings.warn(msg)</span><br><span class="line">    running install</span><br><span class="line">    running build</span><br><span class="line">    running build_py</span><br><span class="line">    creating build</span><br><span class="line">    creating build/lib.linux-x86_64-2.7</span><br><span class="line">    copying subprocess32.py -&gt; build/lib.linux-x86_64-2.7</span><br><span class="line">    running build_ext</span><br><span class="line">    running build_configure</span><br><span class="line">    checking for gcc... gcc</span><br><span class="line">    checking whether the C compiler works... yes</span><br><span class="line">    checking for C compiler default output file name... a.out</span><br><span class="line">    checking for suffix of executables...</span><br><span class="line">    checking whether we are cross compiling... no</span><br><span class="line">    checking for suffix of object files... o</span><br><span class="line">    checking whether we are using the GNU C compiler... yes</span><br><span class="line">    checking whether gcc accepts -g... yes</span><br><span class="line">    checking for gcc option to accept ISO C89... none needed</span><br><span class="line">    checking how to run the C preprocessor... gcc -E</span><br><span class="line">    checking for grep that handles long lines and -e... /bin/grep</span><br><span class="line">    checking for egrep... /bin/grep -E</span><br><span class="line">    checking for ANSI C header files... yes</span><br><span class="line">    checking for sys/types.h... yes</span><br><span class="line">    checking for sys/stat.h... yes</span><br><span class="line">    checking for stdlib.h... yes</span><br><span class="line">    checking for string.h... yes</span><br><span class="line">    checking for memory.h... yes</span><br><span class="line">    checking for strings.h... yes</span><br><span class="line">    checking for inttypes.h... yes</span><br><span class="line">    checking for stdint.h... yes</span><br><span class="line">    checking for unistd.h... yes</span><br><span class="line">    checking for unistd.h... (cached) yes</span><br><span class="line">    checking fcntl.h usability... yes</span><br><span class="line">    checking fcntl.h presence... yes</span><br><span class="line">    checking for fcntl.h... yes</span><br><span class="line">    checking signal.h usability... yes</span><br><span class="line">    checking signal.h presence... yes</span><br><span class="line">    checking for signal.h... yes</span><br><span class="line">    checking sys/cdefs.h usability... yes</span><br><span class="line">    checking sys/cdefs.h presence... yes</span><br><span class="line">    checking for sys/cdefs.h... yes</span><br><span class="line">    checking for sys/types.h... (cached) yes</span><br><span class="line">    checking for sys/stat.h... (cached) yes</span><br><span class="line">    checking sys/syscall.h usability... yes</span><br><span class="line">    checking sys/syscall.h presence... yes</span><br><span class="line">    checking for sys/syscall.h... yes</span><br><span class="line">    checking for dirent.h that defines DIR... yes</span><br><span class="line">    checking for library containing opendir... none required</span><br><span class="line">    checking for pipe2... yes</span><br><span class="line">    checking for setsid... yes</span><br><span class="line">    checking whether dirfd is declared... yes</span><br><span class="line">    configure: creating ./config.status</span><br><span class="line">    config.status: creating _posixsubprocess_config.h</span><br><span class="line">    building &#x27;_posixsubprocess32&#x27; extension</span><br><span class="line">    creating build/temp.linux-x86_64-2.7</span><br><span class="line">    gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I/usr/include/python2.7 -c _posixsubprocess.c -o build/temp.linux-x86_64-2.7/_posixsubprocess.o</span><br><span class="line">    _posixsubprocess.c:16:20: fatal error: Python.h: No such file or directory</span><br><span class="line">     #include &quot;Python.h&quot;</span><br><span class="line">                        ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#x27;gcc&#x27; failed with exit status 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>无法找到 python 库，<code>#include &quot;Python.h&quot;</code> 出错</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ul>
+<li><p>使用 apt (Ubuntu, Debian…) 安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python-dev   # for python2.x installs</span><br><span class="line">sudo apt-get install python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 yum (CentOS, RHEL…) 安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install python-devel   # for python2.x installs</span><br><span class="line">sudo yum install python34-devel   # for python3.4 installs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 dnf (Fedora…) 安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo dnf install python2-devel  # for python2.x installs</span><br><span class="line">sudo dnf install python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 zypper (openSUSE…) 安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo zypper in python-devel   # for python2.x installs</span><br><span class="line">sudo zypper in python3-devel  # for python3.x installs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 apk (Alpine…) 安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apk add python2-dev  # for python2.x installs</span><br><span class="line">sudo apk add python3-dev  # for python3.x installs</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
       <categories>
         <category>CS</category>
       </categories>
@@ -3628,6 +3606,52 @@ _   底线
 <h3 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h3><blockquote>
 <p><a href="http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages">http://stackoverflow.com/questions/36956124/permision-issues-while-using-and-installing-python-packages</a></p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pyparsing 无法卸载导致安装 matplotlib 出错</title>
+    <url>/2018/10/13/PyparsingFailsToUninstallCausingErrorInInstallingMatplotlib/</url>
+    <content><![CDATA[<h2 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install matplotlib</span><br></pre></td></tr></table></figure>
+
+<p>安装 matplotlib 时出现以下错误</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> Found existing installation: pyparsing 1.5.6</span><br><span class="line">Cannot uninstall &#x27;pyparsing&#x27;. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>安装 matplotlib 需要卸载我已安装的 1.5.6 版本的 pyparsing，再重新装新版本，但是无法卸载</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>手动重装最新版 pyparsing</p>
+<p>首先，去官网查看最新版是什么版本：<a href="https://pypi.org/project/pyparsing/">https://pypi.org/project/pyparsing/</a></p>
+<p>当前最新版是 <code>pyparsing 2.2.0</code>，所以执行如下重新安装最新版：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip install -I pyparsing==2.2.0</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python DeprecationWarning the imp module is deprecated in favour of importlib</title>
+    <url>/2019/01/21/PythonDeprecationWarningTheImpModuleIsDeprecatedInFavourOfImportlib/</url>
+    <content><![CDATA[<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module&#x27;s documentation for alternative uses</span><br><span class="line">  import imp</span><br></pre></td></tr></table></figure>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>imp 从 Python 3.4 之后弃用了，建议使用 importlib 代替</p>
+<span id="more"></span>
+
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>打开 <code>E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py</code> 文件，做如下两步修改：</p>
+<ol>
+<li><p>在第一行，注释掉 <code>imp</code>，导入 <code>importlib</code></p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#import imp</span></span><br><span class="line"><span class="keyword">import</span> importlib</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在第 230 行的 <code>loadSource</code> 函数中，注释 <code>imp.load_source</code>，使用 <code>importlib.machinery.SourceFileLoader</code> 加载模块</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#module = imp.load_source(moduleName, fileName)</span></span><br><span class="line">module = importlib.machinery.SourceFileLoader(moduleName, fileName).load_module()</span><br></pre></td></tr></table></figure></li>
+</ol>
 ]]></content>
       <categories>
         <category>CS</category>
@@ -3732,30 +3756,6 @@ win32 &#123;
       </categories>
       <tags>
         <tag>QT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python DeprecationWarning the imp module is deprecated in favour of importlib</title>
-    <url>/2019/01/21/PythonDeprecationWarningTheImpModuleIsDeprecatedInFavourOfImportlib/</url>
-    <content><![CDATA[<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py:1: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module&#x27;s documentation for alternative uses</span><br><span class="line">  import imp</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>imp 从 Python 3.4 之后弃用了，建议使用 importlib 代替</p>
-<span id="more"></span>
-
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>打开 <code>E:\PyCharm 2018.2.5\helpers\pycharm\docrunner.py</code> 文件，做如下两步修改：</p>
-<ol>
-<li><p>在第一行，注释掉 <code>imp</code>，导入 <code>importlib</code></p>
- <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#import imp</span></span><br><span class="line"><span class="keyword">import</span> importlib</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在第 230 行的 <code>loadSource</code> 函数中，注释 <code>imp.load_source</code>，使用 <code>importlib.machinery.SourceFileLoader</code> 加载模块</p>
- <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#module = imp.load_source(moduleName, fileName)</span></span><br><span class="line">module = importlib.machinery.SourceFileLoader(moduleName, fileName).load_module()</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -3867,6 +3867,33 @@ dialog.setWindowModality(Qt::ApplicationModal);
       </tags>
   </entry>
   <entry>
+    <title>QT 无法链接动态库 dyld library not loaded ... libhdf5.100.dylib</title>
+    <url>/2017/06/05/QtDyldLibraryNotLoaded/</url>
+    <content><![CDATA[<h2 id="qt-dyld-library-not-loaded-…-libhdf5-100-dylib"><a href="#qt-dyld-library-not-loaded-…-libhdf5-100-dylib" class="headerlink" title="qt dyld library not loaded …&#x2F;libhdf5.100.dylib"></a>qt dyld library not loaded …&#x2F;libhdf5.100.dylib</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png" alt="DyldLibraryNotLoaded"></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>无法链接动态库，考虑手动添加链接。</p>
+<span id="more"></span>
+
+<h2 id="找到-libhdf5-100-dylib-文件及路径"><a href="#找到-libhdf5-100-dylib-文件及路径" class="headerlink" title="找到 libhdf5.100.dylib 文件及路径"></a>找到 libhdf5.100.dylib 文件及路径</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hdf5-lib-dylib.jpg"></p>
+<pre><code>/usr/local/opt/hdf5/lib
+</code></pre>
+<h2 id="添加到-QT-Run-Environment"><a href="#添加到-QT-Run-Environment" class="headerlink" title="添加到 QT Run Environment"></a>添加到 QT Run Environment</h2><p>把路径添加到<code>Run Environment</code>中的<code>DYLD_LIBRARY_PATH</code>变量的值中。</p>
+<p>若无此变量则添加，若已有则按编辑并在后面加上路径。</p>
+<p>Run!</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTRunEnvironment.jpg"></p>
+<h2 id="补充：添加到构建设置-构建环境中"><a href="#补充：添加到构建设置-构建环境中" class="headerlink" title="补充：添加到构建设置-构建环境中"></a>补充：添加到构建设置-构建环境中</h2><p>如果添加到 <code>Run Environment</code> 中还是不行，可以添加到<code>Build</code>-<code>构建设置</code>-<code>构建环境</code>中。</p>
+<p>Debug!</p>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QtDebugEnvironment.jpg"></p>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://stackoverflow.com/questions/13611740/qt-mac-osx-10-8-dyld-library-not-loaded-image-not-found">stackoverflow . qt mac osx 10.8 dyld: library not loaded…image not found</a></p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>链接装载库</tag>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Qt GDB 无法调试 MSVC 编译的程序而报错：file format not recognized</title>
     <url>/2018/06/02/QtNotInExecutableFormat/</url>
     <content><![CDATA[<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
@@ -3895,30 +3922,37 @@ dialog.setWindowModality(Qt::ApplicationModal);
       </tags>
   </entry>
   <entry>
-    <title>QT 无法链接动态库 dyld library not loaded ... libhdf5.100.dylib</title>
-    <url>/2017/06/05/QtDyldLibraryNotLoaded/</url>
-    <content><![CDATA[<h2 id="qt-dyld-library-not-loaded-…-libhdf5-100-dylib"><a href="#qt-dyld-library-not-loaded-…-libhdf5-100-dylib" class="headerlink" title="qt dyld library not loaded …&#x2F;libhdf5.100.dylib"></a>qt dyld library not loaded …&#x2F;libhdf5.100.dylib</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/DyldLibraryNotLoaded.png" alt="DyldLibraryNotLoaded"></p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>无法链接动态库，考虑手动添加链接。</p>
+    <title>std::map error: implicit instantiation of undefined template 不能识别std::map迭代器指针</title>
+    <url>/2017/07/17/StdMapTheIteratorPointerIsNotRecognized/</url>
+    <content><![CDATA[<h2 id="std-map-error-implicit-instantiation-of-undefined-template-不能识别std-map迭代器指针"><a href="#std-map-error-implicit-instantiation-of-undefined-template-不能识别std-map迭代器指针" class="headerlink" title="std::map error: implicit instantiation of undefined template 不能识别std::map迭代器指针"></a>std::map error: implicit instantiation of undefined template 不能识别std::map迭代器指针</h2><p>代码如下：</p>
+<pre><code>std::map&lt;std::string, int&gt;::iterator map_iter;
+map_iter-&gt;first
+</code></pre>
+<p>QT中报错：</p>
+<pre><code>/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility:258: error: implicit instantiation of undefined template &#39;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;&#39;
+_T1 first;
+    ^
+    
+</code></pre>
+<p>发现是引入头文件错误。</p>
 <span id="more"></span>
 
-<h2 id="找到-libhdf5-100-dylib-文件及路径"><a href="#找到-libhdf5-100-dylib-文件及路径" class="headerlink" title="找到 libhdf5.100.dylib 文件及路径"></a>找到 libhdf5.100.dylib 文件及路径</h2><p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/hdf5-lib-dylib.jpg"></p>
-<pre><code>/usr/local/opt/hdf5/lib
+<p>我原本头文件引入如下：</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;map&gt;
 </code></pre>
-<h2 id="添加到-QT-Run-Environment"><a href="#添加到-QT-Run-Environment" class="headerlink" title="添加到 QT Run Environment"></a>添加到 QT Run Environment</h2><p>把路径添加到<code>Run Environment</code>中的<code>DYLD_LIBRARY_PATH</code>变量的值中。</p>
-<p>若无此变量则添加，若已有则按编辑并在后面加上路径。</p>
-<p>Run!</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QTRunEnvironment.jpg"></p>
-<h2 id="补充：添加到构建设置-构建环境中"><a href="#补充：添加到构建设置-构建环境中" class="headerlink" title="补充：添加到构建设置-构建环境中"></a>补充：添加到构建设置-构建环境中</h2><p>如果添加到 <code>Run Environment</code> 中还是不行，可以添加到<code>Build</code>-<code>构建设置</code>-<code>构建环境</code>中。</p>
-<p>Debug!</p>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/QtDebugEnvironment.jpg"></p>
-<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><p><a href="http://stackoverflow.com/questions/13611740/qt-mac-osx-10-8-dyld-library-not-loaded-image-not-found">stackoverflow . qt mac osx 10.8 dyld: library not loaded…image not found</a></p>
+<p>应该 <code>#include &lt;string&gt;</code>，而不是 <code>#include &lt;string.h&gt;</code>，修改为如下：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;map&gt;
+</code></pre>
 ]]></content>
       <categories>
         <category>CS</category>
       </categories>
       <tags>
-        <tag>链接装载库</tag>
-        <tag>QT</tag>
+        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
@@ -3978,44 +4012,10 @@ dialog.setWindowModality(Qt::ApplicationModal);
       </tags>
   </entry>
   <entry>
-    <title>std::map error: implicit instantiation of undefined template 不能识别std::map迭代器指针</title>
-    <url>/2017/07/17/StdMapTheIteratorPointerIsNotRecognized/</url>
-    <content><![CDATA[<h2 id="std-map-error-implicit-instantiation-of-undefined-template-不能识别std-map迭代器指针"><a href="#std-map-error-implicit-instantiation-of-undefined-template-不能识别std-map迭代器指针" class="headerlink" title="std::map error: implicit instantiation of undefined template 不能识别std::map迭代器指针"></a>std::map error: implicit instantiation of undefined template 不能识别std::map迭代器指针</h2><p>代码如下：</p>
-<pre><code>std::map&lt;std::string, int&gt;::iterator map_iter;
-map_iter-&gt;first
-</code></pre>
-<p>QT中报错：</p>
-<pre><code>/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility:258: error: implicit instantiation of undefined template &#39;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;&#39;
-_T1 first;
-    ^
-    
-</code></pre>
-<p>发现是引入头文件错误。</p>
-<span id="more"></span>
-
-<p>我原本头文件引入如下：</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;map&gt;
-</code></pre>
-<p>应该 <code>#include &lt;string&gt;</code>，而不是 <code>#include &lt;string.h&gt;</code>，修改为如下：</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;map&gt;
-</code></pre>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>C/C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WinRT(C++/CX) UTF8类型转换为std::string和Platform::String^的Unicode字符串</title>
-    <url>/2018/08/23/UTF8ToStdStrAndUTF8ToManagedStr/</url>
-    <content><![CDATA[<p>Gist 仓库地址：<a href="https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339">https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339</a></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">UTF8_To_Std_Str</span><span class="params">(<span class="type">const</span> std::string &amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nwLen = <span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="type">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), str.<span class="built_in">length</span>(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> nLen = <span class="built_in">WideCharToMultiByte</span>(CP_ACP, <span class="number">0</span>, pwBuf, <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span>* pBuf = <span class="keyword">new</span> <span class="type">char</span>[nLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pBuf, <span class="number">0</span>, nLen + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WideCharToMultiByte</span>(CP_ACP, <span class="number">0</span>, pwBuf, nwLen, pBuf, nLen, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	std::string retStr = pBuf;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pBuf;</span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line"></span><br><span class="line">	pBuf = <span class="literal">NULL</span>;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> retStr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ <span class="built_in">UTF8_To_Managed_Str</span>(<span class="type">const</span> std::string &amp; str)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> nwLen = <span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="type">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), str.<span class="built_in">length</span>(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	Platform::String^ pStr = ref <span class="keyword">new</span> Platform::<span class="built_in">String</span>(pwBuf);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>WinRT(C++/CX) Platform::String^ 与 std::string 的类型转换</title>
+    <url>/2018/08/23/TypeConversionBetweenPlatformStringAndStdstring/</url>
+    <content><![CDATA[<p>Gist 仓库地址：<a href="https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920">https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Managed_Str_To_Std_Str</span><span class="params">(Platform::String^ ms)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::wstring <span class="title">w_str</span><span class="params">(ms-&gt;Begin())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">string</span>(w_str.<span class="built_in">begin</span>(), w_str.<span class="built_in">end</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ <span class="built_in">Std_Str_To_Managed_Str</span>(<span class="type">const</span> std::string &amp; input)</span><br><span class="line">&#123;</span><br><span class="line">    std::wstring w_str = std::<span class="built_in">wstring</span>(input.<span class="built_in">begin</span>(), input.<span class="built_in">end</span>());</span><br><span class="line">    <span class="type">const</span> <span class="type">wchar_t</span>* w_chars = w_str.<span class="built_in">c_str</span>();</span><br><span class="line">    <span class="keyword">return</span> (ref <span class="keyword">new</span> Platform::<span class="built_in">String</span>(w_chars));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>CS</category>
       </categories>
@@ -4053,48 +4053,14 @@ _T1 first;
       </tags>
   </entry>
   <entry>
-    <title>WinRT(C++/CX) Platform::String^ 与 std::string 的类型转换</title>
-    <url>/2018/08/23/TypeConversionBetweenPlatformStringAndStdstring/</url>
-    <content><![CDATA[<p>Gist 仓库地址：<a href="https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920">https://gist.github.com/huihut/aa90bd3a202090e25b9a4792c80e6920</a></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Managed_Str_To_Std_Str</span><span class="params">(Platform::String^ ms)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::wstring <span class="title">w_str</span><span class="params">(ms-&gt;Begin())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">string</span>(w_str.<span class="built_in">begin</span>(), w_str.<span class="built_in">end</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ <span class="built_in">Std_Str_To_Managed_Str</span>(<span class="type">const</span> std::string &amp; input)</span><br><span class="line">&#123;</span><br><span class="line">    std::wstring w_str = std::<span class="built_in">wstring</span>(input.<span class="built_in">begin</span>(), input.<span class="built_in">end</span>());</span><br><span class="line">    <span class="type">const</span> <span class="type">wchar_t</span>* w_chars = w_str.<span class="built_in">c_str</span>();</span><br><span class="line">    <span class="keyword">return</span> (ref <span class="keyword">new</span> Platform::<span class="built_in">String</span>(w_chars));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>WinRT(C++/CX) UTF8类型转换为std::string和Platform::String^的Unicode字符串</title>
+    <url>/2018/08/23/UTF8ToStdStrAndUTF8ToManagedStr/</url>
+    <content><![CDATA[<p>Gist 仓库地址：<a href="https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339">https://gist.github.com/huihut/8f75e2332e05673ff7e1248ad5e85339</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">UTF8_To_Std_Str</span><span class="params">(<span class="type">const</span> std::string &amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nwLen = <span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="type">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), str.<span class="built_in">length</span>(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> nLen = <span class="built_in">WideCharToMultiByte</span>(CP_ACP, <span class="number">0</span>, pwBuf, <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span>* pBuf = <span class="keyword">new</span> <span class="type">char</span>[nLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pBuf, <span class="number">0</span>, nLen + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WideCharToMultiByte</span>(CP_ACP, <span class="number">0</span>, pwBuf, nwLen, pBuf, nLen, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	std::string retStr = pBuf;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pBuf;</span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line"></span><br><span class="line">	pBuf = <span class="literal">NULL</span>;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> retStr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Platform::String^ <span class="built_in">UTF8_To_Managed_Str</span>(<span class="type">const</span> std::string &amp; str)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> nwLen = <span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), <span class="number">-1</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">wchar_t</span>* pwBuf = <span class="keyword">new</span> <span class="type">wchar_t</span>[nwLen + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(pwBuf, <span class="number">0</span>, nwLen * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">MultiByteToWideChar</span>(CP_UTF8, <span class="number">0</span>, str.<span class="built_in">c_str</span>(), str.<span class="built_in">length</span>(), pwBuf, nwLen);</span><br><span class="line"></span><br><span class="line">	Platform::String^ pStr = ref <span class="keyword">new</span> Platform::<span class="built_in">String</span>(pwBuf);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] pwBuf;</span><br><span class="line">	pwBuf = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>CS</category>
       </categories>
       <tags>
-        <tag>C/C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>gcc/mpicc 编译器 undefined reference to ... 问题的解决</title>
-    <url>/2017/07/18/UndefinedReferenceTo/</url>
-    <content><![CDATA[<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>我的代码中使用了<code>libcstl</code>库，在代码中声明：</p>
-<pre><code>#include &lt;cstl/cmap.h&gt;
-</code></pre>
-<p>可是出现这个问题，无法识别<code>libcstl</code>库里调用的函数，如下图：</p>
-<span id="more"></span>
-
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReference.png"></p>
-<h2 id="猜想"><a href="#猜想" class="headerlink" title="猜想"></a>猜想</h2><ol>
-<li><code>#include &lt;cstl/cmap.h&gt;</code>这句话不报错说明库已经装好，环境变量也没有问题。</li>
-<li>可能是链接时的错误。</li>
-</ol>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>查看<code>Makefile</code>文件发现忘记添加cstl的链接库了。</p>
-<pre><code>-lcstl
-</code></pre>
-<p>原来的代码是：</p>
-<pre><code>mpicc -c main.c -std=c99 -lstdc++ -fopenmp -lm -o main.o
-</code></pre>
-<p>应该改为：</p>
-<pre><code>mpicc -c main.c -std=c99 -lcstl -lstdc++ -fopenmp -lm -o main.o
-</code></pre>
-<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReferenceMakefile.png"></p>
-<p>如上图，改好之后就解决了！</p>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>链接装载库</tag>
         <tag>C/C++</tag>
       </tags>
   </entry>
@@ -4155,6 +4121,40 @@ _T1 first;
       </tags>
   </entry>
   <entry>
+    <title>gcc/mpicc 编译器 undefined reference to ... 问题的解决</title>
+    <url>/2017/07/18/UndefinedReferenceTo/</url>
+    <content><![CDATA[<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>我的代码中使用了<code>libcstl</code>库，在代码中声明：</p>
+<pre><code>#include &lt;cstl/cmap.h&gt;
+</code></pre>
+<p>可是出现这个问题，无法识别<code>libcstl</code>库里调用的函数，如下图：</p>
+<span id="more"></span>
+
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReference.png"></p>
+<h2 id="猜想"><a href="#猜想" class="headerlink" title="猜想"></a>猜想</h2><ol>
+<li><code>#include &lt;cstl/cmap.h&gt;</code>这句话不报错说明库已经装好，环境变量也没有问题。</li>
+<li>可能是链接时的错误。</li>
+</ol>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>查看<code>Makefile</code>文件发现忘记添加cstl的链接库了。</p>
+<pre><code>-lcstl
+</code></pre>
+<p>原来的代码是：</p>
+<pre><code>mpicc -c main.c -std=c99 -lstdc++ -fopenmp -lm -o main.o
+</code></pre>
+<p>应该改为：</p>
+<pre><code>mpicc -c main.c -std=c99 -lcstl -lstdc++ -fopenmp -lm -o main.o
+</code></pre>
+<p><img src="http://huihut-img.oss-cn-shenzhen.aliyuncs.com/UndefinedReferenceMakefile.png"></p>
+<p>如上图，改好之后就解决了！</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>链接装载库</tag>
+        <tag>C/C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Unity3D Plugin xxx is used from several locations 错误</title>
     <url>/2019/01/07/Unity3DPluginXXXIsUsedFromSeveralLocations/</url>
     <content><![CDATA[<h2 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Plugin &#x27;opencvforunity.dll&#x27; is used from several locations:</span><br><span class="line"> Assets/OpenCVForUnity/Plugins/x86/opencvforunity.dll would be copied to &lt;PluginPath&gt;/opencvforunity.dll</span><br><span class="line"> Assets/OpenCVForUnity/Plugins/x86_64/opencvforunity.dll would be copied to &lt;PluginPath&gt;/opencvforunity.dll</span><br><span class="line">Please fix plugin settings and try again.</span><br><span class="line"></span><br><span class="line">UnityEditor.Modules.DefaultPluginImporterExtension:CheckFileCollisions(String)</span><br><span class="line">UnityEditorInternal.PluginsHelper:CheckFileCollisions(BuildTarget) (at D:/unity/Editor/Mono/Plugins/PluginsHelper.cs:25)</span><br><span class="line">UnityEditor.BuildPlayerWindow:BuildPlayerAndRun()</span><br></pre></td></tr></table></figure>
@@ -4173,18 +4173,6 @@ _T1 first;
       </categories>
       <tags>
         <tag>Unity</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python 生成带标签数据集的 CSV 文件</title>
-    <url>/2018/06/17/UsingPythonToCreateCSV/</url>
-    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件</span></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签从0开始自动升序：0,1,2,3...</span></span><br><span class="line"><span class="comment"># 作者：huihut</span></span><br><span class="line"><span class="comment"># 仓库：https://gist.github.com/huihut/9881c98a1d9279d4fa9dfd8475e3fe4b</span></span><br><span class="line"><span class="comment"># 参考：https://github.com/opencv/opencv_attic/blob/master/opencv/modules/contrib/doc/facerec/src/create_csv.py</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用脚本：</span></span><br><span class="line"><span class="string">* python create_csv.py &lt;base_path&gt; [save_path]</span></span><br><span class="line"><span class="string">例如：</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── README</span></span><br><span class="line"><span class="string">├── dataset_csv.txt</span></span><br><span class="line"><span class="string">├── s01</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">├── s02</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">└── s10</span></span><br><span class="line"><span class="string">    ├── 01.pgm</span></span><br><span class="line"><span class="string">    ├── ...</span></span><br><span class="line"><span class="string">    └── 10.pgm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/01.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/02.pgm;0</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/10.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/01.pgm;1</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/02.pgm;1</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/01.pgm;9</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/02.pgm;9</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/10.pgm;9</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    </span><br><span class="line">    SAVE_PATH = <span class="string">&quot;./dataset_csv.txt&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">len</span>(sys.argv) != <span class="number">2</span> <span class="keyword">and</span> <span class="built_in">len</span>(sys.argv) != <span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;usage:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py &lt;base_path&gt; [save_path]&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;example:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt&quot;</span></span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">len</span>(sys.argv) == <span class="number">3</span>):</span><br><span class="line">        SAVE_PATH = sys.argv[<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    BASE_PATH = sys.argv[<span class="number">1</span>]</span><br><span class="line">    SEPARATOR = <span class="string">&quot;;&quot;</span></span><br><span class="line">    fh = <span class="built_in">open</span>(SAVE_PATH,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    label = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> dirname, dirnames, filenames <span class="keyword">in</span> os.walk(BASE_PATH):</span><br><span class="line">        <span class="keyword">for</span> subdirname <span class="keyword">in</span> dirnames:</span><br><span class="line">            subject_path = os.path.join(dirname, subdirname)</span><br><span class="line">            <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(subject_path):</span><br><span class="line">                abs_path = <span class="string">&quot;%s/%s&quot;</span> % (subject_path, filename)</span><br><span class="line">                <span class="built_in">print</span> <span class="string">&quot;%s%s%d&quot;</span> % (abs_path, SEPARATOR, label)</span><br><span class="line">                fh.write(abs_path + SEPARATOR + <span class="built_in">str</span>(label) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            label = label + <span class="number">1</span></span><br><span class="line">    fh.close()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>ML</tag>
       </tags>
   </entry>
   <entry>
@@ -4212,18 +4200,27 @@ _T1 first;
       </tags>
   </entry>
   <entry>
-    <title>VSCode 的 C/C++ 调试环境的 launch.json、 tasks.json 文件</title>
-    <url>/2018/06/12/VSCodeCppLaunchTasks/</url>
-    <content><![CDATA[<h2 id="launch-json"><a href="#launch-json" class="headerlink" title="launch.json"></a>launch.json</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Configuring tasks.json for C/C++ debugging</span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/9548fe7e1084cf8e844120c5668b8177</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Available variables which can be used inside of strings.</span></span><br><span class="line"><span class="comment">// $&#123;workspaceRoot&#125;: the root folder of the team        </span></span><br><span class="line"><span class="comment">// $&#123;file&#125;: the current opened file                     </span></span><br><span class="line"><span class="comment">// $&#123;fileBasename&#125;: the current opened file&#x27;s basename </span></span><br><span class="line"><span class="comment">// $&#123;fileDirname&#125;: the current opened file&#x27;s dirname    </span></span><br><span class="line"><span class="comment">// $&#123;fileExtname&#125;: the current opened file&#x27;s extension  </span></span><br><span class="line"><span class="comment">// $&#123;cwd&#125;: the current working directory of the spawned process</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;configurations&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;name&quot;</span>: <span class="string">&quot;(gdb) Launch&quot;</span>,</span><br><span class="line">            <span class="string">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="string">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="string">&quot;program&quot;</span>: <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;</span>,</span><br><span class="line">            <span class="string">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="string">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="string">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="string">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="string">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="string">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;gdb.exe&quot;</span>,</span><br><span class="line">            <span class="string">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;description&quot;</span>: <span class="string">&quot;Enable pretty-printing for gdb&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="tasks-json"><a href="#tasks-json" class="headerlink" title="tasks.json"></a>tasks.json</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Configuring tasks.json for C/C++ debugging </span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/887d3c28db92617bd5148c20a5ff112a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Available variables which can be used inside of strings.</span></span><br><span class="line"><span class="comment">// $&#123;workspaceRoot&#125;: the root folder of the team        </span></span><br><span class="line"><span class="comment">// $&#123;file&#125;: the current opened file                     </span></span><br><span class="line"><span class="comment">// $&#123;fileBasename&#125;: the current opened file&#x27;s basename </span></span><br><span class="line"><span class="comment">// $&#123;fileDirname&#125;: the current opened file&#x27;s dirname    </span></span><br><span class="line"><span class="comment">// $&#123;fileExtname&#125;: the current opened file&#x27;s extension  </span></span><br><span class="line"><span class="comment">// $&#123;cwd&#125;: the current working directory of the spawned process</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;version&quot;</span>: <span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;label&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="string">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="string">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;presentation&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;echo&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="string">&quot;reveal&quot;</span>: <span class="string">&quot;always&quot;</span>,</span><br><span class="line">                <span class="string">&quot;focus&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="string">&quot;panel&quot;</span>: <span class="string">&quot;shared&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;windows&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;command&quot;</span>: <span class="string">&quot;g++&quot;</span>,</span><br><span class="line">                <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">                    <span class="string">&quot;-ggdb&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;\&quot;$&#123;file&#125;\&quot;&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;--std=c++11&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;-o&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;\&quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe\&quot;&quot;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>Python 生成带标签数据集的 CSV 文件</title>
+    <url>/2018/06/17/UsingPythonToCreateCSV/</url>
+    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件</span></span><br><span class="line"><span class="comment"># Python 生成 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签从0开始自动升序：0,1,2,3...</span></span><br><span class="line"><span class="comment"># 作者：huihut</span></span><br><span class="line"><span class="comment"># 仓库：https://gist.github.com/huihut/9881c98a1d9279d4fa9dfd8475e3fe4b</span></span><br><span class="line"><span class="comment"># 参考：https://github.com/opencv/opencv_attic/blob/master/opencv/modules/contrib/doc/facerec/src/create_csv.py</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用脚本：</span></span><br><span class="line"><span class="string">* python create_csv.py &lt;base_path&gt; [save_path]</span></span><br><span class="line"><span class="string">例如：</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset</span></span><br><span class="line"><span class="string">* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── README</span></span><br><span class="line"><span class="string">├── dataset_csv.txt</span></span><br><span class="line"><span class="string">├── s01</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">├── s02</span></span><br><span class="line"><span class="string">│   ├── 01.pgm</span></span><br><span class="line"><span class="string">│   ├── ...</span></span><br><span class="line"><span class="string">│   └── 10.pgm</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">└── s10</span></span><br><span class="line"><span class="string">    ├── 01.pgm</span></span><br><span class="line"><span class="string">    ├── ...</span></span><br><span class="line"><span class="string">    └── 10.pgm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="string">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/01.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/02.pgm;0</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s01/10.pgm;0</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/01.pgm;1</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s02/02.pgm;1</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/01.pgm;9</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/02.pgm;9</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">/Users/xx/code/dataset/s10/10.pgm;9</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    </span><br><span class="line">    SAVE_PATH = <span class="string">&quot;./dataset_csv.txt&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">len</span>(sys.argv) != <span class="number">2</span> <span class="keyword">and</span> <span class="built_in">len</span>(sys.argv) != <span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;usage:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py &lt;base_path&gt; [save_path]&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;example:&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset&quot;</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;* python create_csv.py /Users/xx/code/dataset ./dataset_csv.txt&quot;</span></span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">len</span>(sys.argv) == <span class="number">3</span>):</span><br><span class="line">        SAVE_PATH = sys.argv[<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    BASE_PATH = sys.argv[<span class="number">1</span>]</span><br><span class="line">    SEPARATOR = <span class="string">&quot;;&quot;</span></span><br><span class="line">    fh = <span class="built_in">open</span>(SAVE_PATH,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    label = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> dirname, dirnames, filenames <span class="keyword">in</span> os.walk(BASE_PATH):</span><br><span class="line">        <span class="keyword">for</span> subdirname <span class="keyword">in</span> dirnames:</span><br><span class="line">            subject_path = os.path.join(dirname, subdirname)</span><br><span class="line">            <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(subject_path):</span><br><span class="line">                abs_path = <span class="string">&quot;%s/%s&quot;</span> % (subject_path, filename)</span><br><span class="line">                <span class="built_in">print</span> <span class="string">&quot;%s%s%d&quot;</span> % (abs_path, SEPARATOR, label)</span><br><span class="line">                fh.write(abs_path + SEPARATOR + <span class="built_in">str</span>(label) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            label = label + <span class="number">1</span></span><br><span class="line">    fh.close()</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>CS</category>
       </categories>
       <tags>
-        <tag>C/C++</tag>
+        <tag>Python</tag>
+        <tag>ML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ 使用 Qt 生成带标签数据集的 CSV 文件</title>
+    <url>/2018/06/12/UsingQtToCreateCSV/</url>
+    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ 使用 Qt 生成 CSV 文件</span></span><br><span class="line"><span class="comment">// 以下函数实现生成特定类型的 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签为图片上一级的文件夹名字。</span></span><br><span class="line"><span class="comment">// 作者：huihut</span></span><br><span class="line"><span class="comment">// 仓库：https://gist.github.com/huihut/c9f43e276ef7652f0471725482a1e4f6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="comment">.</span></span><br><span class="line"><span class="comment">├── README</span></span><br><span class="line"><span class="comment">├── dataset_csv.txt</span></span><br><span class="line"><span class="comment">├── s01</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">├── s02</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">└── s10</span></span><br><span class="line"><span class="comment">    ├── 01.pgm</span></span><br><span class="line"><span class="comment">    ├── ...</span></span><br><span class="line"><span class="comment">    └── 10.pgm</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">-----------------------------------------------------------</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/01.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/02.pgm,s01</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/10.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/01.pgm,s02</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/02.pgm,s02</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/01.pgm,s10</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/02.pgm,s10</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/10.pgm,s10</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDir&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDirIterator&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CreateCSV</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 数据集的基础路径</span></span><br><span class="line">    QString datasetdir = <span class="string">&quot;/Users/xx/code/dataset&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成的 CSV 文件的名字</span></span><br><span class="line">    QString csvName = <span class="string">&quot;dataset_csv.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据集路径与数据集名字的分隔符</span></span><br><span class="line">    <span class="type">char</span> separator = <span class="string">&#x27;,&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 数据集路径、数据集名字</span></span><br><span class="line">    QString datasetPath, datasetName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器：获取指定类型（以下是 pgm、png、jpg 三种类型）的数据集文件</span></span><br><span class="line">    <span class="function">QDirIterator <span class="title">it</span><span class="params">(datasetdir, QStringList() &lt;&lt; <span class="string">&quot;*.pgm&quot;</span> &lt;&lt; <span class="string">&quot;*.png&quot;</span> &lt;&lt; <span class="string">&quot;*.jpg&quot;</span>, QDir::Files, QDirIterator::Subdirectories)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(!it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;当前路径下数据集为空！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建及打开 CSV 文件</span></span><br><span class="line">    <span class="function">QFile <span class="title">file</span><span class="params">(datasetdir + QDir::toNativeSeparators(<span class="string">&quot;/&quot;</span>) + csvName)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!file.<span class="built_in">open</span>(QIODevice::WriteOnly | QIODevice::Text))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;打开 CSV 文件失败！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 文件写的文本流</span></span><br><span class="line">    <span class="function">QTextStream <span class="title">csv_ts</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器中有指定数据集文件则依次迭代</span></span><br><span class="line">    <span class="keyword">while</span> (it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 数据集路径</span></span><br><span class="line">        datasetPath = it.<span class="built_in">next</span>();</span><br><span class="line">        <span class="comment">// 数据集名字</span></span><br><span class="line">        datasetName = datasetPath.<span class="built_in">section</span>(QDir::<span class="built_in">toNativeSeparators</span>(<span class="string">&quot;/&quot;</span>), <span class="number">-2</span>, <span class="number">-2</span>);</span><br><span class="line">        <span class="comment">// 写入文本流</span></span><br><span class="line">        csv_ts &lt;&lt; datasetPath &lt;&lt; separator &lt;&lt; datasetName &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 关闭文本流</span></span><br><span class="line">    file.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+        <tag>ML</tag>
       </tags>
   </entry>
   <entry>
@@ -4258,15 +4255,18 @@ _T1 first;
       </tags>
   </entry>
   <entry>
-    <title>C++ 使用 Qt 生成带标签数据集的 CSV 文件</title>
-    <url>/2018/06/12/UsingQtToCreateCSV/</url>
-    <content><![CDATA[<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++ 使用 Qt 生成 CSV 文件</span></span><br><span class="line"><span class="comment">// 以下函数实现生成特定类型的 CSV 文件，可用于生成带标签的数据集 CSV 文件，标签为图片上一级的文件夹名字。</span></span><br><span class="line"><span class="comment">// 作者：huihut</span></span><br><span class="line"><span class="comment">// 仓库：https://gist.github.com/huihut/c9f43e276ef7652f0471725482a1e4f6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">目录结构（使用 tree 命令查看）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ tree</span></span><br><span class="line"><span class="comment">.</span></span><br><span class="line"><span class="comment">├── README</span></span><br><span class="line"><span class="comment">├── dataset_csv.txt</span></span><br><span class="line"><span class="comment">├── s01</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">├── s02</span></span><br><span class="line"><span class="comment">│   ├── 01.pgm</span></span><br><span class="line"><span class="comment">│   ├── ...</span></span><br><span class="line"><span class="comment">│   └── 10.pgm</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">└── s10</span></span><br><span class="line"><span class="comment">    ├── 01.pgm</span></span><br><span class="line"><span class="comment">    ├── ...</span></span><br><span class="line"><span class="comment">    └── 10.pgm</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">-----------------------------------------------------------</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">生成的 CSV 文件内容（使用 cat 命令查看 dataset_csv.txt 文件内容）：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">xx@xxs-MacBook-Pro:~/code/dataset$ cat dataset_csv.txt</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/01.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/02.pgm,s01</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s01/10.pgm,s01</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/01.pgm,s02</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s02/02.pgm,s02</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/01.pgm,s10</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/02.pgm,s10</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">/Users/xx/code/dataset/s10/10.pgm,s10</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDir&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDirIterator&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">CreateCSV</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 数据集的基础路径</span></span><br><span class="line">    QString datasetdir = <span class="string">&quot;/Users/xx/code/dataset&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成的 CSV 文件的名字</span></span><br><span class="line">    QString csvName = <span class="string">&quot;dataset_csv.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据集路径与数据集名字的分隔符</span></span><br><span class="line">    <span class="type">char</span> separator = <span class="string">&#x27;,&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 数据集路径、数据集名字</span></span><br><span class="line">    QString datasetPath, datasetName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器：获取指定类型（以下是 pgm、png、jpg 三种类型）的数据集文件</span></span><br><span class="line">    <span class="function">QDirIterator <span class="title">it</span><span class="params">(datasetdir, QStringList() &lt;&lt; <span class="string">&quot;*.pgm&quot;</span> &lt;&lt; <span class="string">&quot;*.png&quot;</span> &lt;&lt; <span class="string">&quot;*.jpg&quot;</span>, QDir::Files, QDirIterator::Subdirectories)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(!it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;当前路径下数据集为空！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建及打开 CSV 文件</span></span><br><span class="line">    <span class="function">QFile <span class="title">file</span><span class="params">(datasetdir + QDir::toNativeSeparators(<span class="string">&quot;/&quot;</span>) + csvName)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!file.<span class="built_in">open</span>(QIODevice::WriteOnly | QIODevice::Text))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;打开 CSV 文件失败！\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 文件写的文本流</span></span><br><span class="line">    <span class="function">QTextStream <span class="title">csv_ts</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件迭代器中有指定数据集文件则依次迭代</span></span><br><span class="line">    <span class="keyword">while</span> (it.<span class="built_in">hasNext</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 数据集路径</span></span><br><span class="line">        datasetPath = it.<span class="built_in">next</span>();</span><br><span class="line">        <span class="comment">// 数据集名字</span></span><br><span class="line">        datasetName = datasetPath.<span class="built_in">section</span>(QDir::<span class="built_in">toNativeSeparators</span>(<span class="string">&quot;/&quot;</span>), <span class="number">-2</span>, <span class="number">-2</span>);</span><br><span class="line">        <span class="comment">// 写入文本流</span></span><br><span class="line">        csv_ts &lt;&lt; datasetPath &lt;&lt; separator &lt;&lt; datasetName &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 关闭文本流</span></span><br><span class="line">    file.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>VSCode 的 C/C++ 调试环境的 launch.json、 tasks.json 文件</title>
+    <url>/2018/06/12/VSCodeCppLaunchTasks/</url>
+    <content><![CDATA[<h2 id="launch-json"><a href="#launch-json" class="headerlink" title="launch.json"></a>launch.json</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Configuring tasks.json for C/C++ debugging</span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/9548fe7e1084cf8e844120c5668b8177</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Available variables which can be used inside of strings.</span></span><br><span class="line"><span class="comment">// $&#123;workspaceRoot&#125;: the root folder of the team        </span></span><br><span class="line"><span class="comment">// $&#123;file&#125;: the current opened file                     </span></span><br><span class="line"><span class="comment">// $&#123;fileBasename&#125;: the current opened file&#x27;s basename </span></span><br><span class="line"><span class="comment">// $&#123;fileDirname&#125;: the current opened file&#x27;s dirname    </span></span><br><span class="line"><span class="comment">// $&#123;fileExtname&#125;: the current opened file&#x27;s extension  </span></span><br><span class="line"><span class="comment">// $&#123;cwd&#125;: the current working directory of the spawned process</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;configurations&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;name&quot;</span>: <span class="string">&quot;(gdb) Launch&quot;</span>,</span><br><span class="line">            <span class="string">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="string">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="string">&quot;program&quot;</span>: <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;</span>,</span><br><span class="line">            <span class="string">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="string">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="string">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="string">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="string">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="string">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;gdb.exe&quot;</span>,</span><br><span class="line">            <span class="string">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;description&quot;</span>: <span class="string">&quot;Enable pretty-printing for gdb&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="tasks-json"><a href="#tasks-json" class="headerlink" title="tasks.json"></a>tasks.json</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Configuring tasks.json for C/C++ debugging </span></span><br><span class="line"><span class="comment">// author: huihut</span></span><br><span class="line"><span class="comment">// repo: https://gist.github.com/huihut/887d3c28db92617bd5148c20a5ff112a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Available variables which can be used inside of strings.</span></span><br><span class="line"><span class="comment">// $&#123;workspaceRoot&#125;: the root folder of the team        </span></span><br><span class="line"><span class="comment">// $&#123;file&#125;: the current opened file                     </span></span><br><span class="line"><span class="comment">// $&#123;fileBasename&#125;: the current opened file&#x27;s basename </span></span><br><span class="line"><span class="comment">// $&#123;fileDirname&#125;: the current opened file&#x27;s dirname    </span></span><br><span class="line"><span class="comment">// $&#123;fileExtname&#125;: the current opened file&#x27;s extension  </span></span><br><span class="line"><span class="comment">// $&#123;cwd&#125;: the current working directory of the spawned process</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;version&quot;</span>: <span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;label&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="string">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="string">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;presentation&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;echo&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="string">&quot;reveal&quot;</span>: <span class="string">&quot;always&quot;</span>,</span><br><span class="line">                <span class="string">&quot;focus&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="string">&quot;panel&quot;</span>: <span class="string">&quot;shared&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;windows&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;command&quot;</span>: <span class="string">&quot;g++&quot;</span>,</span><br><span class="line">                <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">                    <span class="string">&quot;-ggdb&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;\&quot;$&#123;file&#125;\&quot;&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;--std=c++11&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;-o&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;\&quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe\&quot;&quot;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>CS</category>
       </categories>
       <tags>
-        <tag>QT</tag>
-        <tag>ML</tag>
+        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
